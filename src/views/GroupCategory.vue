@@ -1,15 +1,7 @@
 <template>
   <article v-if="!loading">
     <h2>{{ category.fields.Name }}</h2>
-    <div>
-      <router-link
-        v-for="group in groups"
-        :key="`group-${group.id}`"
-        :to="{name: 'group', params: { slug: group.fields.Slug }}"
-       >
-         {{ group.fields.Name }}<br>
-      </router-link>
-    </div>
+    <Groups :groups="groups" />
   </article>
 </template>
 
@@ -19,8 +11,11 @@ import {
   getGroupCategory
 } from '@/store/helpers'
 
+import Groups from '@/components/molecules/Groups'
+
 export default {
   name: 'group-category',
+  components: { Groups },
 
   data () {
     return {
