@@ -1,17 +1,33 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ul>
+      <li :key="job.id" v-for="job in jobs">
+        <router-link :to="`/job/${job.fields.Slug}`">{{ job.fields.Title }}</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { getJobs } from '@/api'
 
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+
+  data () {
+    return {
+      jobs: []
+    }
+  },
+
+  async mounted () {
+    const { data } = await getJobs({
+      params: {
+        filterByFormula: 'SEARCH("Active", Status)'
+      }
+    })
+    this.jobs = data.records
   }
 }
 </script>
