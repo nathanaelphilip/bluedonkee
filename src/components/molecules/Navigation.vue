@@ -15,6 +15,7 @@ export default {
   .nav {
     display: flex;
     font-size: 20px;
+    font-weight: 800;
     flex-direction: column
   }
 

@@ -4,7 +4,9 @@
       <Navigation />
     </template>
     <template v-slot:two>
-      <slot />
+      <main class="main">
+        <slot />
+      </main>
     </template>
     <template v-slot:three>
       Side Piece
@@ -22,3 +24,11 @@ export default {
   components: { Grid, Navigation }
 }
 </script>
+
+<style lang="scss" scoped>
+  .main {
+    height: 100%;
+    border-left: 1px solid $GREY;
+    border-right: 1px solid $GREY;
+  }
+</style>

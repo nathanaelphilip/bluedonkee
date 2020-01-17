@@ -22,7 +22,11 @@ export default {
   .grid {
     align-items: stretch;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-column-gap: 33px;
+    margin: 0 auto;
+    max-width: 1295px;
+    min-height: 100vh;
   }
 
   .sticky {
