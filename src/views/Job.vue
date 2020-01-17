@@ -1,5 +1,5 @@
 <template>
-  <article v-if="job.fields && groups && groups.length > 0 && groups.length">
+  <article v-if="!loading">
     <div>
       <a :href="`${groups[0].fields.Website}`" target="_blank">Website</a>
       <a :href="`https://twitter.com/${groups[0].fields.Twitter}`" target="_blank">{{ groups[0].fields.Twitter }}</a>
@@ -25,11 +25,14 @@
 </template>
 
 <script>
+import { getJob, getJobGroups } from '@/store/helpers'
+
 export default {
   name: 'job',
 
   data () {
     return {
+      loading: true,
       job: {},
       groups: [],
       workTypes: [],
@@ -39,32 +42,9 @@ export default {
   },
 
   async mounted () {
-    const slug = this.$route.params.slug
-
-    let job = this.$store.getters['jobs/getBySlug'](slug)
-
-    if (!job) {
-      job = await this.$store.dispatch('jobs/get', {
-        params: {
-          filterByFormula: `SEARCH("${slug}", Slug)`
-        }
-      })
-    }
-
-    this.job = job
-
-    const groups = this.job.fields.Group.map(async (group) => {
-      const stored = this.$store.getters['groups/getById'](group)
-
-      if (!stored) {
-        const data = await this.$store.dispatch('groups/getById', group)
-        return data
-      }
-
-      return stored
-    })
-
-    this.groups = await Promise.all(groups)
+    this.job = await getJob(this.$route.params.slug)
+    this.groups = await getJobGroups(this.job.fields.Group)
+    this.loading = false
   }
 }
 </script>
