@@ -1,13 +1,17 @@
 <template>
   <div class="grid">
-    <div class="column sticky">
-      <slot name="one"></slot>
+    <div class="column">
+      <div class="sticky">
+        <slot name="one"></slot>
+      </div>
     </div>
     <div class="column">
       <slot name="two"></slot>
     </div>
-    <div class="column sticky">
-      <slot name="three"></slot>
+    <div class="column">
+      <div class="sticky">
+        <slot name="three"></slot>
+      </div>
     </div>
   </div>
 </template>

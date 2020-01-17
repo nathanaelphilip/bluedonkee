@@ -1,14 +1,20 @@
 <template>
   <article v-if="!loading" class="job">
     <div>
-      <img class="avatar" :src="avatar" alt="">
+      <Avatar :src="avatar" />
     </div>
     <div>
       <header class="header">
         <div class="box">
-          <h2 class="heading">{{ this.job.fields.Title }}</h2>
-          <div class="meta">
-            {{ group.fields.Name }}
+          <h2 class="heading">
+            <router-link :to="{ name: 'job', params: { slug: job.fields.Slug } }">
+              {{ job.fields.Title }}
+            </router-link>
+          </h2>
+          <div class="meta" v-if="group">
+            <router-link :to="{ name: 'group', params: { slug: group.fields.Slug } }">
+              {{ group.fields.Name }}
+            </router-link>
           </div>
         </div>
         <time class="time">
@@ -56,6 +62,7 @@ import {
   getWorkTypes
 } from '@/store/helpers'
 
+import Avatar from '@/components/atoms/Avatar'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
@@ -63,7 +70,7 @@ export default {
   name: 'components-molecules-job',
   props: ['job'],
 
-  components: { Tag, Tags },
+  components: { Avatar, Tag, Tags },
 
   data () {
     return {
@@ -77,7 +84,7 @@ export default {
 
   computed: {
     group () {
-      return this.groups[0]
+      return this.groups.length ? this.groups[0] : false
     },
 
     avatar () {
@@ -105,13 +112,6 @@ export default {
     display: grid;
     grid-template-columns: 60px 1fr;
     grid-column-gap: 16px;
-  }
-
-  .avatar {
-    display: block;
-    border-radius: 100%;
-    height: auto;
-    width: 60px;
   }
 
   .header {

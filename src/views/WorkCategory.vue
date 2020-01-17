@@ -1,16 +1,14 @@
 <template>
-  <article v-if="!loading">
-    <h2>{{ category.fields.Name }}</h2>
-    <div>
-      <router-link
+  <section v-if="!loading">
+    <div class="jobs">
+      <div
         v-for="job in jobs"
-        :key="`job-${job.id}`"
-        :to="{name: 'job', params: { slug: job.fields.Slug }}"
-       >
-         {{ job.fields.Title }}<br>
-      </router-link>
+        :key="job.id"
+        class="box">
+        <Job :job="job" />
+      </div>
     </div>
-  </article>
+  </section>
 </template>
 
 <script>
@@ -19,8 +17,11 @@ import {
   getWorkCategory
 } from '@/store/helpers'
 
+import Job from '@/components/molecules/Job'
+
 export default {
   name: 'work-category',
+  components: { Job },
 
   data () {
     return {
@@ -38,3 +39,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .box {
+    padding: 25px 36px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $GREY;
+    }
+  }
+</style>

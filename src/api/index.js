@@ -11,7 +11,7 @@ const states = `/States`
 
 const api = axios.create({
   baseURL: `https://api.airtable.com/v0/appkK3vHJcH4114kk`,
-  timeout: 1000,
+  timeout: 3000,
   headers: { 'Authorization': `Bearer ${process.env.VUE_APP_AIRTABLE_API_KEY}` }
 })
 
