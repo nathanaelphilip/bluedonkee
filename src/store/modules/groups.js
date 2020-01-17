@@ -15,10 +15,20 @@ const actions = {
   async fetch ({ commit }, settings) {
     const { data } = await getGroups(settings)
     commit(GROUPS_FETCH, data.records)
+  },
+
+  async get ({ commit }, settings) {
+    const { data } = await getGroups(settings)
+    commit(GROUPS_FETCH, data.records)
+    return data.records[0]
   }
 }
 
-const getters = {}
+const getters = {
+  getById: (state) => (id) => {
+    return state.repository.find(group => group.id === id)
+  }
+}
 
 export default {
   namespaced: true,

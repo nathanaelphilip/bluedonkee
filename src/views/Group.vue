@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import { getGroups } from '@/api'
-
 export default {
   name: 'group',
 
@@ -17,13 +15,21 @@ export default {
   },
 
   async mounted () {
-    const { data } = await getGroups({
-      params: {
-        filterByFormula: `SEARCH("${this.$route.params.slug}", Slug)`
-      }
+    const slug = this.$route.params.slug
+
+    let group = this.$store.state.groups.repository.find((group) => {
+      return group.fields.Slug === slug
     })
 
-    this.group = data.records[0]
+    if (!group) {
+      group = await this.$store.dispatch('groups/get', {
+        params: {
+          filterByFormula: `SEARCH("${slug}", Slug)`
+        }
+      })
+    }
+
+    this.group = group
   }
 }
 </script>
