@@ -1,29 +1,29 @@
 <template>
-  <div v-if="job.fields">
-    {{ job.fields.Title }}
+  <div v-if="group.fields">
+    {{ group.fields.Name }}
   </div>
 </template>
 
 <script>
-import { getJobs } from '@/api'
+import { getGroups } from '@/api'
 
 export default {
-  name: 'job',
+  name: 'group',
 
   data () {
     return {
-      job: {}
+      group: {}
     }
   },
 
   async mounted () {
-    const { data } = await getJobs({
+    const { data } = await getGroups({
       params: {
         filterByFormula: `SEARCH("${this.$route.params.slug}", Slug)`
       }
     })
 
-    this.job = data.records[0]
+    this.group = data.records[0]
   }
 }
 </script>

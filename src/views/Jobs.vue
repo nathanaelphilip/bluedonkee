@@ -13,7 +13,7 @@
 import { getJobs } from '@/api'
 
 export default {
-  name: 'home',
+  name: 'jobs',
 
   data () {
     return {
