@@ -26,3 +26,23 @@ export const getGroups = (settings) => {
 export const getGroupsCategories = (settings) => {
   return api.get(groupsCategories, settings)
 }
+
+export const getWorkTypes = (settings) => {
+  return api.get(workTypes, settings)
+}
+
+export const getWorkLevels = (settings) => {
+  return api.get(workLevels, settings)
+}
+
+export const getWorkCategories = (settings) => {
+  return api.get(workCategories, settings)
+}
+
+export const getLocations = (settings) => {
+  return api.get(locations, settings)
+}
+
+export const getStates = (settings) => {
+  return api.get(states, settings)
+}
