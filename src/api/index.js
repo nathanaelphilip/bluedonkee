@@ -23,6 +23,10 @@ export const getGroups = (settings) => {
   return api.get(groups, settings)
 }
 
+export const getGroup = (id) => {
+  return api.get(`${groups}/${id}`)
+}
+
 export const getGroupsCategories = (settings) => {
   return api.get(groupsCategories, settings)
 }

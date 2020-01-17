@@ -1,5 +1,5 @@
 <template>
-  <article v-if="job.fields">
+  <article v-if="job.fields && groups && groups.length > 0 && groups.length">
     <div>
       <a :href="`${groups[0].fields.Website}`" target="_blank">Website</a>
       <a :href="`https://twitter.com/${groups[0].fields.Twitter}`" target="_blank">{{ groups[0].fields.Twitter }}</a>
@@ -43,10 +43,6 @@ export default {
 
     let job = this.$store.getters['jobs/getBySlug'](slug)
 
-    if (!this.$store.state.groups.repository.length) {
-      await this.$store.dispatch('groups/fetch')
-    }
-
     if (!job) {
       job = await this.$store.dispatch('jobs/get', {
         params: {
@@ -57,9 +53,18 @@ export default {
 
     this.job = job
 
-    this.groups = this.job.fields.Group.map((group) => {
-      return this.$store.getters['groups/getById'](group)
+    const groups = this.job.fields.Group.map(async (group) => {
+      const stored = this.$store.getters['groups/getById'](group)
+
+      if (!stored) {
+        const data = await this.$store.dispatch('groups/getById', group)
+        return data
+      }
+
+      return stored
     })
+
+    this.groups = await Promise.all(groups)
   }
 }
 </script>

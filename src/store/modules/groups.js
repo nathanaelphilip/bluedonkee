@@ -1,4 +1,4 @@
-import { getGroups } from '@/api'
+import { getGroups, getGroup } from '@/api'
 import { GROUPS_FETCH } from '@/store/mutation-types'
 
 const state = {
@@ -21,6 +21,12 @@ const actions = {
     const { data } = await getGroups(settings)
     commit(GROUPS_FETCH, data.records)
     return data.records[0]
+  },
+
+  async getById ({ commit }, id) {
+    const { data } = await getGroup(id)
+    commit(GROUPS_FETCH, [data])
+    return data
   }
 }
 
