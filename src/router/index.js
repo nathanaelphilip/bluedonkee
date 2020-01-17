@@ -21,6 +21,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "group" */ '../views/Group.vue')
   },
   {
+    path: '/group/category/:slug',
+    name: 'groupCategory',
+    component: () => import(/* webpackChunkName: "groupCategory" */ '../views/GroupCategory.vue')
+  },
+  {
     path: '/job/:slug',
     name: 'job',
     component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')

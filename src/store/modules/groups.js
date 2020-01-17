@@ -35,7 +35,11 @@ const actions = {
 
 const getters = {
   getById: (state) => (id) => {
-    return state.repository.find(group => group.id === id)
+    return state.repository.find(job => job.id === id)
+  },
+
+  getBySlug: (state) => (slug) => {
+    return state.repository.find(job => job.fields.Slug === slug)
   }
 }
 

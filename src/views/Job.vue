@@ -52,7 +52,7 @@
 <script>
 import {
   getJob,
-  getJobGroups,
+  getGroups,
   getWorkCategories,
   getWorkLevels,
   getWorkTypes
@@ -74,7 +74,7 @@ export default {
 
   async mounted () {
     this.job = await getJob(this.$route.params.slug)
-    this.groups = await getJobGroups(this.job.fields.Group)
+    this.groups = await getGroups(this.job.fields.Group)
     this.workCategories = await getWorkCategories(this.job.fields['Work Categories'])
     this.workLevels = await getWorkLevels(this.job.fields['Work Levels'])
     this.workTypes = await getWorkTypes(this.job.fields['Work Types'])

@@ -16,8 +16,8 @@ export const getJob = async (slug) => {
   return stored
 }
 
-export const getJobs = async (jobs) => {
-  const items = jobs.map(async id => {
+export const getJobs = async (ids) => {
+  const items = ids.map(async id => {
     const stored = $store.getters['jobs/getById'](id)
 
     if (!stored) {
@@ -33,8 +33,24 @@ export const getJobs = async (jobs) => {
   return data
 }
 
-export const getJobGroups = async (jobGroups) => {
-  const groups = jobGroups.map(async (id) => {
+export const getGroup = async (slug) => {
+  const stored = $store.getters['groups/getBySlug'](slug)
+
+  if (!stored) {
+    const item = await $store.dispatch('groups/get', {
+      params: {
+        filterByFormula: `SEARCH("${slug}", Slug)`
+      }
+    })
+
+    return item
+  }
+
+  return stored
+}
+
+export const getGroups = async (ids) => {
+  const groups = ids.map(async (id) => {
     const stored = $store.getters['groups/getById'](id)
 
     if (!stored) {
@@ -48,6 +64,22 @@ export const getJobGroups = async (jobGroups) => {
   const data = await Promise.all(groups)
 
   return data
+}
+
+export const getGroupCategory = async (slug) => {
+  const stored = $store.getters['groupCategories/getBySlug'](slug)
+
+  if (!stored) {
+    const item = await $store.dispatch('groupCategories/get', {
+      params: {
+        filterByFormula: `SEARCH("${slug}", Slug)`
+      }
+    })
+
+    return item
+  }
+
+  return stored
 }
 
 export const getWorkCategory = async (slug) => {

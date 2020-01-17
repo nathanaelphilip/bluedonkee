@@ -1,35 +1,36 @@
 <template>
-  <div v-if="group.fields">
-    {{ group.fields.Name }}
+  <div v-if="!loading">
+    <h2>{{ group.fields.Name }}</h2>
+    <router-link
+      v-for="job in jobs"
+      :key="`job-${job.id}`"
+      :to="{ name: 'job', params: { slug: job.fields.Slug } }">
+      {{ job.fields.Title }}<br>
+    </router-link>
   </div>
 </template>
 
 <script>
+import {
+  getJobs,
+  getGroup
+} from '@/store/helpers'
+
 export default {
   name: 'group',
 
   data () {
     return {
-      group: {}
+      loading: true,
+      group: {},
+      jobs: []
     }
   },
 
   async mounted () {
-    const slug = this.$route.params.slug
-
-    let group = this.$store.state.groups.repository.find((group) => {
-      return group.fields.Slug === slug
-    })
-
-    if (!group) {
-      group = await this.$store.dispatch('groups/get', {
-        params: {
-          filterByFormula: `SEARCH("${slug}", Slug)`
-        }
-      })
-    }
-
-    this.group = group
+    this.group = await getGroup(this.$route.params.slug)
+    this.jobs = this.group.fields.Jobs ? await getJobs(this.group.fields.Jobs) : []
+    this.loading = false
   }
 }
 </script>
