@@ -13,6 +13,7 @@
       :to="{ name: 'job', params: { slug: job.fields.Slug } }">
       {{ job.fields.Title }}<br>
     </router-link>
+    <Jobs :jobs="jobs" />
   </div>
 </template>
 
@@ -23,8 +24,11 @@ import {
   getGroupCategories
 } from '@/store/helpers'
 
+import Jobs from '@/components/molecules/Jobs'
+
 export default {
-  name: 'group',
+  name: 'views-group',
+  components: { Jobs },
 
   data () {
     return {

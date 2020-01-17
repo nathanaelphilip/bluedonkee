@@ -10,6 +10,8 @@
          {{ job.fields.Title }}<br>
       </router-link>
     </div>
+
+    <Jobs :jobs="jobs" />
   </article>
 </template>
 
@@ -19,8 +21,11 @@ import {
   getWorkType
 } from '@/store/helpers'
 
+import Jobs from '@/components/molecules/Jobs'
+
 export default {
   name: 'work-type',
+  components: { Jobs },
 
   data () {
     return {

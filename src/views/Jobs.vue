@@ -1,23 +1,16 @@
 <template>
   <section class="home">
-    <div class="jobs">
-      <div
-        v-for="job in $store.state.jobs.repository"
-        :key="job.id"
-        class="box">
-        <Job :job="job" />
-      </div>
-    </div>
+    <Jobs :jobs="$store.state.jobs.repository" />
   </section>
 </template>
 
 <script>
-import Job from '@/components/molecules/Job'
+import Jobs from '@/components/molecules/Jobs'
 
 export default {
   name: 'views-jobs',
 
-  components: { Job },
+  components: { Jobs },
 
   async mounted () {
     await this.$store.dispatch('jobs/fetch')
@@ -26,11 +19,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .box {
-    padding: 25px 36px;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid $GREY;
-    }
-  }
 </style>
