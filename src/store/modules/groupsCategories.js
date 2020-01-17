@@ -13,7 +13,7 @@ const mutations = {
 
 const actions = {
   async fetch ({ commit }) {
-    const { data } = getGroupsCategories()
+    const { data } = await getGroupsCategories()
     commit(GROUPS_CATEGORIES_FETCH, data.records)
   }
 }

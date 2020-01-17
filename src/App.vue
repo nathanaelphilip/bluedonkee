@@ -8,6 +8,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'app',
+  async mounted () {
+    await this.$store.dispatch('groupsCategories/fetch')
+  }
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
