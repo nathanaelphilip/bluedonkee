@@ -3,11 +3,11 @@
     <h2>{{ category.fields.Name }}</h2>
     <div>
       <router-link
-        v-for="job in jobs"
-        :key="`job-${job.id}`"
-        :to="{name: 'job', params: { slug: job.fields.Slug }}"
+        v-for="group in groups"
+        :key="`group-${group.id}`"
+        :to="{name: 'group', params: { slug: group.fields.Slug }}"
        >
-         {{ job.fields.Title }}<br>
+         {{ group.fields.Name }}<br>
       </router-link>
     </div>
   </article>
@@ -15,7 +15,7 @@
 
 <script>
 import {
-  getJobs,
+  getGroups,
   getGroupCategory
 } from '@/store/helpers'
 
@@ -26,13 +26,13 @@ export default {
     return {
       loading: true,
       category: {},
-      jobs: []
+      groups: []
     }
   },
 
   async mounted () {
     this.category = await getGroupCategory(this.$route.params.slug)
-    this.jobs = await getJobs(this.category.fields.Jobs)
+    this.groups = this.category.fields.Groups ? await getGroups(this.category.fields.Groups) : []
 
     this.loading = false
   }

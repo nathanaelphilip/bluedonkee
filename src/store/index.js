@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import groups from './modules/groups'
-import groupsCategories from './modules/groupsCategories'
+import groupCategories from './modules/groupCategories'
 import jobs from './modules/jobs'
 import workCategories from './modules/workCategories'
 import workLevels from './modules/workLevels'
@@ -13,7 +13,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     groups,
-    groupsCategories,
+    groupCategories,
     jobs,
     workCategories,
     workLevels,

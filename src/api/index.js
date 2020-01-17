@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const jobs = `/Jobs`
 const groups = `/Groups`
-const groupsCategories = `/Groups%20Categories`
+const groupCategories = `/Groups%20Categories`
 const workTypes = `/Work%20Types`
 const workLevels = `/Work%20Levels`
 const workCategories = `/Work%20Categories`
@@ -31,8 +31,12 @@ export const getGroup = (id) => {
   return api.get(`${groups}/${id}`)
 }
 
-export const getGroupsCategories = (settings) => {
-  return api.get(groupsCategories, settings)
+export const getGroupCategories = (settings) => {
+  return api.get(groupCategories, settings)
+}
+
+export const getGroupCategory = (id) => {
+  return api.get(`${groupCategories}/${id}`, id)
 }
 
 export const getWorkTypes = (settings) => {

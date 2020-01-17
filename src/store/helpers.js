@@ -82,6 +82,23 @@ export const getGroupCategory = async (slug) => {
   return stored
 }
 
+export const getGroupCategories = async (ids) => {
+  const items = ids.map(async (id) => {
+    const stored = $store.getters['groupCategories/getById'](id)
+
+    if (!stored) {
+      const item = await $store.dispatch('groupCategories/getById', id)
+      return item
+    }
+
+    return stored
+  })
+
+  const data = await Promise.all(items)
+
+  return data
+}
+
 export const getWorkCategory = async (slug) => {
   const stored = $store.getters['workCategories/getBySlug'](slug)
 
