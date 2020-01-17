@@ -1,6 +1,7 @@
 <template>
   <Grid>
     <template v-slot:one>
+      <Logo />
       <Navigation />
     </template>
     <template v-slot:two>
@@ -16,12 +17,13 @@
 
 <script>
 import Grid from '@/components/layouts/Grid'
+import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
 
 export default {
   name: 'layout-full',
 
-  components: { Grid, Navigation }
+  components: { Grid, Logo, Navigation }
 }
 </script>
 

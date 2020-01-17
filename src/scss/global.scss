@@ -1,5 +1,6 @@
 @import "~reset-css";
 @import "~normalize.css";
+@import "_variables";
 
 @font-face {
   font-family: 'Inter';
@@ -19,6 +20,12 @@
   src: url("~@/assets/fonts/inter/Inter-Bold.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: 'Inter';
+  font-weight: 900;
+  src: url("~@/assets/fonts/inter/Inter-ExtraBold.woff2") format("woff2");
+}
+
 html {
   box-sizing: border-box;
 }
@@ -27,6 +34,7 @@ html {
 }
 
 body {
+  color: $BLACK;
   font-family: 'Inter', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
