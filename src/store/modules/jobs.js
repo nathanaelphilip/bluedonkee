@@ -1,6 +1,6 @@
 import { unionBy } from 'lodash'
 
-import { getJobs } from '@/api'
+import { getJob, getJobs } from '@/api'
 import { JOBS_FETCH } from '@/store/mutation-types'
 
 const state = {
@@ -18,6 +18,12 @@ const actions = {
   async fetch ({ commit }, settings) {
     const { data } = await getJobs(settings)
     commit(JOBS_FETCH, data.records)
+  },
+
+  async getById ({ commit }, id) {
+    const { data } = await getJob(id)
+    commit(JOBS_FETCH, [data])
+    return data
   },
 
   async get ({ commit }, settings) {

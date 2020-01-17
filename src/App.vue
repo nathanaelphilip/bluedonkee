@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Jobs</router-link> |
-      <router-link to="/groups">Groups</router-link>
+      <router-link :to="{ name: 'jobs' }">Jobs</router-link> |
+      <router-link :to="{ name: 'groups' }">Groups</router-link>
     </div>
     <router-view/>
   </div>
@@ -10,10 +10,7 @@
 
 <script>
 export default {
-  name: 'app',
-  async mounted () {
-    await this.$store.dispatch('groupsCategories/fetch')
-  }
+  name: 'app'
 }
 </script>
 

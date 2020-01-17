@@ -19,6 +19,10 @@ export const getJobs = (settings) => {
   return api.get(jobs, settings)
 }
 
+export const getJob = (id) => {
+  return api.get(`${jobs}/${id}`)
+}
+
 export const getGroups = (settings) => {
   return api.get(groups, settings)
 }
@@ -35,12 +39,24 @@ export const getWorkTypes = (settings) => {
   return api.get(workTypes, settings)
 }
 
+export const getWorkType = (id) => {
+  return api.get(`${workTypes}/${id}`)
+}
+
 export const getWorkLevels = (settings) => {
   return api.get(workLevels, settings)
 }
 
+export const getWorkLevel = (id) => {
+  return api.get(`${workLevels}/${id}`)
+}
+
 export const getWorkCategories = (settings) => {
   return api.get(workCategories, settings)
+}
+
+export const getWorkCategory = (id) => {
+  return api.get(`${workCategories}/${id}`)
 }
 
 export const getLocations = (settings) => {

@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'jobs',
     component: () => import(/* webpackChunkName: "jobs" */ '../views/Jobs.vue')
   },
 
@@ -24,6 +24,21 @@ const routes = [
     path: '/job/:slug',
     name: 'job',
     component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')
+  },
+  {
+    path: '/job/category/:slug',
+    name: 'workCategory',
+    component: () => import(/* webpackChunkName: "workCategory" */ '../views/WorkCategory.vue')
+  },
+  {
+    path: '/job/level/:slug',
+    name: 'workLevel',
+    component: () => import(/* webpackChunkName: "workLevel" */ '../views/WorkLevel.vue')
+  },
+  {
+    path: '/job/type/:slug',
+    name: 'workType',
+    component: () => import(/* webpackChunkName: "workType" */ '../views/WorkType.vue')
   }
 ]
 

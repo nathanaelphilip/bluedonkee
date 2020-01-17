@@ -10,6 +10,7 @@
 export default {
   name: 'groups',
   async mounted () {
+    await this.$store.dispatch('groupsCategories/fetch')
     await this.$store.dispatch('groups/fetch')
   }
 }
