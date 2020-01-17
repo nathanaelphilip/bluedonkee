@@ -8,9 +8,8 @@
 
 <script>
 export default {
-  name: 'groups',
+  name: 'views-groups',
   async mounted () {
-    await this.$store.dispatch('groupsCategories/fetch')
     await this.$store.dispatch('groups/fetch')
   }
 }

@@ -1,38 +1,33 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'jobs' }">Jobs</router-link> |
-      <router-link :to="{ name: 'groups' }">Groups</router-link>
-    </div>
-    <router-view/>
+    <component :is="layout">
+      <router-view/>
+    </component>
   </div>
 </template>
 
 <script>
+import Basic from '@/layouts/Basic'
+import Full from '@/layouts/Full'
+
 export default {
-  name: 'app'
-}
-</script>
+  name: 'app',
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  components: {
+    'basic': Basic,
+    'full': Full
+  },
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  computed: {
+    layout () {
+      return `full`
     }
   }
 }
+</script>
+
+<style>
+  #app {
+    font-family: Avenir;
+  }
 </style>

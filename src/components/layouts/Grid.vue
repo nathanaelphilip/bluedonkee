@@ -1,0 +1,32 @@
+<template>
+  <div class="grid">
+    <div class="column sticky">
+      <slot name="one"></slot>
+    </div>
+    <div class="column">
+      <slot name="two"></slot>
+    </div>
+    <div class="column sticky">
+      <slot name="three"></slot>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'components-layouts-grid'
+}
+</script>
+
+<style lang="scss" scoped>
+  .grid {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 0;
+  }
+</style>
