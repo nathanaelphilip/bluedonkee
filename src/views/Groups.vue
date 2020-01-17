@@ -10,9 +10,7 @@
 export default {
   name: 'groups',
   async mounted () {
-    if (!this.$store.state.groups.repository.length) {
-      await this.$store.dispatch('groups/fetch')
-    }
+    await this.$store.dispatch('groups/fetch')
   }
 }
 </script>

@@ -13,9 +13,7 @@ export default {
   name: 'jobs',
 
   async mounted () {
-    if (!this.$store.state.jobs.repository.length) {
-      await this.$store.dispatch('jobs/fetch')
-    }
+    await this.$store.dispatch('jobs/fetch')
   }
 }
 </script>

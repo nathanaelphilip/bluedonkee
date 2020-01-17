@@ -1,3 +1,5 @@
+import { unionBy } from 'lodash'
+
 import { getGroups, getGroup } from '@/api'
 import { GROUPS_FETCH } from '@/store/mutation-types'
 
@@ -7,7 +9,8 @@ const state = {
 
 const mutations = {
   [GROUPS_FETCH] (state, items) {
-    state.repository = [...state.repository, ...items]
+    const merged = unionBy(state.repository, items, 'id')
+    state.repository = merged
   }
 }
 
