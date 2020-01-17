@@ -1,18 +1,14 @@
 <template>
   <div v-if="!loading">
-    <h2>{{ group.fields.Name }}</h2>
-    <router-link
-      v-for="category in categories"
-      :key="`category-${category.id}`"
-      :to="{ name: 'groupCategory', params: { slug: category.fields.Slug } }">
-      {{ category.fields.Name }}<br>
-    </router-link>
-    <router-link
-      v-for="job in jobs"
-      :key="`job-${job.id}`"
-      :to="{ name: 'job', params: { slug: job.fields.Slug } }">
-      {{ job.fields.Title }}<br>
-    </router-link>
+    <div class="group">
+      <Header
+        :avatar="avatar"
+        :group="group"
+        :heading="group.fields.Name"
+        :groupCategories="categories"
+      />
+      <h3 class="subheading">Available Positions</h3>
+    </div>
     <Jobs :jobs="jobs" />
   </div>
 </template>
@@ -24,11 +20,12 @@ import {
   getGroupCategories
 } from '@/store/helpers'
 
+import Header from '@/components/molecules/Header'
 import Jobs from '@/components/molecules/Jobs'
 
 export default {
   name: 'views-group',
-  components: { Jobs },
+  components: { Header, Jobs },
 
   data () {
     return {
@@ -36,6 +33,12 @@ export default {
       categories: [],
       group: {},
       jobs: []
+    }
+  },
+
+  computed: {
+    avatar () {
+      return this.group.fields.Avatar[0].url
     }
   },
 
@@ -47,3 +50,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .group {
+    background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
+    padding: 32px 32px 0 32px;
+  }
+
+  .subheading {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 5px;
+    margin-top: 36px;
+  }
+</style>
