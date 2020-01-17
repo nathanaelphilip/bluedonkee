@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <ul>
-      <li :key="job.id" v-for="job in jobs">
+      <li :key="job.id" v-for="job in $store.state.jobs.repository">
         <router-link :to="`/job/${job.fields.Slug}`">{{ job.fields.Title }}</router-link>
       </li>
     </ul>
@@ -9,25 +9,13 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import { getJobs } from '@/api'
-
 export default {
   name: 'jobs',
 
-  data () {
-    return {
-      jobs: []
-    }
-  },
-
   async mounted () {
-    const { data } = await getJobs({
-      params: {
-        filterByFormula: 'SEARCH("Active", Status)'
-      }
-    })
-    this.jobs = data.records
+    if (!this.$store.state.jobs.repository.length) {
+      await this.$store.dispatch('jobs/fetch')
+    }
   }
 }
 </script>
