@@ -25,6 +25,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "groupCategory" */ '../views/GroupCategory.vue')
   },
   {
+    path: '/locations/groups/:slug',
+    name: 'locationGroup',
+    component: () => import(/* webpackChunkName: "locationGroups" */ '../views/LocationGroups.vue')
+  },
+  {
     path: '/job/:slug',
     name: 'job',
     component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')
@@ -43,6 +48,11 @@ const routes = [
     path: '/job/type/:slug',
     name: 'workType',
     component: () => import(/* webpackChunkName: "workType" */ '../views/WorkType.vue')
+  },
+  {
+    path: '/locations/jobs/:slug',
+    name: 'locationJob',
+    component: () => import(/* webpackChunkName: "locationJobs" */ '../views/LocationJobs.vue')
   },
   {
     path: '/submit',

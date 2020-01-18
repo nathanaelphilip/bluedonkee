@@ -22,6 +22,16 @@ export default {
     layout () {
       return this.$route.meta.layout ? this.$route.meta.layout : `full`
     }
+  },
+
+  async mounted () {
+    if (!this.$store.state.states.repository.length) {
+      await this.$store.dispatch('states/fetch')
+    }
+
+    if (!this.$store.state.locations.repository.length) {
+      await this.$store.dispatch('locations/fetch')
+    }
   }
 }
 </script>

@@ -115,8 +115,8 @@ export const getWorkCategory = async (slug) => {
   return stored
 }
 
-export const getWorkCategories = async (jobWorkCategories) => {
-  const categories = jobWorkCategories.map(async (id) => {
+export const getWorkCategories = async (ids) => {
+  const categories = ids.map(async (id) => {
     const stored = $store.getters['workCategories/getById'](id)
 
     if (!stored) {
@@ -148,8 +148,8 @@ export const getWorkLevel = async (slug) => {
   return stored
 }
 
-export const getWorkLevels = async (jobWorkLevels) => {
-  const items = jobWorkLevels.map(async (id) => {
+export const getWorkLevels = async (ids) => {
+  const items = ids.map(async (id) => {
     const stored = $store.getters['workLevels/getById'](id)
 
     if (!stored) {
@@ -181,12 +181,45 @@ export const getWorkType = async (slug) => {
   return stored
 }
 
-export const getWorkTypes = async (jobWorkTypes) => {
-  const items = jobWorkTypes.map(async (id) => {
+export const getWorkTypes = async (ids) => {
+  const items = ids.map(async (id) => {
     const stored = $store.getters['workTypes/getById'](id)
 
     if (!stored) {
       const item = await $store.dispatch('workTypes/getById', id)
+      return item
+    }
+
+    return stored
+  })
+
+  const data = await Promise.all(items)
+
+  return data
+}
+
+export const getLocation = async (slug) => {
+  const stored = $store.getters['locations/getBySlug'](slug)
+
+  if (!stored) {
+    const item = await $store.dispatch('locations/get', {
+      params: {
+        filterByFormula: `SEARCH("${slug}", Slug)`
+      }
+    })
+
+    return item
+  }
+
+  return stored
+}
+
+export const getLocations = async (ids) => {
+  const items = ids.map(async (id) => {
+    const stored = $store.getters['locations/getById'](id)
+
+    if (!stored) {
+      const item = await $store.dispatch('locations/getById', id)
       return item
     }
 

@@ -15,6 +15,12 @@
             <router-link :to="{ name: 'group', params: { slug: group.fields.Slug } }">
               {{ group.fields.Name }}
             </router-link>
+            <template v-if="locations.length">
+              -
+              <router-link :to="{ name: 'locationJob', params: { slug: locations[0].fields.Slug } }">
+                {{ locations[0].fields.City }}
+              </router-link>
+            </template>
           </div>
         </div>
         <time class="time">
@@ -57,6 +63,7 @@
 import moment from 'moment'
 import {
   getGroups,
+  getLocations,
   getWorkCategories,
   getWorkLevels,
   getWorkTypes
@@ -76,6 +83,7 @@ export default {
     return {
       loading: false,
       groups: [],
+      locations: [],
       workCategories: [],
       workLevels: [],
       workTypes: []
@@ -101,6 +109,7 @@ export default {
     this.workCategories = await getWorkCategories(this.job.fields['Work Categories'])
     this.workLevels = await getWorkLevels(this.job.fields['Work Levels'])
     this.workTypes = await getWorkTypes(this.job.fields['Work Types'])
+    this.locations = await getLocations(this.job.fields['Location'])
     this.loading = false
   }
 }

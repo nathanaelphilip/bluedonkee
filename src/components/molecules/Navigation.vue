@@ -16,6 +16,7 @@ export default {
     display: flex;
     font-size: 20px;
     font-weight: 800;
+    max-width: 200px;
     flex-direction: column
   }
 

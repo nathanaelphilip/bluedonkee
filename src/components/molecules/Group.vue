@@ -9,7 +9,11 @@
           {{ group.fields.Name }}
         </router-link>
       </h2>
-      <div class="location">Location</div>
+      <div class="location" v-if="locations.length">
+        <router-link :to="{ name: 'locationGroup', params: { slug: locations[0].fields.Slug } }">
+          {{ locations[0].fields.City }}
+        </router-link>
+      </div>
     </div>
     <div class="tags">
        <Tags>
@@ -26,7 +30,7 @@
 </template>
 
 <script>
-import { getGroupCategories } from '@/store/helpers'
+import { getGroupCategories, getLocations } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
 import Tag from '@/components/atoms/Tag'
@@ -39,12 +43,14 @@ export default {
 
   data () {
     return {
-      categories: []
+      categories: [],
+      locations: []
     }
   },
 
   async mounted () {
     this.categories = this.group.fields['Groups Categories'].length ? await getGroupCategories(this.group.fields['Groups Categories']) : []
+    this.locations = this.group.fields['Location'] ? await getLocations(this.group.fields['Location']) : []
   }
 }
 </script>

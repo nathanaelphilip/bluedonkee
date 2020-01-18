@@ -15,6 +15,11 @@ const mutations = {
 }
 
 const actions = {
+  async fetch ({ commit }, settings) {
+    const { data } = await getWorkTypes(settings)
+    commit(WORK_TYPES_FETCH, data.records)
+  },
+
   async getById ({ commit }, id) {
     const { data } = await getWorkType(id)
     commit(WORK_TYPES_FETCH, [data])

@@ -19,6 +19,18 @@ export default {
   components: { ButtonSecondary, Intro, Jobs, LinkPrimary },
 
   async mounted () {
+    if (!this.$store.state.workCategories.repository.length) {
+      await this.$store.dispatch('workCategories/fetch')
+    }
+
+    if (!this.$store.state.workLevels.repository.length) {
+      await this.$store.dispatch('workLevels/fetch')
+    }
+
+    if (!this.$store.state.workTypes.repository.length) {
+      await this.$store.dispatch('workTypes/fetch')
+    }
+
     await this.$store.dispatch('jobs/fetch')
   }
 }

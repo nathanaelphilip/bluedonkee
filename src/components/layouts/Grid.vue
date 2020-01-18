@@ -28,10 +28,11 @@ export default {
 <style lang="scss" scoped>
   .grid {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 2.25fr 1fr;
     grid-column-gap: 33px;
     margin: 0 auto;
-    max-width: 1295px;
+    max-width: 1400px;
+    width: 95%;
   }
 
   .column { min-height: 100vh; position: relative; }

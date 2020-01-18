@@ -14,6 +14,10 @@ export default {
   components: { Intro, Groups },
 
   async mounted () {
+    if (!this.$store.state.groupCategories.repository.length) {
+      await this.$store.dispatch('groupCategories/fetch')
+    }
+
     await this.$store.dispatch('groups/fetch')
   }
 }
