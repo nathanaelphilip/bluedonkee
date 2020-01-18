@@ -14,6 +14,7 @@
     </template>
     <template v-slot:three>
       <Newsletter />
+      <Twitter />
     </template>
     <template v-slot:four>
       <div class="copyright">&copy; 2020 Blue Donkee - Contact</div>
@@ -27,11 +28,12 @@ import Grid from '@/components/layouts/Grid'
 import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
 import Newsletter from '@/components/molecules/Newsletter'
+import Twitter from '@/components/molecules/Twitter'
 
 export default {
   name: 'layout-full',
 
-  components: { Bug, Grid, Logo, Navigation, Newsletter }
+  components: { Bug, Grid, Logo, Navigation, Newsletter, Twitter }
 }
 </script>
 
@@ -49,6 +51,10 @@ export default {
     margin-bottom: 36px;
 
     > img {margin-right: 12px}
+  }
+
+  .newsletter {
+    margin-bottom: 26px;
   }
 
   .copyright {
