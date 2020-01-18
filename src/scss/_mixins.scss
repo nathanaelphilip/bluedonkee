@@ -5,6 +5,8 @@
   font-family: $INTER;
   font-weight: 600;
   line-height: 1;
+
+  &:hover {cursor: pointer}
 }
 
 @mixin ButtonPrimary {

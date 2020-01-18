@@ -2,7 +2,7 @@
   <section class="home">
     <Intro heading="Jobs">
       <ButtonSecondary>Filter</ButtonSecondary>
-      <LinkPrimary :to="{name: 'submit'}">Submit a Job</LinkPrimary>
+      <LinkPrimary :to="{name: 'submit'}">Submit Job</LinkPrimary>
     </Intro>
     <Jobs :jobs="$store.state.jobs.repository" />
   </section>
