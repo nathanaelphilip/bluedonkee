@@ -47,7 +47,8 @@ const routes = [
   {
     path: '/submit',
     name: 'submit',
-    component: () => import(/* webpackChunkName: "submit" */ '../views/Submit.vue')
+    component: () => import(/* webpackChunkName: "submit" */ '../views/Submit.vue'),
+    meta: { layout: 'basic' }
   },
   {
     path: '/questions',
