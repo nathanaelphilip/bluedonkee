@@ -1,6 +1,6 @@
 <template>
   <article v-if="!loading">
-    <h2>{{ category.fields.Name }}</h2>
+    <Intro :back="{ name: 'groups' }" :heading="`Category: ${category.fields.Name}`" />
     <Groups :groups="groups" />
   </article>
 </template>
@@ -12,10 +12,11 @@ import {
 } from '@/store/helpers'
 
 import Groups from '@/components/molecules/Groups'
+import Intro from '@/components/molecules/Intro'
 
 export default {
   name: 'group-category',
-  components: { Groups },
+  components: { Groups, Intro },
 
   data () {
     return {

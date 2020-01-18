@@ -2,7 +2,7 @@
   <Grid>
     <template v-slot:one>
       <div class="logo">
-        <Logo />
+        <router-link :to="{name: 'jobs'}"><Logo /></router-link>
         <Bug>Alpha</Bug>
       </div>
       <Navigation />
@@ -50,7 +50,7 @@ export default {
     justify-content: flex-start;
     margin-bottom: 36px;
 
-    > img {margin-right: 12px}
+    img {margin-right: 12px}
   }
 
   .newsletter {
