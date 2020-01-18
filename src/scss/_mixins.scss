@@ -1,5 +1,6 @@
 @mixin Button {
   appearance: none;
+  border: none;
   border-radius: 4px;
   display: inline-block;
   font-family: $INTER;
@@ -12,6 +13,7 @@
 @mixin ButtonPrimary {
   @include Button;
   background: $BLUE;
+  border: 1px solid $BLUE;
   color: $WHITE;
   padding: 11px 18px;
 }
