@@ -20,7 +20,7 @@ export default {
 
   computed: {
     layout () {
-      return `full`
+      return this.$route.meta.layout ? this.$route.meta.layout : `full`
     }
   }
 }

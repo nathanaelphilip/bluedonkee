@@ -1,19 +1,22 @@
 <template>
-  <div class="grid">
-    <div class="one">
-      <button>Close</button>
-    </div>
-    <div class="two">
+  <Grid>
+    <template v-slot:one>
+      <router-link :to="{name: 'jobs'}">Close</router-link>
+    </template>
+    <template v-slot:two>
       <slot />
-    </div>
-    <div class="three">
+    </template>
+    <template v-slot:three>
       &nbsp;
-    </div>
-  </div>
+    </template>
+  </Grid>
 </template>
 
 <script>
+import Grid from '@/components/layouts/Grid'
+
 export default {
-  name: 'layout-basic'
+  name: 'layout-basic',
+  components: { Grid }
 }
 </script>

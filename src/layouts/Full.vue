@@ -17,7 +17,7 @@
       <Twitter />
     </template>
     <template v-slot:four>
-      <div class="copyright">&copy; 2020 Blue Donkee - Contact</div>
+      <div class="copyright">&copy; 2020 Blue Donkee - <router-link :to="{ name: 'questions' }">Questions</router-link></div>
     </template>
   </Grid>
 </template>
