@@ -67,6 +67,10 @@ export const getLocations = (settings) => {
   return api.get(locations, settings)
 }
 
+export const getLocation = (id) => {
+  return api.get(`${locations}/${id}`)
+}
+
 export const getStates = (settings) => {
   return api.get(states, settings)
 }

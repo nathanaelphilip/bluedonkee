@@ -46,6 +46,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .questions {
+    padding: 60px 0;
+  }
+
   .question {
     &:not(:last-child) {
       margin-bottom: 60px;
