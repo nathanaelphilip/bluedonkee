@@ -1,18 +1,8 @@
 <template>
-  <article v-if="!loading">
-    <h2>{{ level.fields.Name }}</h2>
-    <div>
-      <router-link
-        v-for="job in jobs"
-        :key="`job-${job.id}`"
-        :to="{name: 'job', params: { slug: job.fields.Slug }}"
-       >
-         {{ job.fields.Title }}<br>
-      </router-link>
-    </div>
-
+  <section v-if="!loading">
+    <Intro :back="{ name: 'jobs' }" :heading="`Level: ${level.fields.Name}`" />
     <Jobs :jobs="jobs" />
-  </article>
+  </section>
 </template>
 
 <script>
@@ -21,11 +11,12 @@ import {
   getWorkLevel
 } from '@/store/helpers'
 
+import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 
 export default {
   name: 'work-level',
-  components: { Jobs },
+  components: { Intro, Jobs },
 
   data () {
     return {

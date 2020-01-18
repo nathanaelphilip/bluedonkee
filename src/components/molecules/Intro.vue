@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="intro">
     <div class="box">
       <ButtonBack :to="back" v-if="back" />
       <h1 class="heading">{{ heading }}</h1>
@@ -20,12 +20,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .header {
+  .intro {
     align-items: center;
+    background: $WHITE;
     border-bottom: 1px solid $GREY;
     display: flex;
     justify-content: space-between;
     padding: 24px 32px;
+    position: sticky;
+    top: 0;
   }
 
   .heading {
