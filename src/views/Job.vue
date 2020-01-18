@@ -1,23 +1,28 @@
 <template>
   <article class="job" v-if="!loading">
-    <Header
-      :avatar="avatar"
-      :group="group"
-      :heading="job.fields.Title"
-      :workCategories="workCategories"
-      :workLevels="workLevels"
-      :workTypes="workTypes"
-    />
+    <Intro :back="{ name: 'jobs' }" :heading="job.fields.Title">
+      <LinkPrimary :href="job.fields['Application URL']">Apply</LinkPrimary>
+    </Intro>
+    <div class="boxed">
+      <Header
+        :avatar="avatar"
+        :group="group"
+        :heading="job.fields.Title"
+        :workCategories="workCategories"
+        :workLevels="workLevels"
+        :workTypes="workTypes"
+      />
 
-    <div class="overview">
-      <h3 class="subheading">Job Overview</h3>
-      <div class="content">
-        {{ job.fields.Description }}
+      <div class="overview">
+        <h3 class="subheading">Job Overview</h3>
+        <div class="content">
+          {{ job.fields.Description }}
+        </div>
       </div>
-    </div>
-    <div>
-      Something off with this post?
-      <button>Flag Posting</button>
+      <div>
+        Something off with this post?
+        <button>Flag Posting</button>
+      </div>
     </div>
   </article>
 </template>
@@ -32,10 +37,12 @@ import {
 } from '@/store/helpers'
 
 import Header from '@/components/molecules/Header'
+import Intro from '@/components/molecules/Intro'
+import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 export default {
   name: 'job',
-  components: { Header },
+  components: { LinkPrimary, Header, Intro },
 
   data () {
     return {
@@ -70,7 +77,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .job {
+  .boxed {
     background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
     padding: 32px;
   }

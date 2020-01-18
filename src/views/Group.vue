@@ -1,6 +1,7 @@
 <template>
-  <div v-if="!loading">
-    <div class="group">
+  <article class="group" v-if="!loading">
+    <Intro :back="{ name: 'groups' }" :heading="group.fields.Name" />
+    <div class="box">
       <Header
         :avatar="avatar"
         :group="group"
@@ -10,7 +11,7 @@
       <h3 class="subheading">Available Positions</h3>
     </div>
     <Jobs :jobs="jobs" />
-  </div>
+  </article>
 </template>
 
 <script>
@@ -21,11 +22,12 @@ import {
 } from '@/store/helpers'
 
 import Header from '@/components/molecules/Header'
+import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 
 export default {
   name: 'views-group',
-  components: { Header, Jobs },
+  components: { Header, Intro, Jobs },
 
   data () {
     return {
@@ -52,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .group {
+  .box {
     background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
     padding: 32px 32px 0 32px;
   }

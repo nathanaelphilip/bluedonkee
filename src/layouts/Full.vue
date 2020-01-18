@@ -3,7 +3,7 @@
     <template v-slot:one>
       <div class="logo">
         <Logo />
-        <Bug>Beta</Bug>
+        <Bug>Alpha</Bug>
       </div>
       <Navigation />
     </template>

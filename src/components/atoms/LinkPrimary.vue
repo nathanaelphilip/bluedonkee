@@ -1,12 +1,20 @@
 <template>
-  <router-link :to="to" class="button">
-    <slot></slot>
-  </router-link>
+  <Fragment>
+    <router-link :to="to" v-if="to" class="button">
+      <slot></slot>
+    </router-link>
+    <a :href="href" v-if="href" target="_blank" class="button">
+      <slot></slot>
+    </a>
+  </Fragment>
 </template>
 
 <script>
+import { Fragment } from 'vue-fragment'
+
 export default {
-  props: ['to']
+  props: ['to', 'href'],
+  components: { Fragment }
 }
 </script>
 
