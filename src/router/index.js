@@ -9,7 +9,6 @@ const routes = [
     name: 'jobs',
     component: () => import(/* webpackChunkName: "jobs" */ '../views/Jobs.vue')
   },
-
   {
     path: '/groups',
     name: 'groups',
@@ -44,6 +43,11 @@ const routes = [
     path: '/job/type/:slug',
     name: 'workType',
     component: () => import(/* webpackChunkName: "workType" */ '../views/WorkType.vue')
+  },
+  {
+    path: '/submit',
+    name: 'submit',
+    component: () => import(/* webpackChunkName: "submit" */ '../views/Submit.vue')
   }
 ]
 
