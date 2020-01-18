@@ -1,7 +1,7 @@
 <template>
   <div class="input">
     <label class="label" v-if="label">{{ label }}</label>
-    <input type="text" :placeholder="placeholder" class="text">
+    <textarea :placeholder="placeholder" class="text"></textarea>
   </div>
 </template>
 
@@ -19,5 +19,7 @@ export default {
 
   .text {
     @include Input;
+    min-height: 150px;
+    resize: none;
   }
 </style>

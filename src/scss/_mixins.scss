@@ -29,3 +29,25 @@
 
   &:hover {background: $GREY;}
 }
+
+@mixin Label {
+  color: $GREY2;
+  display: block;
+  font-size: 15px;
+}
+
+@mixin Input {
+  appearance: none;
+  background: $WHITE;
+  border: 1px solid $GREY;
+  border-radius: 4px;
+  color: $BLACK;
+  display: block;
+  font-family: $INTER;
+  font-size: 15px;
+  line-height: 1;
+  padding: 12px;
+  width: 100%;
+
+  &:placeholder { color: $GREY; }
+}

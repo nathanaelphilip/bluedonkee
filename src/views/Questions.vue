@@ -1,15 +1,20 @@
 <template>
   <article class="questions">
-    <Question
-      v-for="(question, index) in questions"
-      :key="index"
-      v-bind="question"
-    />
+    <div class="grouped">
+      <Question
+        v-for="(question, index) in questions"
+        :key="index"
+        v-bind="question"
+      />
+    </div>
+    <ContactForm />
+    <div class="copyright">&copy; 2020 Blue Donkee</div>
   </article>
 </template>
 
 <script>
 import Question from '@/components/molecules/Question'
+import ContactForm from '@/components/forms/Contact'
 
 const questions = [{
   emoji: `🤔`,
@@ -37,7 +42,7 @@ const questions = [{
 
 export default {
   name: 'views-questions',
-  components: { Question },
+  components: { ContactForm, Question },
 
   data () {
     return { questions }
@@ -54,5 +59,16 @@ export default {
     &:not(:last-child) {
       margin-bottom: 60px;
     }
+  }
+
+  .form-contact {
+    margin-bottom: 25px;
+    margin-top: 15px;
+  }
+
+  .copyright {
+    color: $BLUEGREY;
+    font-size: 13px;
+    text-align: center;
   }
 </style>

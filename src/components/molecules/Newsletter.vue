@@ -2,7 +2,9 @@
   <form class="newsletter">
     <h4 class="heading">Stay in the know</h4>
     <div class="content">Get our weekly email newsletter.</div>
-    <Input placeholder="Email Address" />
+    <div class="input-container">
+      <Input placeholder="Email Address" />
+    </div>
     <ButtonPrimary :full="true">Sign Up</ButtonPrimary>
   </form>
 </template>
@@ -34,5 +36,5 @@ export default {
     margin-bottom: 20px;
   }
 
-  .input {margin-bottom: 10px;}
+  .input-container {margin-bottom: 10px;}
 </style>
