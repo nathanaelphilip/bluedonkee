@@ -22,13 +22,16 @@ export default {
   .aside {
     left: 0;
     position: fixed;
-    top: 0;
-    transform: translateY(-100%);
-    transition: transform .4s .15s ease-out;
+    top: 10px;
+    transform: translateY(-120%);
+    transition: transform .2s .15s ease;
     width: 100%;
     z-index: 10;
 
-    &.open {transform: translateY(0);}
+    &.open {
+      transform: translateY(0);
+      transform-delay: transform 0s;
+    }
   }
 
   .grid {
