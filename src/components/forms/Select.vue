@@ -1,13 +1,16 @@
 <template>
   <div class="input">
     <label class="label" v-if="label">{{ label }}</label>
-    <input :required="required" type="text" :placeholder="placeholder" class="text">
+    <select class="select" required>
+       <option disabled selected hidden>{{ placeholder }}</option>
+       <slot></slot>
+    </select>
   </div>
 </template>
 
 <script>
 export default {
-  props: [ 'label', 'placeholder', 'required' ]
+  props: [ 'label', 'placeholder' ]
 }
 </script>
 
@@ -17,7 +20,7 @@ export default {
     margin-bottom: 8px;
   }
 
-  .text {
-    @include Input;
+  .select {
+    @include Select;
   }
 </style>

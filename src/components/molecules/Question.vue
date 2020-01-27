@@ -14,22 +14,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .question {}
-  .emoji {
-    font-size: 40px;
-    margin-bottom: 12px;
+  .question {
+    background: $BLUELIGHT;
+    border-radius: 12px;
+    padding: 32px;
   }
 
   .heading {
     font-size: 28px;
     font-weight: 800;
     margin-bottom: 15px;
-  }
-
-  .subheading {
-    color: $GREY2;
-    font-size: 18px;
-    margin-bottom: 22px;
   }
 
   .content {

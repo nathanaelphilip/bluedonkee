@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <portal-target name="banner">
+    </portal-target>
+    <portal-target name="modal">
+    </portal-target>
     <component :is="layout">
       <router-view/>
     </component>

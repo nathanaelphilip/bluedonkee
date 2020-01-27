@@ -6,6 +6,7 @@
   font-family: $INTER;
   font-weight: 600;
   line-height: 1;
+  position: relative;
   transition: background .5s, border-color .5s;
 
   &:hover {cursor: pointer}
@@ -50,4 +51,17 @@
   width: 100%;
 
   &:placeholder { color: $GREY; }
+}
+
+@mixin Select {
+  @include Input;
+
+  option {color: $BLACK}
+
+  &:invalid:required { color: grey; }
+}
+
+
+@mixin Shadow {
+  box-shadow: 0 2px 12px rgba(#BEBEBE, .5);
 }
