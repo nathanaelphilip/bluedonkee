@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import campaigns from './modules/campaigns'
 import groups from './modules/groups'
 import groupCategories from './modules/groupCategories'
 import jobs from './modules/jobs'
@@ -14,6 +15,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
+    campaigns,
     groups,
     groupCategories,
     jobs,
