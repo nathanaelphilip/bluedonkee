@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+const campaigns = `/Campaigns`
 const contactForm = `/Contact%20Form`
 const jobs = `/Jobs`
 const groups = `/Groups`
@@ -18,6 +19,14 @@ const api = axios.create({
 
 export const postContactForm = (data) => {
   return api.post(contactForm, data)
+}
+
+export const getCampaigns = (settings) => {
+  return api.get(campaigns, settings)
+}
+
+export const getCampaign = (id) => {
+  return api.get(`${campaigns}/${id}`)
 }
 
 export const getJobs = (settings) => {
