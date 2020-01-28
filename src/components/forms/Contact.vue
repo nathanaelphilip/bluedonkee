@@ -6,18 +6,42 @@
     </div>
     <div class="row">
       <div class="half">
-        <Input label="Your Name" required placeholder="Type your name" />
+        <Input
+          label="Your Name"
+          @input="value => form.name = value"
+          required
+          placeholder="Type your name"
+          :value="form.name"
+          />
       </div>
       <div class="half">
-        <Input label="Email Address" required placeholder="jane@example.com" />
+        <Input
+          label="Email Address"
+          @input="value => form.email = value"
+          required
+          placeholder="jane@example.com"
+          type="email"
+          :value="form.email"
+        />
       </div>
     </div>
     <div class="row">
       <div class="half">
-        <Input label="Organization Name" required placeholder="WorkBlue" />
+        <Input
+          label="Organization Name"
+          @input="value => form.organization = value"
+          required
+          placeholder="WorkBlue"
+          :value="form.organization"
+         />
       </div>
       <div class="half">
-        <Select label="Email Address" placeholder="Saying Hello">
+        <Select
+          label="Contact Reason"
+          placeholder="Saying Hello"
+          @change="value => form.reason = value"
+          :value="form.reason"
+         >
           <option>Saying Hello</option>
           <option>Something Else...</option>
         </Select>
@@ -25,7 +49,12 @@
     </div>
     <div class="row">
       <div class="full">
-        <TextArea label="Message" placeholder="Type message" />
+        <TextArea
+          label="Message"
+          placeholder="Type message"
+          @input="value => form.message = value"
+          :value="form.message"
+         />
       </div>
     </div>
     <div class="action">
@@ -42,6 +71,8 @@
 </template>
 
 <script>
+import { postContactForm } from '@/api'
+
 import Banner from '@/components/molecules/Banner'
 import Input from '@/components/forms/Input'
 import Select from '@/components/forms/Select'
@@ -49,24 +80,55 @@ import Processing from '@/components/forms/Processing'
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import TextArea from '@/components/forms/TextArea'
 
+const form = {
+  name: '',
+  email: '',
+  organization: '',
+  reason: '',
+  message: ''
+}
+
 export default {
   components: { Banner, ButtonPrimary, Input, Processing, Select, TextArea },
 
   data () {
-    return { status: false }
+    return {
+      status: false,
+      form
+    }
   },
 
   methods: {
-    submit () {
+    async submit () {
       this.status = 'processing'
 
-      setTimeout(() => {
-        this.status = 'success'
-      }, 2000)
+      try {
+        const { data } = await postContactForm({
+          'fields': {
+            'Full Name': this.form.name,
+            'Email Address': this.form.email,
+            'Organization Name': this.form.organization,
+            'Contact Reason': this.form.reason,
+            'Message': this.form.message
+          }
+        })
 
-      setTimeout(() => {
-        this.status = false
-      }, 6000)
+        if (data) {
+          this.status = 'success'
+
+          setTimeout(() => {
+            this.status = false
+          }, 5000)
+        }
+
+        if (!data) {
+          this.status = 'failure'
+        }
+      } catch (e) {
+        console.log(e)
+      } finally {
+
+      }
     }
   }
 }

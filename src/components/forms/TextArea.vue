@@ -1,13 +1,19 @@
 <template>
   <div class="input">
     <label class="label" v-if="label">{{ label }}</label>
-    <textarea :placeholder="placeholder" class="text"></textarea>
+    <textarea
+      @input="event => $emit('input', event.target.value)"
+      class="text"
+      :placeholder="placeholder"
+      :value="value"
+    >
+    </textarea>
   </div>
 </template>
 
 <script>
 export default {
-  props: [ 'label', 'placeholder' ]
+  props: [ 'label', 'placeholder', 'value' ]
 }
 </script>
 

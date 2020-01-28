@@ -1,13 +1,20 @@
 <template>
   <div class="input">
     <label class="label" v-if="label">{{ label }}</label>
-    <input :required="required" type="text" :placeholder="placeholder" class="text">
+    <input
+      @input="event => $emit('input', event.target.value)"
+      :required="required"
+      :placeholder="placeholder"
+      :type="type"
+      :value="value"
+      class="text"
+     >
   </div>
 </template>
 
 <script>
 export default {
-  props: [ 'label', 'placeholder', 'required' ]
+  props: [ 'label', 'placeholder', 'required', 'value', 'type' ]
 }
 </script>
 

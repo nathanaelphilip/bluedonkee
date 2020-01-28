@@ -1,8 +1,13 @@
 <template>
   <div class="input">
     <label class="label" v-if="label">{{ label }}</label>
-    <select class="select" required>
-       <option disabled selected hidden>{{ placeholder }}</option>
+    <select
+      @change="event => $emit('change', event.target.value)"
+      class="select"
+      required
+      :value="value"
+      >
+       <option value="" disabled selected hidden>{{ placeholder }}</option>
        <slot></slot>
     </select>
   </div>
@@ -10,7 +15,7 @@
 
 <script>
 export default {
-  props: [ 'label', 'placeholder' ]
+  props: [ 'label', 'placeholder', 'value' ]
 }
 </script>
 

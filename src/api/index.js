@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+const contactForm = `/Contact%20Form`
 const jobs = `/Jobs`
 const groups = `/Groups`
 const groupCategories = `/Groups%20Categories`
@@ -14,6 +15,10 @@ const api = axios.create({
   timeout: 3000,
   headers: { 'Authorization': `Bearer ${process.env.VUE_APP_AIRTABLE_API_KEY}` }
 })
+
+export const postContactForm = (data) => {
+  return api.post(contactForm, data)
+}
 
 export const getJobs = (settings) => {
   return api.get(jobs, settings)

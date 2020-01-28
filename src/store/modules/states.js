@@ -16,18 +16,18 @@ const mutations = {
 
 const actions = {
   async fetch ({ commit }, settings) {
-    const { data } = await getLocations(settings)
+    const { data } = await getStates(settings)
     commit(STATES_FETCH, data.records)
   },
 
   async getById ({ commit }, id) {
-    const { data } = await getLocation(id)
+    const { data } = await getState(id)
     commit(STATES_FETCH, [data])
     return data
   },
 
   async get ({ commit }, settings) {
-    const { data } = await getLocations(settings)
+    const { data } = await getStates(settings)
     commit(STATES_FETCH, data.records)
     return data.records[0]
   }
