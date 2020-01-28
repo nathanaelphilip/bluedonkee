@@ -125,7 +125,7 @@ export default {
           this.status = 'failure'
         }
       } catch (e) {
-        console.log(e)
+
       } finally {
 
       }
