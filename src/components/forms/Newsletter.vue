@@ -55,7 +55,6 @@ export default {
 
       try {
         const { data } = await postNewsletterForm({
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
           params: this.form,
           paramsSerializer: params => qs.stringify(params)
         })
