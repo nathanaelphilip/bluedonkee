@@ -1,5 +1,7 @@
 import $store from '@/store'
 
+// TODO: convert all this to a factory – DRY
+
 export const getJob = async (slug) => {
   const stored = $store.getters['jobs/getBySlug'](slug)
 
@@ -253,6 +255,39 @@ export const getCampaigns = async (ids) => {
 
     if (!stored) {
       const item = await $store.dispatch('campaigns/getById', id)
+      return item
+    }
+
+    return stored
+  })
+
+  const data = await Promise.all(items)
+
+  return data
+}
+
+export const getOffice = async (slug) => {
+  const stored = $store.getters['offices/getBySlug'](slug)
+
+  if (!stored) {
+    const item = await $store.dispatch('offices/get', {
+      params: {
+        filterByFormula: `SEARCH("${slug}", Slug)`
+      }
+    })
+
+    return item
+  }
+
+  return stored
+}
+
+export const getOffices = async (ids) => {
+  const items = ids.map(async (id) => {
+    const stored = $store.getters['offices/getById'](id)
+
+    if (!stored) {
+      const item = await $store.dispatch('offices/getById', id)
       return item
     }
 

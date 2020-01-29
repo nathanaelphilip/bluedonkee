@@ -20,6 +20,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "campaign" */ '../views/Campaign.vue')
   },
   {
+    path: '/campaign/office/:slug',
+    name: 'office',
+    component: () => import(/* webpackChunkName: "offices" */ '../views/Offices.vue')
+  },
+  {
     path: '/groups',
     name: 'groups',
     component: () => import(/* webpackChunkName: "groups" */ '../views/Groups.vue')

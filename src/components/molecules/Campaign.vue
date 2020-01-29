@@ -8,12 +8,20 @@
       <div class="location">Location</div>
     </div>
     <Tags>
-      <Tag :name="campaign.fields.Office" />
+      <Tag
+        v-for="office in offices"
+        :key="office.id"
+        route="office"
+        :slug="office.fields.Slug"
+        :name="office.fields.Name"
+      />
     </Tags>
   </article>
 </template>
 
 <script>
+import { getOffices } from '@/store/helpers'
+
 import Avatar from '@/components/atoms/Avatar'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
@@ -22,10 +30,20 @@ export default {
   props: ['campaign'],
   components: { Avatar, Tag, Tags },
 
+  data () {
+    return {
+      offices: {}
+    }
+  },
+
   computed: {
     avatar () {
       return this.campaign.fields.Avatar ? this.campaign.fields.Avatar[0].url : ''
     }
+  },
+
+  async mounted () {
+    this.offices = await getOffices(this.campaign.fields['Office'])
   }
 }
 </script>

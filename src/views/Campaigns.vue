@@ -14,6 +14,10 @@ export default {
   components: { Campaigns, Intro },
 
   async mounted () {
+    if (!this.$store.state.offices.repository.length) {
+      await this.$store.dispatch('offices/fetch')
+    }
+
     await this.$store.dispatch('campaigns/fetch')
   }
 }

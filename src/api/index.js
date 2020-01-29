@@ -2,14 +2,15 @@ import axios from 'axios'
 
 const campaigns = `/Campaigns`
 const contactForm = `/Contact%20Form`
-const jobs = `/Jobs`
 const groups = `/Groups`
 const groupCategories = `/Groups%20Categories`
+const jobs = `/Jobs`
+const locations = `/Locations`
+const offices = `/Offices`
+const states = `/States`
 const workTypes = `/Work%20Types`
 const workLevels = `/Work%20Levels`
 const workCategories = `/Work%20Categories`
-const locations = `/Locations`
-const states = `/States`
 
 const newsletterForm = process.env.VUE_APP_MAILCHIMP_URL
 
@@ -97,4 +98,12 @@ export const getStates = (settings) => {
 
 export const getState = (id) => {
   return api.get(`${states}/${id}`)
+}
+
+export const getOffices = (settings) => {
+  return api.get(offices, settings)
+}
+
+export const getOffice = (id) => {
+  return api.get(`${offices}/${id}`)
 }
