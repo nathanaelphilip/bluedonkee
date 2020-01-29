@@ -230,3 +230,36 @@ export const getLocations = async (ids) => {
 
   return data
 }
+
+export const getCampgain = async (slug) => {
+  const stored = $store.getters['campaigns/getBySlug'](slug)
+
+  if (!stored) {
+    const item = await $store.dispatch('campaigns/get', {
+      params: {
+        filterByFormula: `SEARCH("${slug}", Slug)`
+      }
+    })
+
+    return item
+  }
+
+  return stored
+}
+
+export const getCampgains = async (ids) => {
+  const items = ids.map(async (id) => {
+    const stored = $store.getters['campaigns/getById'](id)
+
+    if (!stored) {
+      const item = await $store.dispatch('campaigns/getById', id)
+      return item
+    }
+
+    return stored
+  })
+
+  const data = await Promise.all(items)
+
+  return data
+}

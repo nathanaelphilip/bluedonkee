@@ -10,6 +10,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "jobs" */ '../views/Jobs.vue')
   },
   {
+    path: '/campaigns',
+    name: 'campaigns',
+    component: () => import(/* webpackChunkName: "campaigns" */ '../views/Campaigns.vue')
+  },
+  {
+    path: '/campaign/:slug',
+    name: 'campaign',
+    component: () => import(/* webpackChunkName: "campaign" */ '../views/Campaign.vue')
+  },
+  {
     path: '/groups',
     name: 'groups',
     component: () => import(/* webpackChunkName: "groups" */ '../views/Groups.vue')

@@ -2,6 +2,7 @@
   <nav class="nav">
     <router-link class="anchor" :to="{ name: 'jobs' }">Jobs</router-link>
     <router-link class="anchor" :to="{ name: 'groups' }">Groups</router-link>
+    <router-link class="anchor" :to="{ name: 'campaigns' }">Campaigns</router-link>
   </nav>
 </template>
 
