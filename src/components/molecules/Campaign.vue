@@ -32,6 +32,7 @@ export default {
 
 <style lang="scss" scoped>
   .campaign {
+    align-items: center;
     display: grid;
     grid-template-columns: 60px 1fr 1fr;
     grid-column-gap: 12px;
