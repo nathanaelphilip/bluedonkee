@@ -7,6 +7,8 @@
         :group="group"
         :heading="group.fields.Name"
         :groupCategories="categories"
+        :website="group.fields.Website"
+        :twitter="group.fields.Twitter"
       />
       <h3 class="subheading">Available Positions</h3>
     </div>

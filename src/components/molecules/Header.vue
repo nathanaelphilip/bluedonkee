@@ -3,16 +3,15 @@
     <div class="top">
       <Avatar :src="avatar" />
       <div class="links">
-        <a :href="`${group.fields.Website}`" target="_blank">Website</a>
-        <a :href="`https://twitter.com/${group.fields.Twitter}`" target="_blank">{{ group.fields.Twitter }}</a>
+        <a :href="website" target="_blank">Website</a>
+        <a :href="`https://twitter.com/${twitter}`" target="_blank">{{ twitter }}</a>
       </div>
     </div>
 
     <h2 class="heading">{{ heading }}</h2>
 
     <div class="location">
-      <template v-if="locations.length">
-
+      <template v-if="locations && locations.length">
       </template>
     </div>
 
@@ -57,7 +56,19 @@ import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
 export default {
-  props: [ 'avatar', 'group', 'heading', 'workCategories', 'workLevels', 'workTypes', 'groupCategories', 'locations' ],
+  props: [
+    'avatar',
+    'group',
+    'heading',
+    'workCategories',
+    'workLevels',
+    'workTypes',
+    'groupCategories',
+    'locations',
+    'twitter',
+    'website'
+  ],
+
   components: { Avatar, Tag, Tags }
 }
 </script>

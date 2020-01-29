@@ -27,7 +27,7 @@ import Bug from '@/components/atoms/Bug'
 import Grid from '@/components/layouts/Grid'
 import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
-import Newsletter from '@/components/molecules/Newsletter'
+import Newsletter from '@/components/forms/Newsletter'
 import Twitter from '@/components/molecules/Twitter'
 
 export default {

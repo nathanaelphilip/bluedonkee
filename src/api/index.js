@@ -11,6 +11,8 @@ const workCategories = `/Work%20Categories`
 const locations = `/Locations`
 const states = `/States`
 
+const newsletterForm = process.env.VUE_APP_MAILCHIMP_URL
+
 const api = axios.create({
   baseURL: `https://api.airtable.com/v0/appkK3vHJcH4114kk`,
   timeout: 3000,
@@ -19,6 +21,10 @@ const api = axios.create({
 
 export const postContactForm = (data) => {
   return api.post(contactForm, data)
+}
+
+export const postNewsletterForm = (settings) => {
+  return api.get(newsletterForm, settings)
 }
 
 export const getCampaigns = (settings) => {

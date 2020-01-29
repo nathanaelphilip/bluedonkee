@@ -1,6 +1,6 @@
 <template>
   <article class="campaign">
-    <Avatar :src="campaign.fields.Avatar" />
+    <Avatar :src="avatar" />
     <div class="info">
       <h3 class="heading">
         <router-link :to="{ name: 'campaign', params: { slug: campaign.fields.Slug } }">{{ campaign.fields.Name }}</router-link>
@@ -22,7 +22,11 @@ export default {
   props: ['campaign'],
   components: { Avatar, Tag, Tags },
 
-  computed: {}
+  computed: {
+    avatar () {
+      return this.campaign.fields.Avatar ? this.campaign.fields.Avatar[0].url : ''
+    }
+  }
 }
 </script>
 

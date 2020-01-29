@@ -11,6 +11,8 @@
         :workCategories="workCategories"
         :workLevels="workLevels"
         :workTypes="workTypes"
+        :website="group.fields.Website"
+        :twitter="group.fields.Twitter"
       />
 
       <div class="overview">

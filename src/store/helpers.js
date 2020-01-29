@@ -231,7 +231,7 @@ export const getLocations = async (ids) => {
   return data
 }
 
-export const getCampgain = async (slug) => {
+export const getCampaign = async (slug) => {
   const stored = $store.getters['campaigns/getBySlug'](slug)
 
   if (!stored) {
@@ -247,7 +247,7 @@ export const getCampgain = async (slug) => {
   return stored
 }
 
-export const getCampgains = async (ids) => {
+export const getCampaigns = async (ids) => {
   const items = ids.map(async (id) => {
     const stored = $store.getters['campaigns/getById'](id)
 

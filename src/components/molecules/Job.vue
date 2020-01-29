@@ -96,7 +96,7 @@ export default {
     },
 
     avatar () {
-      return this.group ? this.group.fields.Avatar[0].url : ''
+      return this.group && this.group.fields.Avatar ? this.group.fields.Avatar[0].url : ''
     },
 
     date () {
