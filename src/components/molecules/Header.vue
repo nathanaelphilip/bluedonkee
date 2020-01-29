@@ -11,7 +11,9 @@
     <h2 class="heading">{{ heading }}</h2>
 
     <div class="location">
-      Group / Location Here
+      <template v-if="locations.length">
+
+      </template>
     </div>
 
     <div class="tags">
@@ -55,7 +57,7 @@ import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
 export default {
-  props: ['avatar', 'group', 'heading', 'workCategories', 'workLevels', 'workTypes', 'groupCategories'],
+  props: [ 'avatar', 'group', 'heading', 'workCategories', 'workLevels', 'workTypes', 'groupCategories', 'locations' ],
   components: { Avatar, Tag, Tags }
 }
 </script>
