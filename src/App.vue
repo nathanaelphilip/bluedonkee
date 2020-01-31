@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <portal-target name="banner">
+    <portal-target name="flash">
     </portal-target>
     <portal-target name="modal">
     </portal-target>

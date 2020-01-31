@@ -14,13 +14,13 @@
     <ButtonPrimary :full="true">
       <Processing :processing="status === 'processing'">Sign Up</Processing>
     </ButtonPrimary>
-    <portal to="banner">
-      <Banner :open="status === 'failure'" @close="status = false">
+    <portal to="flash">
+      <Flash :open="status === 'failure'" @close="status = false">
         👎 There was an error
-      </Banner>
-      <Banner :open="status === 'success'" @close="status = false">
+      </Flash>
+      <Flash :open="status === 'success'" @close="status = false">
         👍 Newsletter Subscribed
-      </Banner>
+      </Flash>
     </portal>
   </form>
 </template>
@@ -29,7 +29,7 @@
 import qs from 'qs'
 import { postNewsletterForm } from '@/api'
 
-import Banner from '@/components/molecules/Banner'
+import Flash from '@/components/molecules/Flash'
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import Input from '@/components/forms/Input'
 import Processing from '@/components/forms/Processing'
@@ -40,7 +40,7 @@ const form = {
 
 export default {
   name: 'components-molecules-newsletter',
-  components: { Banner, ButtonPrimary, Input, Processing },
+  components: { Flash, ButtonPrimary, Input, Processing },
 
   data () {
     return {

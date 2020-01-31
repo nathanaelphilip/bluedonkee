@@ -1,83 +1,149 @@
-<template lang="html">
-  <aside class="aside" :class="{'open': open}">
+<template>
+  <aside class="banner">
     <div class="grid">
-      <div class="banner">
-        <div class="message"><slot></slot></div>
-        <button class="close" @click.prevent="$emit('close')"><IconClose width="10" height="10" /></button>
+      <div class="info">
+        <h3 class="heading">{{ heading }}</h3>
+        <div class="content">{{ content }}</div>
+        <div class="actions">
+          <LinkPrimary :to="link">Learn More</LinkPrimary>
+          <ButtonPrimary
+            @click.native.prevent="$emit('close')"
+            :simple="true">
+            Close
+          </ButtonPrimary>
+        </div>
+      </div>
+      <div class="images">
+          <Avatar
+            v-for="item in items"
+            :key="item.id"
+            :src="item.fields.Avatar[0].url"
+          />
       </div>
     </div>
   </aside>
 </template>
 
 <script>
-import IconClose from '@/components/icons/Close'
+import Avatar from '@/components/atoms/Avatar'
+import ButtonPrimary from '@/components/atoms/ButtonPrimary'
+import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 export default {
-  props: ['open'],
-  components: { IconClose }
+  props: ['heading', 'cookie', 'content', 'items', 'link'],
+  components: { Avatar, ButtonPrimary, LinkPrimary }
 }
 </script>
 
 <style lang="scss" scoped>
-  .aside {
-    left: 0;
-    position: fixed;
-    top: 10px;
-    transform: translateY(-120%);
-    transition: transform .2s .15s ease;
-    width: 100%;
-    z-index: 10;
-
-    &.open {
-      transform: translateY(0);
-      transform-delay: transform 0s;
-    }
+  .banner {
+    background: $BLUEDARK;
+    border-radius: 16px;
+    color: $WHITE;
+    overflow: hidden;
+    padding: 30px;
   }
 
   .grid {
-    display: grid;
-    grid-template-columns: 1fr 2.25fr 1fr;
-    grid-column-gap: 33px;
-    margin: 0 auto;
-    max-width: 1400px;
-    width: 95%;
-  }
-
-  .banner {
-    @include Shadow;
     align-items: center;
-    border-radius: 12px;
     display: grid;
-    grid-template-columns: 1fr 35px;
-    grid-column-gap: 22px;
-    background: $WHITE;
-    grid-column: 2 / 3;
-    padding: 22px 25px;
-    max-width: 800px;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 16px;
   }
 
-  .message {
-    font-size: 22px;
+  .heading {
+    font-size: 20px;
     font-weight: 900;
+    margin-bottom: 5px;
   }
 
-  .close {
-    $d: 35px;
-    appearance: none;
-    align-items: center;
-    background: $BLUELIGHT;
-    border: none;
-    border-radius: 100%;
-    display: flex;
-    justify-content: center;
-    height: $d;
-    width: $d;
+  .content {
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
 
-    &:hover {
-      background: $BLUE;
-      cursor: pointer;
+  .images {
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+    max-height: 125px;
+    min-width: 0;
+    min-height: 0;
+  }
 
-      svg { fill: $WHITE; }
+  .avatar {
+    overflow: hidden;
+    min-width: 0;
+
+    &:nth-child(1) {
+      grid-column-start: 10;
+      grid-row-start: 1;
+      transform: translateX(25%);
+      height: 72px;
+      width: 72px;
+    }
+
+    &:nth-child(2) {
+      grid-column-start: 8;
+      grid-row-start: 0;
+      transform: translateY(-100%);
+      height: 48px;
+      width: 48px;
+    }
+
+    &:nth-child(3) {
+      grid-column-start: 8;
+      grid-row-start: 6;
+      height: 45px;
+      width: 45px;
+    }
+
+    &:nth-child(4) {
+      grid-column-start: 3;
+      grid-row-start: 1;
+      transform: translateY(-60%);
+      height: 48px;
+      width: 48px;
+    }
+
+    &:nth-child(5) {
+      grid-column-start: 2;
+      grid-row-start: 8;
+      transform: translateY(80%);
+      height: 72px;
+      width: 72px;
+    }
+
+    &:nth-child(6) {
+      grid-column-start: 6;
+      grid-row-start: 8;
+      transform: translateY(50%);
+      height: 72px;
+      width: 72px;
+    }
+
+    &:nth-child(7) {
+      grid-column-start: 4;
+      grid-row-start: 7;
+      height: 45px;
+      width: 45px;
+    }
+
+    &:nth-child(8) {
+      grid-column-start: 9;
+      grid-row-start: 9;
+      transform: translateX(50%);
+      height: 45px;
+      width: 45px;
+    }
+
+    &:nth-child(9) {
+      grid-column-start: 6;
+      grid-row-start: 1;
+      height: 60px;
+      width: 60px;
     }
   }
 </style>

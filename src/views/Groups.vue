@@ -1,19 +1,40 @@
 <template>
   <div>
     <Intro heading="Groups" />
+    <div
+      class="boxed"
+      v-if="!closed"
+      >
+      <Banner
+        @close="$cookies.set('banner:groups'); closed = true"
+        heading="The Good Fight."
+        content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
+        :link="{name: 'questions'}"
+        :items="$store.state.groups.repository.slice(0, 9)"
+      />
+    </div>
     <Groups :groups="$store.state.groups.repository" />
   </div>
 </template>
 
 <script>
+import Banner from '@/components/molecules/Banner'
 import Groups from '@/components/molecules/Groups'
 import Intro from '@/components/molecules/Intro'
 
 export default {
   name: 'views-groups',
-  components: { Intro, Groups },
+  components: { Banner, Intro, Groups },
+
+  data () {
+    return { closed: false }
+  },
 
   async mounted () {
+    if (this.$cookies.isKey('banner:groups')) {
+      this.closed = true
+    }
+
     if (!this.$store.state.groupCategories.repository.length) {
       await this.$store.dispatch('groupCategories/fetch')
     }
@@ -24,5 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .boxed {
+    padding: 32px 36px 0 36px;
+  }
 </style>

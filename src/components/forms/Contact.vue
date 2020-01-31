@@ -62,10 +62,10 @@
         <Processing :processing="status === 'processing'">Submit</Processing>
       </ButtonPrimary>
     </div>
-    <portal to="banner">
-      <Banner :open="status === 'success'" @close="status = false">
+    <portal to="flash">
+      <Flash :open="status === 'success'" @close="status = false">
         👍 Form Submission Successful
-      </Banner>
+      </Flash>
     </portal>
   </form>
 </template>
@@ -73,7 +73,7 @@
 <script>
 import { postContactForm } from '@/api'
 
-import Banner from '@/components/molecules/Banner'
+import Flash from '@/components/molecules/Flash'
 import Input from '@/components/forms/Input'
 import Select from '@/components/forms/Select'
 import Processing from '@/components/forms/Processing'
@@ -89,7 +89,7 @@ const form = {
 }
 
 export default {
-  components: { Banner, ButtonPrimary, Input, Processing, Select, TextArea },
+  components: { Flash, ButtonPrimary, Input, Processing, Select, TextArea },
 
   data () {
     return {

@@ -43,7 +43,9 @@ export default {
   },
 
   async mounted () {
-    this.offices = await getOffices(this.campaign.fields['Office'])
+    if (this.campaign.fields['Office'] && this.campaign.fields['Office'].length) {
+      this.offices = await getOffices(this.campaign.fields['Office'])
+    }
   }
 }
 </script>

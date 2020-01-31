@@ -1,12 +1,12 @@
 <template>
-  <button :class="{button: true, full}">
+  <button :class="{button: true, full, simple}">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  props: ['full']
+  props: ['full', 'simple']
 }
 </script>
 
@@ -15,5 +15,6 @@ export default {
     @include ButtonPrimary;
 
     &.full {display: block; width: 100%}
+    &.simple {background: none; border-color: transparent}
   }
 </style>

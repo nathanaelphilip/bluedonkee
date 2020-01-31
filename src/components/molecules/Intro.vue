@@ -29,6 +29,7 @@ export default {
     padding: 24px 32px;
     position: sticky;
     top: 0;
+    z-index: 8;
   }
 
   .heading {
