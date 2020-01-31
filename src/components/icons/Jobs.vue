@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss" scoped>
   .icon-jobs {
-    .st0{fill:#CDD5DF;}
-    .st1{fill:#A0AEC0;}
+    .st0{fill:#A0AEC0;}
+    .st1{fill:#718096;}
   }
 </style>

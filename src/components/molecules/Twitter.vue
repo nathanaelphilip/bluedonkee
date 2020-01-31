@@ -3,7 +3,7 @@
     <div class="box">
       <h5 class="heading">Follow on Twitter</h5>
       <div class="action">
-        <a href="https://twitter.com/@bluedonkeejobs" target="_blank">@bluedonkeejobs</a>
+        <a href="https://twitter.com/@LetsWorkBlue" target="_blank">@LetsWorkBlue</a>
       </div>
     </div>
     <IconTwitter :width="25" :height="21" theme="blue" />
