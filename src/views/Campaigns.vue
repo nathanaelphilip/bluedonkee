@@ -10,7 +10,7 @@
         heading="Pick a Race, Get Involved"
         content="Volunteer, knock doors, phone bank or apply for a job. Strengthening democracy is no joke. Its go time. #letsworkblue"
         :link="{name: 'questions'}"
-        :items="$store.state.campaigns.repository.slice(0, 9)"
+        :items="$store.state.campaigns.repository"
       />
     </div>
     <Campaigns :campaigns="$store.state.campaigns.repository" />

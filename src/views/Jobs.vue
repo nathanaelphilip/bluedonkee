@@ -13,7 +13,7 @@
         heading="Positioned for Change."
         content="Find campaigns and organizations fighting to make democracy more equitable. #letsworkblue"
         :link="{name: 'questions'}"
-        :items="$store.state.groups.repository.slice(0, 9)"
+        :items="$store.state.groups.repository"
       />
     </div>
     <Jobs :jobs="$store.state.jobs.repository" />

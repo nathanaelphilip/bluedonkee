@@ -10,7 +10,7 @@
         heading="The Good Fight."
         content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
         :link="{name: 'questions'}"
-        :items="$store.state.groups.repository.slice(0, 9)"
+        :items="$store.state.groups.repository"
       />
     </div>
     <Groups :groups="$store.state.groups.repository" />

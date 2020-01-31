@@ -15,7 +15,7 @@
       </div>
       <div class="images">
           <Avatar
-            v-for="item in items"
+            v-for="item in shuffled"
             :key="item.id"
             :src="item.fields.Avatar[0].url"
           />
@@ -25,13 +25,21 @@
 </template>
 
 <script>
+import { shuffle } from 'lodash'
+
 import Avatar from '@/components/atoms/Avatar'
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 export default {
   props: ['heading', 'cookie', 'content', 'items', 'link'],
-  components: { Avatar, ButtonPrimary, LinkPrimary }
+  components: { Avatar, ButtonPrimary, LinkPrimary },
+
+  computed: {
+    shuffled () {
+      return shuffle(this.items).splice(0, 9)
+    }
+  }
 }
 </script>
 
