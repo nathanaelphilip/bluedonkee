@@ -27,8 +27,6 @@ export default {
       const image = new Image()
       image.src = this.src
 
-      console.log(this.src)
-
       image.onload = () => {
         this.loaded = true
       }
