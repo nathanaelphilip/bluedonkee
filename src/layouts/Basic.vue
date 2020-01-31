@@ -1,7 +1,7 @@
 <template>
   <Grid>
     <template v-slot:one>
-      <ButtonSecondary @click.native.prevent="$router.go(-1)">
+      <ButtonSecondary @click.native.prevent="back()">
         Close
       </ButtonSecondary>
     </template>
@@ -20,6 +20,12 @@ import Grid from '@/components/layouts/Grid'
 
 export default {
   name: 'layout-basic',
-  components: { Grid, ButtonSecondary }
+  components: { Grid, ButtonSecondary },
+
+  methods: {
+    back () {
+      window.history.length > 2 ? this.$router.go(-1) : this.$router.push({ name: 'jobs' })
+    }
+  }
 }
 </script>
