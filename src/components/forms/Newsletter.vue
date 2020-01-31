@@ -4,7 +4,7 @@
     <div class="content">Get our weekly email newsletter.</div>
     <div class="input-container">
       <Input
-        @input="value => form.EMAIL = value"
+        @input="value => form.email = value"
         required
         placeholder="Email Address"
         type="email"
@@ -16,10 +16,10 @@
     </ButtonPrimary>
     <portal to="flash">
       <Flash :open="status === 'failure'" @close="status = false">
-        👎 There was an error
+        👎 {{ messages.error }}
       </Flash>
       <Flash :open="status === 'success'" @close="status = false">
-        👍 Newsletter Subscribed
+        👍 {{ messages.success }}
       </Flash>
     </portal>
   </form>
@@ -35,7 +35,7 @@ import Input from '@/components/forms/Input'
 import Processing from '@/components/forms/Processing'
 
 const form = {
-  EMAIL: ''
+  email: ''
 }
 
 export default {
@@ -45,6 +45,10 @@ export default {
   data () {
     return {
       status: false,
+      messages: {
+        error: 'There was an error',
+        success: 'Newsletter Subscribed'
+      },
       form
     }
   },
@@ -54,13 +58,22 @@ export default {
       this.status = 'processing'
 
       try {
-        const { data } = await postNewsletterForm({
-          params: this.form,
-          paramsSerializer: params => qs.stringify(params)
+        const params = qs.stringify({
+          u: process.env.VUE_APP_MAILCHIMP_USER_ID,
+          id: process.env.VUE_APP_MAILCHIMP_LIST_ID,
+          EMAIL: this.form.email
         })
 
-        if (data) {
+        const { result, msg } = await postNewsletterForm(params)
+
+        if (result === 'error') {
+          this.status = 'failure'
+          this.messages.error = msg
+        }
+
+        if (result === 'success') {
           this.status = 'success'
+          this.messages.success = msg
         }
       } catch (e) {
         this.status = 'failure'

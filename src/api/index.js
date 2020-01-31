@@ -1,4 +1,5 @@
 import axios from 'axios'
+import jsonp from 'jsonp'
 
 const campaigns = `/Campaigns`
 const contactForm = `/Contact%20Form`
@@ -24,8 +25,10 @@ export const postContactForm = (data) => {
   return api.post(contactForm, data)
 }
 
-export const postNewsletterForm = (settings) => {
-  return api.get(newsletterForm, settings)
+const jsonpFetch = (params) => new Promise((resolve, reject) => jsonp(`${newsletterForm}?${params}`, { param: 'c' }, (err, data) => err ? reject(err) : resolve(data)))
+
+export const postNewsletterForm = (params) => {
+  return jsonpFetch(params)
 }
 
 export const getCampaigns = (settings) => {
