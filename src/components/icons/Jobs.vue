@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  props: ['theme', 'width', 'height']
+  props: ['width', 'height']
 }
 </script>
 

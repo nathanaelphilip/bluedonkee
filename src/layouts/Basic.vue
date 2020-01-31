@@ -1,9 +1,9 @@
 <template>
   <Grid>
     <template v-slot:one>
-      <LinkSecondary :to="{name: 'jobs'}">
+      <ButtonSecondary @click.native.prevent="$router.go(-1)">
         Close
-      </LinkSecondary>
+      </ButtonSecondary>
     </template>
     <template v-slot:two>
       <slot />
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import LinkSecondary from '@/components/atoms/LinkSecondary'
+import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import Grid from '@/components/layouts/Grid'
 
 export default {
   name: 'layout-basic',
-  components: { Grid, LinkSecondary }
+  components: { Grid, ButtonSecondary }
 }
 </script>
