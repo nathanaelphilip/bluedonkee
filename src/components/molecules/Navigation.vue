@@ -18,10 +18,11 @@ export default {
 <style lang="scss" scoped>
   .nav {
     display: flex;
+    flex-direction: column;
     font-size: 20px;
     font-weight: 800;
     max-width: 200px;
-    flex-direction: column
+    margin-left: -20px;
   }
 
   .anchor {
@@ -30,7 +31,7 @@ export default {
     border-radius: 30px;
     color: inherit;
     justify-content: flex-start;
-    padding: 15px 20px;
+    padding: 13px 20px;
     text-decoration: none;
 
     &:hover,
