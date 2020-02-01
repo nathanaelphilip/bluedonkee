@@ -19,10 +19,8 @@
         </router-link> –
       </template>
       <template v-if="locations && locations.length">
-        <Location
-          v-for="location in locations"
-          :key="location.id"
-          :location="location"
+        <Locations
+          :locations="locations"
           :route="locationroute"
         />
       </template>
@@ -65,7 +63,7 @@
 
 <script>
 import Avatar from '@/components/atoms/Avatar'
-import Location from '@/components/atoms/Location'
+import Locations from '@/components/molecules/Locations'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
@@ -84,7 +82,7 @@ export default {
     'website'
   ],
 
-  components: { Avatar, Location, Tag, Tags }
+  components: { Avatar, Locations, Tag, Tags }
 }
 </script>
 

@@ -10,10 +10,8 @@
         </router-link>
       </h2>
       <div class="location" v-if="locations.length">
-        <Location
-          v-for="location in locations"
-          :key="location.id"
-          :location="location"
+        <Locations
+          :locations="locations"
           route="locationGroup"
         />
       </div>
@@ -36,14 +34,14 @@
 import { getGroupCategories, getLocations } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
-import Location from '@/components/atoms/Location'
+import Locations from '@/components/molecules/Locations'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
 export default {
   name: 'components-molecules-group',
   props: ['group'],
-  components: { Avatar, Location, Tag, Tags },
+  components: { Avatar, Locations, Tag, Tags },
 
   data () {
     return {
