@@ -31,6 +31,26 @@
   &:hover {background: $GREY;}
 }
 
+@mixin ButtonClose {
+  $d: 35px;
+  appearance: none;
+  align-items: center;
+  background: $BLUELIGHT;
+  border: none;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  height: $d;
+  width: $d;
+
+  &:hover {
+    background: $BLUE;
+    cursor: pointer;
+
+    svg { fill: $WHITE; }
+  }
+}
+
 @mixin Label {
   color: $GREY2;
   display: block;

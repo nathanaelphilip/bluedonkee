@@ -77,10 +77,6 @@ export default {
         }
       } catch (e) {
         this.status = 'failure'
-      } finally {
-        setTimeout(() => {
-          this.status = false
-        }, 5000)
       }
     }
   }

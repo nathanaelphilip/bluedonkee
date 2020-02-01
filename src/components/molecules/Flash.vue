@@ -14,7 +14,15 @@ import IconClose from '@/components/icons/Close'
 
 export default {
   props: ['open'],
-  components: { IconClose }
+  components: { IconClose },
+
+  watch: {
+    open () {
+      setTimeout(() => {
+        this.$emit('close')
+      }, 3500)
+    }
+  }
 }
 </script>
 
@@ -62,22 +70,6 @@ export default {
   }
 
   .close {
-    $d: 35px;
-    appearance: none;
-    align-items: center;
-    background: $BLUELIGHT;
-    border: none;
-    border-radius: 100%;
-    display: flex;
-    justify-content: center;
-    height: $d;
-    width: $d;
-
-    &:hover {
-      background: $BLUE;
-      cursor: pointer;
-
-      svg { fill: $WHITE; }
-    }
+    @include ButtonClose;
   }
 </style>

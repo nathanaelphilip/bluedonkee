@@ -21,10 +21,8 @@
           {{ job.fields.Description }}
         </div>
       </div>
-      <div>
-        Something off with this post?
-        <button>Flag Posting</button>
-      </div>
+
+      <Report :id="job.id" />
     </div>
   </article>
 </template>
@@ -41,10 +39,11 @@ import {
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
+import Report from '@/components/molecules/Report'
 
 export default {
   name: 'job',
-  components: { LinkPrimary, Header, Intro },
+  components: { LinkPrimary, Header, Intro, Report },
 
   data () {
     return {

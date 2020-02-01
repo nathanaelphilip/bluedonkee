@@ -115,10 +115,6 @@ export default {
 
         if (data) {
           this.status = 'success'
-
-          setTimeout(() => {
-            this.status = false
-          }, 5000)
         }
 
         if (!data) {

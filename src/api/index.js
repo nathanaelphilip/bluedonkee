@@ -3,6 +3,7 @@ import jsonp from 'jsonp'
 
 const campaigns = `/Campaigns`
 const contactForm = `/Contact%20Form`
+const flagged = `/Flagged`
 const groups = `/Groups`
 const groupCategories = `/Groups%20Categories`
 const jobs = `/Jobs`
@@ -109,4 +110,8 @@ export const getOffices = (settings) => {
 
 export const getOffice = (id) => {
   return api.get(`${offices}/${id}`)
+}
+
+export const postFlagged = (fields) => {
+  return api.post(`${flagged}`, { fields })
 }
