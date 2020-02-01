@@ -2,7 +2,7 @@
   <section class="home">
     <Intro heading="Jobs">
       <ButtonSecondary>Filter</ButtonSecondary>
-      <LinkPrimary :to="{name: 'submit'}">Submit Job</LinkPrimary>
+      <LinkPrimary :to="{name: 'postJob'}">Post Job</LinkPrimary>
     </Intro>
     <div
       class="boxed"

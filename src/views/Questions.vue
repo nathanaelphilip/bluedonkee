@@ -1,9 +1,9 @@
 <template>
   <article class="questions">
-    <header class="header">
-      <i class="emoji">🗽</i>
-      <h2 class="heading">Positioned for <span>Change.</span></h2>
-    </header>
+    <HeaderPage
+      emoji="🗽"
+      :heading="`Positioned for <span>Change.</span>`"
+    />
     <Question
       v-for="(question, index) in questions"
       :key="index"
@@ -15,8 +15,9 @@
 </template>
 
 <script>
-import Question from '@/components/molecules/Question'
 import ContactForm from '@/components/forms/Contact'
+import HeaderPage from '@/components/molecules/HeaderPage'
+import Question from '@/components/molecules/Question'
 
 const questions = [{
   heading: `What is WorkBlue?`,
@@ -37,7 +38,7 @@ const questions = [{
 
 export default {
   name: 'views-questions',
-  components: { ContactForm, Question },
+  components: { ContactForm, HeaderPage, Question },
 
   data () {
     return { questions }
@@ -48,20 +49,6 @@ export default {
 <style lang="scss" scoped>
   .header {
     margin-bottom: 70px;
-    text-align: center;
-  }
-
-  .emoji {
-    display: inline-block;
-    font-size: 85px;
-    margin-bottom: 15px;
-  }
-
-  .heading {
-    font-size: 72px;
-    font-weight: 900;
-
-    span { color: $BLUE; }
   }
 
   .questions {

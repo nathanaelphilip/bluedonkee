@@ -27,5 +27,6 @@ export default {
     @include Input;
     min-height: 150px;
     resize: none;
+    width: 100%;
   }
 </style>

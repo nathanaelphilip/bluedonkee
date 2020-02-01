@@ -1,20 +1,26 @@
 <template>
   <div class="input">
     <label class="label" v-if="label">{{ label }}</label>
-    <input
-      @input="event => $emit('input', event.target.value)"
-      :required="required"
-      :placeholder="placeholder"
-      :type="type"
-      :value="value"
-      class="text"
-     >
+    <div class="box">
+      <div class="prefix" v-if="prefix">{{ prefix }}</div>
+      <input
+        @input="event => $emit('input', event.target.value)"
+        :required="required"
+        :placeholder="placeholder"
+        :type="type"
+        :value="value"
+        class="text"
+       />
+    </div>
+    <div class="instructions" v-if="instructions">
+      {{ instructions }}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: [ 'label', 'placeholder', 'required', 'value', 'type' ]
+  props: ['label', 'instructions', 'placeholder', 'prefix', 'required', 'value', 'type']
 }
 </script>
 
@@ -24,7 +30,40 @@ export default {
     margin-bottom: 8px;
   }
 
+  .box {
+    display: flex;
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+
+  .prefix {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    border: 1px solid $GREY;
+    border-right: none;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    color: $GREY2;
+    font-size: 15px;
+    line-height: 1;
+    padding: 0 10px;
+
+    & + .text {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
   .text {
     @include Input;
+  }
+
+  .instructions {
+    color: $GREY2;
+    font-size: 13px;
+    font-weight: 600;
   }
 </style>

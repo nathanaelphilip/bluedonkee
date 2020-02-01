@@ -64,11 +64,12 @@
   border-radius: 4px;
   color: $BLACK;
   display: block;
+  flex: 1;
   font-family: $INTER;
   font-size: 15px;
   line-height: 1;
+  min-width: 0;
   padding: 12px;
-  width: 100%;
 
   &:placeholder { color: $GREY; }
 }

@@ -70,9 +70,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "locationJobs" */ '../views/LocationJobs.vue')
   },
   {
-    path: '/submit',
-    name: 'submit',
-    component: () => import(/* webpackChunkName: "submit" */ '../views/Submit.vue'),
+    path: '/post/job',
+    name: 'postJob',
+    component: () => import(/* webpackChunkName: "submit" */ '../views/PostJob.vue'),
     meta: { layout: 'basic' }
   },
   {

@@ -27,5 +27,6 @@ export default {
 
   .select {
     @include Select;
+    width: 100%;
   }
 </style>
