@@ -36,6 +36,22 @@ export default {
     if (!this.$store.state.locations.repository.length) {
       await this.$store.dispatch('locations/fetch')
     }
+
+    if (!this.$store.state.groupCategories.repository.length) {
+      await this.$store.dispatch('groupCategories/fetch')
+    }
+
+    if (!this.$store.state.workCategories.repository.length) {
+      await this.$store.dispatch('workCategories/fetch')
+    }
+
+    if (!this.$store.state.workLevels.repository.length) {
+      await this.$store.dispatch('workLevels/fetch')
+    }
+
+    if (!this.$store.state.workTypes.repository.length) {
+      await this.$store.dispatch('workTypes/fetch')
+    }
   }
 }
 </script>
