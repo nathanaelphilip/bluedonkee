@@ -10,8 +10,21 @@
 
     <h2 class="heading">{{ heading }}</h2>
 
-    <div class="location">
+    <div class="info">
+      <template v-if="group">
+        <router-link :to="{
+          name: 'group',
+          params: {slug: group.fields.Slug}
+          }">{{ group.fields.Name }}
+        </router-link> –
+      </template>
       <template v-if="locations && locations.length">
+        <Location
+          v-for="location in locations"
+          :key="location.id"
+          :location="location"
+          :route="locationroute"
+        />
       </template>
     </div>
 
@@ -52,6 +65,7 @@
 
 <script>
 import Avatar from '@/components/atoms/Avatar'
+import Location from '@/components/atoms/Location'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
@@ -65,11 +79,12 @@ export default {
     'workTypes',
     'groupCategories',
     'locations',
+    'locationroute',
     'twitter',
     'website'
   ],
 
-  components: { Avatar, Tag, Tags }
+  components: { Avatar, Location, Tag, Tags }
 }
 </script>
 
@@ -105,7 +120,7 @@ export default {
     margin-bottom: 8px;
   }
 
-  .location {
+  .info {
     color: $BLUE;
     font-size: 17px;
     margin-bottom: 24px;

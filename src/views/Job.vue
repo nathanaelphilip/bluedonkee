@@ -7,6 +7,8 @@
       <Header
         :avatar="avatar"
         :group="group"
+        :locations="locations"
+        locationroute="locationJob"
         :heading="job.fields.Title"
         :workCategories="workCategories"
         :workLevels="workLevels"
@@ -30,6 +32,7 @@
 <script>
 import {
   getJob,
+  getLocations,
   getGroups,
   getWorkCategories,
   getWorkLevels,
@@ -48,6 +51,7 @@ export default {
   data () {
     return {
       loading: true,
+      locations: [],
       job: {},
       groups: [],
       workTypes: [],
@@ -68,6 +72,7 @@ export default {
 
   async mounted () {
     this.job = await getJob(this.$route.params.slug)
+    this.locations = await getLocations(this.job.fields.Location)
     this.groups = await getGroups(this.job.fields.Group)
     this.workCategories = await getWorkCategories(this.job.fields['Work Categories'])
     this.workLevels = await getWorkLevels(this.job.fields['Work Levels'])

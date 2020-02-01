@@ -15,7 +15,7 @@ import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 
 export default {
-  name: 'views-location',
+  name: 'views-location-jobs',
   components: { Intro, Jobs },
 
   data () {

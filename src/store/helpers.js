@@ -200,6 +200,39 @@ export const getWorkTypes = async (ids) => {
   return data
 }
 
+export const getState = async (slug) => {
+  const stored = $store.getters['states/getBySlug'](slug)
+
+  if (!stored) {
+    const item = await $store.dispatch('states/get', {
+      params: {
+        filterByFormula: `SEARCH("${slug}", Slug)`
+      }
+    })
+
+    return item
+  }
+
+  return stored
+}
+
+export const getStates = async (ids) => {
+  const items = ids.map(async (id) => {
+    const stored = $store.getters['states/getById'](id)
+
+    if (!stored) {
+      const item = await $store.dispatch('states/getById', id)
+      return item
+    }
+
+    return stored
+  })
+
+  const data = await Promise.all(items)
+
+  return data
+}
+
 export const getLocation = async (slug) => {
   const stored = $store.getters['locations/getBySlug'](slug)
 

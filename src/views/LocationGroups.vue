@@ -15,7 +15,7 @@ import Intro from '@/components/molecules/Intro'
 import Groups from '@/components/molecules/Groups'
 
 export default {
-  name: 'views-location',
+  name: 'views-location-groups',
   components: { Intro, Groups },
 
   data () {

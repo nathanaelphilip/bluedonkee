@@ -2,7 +2,7 @@
   <div class="groups">
     <div
       class="box"
-      v-for="group in $store.state.groups.repository"
+      v-for="group in groups"
       :key="group.id"
       >
       <Group :group="group" />
@@ -14,6 +14,7 @@
 import Group from '@/components/molecules/Group'
 
 export default {
+  props: ['groups'],
   components: { Group }
 }
 </script>

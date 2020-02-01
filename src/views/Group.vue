@@ -4,8 +4,9 @@
     <div class="box">
       <Header
         :avatar="avatar"
-        :group="group"
         :heading="group.fields.Name"
+        :locations="locations"
+        locationroute="locationGroup"
         :groupCategories="categories"
         :website="group.fields.Website"
         :twitter="group.fields.Twitter"
@@ -18,9 +19,10 @@
 
 <script>
 import {
-  getJobs,
   getGroup,
-  getGroupCategories
+  getGroupCategories,
+  getJobs,
+  getLocations
 } from '@/store/helpers'
 
 import Header from '@/components/molecules/Header'
@@ -33,10 +35,11 @@ export default {
 
   data () {
     return {
-      loading: true,
       categories: [],
       group: {},
-      jobs: []
+      jobs: [],
+      locations: [],
+      loading: true
     }
   },
 
@@ -49,6 +52,7 @@ export default {
   async mounted () {
     this.group = await getGroup(this.$route.params.slug)
     this.jobs = this.group.fields.Jobs ? await getJobs(this.group.fields.Jobs) : []
+    this.locations = await getLocations(this.group.fields.Location)
     this.categories = this.group.fields['Groups Categories'] ? await getGroupCategories(this.group.fields['Groups Categories']) : []
     this.loading = false
   }
