@@ -8,6 +8,8 @@
             <Input
               label="Job Title"
               placeholder="Senior Policy Advisor"
+              @input="value => form['Job Title'] = value"
+              :required="true"
             />
           </div>
         </div>
@@ -16,6 +18,8 @@
             <TextArea
               label="Job Description"
               placeholder="Provide a brief description of the role"
+              @input="value => form['Job Description'] = value"
+              :required="true"
             />
           </div>
         </div>
@@ -25,6 +29,8 @@
               label="Application Url"
               prefix="https://"
               instructions="Full URL where users can apply for this position."
+              @input="value => form['Job Application URL'] = value"
+              :required="true"
             />
           </div>
         </div>
@@ -41,6 +47,7 @@
             <Input
               label="City"
               placeholder="New York"
+              :required="true"
             />
           </div>
           <div class="half">
@@ -49,7 +56,7 @@
               placeholder="Select State"
             >
               <option value="HI">Hawaii</option>
-          </Select>
+            </Select>
           </div>
         </div>
       </div>
@@ -62,17 +69,29 @@
         </legend>
         <div class="row">
           <div class="full">
-            <CheckList :options="$store.state.workTypes.repository" heading="Work Type" />
+            <CheckList
+              heading="Work Type"
+              @change="value => form['Job Work Type'] = value"
+              :options="$store.state.workTypes.repository"
+              />
           </div>
         </div>
         <div class="row">
           <div class="full">
-            <CheckList :options="$store.state.workLevels.repository" heading="Work Levels" />
+            <CheckList
+              heading="Work Levels"
+              @change="value => form['Job Work Level'] = value"
+              :options="$store.state.workLevels.repository"
+            />
           </div>
         </div>
         <div class="row">
           <div class="full">
-            <CheckList :options="$store.state.workCategories.repository" heading="Work Categories" />
+            <CheckList
+              heading="Work Categories"
+              @change="value => form['Job Work Category'] = value"
+              :options="$store.state.workCategories.repository"
+            />
           </div>
         </div>
       </div>
@@ -93,6 +112,8 @@
             <Input
               label="Company"
               placeholder="WorkBlue"
+              @input="value => form['Company Name'] = value"
+              :required="true"
             />
           </div>
         </div>
@@ -101,12 +122,15 @@
             <Input
               label="Website"
               prefix="https://"
+              @input="value => form['Company Website'] = value"
+              :required="true"
             />
           </div>
           <div class="half">
             <Input
               label="Twitter"
               prefix="@"
+              @input="value => form['Company Twitter'] = value"
             />
           </div>
         </div>
@@ -115,6 +139,7 @@
             <Input
               label="City"
               placeholder="New York"
+              :required="true"
             />
           </div>
           <div class="half">
@@ -134,9 +159,12 @@
       </div>
     </fieldset>
 
-    <portal target="flash">
-       <Flash :open="status === 'success'">
+    <portal to="flash">
+       <Flash @close="status = false" :open="status === 'success'">
          🏄‍♀️ Surfing into success!
+       </Flash>
+       <Flash @close="status = false" :open="status === 'error'">
+         😱Something went wrong
        </Flash>
     </portal>
   </form>
@@ -144,6 +172,7 @@
 
 <script>
 import * as filestack from 'filestack-js'
+import { postJobSubmission } from '@/api'
 
 import Avatar from '@/components/forms/Avatar'
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
@@ -163,7 +192,49 @@ export default {
   data () {
     return {
       status: false,
-      file: false
+      file: false,
+      form: {
+        'Job Title': '',
+        'Job Description': '',
+        'Job Application URL': '',
+        'Job Location': [],
+        'Job Work Type': [],
+        'Job Work Level': [],
+        'Job Work Category': [],
+        'Company Avatar': '',
+        'Company Name': '',
+        'Company Website': '',
+        'Company Twitter': '',
+        'Company Location': []
+      }
+    }
+  },
+
+  computed: {
+    jobLocation () {
+      return this.form['Job Location'].length ? this.form['Job Location'].join('') : ''
+    },
+
+    jobWorkType () {
+      return this.form['Job Work Type'].length ? this.form['Job Work Type'].map((item) => {
+        return item.fields.Name
+      }).join(', ') : ''
+    },
+
+    jobWorkLevel () {
+      return this.form['Job Work Level'].length ? this.form['Job Work Level'].map((item) => {
+        return item.fields.Name
+      }).join(', ') : ''
+    },
+
+    jobWorkCategory () {
+      return this.form['Job Work Category'].length ? this.form['Job Work Category'].map((item) => {
+        return item.fields.Name
+      }).join(', ') : ''
+    },
+
+    companyLocation () {
+      return this.form['Company Location'].length ? this.form['Company Location'].join(', ') : ''
     }
   },
 
@@ -184,12 +255,39 @@ export default {
   methods: {
     async process () {
       this.status = 'processing'
-
-      if (this.status === 'lol') {
-        await client.upload(this.file)
+      const computed = {
+        'Job Location': this.jobLocation,
+        'Job Work Type': this.jobWorkType,
+        'Job Work Level': this.jobWorkLevel,
+        'Job Work Category': this.jobWorkCategory,
+        'Company Location': this.companyLocation
       }
 
-      this.status = 'success'
+      if (this.file) {
+        const {
+          filename,
+          url
+        } = await client.upload(this.file)
+
+        const attachment = {
+          url,
+          filename
+        }
+
+        computed['Company Avatar'] = [attachment]
+      }
+
+      const fields = { ...this.form, ...computed }
+
+      try {
+        const { data } = await postJobSubmission(fields)
+
+        if (data) {
+          this.status = 'success'
+        }
+      } catch (e) {
+        this.status = 'error'
+      }
     }
   }
 }

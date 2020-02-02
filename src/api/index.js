@@ -7,6 +7,7 @@ const flagged = `/Flagged`
 const groups = `/Groups`
 const groupCategories = `/Groups%20Categories`
 const jobs = `/Jobs`
+const jobSubmission = `/Job%20Submissions`
 const locations = `/Locations`
 const offices = `/Offices`
 const states = `/States`
@@ -114,4 +115,8 @@ export const getOffice = (id) => {
 
 export const postFlagged = (fields) => {
   return api.post(`${flagged}`, { fields })
+}
+
+export const postJobSubmission = (fields) => {
+  return api.post(`${jobSubmission}`, { fields })
 }

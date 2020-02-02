@@ -1,7 +1,7 @@
 <template>
   <div class="checklist">
     <div class="header">
-      <h5 class="heading">Work Type</h5>
+      <h5 class="heading">{{ heading }}</h5>
       <div class="action">
         <button @click.prevent="all" class="button">Select all that apply</button>
       </div>
@@ -30,7 +30,7 @@
 import CheckBox from '@/components/forms/CheckBox'
 
 export default {
-  props: ['options'],
+  props: ['heading', 'options'],
   components: { CheckBox },
 
   data () {
@@ -72,6 +72,8 @@ export default {
       if (!isChecked) {
         this.checked.push(value)
       }
+
+      this.$emit('change', this.selected)
     }
   }
 }

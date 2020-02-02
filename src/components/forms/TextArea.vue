@@ -5,6 +5,7 @@
       @input="event => $emit('input', event.target.value)"
       class="text"
       :placeholder="placeholder"
+      :required="required"
       :value="value"
     >
     </textarea>
@@ -13,7 +14,7 @@
 
 <script>
 export default {
-  props: [ 'label', 'placeholder', 'value' ]
+  props: ['label', 'placeholder', 'required', 'value']
 }
 </script>
 
