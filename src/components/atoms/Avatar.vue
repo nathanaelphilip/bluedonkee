@@ -1,5 +1,9 @@
 <template>
-  <img class="avatar" :class="{loaded}" :src="src" />
+  <img
+    class="avatar"
+    :class="{loaded}"
+    :src="src"
+  />
 </template>
 
 <script>
@@ -40,7 +44,8 @@ export default {
     display: block;
     border: 3px solid $GREY;
     border-radius: 100%;
-    height: auto;
+    object-fit: cover;
+    height: 100%;
     opacity: 0;
     transition: opacity .4s;
     width: 100%;

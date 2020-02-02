@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.19.1",
     "core-js": "^3.4.4",
+    "filestack-js": "^3.11.2",
     "jsonp": "^0.2.1",
     "moment": "^2.24.0",
     "normalize.css": "^8.0.1",

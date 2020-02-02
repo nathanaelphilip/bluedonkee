@@ -8,7 +8,7 @@
       type="checkbox"
       class="hidden"
     />
-    <div class="checkbox">
+    <div class="checkbox" @click.prevent="$emit('change', id)">
       <IconCheck class="icon" width="10" height="8" />
     </div>
     <label class="label" :for="id">{{ label }}</label>

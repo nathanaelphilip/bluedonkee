@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="process">
     <fieldset class="fieldset">
       <div>
         <legend class="legend">Job Description</legend>
@@ -47,7 +47,9 @@
             <Select
               label="State"
               placeholder="Select State"
-            />
+            >
+              <option value="HI">Hawaii</option>
+          </Select>
           </div>
         </div>
       </div>
@@ -81,6 +83,13 @@
         <legend class="legend">Company Information</legend>
         <div class="row">
           <div class="full">
+            <Avatar
+              @change="(value) => file = value"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="full">
             <Input
               label="Company"
               placeholder="WorkBlue"
@@ -112,25 +121,31 @@
             <Select
               label="State"
               placeholder="Select State"
-            />
+            >
+              <option value="HI">Hawaii</option>
+            </Select>
           </div>
         </div>
         <div class="action">
           <ButtonPrimary>
-            <Processing>Post Job</Processing>
+            <Processing :processing="status === 'processing'">Post Job</Processing>
           </ButtonPrimary>
         </div>
       </div>
     </fieldset>
 
     <portal target="flash">
-       <Flash>
+       <Flash :open="status === 'success'">
+         🏄‍♀️ Surfing into success!
        </Flash>
     </portal>
   </form>
 </template>
 
 <script>
+import * as filestack from 'filestack-js'
+
+import Avatar from '@/components/forms/Avatar'
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import CheckList from '@/components/forms/CheckList'
 import Flash from '@/components/molecules/Flash'
@@ -139,9 +154,18 @@ import Select from '@/components/forms/Select'
 import Processing from '@/components/forms/Processing'
 import TextArea from '@/components/forms/TextArea'
 
+const client = filestack.init(process.env.VUE_APP_FILESTACK_API_KEY)
+
 export default {
   name: 'form-post-job',
-  components: { ButtonPrimary, CheckList, Flash, Input, Select, Processing, TextArea },
+  components: { Avatar, ButtonPrimary, CheckList, Flash, Input, Select, Processing, TextArea },
+
+  data () {
+    return {
+      status: false,
+      file: false
+    }
+  },
 
   async mounted () {
     if (!this.$store.state.workCategories.repository.length) {
@@ -154,6 +178,18 @@ export default {
 
     if (!this.$store.state.workTypes.repository.length) {
       await this.$store.dispatch('workTypes/fetch')
+    }
+  },
+
+  methods: {
+    async process () {
+      this.status = 'processing'
+
+      if (this.status === 'lol') {
+        await client.upload(this.file)
+      }
+
+      this.status = 'success'
     }
   }
 }
@@ -190,6 +226,11 @@ export default {
 
   .full {
     grid-column: span 2;
+  }
+
+  .avatar {
+    margin: 0 auto;
+    max-width: 320px;
   }
 
   .action {
