@@ -7,6 +7,8 @@
       <Header
         :avatar="avatar"
         :heading="campaign.fields.Name"
+        :locations="locations"
+        locationroute="locationCampaign"
         :website="campaign.fields.Website"
         :twitter="campaign.fields.Twitter"
       />
@@ -22,6 +24,7 @@
 
 <script>
 import {
+  getLocations,
   getCampaign
 } from '@/store/helpers'
 
@@ -36,7 +39,8 @@ export default {
   data () {
     return {
       loading: true,
-      campaign: {}
+      campaign: {},
+      locations: []
     }
   },
 
@@ -48,6 +52,7 @@ export default {
 
   async mounted () {
     this.campaign = await getCampaign(this.$route.params.slug)
+    this.locations = await getLocations(this.campaign.fields.Location)
     this.loading = false
   }
 }
