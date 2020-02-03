@@ -7,9 +7,13 @@
     @dragexit="status = 'notdragging'"
     @dragend="status = 'notdragging'"
     >
-    <figure class="image">
-      <Avatar :src="src" />
-    </figure>
+    <label for="upload-file" class="image">
+      <Avatar :src="src" v-if="src" />
+      <div class="upload" v-if="!src">
+        <IconUpload width="30" />
+      </div>
+      <input @change="addFile" id="upload-file" type="file" class="input">
+    </label>
     <div class="content">
       We recommend using at least a 500x500px (1:1 ratio) image that's no larger than 2MB.
     </div>
@@ -19,13 +23,14 @@
 
 <script>
 import Avatar from '@/components/atoms/Avatar'
+import IconUpload from '@/components/icons/Upload'
 
 export default {
-  components: { Avatar },
+  components: { Avatar, IconUpload },
 
   data () {
     return {
-      src: require(`@/assets/logo.svg`),
+      src: false,
       status: 'resting',
       files: []
     }
@@ -33,7 +38,16 @@ export default {
 
   methods: {
     addFile (event) {
-      const { files } = event.dataTransfer
+      let files = false
+
+      if (event.dataTransfer) {
+        files = event.dataTransfer.files
+      }
+
+      if (event.target && event.target.files) {
+        files = event.target.files
+      }
+
       this.status = 'resting'
 
       if (!files) { return }
@@ -52,7 +66,7 @@ export default {
     },
 
     removeFile (event) {
-      this.src = require(`@/assets/logo.svg`)
+      this.src = false
       this.files = []
       this.$emit('change', false)
     }
@@ -65,16 +79,25 @@ export default {
     text-align: center;
 
     &.dragging {
-      .image {
-        transform: scale(1.1);
-      }
+      .upload {border-color: $BLUE;}
     }
   }
 
   .image {
+    display: block;
     margin: 0 auto 10px auto;
     height: 90px;
     transition: transform .25s ease-out;
+    width: 90px;
+  }
+
+  .upload {
+    align-items: center;
+    border: 1px solid $GREY;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    height: 90px;
     width: 90px;
   }
 
@@ -90,5 +113,12 @@ export default {
     color: $RED;
     font-size: 15px;
     font-weight: 500;
+  }
+
+  .input {
+    height: 0;
+    position: absolute;
+    left: -99999px;
+    width: 0;
   }
 </style>
