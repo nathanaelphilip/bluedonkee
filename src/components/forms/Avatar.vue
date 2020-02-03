@@ -80,7 +80,7 @@ export default {
     text-align: center;
 
     &.dragging {
-      .upload {border-color: $BLUE;}
+      .icon {border-color: $BLUE;}
     }
   }
 
