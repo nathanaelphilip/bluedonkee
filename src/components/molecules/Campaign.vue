@@ -5,7 +5,10 @@
       <h3 class="heading">
         <router-link :to="{ name: 'campaign', params: { slug: campaign.fields.Slug } }">{{ campaign.fields.Name }}</router-link>
       </h3>
-      <div class="location">Location</div>
+      <Locations
+        :locations="locations"
+        route="locationCampaign"
+      />
     </div>
     <Tags>
       <Tag
@@ -20,18 +23,20 @@
 </template>
 
 <script>
-import { getOffices } from '@/store/helpers'
+import { getLocations, getOffices } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
+import Locations from '@/components/molecules/Locations'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
 export default {
   props: ['campaign'],
-  components: { Avatar, Tag, Tags },
+  components: { Avatar, Locations, Tag, Tags },
 
   data () {
     return {
+      locations: [],
       offices: {}
     }
   },
@@ -46,6 +51,8 @@ export default {
     if (this.campaign.fields['Office'] && this.campaign.fields['Office'].length) {
       this.offices = await getOffices(this.campaign.fields['Office'])
     }
+
+    this.locations = this.campaign.fields['Location'] ? await getLocations(this.campaign.fields['Location']) : []
   }
 }
 </script>

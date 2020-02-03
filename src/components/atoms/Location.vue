@@ -7,8 +7,7 @@
       }
     }"
   >
-    {{ location.fields.City }}
-    <template v-if="state">, {{ state }}</template>
+    {{ location.fields.City }}<template v-if="state">, {{ state }}</template>
   </router-link>
 </template>
 
