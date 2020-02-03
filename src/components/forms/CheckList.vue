@@ -94,6 +94,10 @@ export default {
     padding: 12px 10px;
   }
 
+  .input:hover {
+    background: $BLUELIGHT;
+  }
+
   .button {
     appearance: none;
     background: none;

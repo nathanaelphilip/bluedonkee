@@ -154,21 +154,10 @@ export default {
   }
 
   .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 16px;
-
-    &:not(:last-child) {
-      margin-bottom: 24px;
-    }
-  }
-
-  .full {
-    grid-column: span 2;
+    @include FormRow;
   }
 
   .action {
-    display: flex;
-    justify-content: flex-end;
+    @include FormAction;
   }
 </style>

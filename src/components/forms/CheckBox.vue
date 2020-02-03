@@ -32,8 +32,6 @@ export default {
     padding: 5px 6px;
 
     &:hover {
-      background: $BLUELIGHT;
-
       .checkbox {border-color:  $BLUE;}
     }
   }

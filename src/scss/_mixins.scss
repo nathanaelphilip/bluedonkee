@@ -86,3 +86,39 @@
 @mixin Shadow {
   box-shadow: 0 2px 12px rgba(#BEBEBE, .5);
 }
+
+
+@mixin FormAction {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@mixin FormFieldset {
+  background: $BLUELIGHT;
+  border-radius: 12px;
+  display: block;
+  padding: 32px;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}
+
+@mixin FormLegend {
+  display: block;
+  font-size: 19px;
+  font-weight: 800;
+  margin-bottom: 22px;
+}
+
+@mixin FormRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 30px;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+
+  .full { grid-column: span 2 }
+}

@@ -43,22 +43,16 @@
           Job Location
         </legend>
         <div class="row">
-          <div class="half">
-            <Input
-              label="City"
-              placeholder="New York"
-              :required="true"
+          <div class="full remote">
+            <CheckBox
+              label="This role is available to remote work"
+              id="remote"
+              :checked="form['Job Location Remote']"
+              @change="form['Job Location Remote'] = !form['Job Location Remote']"
             />
           </div>
-          <div class="half">
-            <Select
-              label="State"
-              placeholder="Select State"
-            >
-              <option value="HI">Hawaii</option>
-            </Select>
-          </div>
         </div>
+        <Locations :locations.sync="form['Job Location']" :multiple="true" />
       </div>
     </fieldset>
 
@@ -134,23 +128,9 @@
             />
           </div>
         </div>
-        <div class="row">
-          <div class="half">
-            <Input
-              label="City"
-              placeholder="New York"
-              :required="true"
-            />
-          </div>
-          <div class="half">
-            <Select
-              label="State"
-              placeholder="Select State"
-            >
-              <option value="HI">Hawaii</option>
-            </Select>
-          </div>
-        </div>
+
+        <Locations :locations.sync="form['Company Location']" />
+
         <div class="action">
           <ButtonPrimary>
             <Processing :processing="status === 'processing'">Post Job</Processing>
@@ -161,10 +141,10 @@
 
     <portal to="flash">
        <Flash @close="status = false" :open="status === 'success'">
-         🏄‍♀️ Surfing into success!
+         🏄‍♀️  Surfing into success!
        </Flash>
        <Flash @close="status = false" :open="status === 'error'">
-         😱Something went wrong
+         😱 Something went wrong
        </Flash>
     </portal>
   </form>
@@ -176,10 +156,11 @@ import { postJobSubmission } from '@/api'
 
 import Avatar from '@/components/forms/Avatar'
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
+import CheckBox from '@/components/forms/CheckBox'
 import CheckList from '@/components/forms/CheckList'
 import Flash from '@/components/molecules/Flash'
 import Input from '@/components/forms/Input'
-import Select from '@/components/forms/Select'
+import Locations from '@/components/forms/Locations'
 import Processing from '@/components/forms/Processing'
 import TextArea from '@/components/forms/TextArea'
 
@@ -187,7 +168,7 @@ const client = filestack.init(process.env.VUE_APP_FILESTACK_API_KEY)
 
 export default {
   name: 'form-post-job',
-  components: { Avatar, ButtonPrimary, CheckList, Flash, Input, Select, Processing, TextArea },
+  components: { Avatar, ButtonPrimary, CheckBox, CheckList, Flash, Input, Locations, Processing, TextArea },
 
   data () {
     return {
@@ -198,6 +179,7 @@ export default {
         'Job Description': '',
         'Job Application URL': '',
         'Job Location': [],
+        'Job Location Remote': false,
         'Job Work Type': [],
         'Job Work Level': [],
         'Job Work Category': [],
@@ -212,7 +194,9 @@ export default {
 
   computed: {
     jobLocation () {
-      return this.form['Job Location'].length ? this.form['Job Location'].join('') : ''
+      return this.form['Job Location'].length ? this.form['Job Location'].map((item) => {
+        return `${item.city}, ${item.state}`
+      }).join(' / ') : ''
     },
 
     jobWorkType () {
@@ -234,7 +218,9 @@ export default {
     },
 
     companyLocation () {
-      return this.form['Company Location'].length ? this.form['Company Location'].join(', ') : ''
+      return this.form['Company Location'].length ? this.form['Company Location'].map((item) => {
+        return `${item.city}, ${item.state}`
+      }).join(' / ') : ''
     }
   },
 
@@ -295,35 +281,27 @@ export default {
 
 <style lang="scss" scoped>
   .fieldset {
-    background: $BLUELIGHT;
-    border-radius: 12px;
-    display: block;
-    padding: 32px;
-
-    &:not(:last-child) {
-      margin-bottom: 24px;
-    }
+    @include FormFieldset;
   }
 
   .legend {
-    display: block;
-    font-size: 19px;
-    font-weight: 800;
-    margin-bottom: 22px;
+    @include FormLegend;
+  }
+
+  .remote {
+    background: $GREY3;
+    border-radius: 3px;
+    padding: 5px;
   }
 
   .row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(50%, 1fr));
-    grid-column-gap: 16px;
-
-    &:not(:last-child) {
-      margin-bottom: 24px;
-    }
+    @include FormRow;
   }
 
-  .full {
-    grid-column: span 2;
+  .locations {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
   }
 
   .avatar {
@@ -332,7 +310,6 @@ export default {
   }
 
   .action {
-    display: flex;
-    justify-content: flex-end;
+    @include FormAction;
   }
 </style>
