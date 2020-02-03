@@ -112,6 +112,7 @@ export default {
     @include Button;
     background: none;
     font-size: 15px;
+    font-weight: 500;
   }
 
   .upload {
