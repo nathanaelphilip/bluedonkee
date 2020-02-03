@@ -9,7 +9,7 @@
     >
     <label for="upload-file" class="image">
       <Avatar :src="src" v-if="src" />
-      <div class="upload" v-if="!src">
+      <div class="icon" v-if="!src">
         <IconUpload width="30" />
       </div>
       <input @change="addFile" id="upload-file" type="file" class="input">
@@ -17,7 +17,8 @@
     <div class="content">
       We recommend using at least a 500x500px (1:1 ratio) image that's no larger than 2MB.
     </div>
-    <button v-if="files.length" class="button" @click.prevent="removeFile">Remove Avatar</button>
+    <label v-if="!files.length" class="upload" for="upload-file">Upload Avatar</label>
+    <button v-if="files.length" class="remove" @click.prevent="removeFile">Remove Avatar</button>
   </div>
 </template>
 
@@ -91,7 +92,7 @@ export default {
     width: 90px;
   }
 
-  .upload {
+  .icon {
     align-items: center;
     border: 1px solid $GREY;
     border-radius: 100%;
@@ -107,12 +108,21 @@ export default {
     margin-bottom: 10px;
   }
 
-  .button {
+  .upload, .remove {
     @include Button;
     background: none;
-    color: $RED;
     font-size: 15px;
-    font-weight: 500;
+  }
+
+  .upload {
+    color: $BLUE;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .remove {
+    color: $RED;
   }
 
   .input {
