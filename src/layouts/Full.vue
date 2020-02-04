@@ -13,6 +13,7 @@
       </main>
     </template>
     <template v-slot:three>
+      <JobsPromoted />
       <Newsletter />
       <Twitter />
     </template>
@@ -28,12 +29,13 @@ import Grid from '@/components/layouts/Grid'
 import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
 import Newsletter from '@/components/forms/Newsletter'
+import JobsPromoted from '@/components/molecules/JobsPromoted'
 import Twitter from '@/components/molecules/Twitter'
 
 export default {
   name: 'layout-full',
 
-  components: { Bug, Grid, Logo, Navigation, Newsletter, Twitter }
+  components: { Bug, Grid, Logo, Navigation, Newsletter, JobsPromoted, Twitter }
 }
 </script>
 
@@ -53,6 +55,7 @@ export default {
     img {margin-right: 12px}
   }
 
+  .promoted,
   .newsletter {
     margin-bottom: 26px;
   }
