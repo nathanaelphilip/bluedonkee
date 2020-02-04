@@ -7,8 +7,8 @@
 
 <script>
 import {
-  getGroups,
-  getGroupCategory
+  getByIds,
+  getBySlug
 } from '@/store/helpers'
 
 import Groups from '@/components/molecules/Groups'
@@ -27,8 +27,15 @@ export default {
   },
 
   async mounted () {
-    this.category = await getGroupCategory(this.$route.params.slug)
-    this.groups = this.category.fields.Groups ? await getGroups(this.category.fields.Groups) : []
+    this.category = await getBySlug({
+      slug: this.$route.params.slug,
+      type: 'groupCategories'
+    })
+
+    this.groups = this.category.fields.Groups ? await getByIds({
+      ids: this.category.fields.Groups,
+      type: 'groups'
+    }) : []
 
     this.loading = false
   }

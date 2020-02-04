@@ -33,7 +33,7 @@
           :key="`work-category-${category.id}`"
           :slug="category.fields.Slug"
           :name="category.fields.Name"
-          route="workCategory"
+          route="groupCategory"
          />
         <Tag
           v-for="category in workCategories"

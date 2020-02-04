@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getStates } from '@/store/helpers'
+import { getByIds } from '@/store/helpers'
 
 export default {
   props: ['location', 'route'],
@@ -29,7 +29,10 @@ export default {
 
   async mounted () {
     if (this.location.fields.State && this.location.fields.State.length) {
-      this.states = await getStates(this.location.fields.State)
+      this.states = await getByIds({
+        ids: this.location.fields.State,
+        type: 'states'
+      })
     }
   }
 }

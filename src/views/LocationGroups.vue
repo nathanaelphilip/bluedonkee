@@ -7,8 +7,8 @@
 
 <script>
 import {
-  getGroups,
-  getLocation
+  getByIds,
+  getBySlug
 } from '@/store/helpers'
 
 import Intro from '@/components/molecules/Intro'
@@ -27,8 +27,15 @@ export default {
   },
 
   async mounted () {
-    this.location = await getLocation(this.$route.params.slug)
-    this.groups = await getGroups(this.location.fields.Groups)
+    this.location = await getBySlug({
+      slug: this.$route.params.slug,
+      type: 'locations'
+    })
+
+    this.groups = await getByIds({
+      ids: this.location.fields.Groups,
+      type: 'groups'
+    })
 
     this.loading = false
   }

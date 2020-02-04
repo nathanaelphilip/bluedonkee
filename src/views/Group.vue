@@ -19,10 +19,8 @@
 
 <script>
 import {
-  getGroup,
-  getGroupCategories,
-  getJobs,
-  getLocations
+  getByIds,
+  getBySlug
 } from '@/store/helpers'
 
 import Header from '@/components/molecules/Header'
@@ -50,10 +48,26 @@ export default {
   },
 
   async mounted () {
-    this.group = await getGroup(this.$route.params.slug)
-    this.jobs = this.group.fields.Jobs ? await getJobs(this.group.fields.Jobs) : []
-    this.locations = await getLocations(this.group.fields.Location)
-    this.categories = this.group.fields['Groups Categories'] ? await getGroupCategories(this.group.fields['Groups Categories']) : []
+    this.group = await getBySlug({
+      slug: this.$route.params.slug,
+      type: 'groups'
+    })
+
+    this.jobs = this.group.fields.Jobs ? await getByIds({
+      ids: this.group.fields.Jobs,
+      type: 'jobs'
+    }) : []
+
+    this.locations = await getByIds({
+      ids: this.group.fields.Location,
+      type: 'locations'
+    })
+
+    this.categories = this.group.fields['Groups Categories'] ? await getByIds({
+      ids: this.group.fields['Groups Categories'],
+      type: 'groupCategories'
+    }) : []
+
     this.loading = false
   }
 }

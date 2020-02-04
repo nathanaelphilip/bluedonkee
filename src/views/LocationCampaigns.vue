@@ -7,8 +7,8 @@
 
 <script>
 import {
-  getCampaigns,
-  getLocation
+  getByIds,
+  getBySlug
 } from '@/store/helpers'
 
 import Intro from '@/components/molecules/Intro'
@@ -27,8 +27,15 @@ export default {
   },
 
   async mounted () {
-    this.location = await getLocation(this.$route.params.slug)
-    this.campaigns = await getCampaigns(this.location.fields.Campaigns)
+    this.location = await getBySlug({
+      slug: this.$route.params.slug,
+      type: 'locations'
+    })
+
+    this.campaigns = await getByIds({
+      ids: this.location.fields.Campaigns,
+      type: 'campaigns'
+    })
 
     this.loading = false
   }

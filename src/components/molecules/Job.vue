@@ -62,11 +62,7 @@
 <script>
 import moment from 'moment'
 import {
-  getGroups,
-  getLocations,
-  getWorkCategories,
-  getWorkLevels,
-  getWorkTypes
+  getByIds
 } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
@@ -81,7 +77,7 @@ export default {
 
   data () {
     return {
-      loading: false,
+      loading: true,
       groups: [],
       locations: [],
       workCategories: [],
@@ -105,11 +101,31 @@ export default {
   },
 
   async mounted () {
-    this.groups = await getGroups(this.job.fields.Group)
-    this.workCategories = await getWorkCategories(this.job.fields['Work Categories'])
-    this.workLevels = await getWorkLevels(this.job.fields['Work Levels'])
-    this.workTypes = await getWorkTypes(this.job.fields['Work Types'])
-    this.locations = await getLocations(this.job.fields['Location'])
+    this.groups = await getByIds({
+      ids: this.job.fields.Group,
+      type: 'groups'
+    })
+
+    this.workCategories = await getByIds({
+      ids: this.job.fields['Work Categories'],
+      type: 'workCategories'
+    })
+
+    this.workLevels = await getByIds({
+      ids: this.job.fields['Work Levels'],
+      type: 'workLevels'
+    })
+
+    this.workTypes = await getByIds({
+      ids: this.job.fields['Work Types'],
+      type: 'workTypes'
+    })
+
+    this.locations = await getByIds({
+      ids: this.job.fields['Location'],
+      type: 'locations'
+    })
+
     this.loading = false
   }
 }

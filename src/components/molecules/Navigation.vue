@@ -1,12 +1,12 @@
 <template>
   <nav class="nav">
-    <router-link class="anchor" :to="{ name: 'jobs' }">
+    <router-link exact class="anchor" :to="{ name: 'jobs' }">
       <IconJobs class="icon" width="36" height="27" />Jobs
     </router-link>
-    <router-link class="anchor" :to="{ name: 'groups' }">
+    <router-link exact class="anchor" :to="{ name: 'groups' }">
       <IconGroups class="icon" width="36" height="36" />Groups
     </router-link>
-    <router-link class="anchor" :to="{ name: 'campaigns' }">
+    <router-link exact class="anchor" :to="{ name: 'campaigns' }">
       <IconCampaigns class="icon" width="36" height="38" />Campaigns
     </router-link>
   </nav>

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getLocations, getOffices } from '@/store/helpers'
+import { getByIds } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
 import Locations from '@/components/molecules/Locations'
@@ -49,10 +49,16 @@ export default {
 
   async mounted () {
     if (this.campaign.fields['Office'] && this.campaign.fields['Office'].length) {
-      this.offices = await getOffices(this.campaign.fields['Office'])
+      this.offices = await getByIds({
+        ids: this.campaign.fields['Office'],
+        type: 'offices'
+      })
     }
 
-    this.locations = this.campaign.fields['Location'] ? await getLocations(this.campaign.fields['Location']) : []
+    this.locations = this.campaign.fields['Location'] ? await getByIds({
+      ids: this.campaign.fields['Location'],
+      type: 'locations'
+    }) : []
   }
 }
 </script>

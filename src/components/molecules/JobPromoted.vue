@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { getGroups } from '@/store/helpers'
+import { getByIds } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
 
@@ -51,7 +51,10 @@ export default {
   },
 
   async mounted () {
-    this.groups = await getGroups(this.job.fields.Group)
+    this.groups = await getByIds({
+      ids: this.job.fields.Group,
+      type: 'groups'
+    })
   }
 }
 </script>

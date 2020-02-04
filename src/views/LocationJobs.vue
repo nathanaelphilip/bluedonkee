@@ -7,8 +7,8 @@
 
 <script>
 import {
-  getJobs,
-  getLocation
+  getByIds,
+  getBySlug
 } from '@/store/helpers'
 
 import Intro from '@/components/molecules/Intro'
@@ -27,8 +27,15 @@ export default {
   },
 
   async mounted () {
-    this.location = await getLocation(this.$route.params.slug)
-    this.jobs = await getJobs(this.location.fields.Jobs)
+    this.location = await getBySlug({
+      slug: this.$route.params.slug,
+      type: 'locations'
+    })
+
+    this.jobs = await getByIds({
+      ids: this.location.fields.Jobs,
+      type: 'jobs'
+    })
 
     this.loading = false
   }

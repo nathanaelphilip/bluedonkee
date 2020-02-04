@@ -24,8 +24,8 @@
 
 <script>
 import {
-  getLocations,
-  getCampaign
+  getByIds,
+  getBySlug
 } from '@/store/helpers'
 
 import Header from '@/components/molecules/Header'
@@ -46,13 +46,21 @@ export default {
 
   computed: {
     avatar () {
-      return this.campaign.fields.Avatar ? this.campaign.fields.Avatar[0].url : ''
+      return this.campaign && this.campaign.fields.Avatar ? this.campaign.fields.Avatar[0].url : ''
     }
   },
 
   async mounted () {
-    this.campaign = await getCampaign(this.$route.params.slug)
-    this.locations = await getLocations(this.campaign.fields.Location)
+    this.campaign = await getBySlug({
+      slug: this.$route.params.slug,
+      type: 'campaigns'
+    })
+
+    this.locations = await getByIds({
+      ids: this.campaign.fields.Location,
+      type: 'locations'
+    })
+
     this.loading = false
   }
 }

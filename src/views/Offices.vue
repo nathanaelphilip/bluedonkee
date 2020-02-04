@@ -6,7 +6,10 @@
 </template>
 
 <script>
-import { getCampaigns, getOffice } from '@/store/helpers'
+import {
+  getByIds,
+  getBySlug
+} from '@/store/helpers'
 
 import Intro from '@/components/molecules/Intro'
 import Campaigns from '@/components/molecules/Campaigns'
@@ -23,8 +26,15 @@ export default {
   },
 
   async mounted () {
-    this.office = await getOffice(this.$route.params.slug)
-    this.campaigns = await getCampaigns(this.office.fields.Campaigns)
+    this.office = await getBySlug({
+      slug: this.$route.params.slug,
+      type: 'offices'
+    })
+
+    this.campaigns = await getByIds({
+      ids: this.office.fields.Campaigns,
+      type: 'campaigns'
+    })
   }
 }
 </script>

@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { getGroupCategories, getLocations } from '@/store/helpers'
+import { getByIds } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
 import Locations from '@/components/molecules/Locations'
@@ -51,8 +51,15 @@ export default {
   },
 
   async mounted () {
-    this.categories = this.group.fields['Groups Categories'].length ? await getGroupCategories(this.group.fields['Groups Categories']) : []
-    this.locations = this.group.fields['Location'] ? await getLocations(this.group.fields['Location']) : []
+    this.categories = this.group.fields['Groups Categories'].length ? await getByIds({
+      ids: this.group.fields['Groups Categories'],
+      type: 'groupCategories'
+    }) : []
+
+    this.locations = this.group.fields['Location'] ? await getByIds({
+      ids: this.group.fields['Location'],
+      type: 'locations'
+    }) : []
   }
 }
 </script>
