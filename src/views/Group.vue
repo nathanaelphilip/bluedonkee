@@ -11,9 +11,9 @@
         :website="group.fields.Website"
         :twitter="group.fields.Twitter"
       />
-      <h3 class="subheading">Available Positions</h3>
     </div>
-    <Jobs :jobs="jobs" />
+    <Jobs heading="Available Jobs" :jobs="jobs" />
+    <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
   </article>
 </template>
 
@@ -25,14 +25,16 @@ import {
 
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
+import Campaigns from '@/components/molecules/Campaigns'
 import Jobs from '@/components/molecules/Jobs'
 
 export default {
   name: 'views-group',
-  components: { Header, Intro, Jobs },
+  components: { Campaigns, Header, Intro, Jobs },
 
   data () {
     return {
+      campaigns: [],
       categories: [],
       group: {},
       jobs: [],
@@ -68,6 +70,8 @@ export default {
       type: 'groupCategories'
     }) : []
 
+    this.campaigns = this.$store.state.campaigns.repository.slice(0, 4)
+
     this.loading = false
   }
 }
@@ -79,10 +83,7 @@ export default {
     padding: 32px 32px 0 32px;
   }
 
-  .subheading {
-    font-size: 18px;
-    font-weight: 900;
-    margin-bottom: 5px;
-    margin-top: 36px;
+  .jobs {
+    margin-bottom: 24px;
   }
 </style>
