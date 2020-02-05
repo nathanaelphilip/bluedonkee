@@ -4,9 +4,6 @@
       <div class="sticky-top">
         <slot name="one"></slot>
       </div>
-      <div class="sticky-bottom">
-        <slot name="four"></slot>
-      </div>
     </div>
     <div class="column">
       <slot name="two"></slot>

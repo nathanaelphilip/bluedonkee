@@ -16,8 +16,6 @@
       <JobsPromoted />
       <Newsletter />
       <Twitter />
-    </template>
-    <template v-slot:four>
       <div class="copyright">&copy; 2020 Blue Donkee - <router-link :to="{ name: 'questions' }">Questions</router-link></div>
     </template>
   </Grid>
@@ -56,12 +54,14 @@ export default {
   }
 
   .promoted,
-  .newsletter {
+  .newsletter,
+  .twitter {
     margin-bottom: 26px;
   }
 
   .copyright {
     color: $BLUEGREY;
     font-size: 13px;
+    text-align: center;
   }
 </style>
