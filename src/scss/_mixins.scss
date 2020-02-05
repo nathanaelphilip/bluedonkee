@@ -1,6 +1,12 @@
-@mixin Button {
+@mixin ButtonStripped {
+  background: none;
   appearance: none;
   border: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin Button {
   border-radius: 4px;
   display: inline-block;
   font-family: $INTER;

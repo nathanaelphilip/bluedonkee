@@ -3,22 +3,22 @@
     <h6 class="heading">Something off with this post?</h6>
     <button class="button" @click.prevent="open.modal = true">Flag Posting</button>
     <portal to="modal">
-      <Modal @close="open = false" :open="open.modal" heading="Flag Posting">
+      <Modal @close="open.modal = false" :open="open.modal" heading="Flag Posting">
         <OptionsList
           :options="options"
           :status="status"
           :selected="selected"
           @selected="value => selected = value"
-          @close="open = false"
+          @close="open.modal = false"
           @process="report"
         >
-        <TextArea
-          v-if="selected === 4"
-          placeholder="Leave note"
-          @input="value => note = value"
-          :value="note"
-        />
-      </OptionsList>
+          <TextArea
+            v-if="selected === 4"
+            placeholder="Leave note"
+            @input="value => note = value"
+            :value="note"
+          />
+        </OptionsList>
       </Modal>
     </portal>
     <portal to="flash">

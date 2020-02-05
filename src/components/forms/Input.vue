@@ -7,6 +7,7 @@
         @input="event => $emit('input', event.target.value)"
         :required="required"
         :placeholder="placeholder"
+        :readonly="readonly"
         :type="type"
         :value="value"
         class="text"
@@ -20,7 +21,16 @@
 
 <script>
 export default {
-  props: ['label', 'instructions', 'placeholder', 'prefix', 'required', 'value', 'type']
+  props: [
+    'label',
+    'instructions',
+    'placeholder',
+    'prefix',
+    'readonly',
+    'required',
+    'type',
+    'value'
+  ]
 }
 </script>
 

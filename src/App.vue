@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <portal-target name="flash">
+    <portal-target name="flash" multiple>
     </portal-target>
-    <portal-target name="modal">
+    <portal-target name="modal" multiple>
     </portal-target>
     <component :is="layout">
       <router-view />
