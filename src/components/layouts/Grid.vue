@@ -1,11 +1,11 @@
 <template>
   <div class="grid">
-    <div class="column">
+    <div class="column column-1">
       <div class="sticky-top">
         <slot name="one"></slot>
       </div>
     </div>
-    <div class="column">
+    <div class="column column-2">
       <slot name="two"></slot>
     </div>
     <div class="column column-3">
@@ -37,9 +37,18 @@ export default {
     @include mq($until: small) {
      grid-template-columns: 93px 1fr;
     }
+
+    @include mq($until: xsmall) {
+     grid-template-columns: 1fr;
+    }
   }
 
-  .column { min-height: 100vh; position: relative; }
+  .column {
+    @include mq($from: xsmall) {
+      min-height: 100vh;
+      position: relative;
+    }
+  }
 
   .sticky-top {
     @include mq($from: xsmall) {
@@ -48,6 +57,8 @@ export default {
       top: 0;
     }
   }
+
+  .column-1 {}
 
   .column-3 {
     @include mq($until: small) {

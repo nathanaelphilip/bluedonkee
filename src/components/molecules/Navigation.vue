@@ -26,7 +26,6 @@ export default {
 <style lang="scss" scoped>
   .nav {
     display: flex;
-    flex-direction: column;
 
     @include mq($from: small) {
       font-size: 20px;
@@ -39,10 +38,17 @@ export default {
       align-items: center;
     }
 
+     @include mq($from: xsmall) {
+       flex-direction: column;
+     }
+
     @include mq($until: xsmall) {
+      background: $WHITE;
       left: 0;
       bottom: 0;
+      padding: 12px 0;
       position: fixed;
+      justify-content: space-around;
       width: 100%;
       z-index: 10;
     }
@@ -65,7 +71,9 @@ export default {
     }
 
     &:not(:last-child) {
-      margin-bottom: 12px;
+      @include mq($from: xsmall) {
+        margin-bottom: 12px;
+      }
     }
 
     &:hover,

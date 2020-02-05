@@ -11,7 +11,7 @@ export default {
 
 <style lang="scss" scoped>
   .tags {
-    display: flex;
+    @include Flex($justify: flex-start);
 
     > *:not(:last-child) {margin-right: 6px}
   }

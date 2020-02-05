@@ -30,6 +30,10 @@ export default {
   .box {
     padding: 25px 36px;
 
+    @include mq($until: xsmall) {
+      padding: 24px 16px;
+    }
+
     .simple &:nth-child(2) { padding-top: 0; }
 
     &:not(:last-child) {

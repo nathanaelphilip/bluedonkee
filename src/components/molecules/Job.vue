@@ -30,31 +30,29 @@
       <div class="content">
         {{ description }}
       </div>
-      <div class="tags">
-        <Tags>
-          <Tag
-            v-for="item in workCategories"
-            :key="`work-category-${item.id}`"
-            :name="item.fields.Name"
-            :slug="item.fields.Slug"
-            route="workCategory"
-          />
-          <Tag
-            v-for="item in workTypes"
-            :key="`work-type-${item.id}`"
-            :name="item.fields.Name"
-            :slug="item.fields.Slug"
-            route="workType"
-          />
-          <Tag
-            v-for="item in workLevels"
-            :key="`work-level-${item.id}`"
-            :name="item.fields.Name"
-            :slug="item.fields.Slug"
-            route="workLevel"
-          />
-        </Tags>
-      </div>
+      <Tags>
+        <Tag
+          v-for="item in workCategories"
+          :key="`work-category-${item.id}`"
+          :name="item.fields.Name"
+          :slug="item.fields.Slug"
+          route="workCategory"
+        />
+        <Tag
+          v-for="item in workTypes"
+          :key="`work-type-${item.id}`"
+          :name="item.fields.Name"
+          :slug="item.fields.Slug"
+          route="workType"
+        />
+        <Tag
+          v-for="item in workLevels"
+          :key="`work-level-${item.id}`"
+          :name="item.fields.Name"
+          :slug="item.fields.Slug"
+          route="workLevel"
+        />
+      </Tags>
     </div>
   </article>
 </template>
@@ -143,6 +141,10 @@ export default {
     display: grid;
     grid-template-columns: 60px 1fr;
     grid-column-gap: 16px;
+
+    @include mq($until: xsmall) {
+      grid-template-columns: 48px 1fr;
+    }
 
     &.simple { grid-template-columns: 1fr; }
   }

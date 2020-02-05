@@ -122,9 +122,26 @@
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 30px;
 
+  @include mq($until: xsmall) {
+   grid-template-columns: 1fr;
+  }
+
   &:not(:last-child) {
     margin-bottom: 24px;
   }
 
   .full { grid-column: span 2 }
+}
+
+@mixin Flex(
+  $align: center,
+  $justify: space-between,
+  $direction: row,
+  $wrap: wrap)
+{
+  align-items: $align;
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
 }

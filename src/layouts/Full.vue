@@ -54,14 +54,10 @@ export default {
     justify-content: flex-start;
     margin-bottom: 36px;
 
-    @include mq($until: small) {
-      justify-content: center;
-    }
+    @include mq($until: small) {display: none}
 
     img {
-      @include mq($from: small) {
-        margin-right: 12px;
-      }
+      margin-right: 12px;
     }
   }
 
