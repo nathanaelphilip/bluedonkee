@@ -37,10 +37,7 @@ export default {
   }
 
   .box {
-    padding: 20px 15px;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid $GREY;
-    }
+    border-top: 1px solid $GREY;
+    padding: 12px 15px;
   }
 </style>
