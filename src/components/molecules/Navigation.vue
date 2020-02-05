@@ -1,13 +1,13 @@
 <template>
   <nav class="nav">
     <router-link exact class="anchor" :to="{ name: 'jobs' }">
-      <IconJobs class="icon" width="36" height="27" />Jobs
+      <IconJobs class="icon" width="36" height="27" /><span class="text">Jobs</span>
     </router-link>
     <router-link exact class="anchor" :to="{ name: 'groups' }">
-      <IconGroups class="icon" width="36" height="36" />Groups
+      <IconGroups class="icon" width="36" height="36" /><span class="text">Groups</span>
     </router-link>
     <router-link exact class="anchor" :to="{ name: 'campaigns' }">
-      <IconCampaigns class="icon" width="36" height="38" />Campaigns
+      <IconCampaigns class="icon" width="36" height="38" /><span class="text">Campaigns</span>
     </router-link>
   </nav>
 </template>
@@ -27,10 +27,25 @@ export default {
   .nav {
     display: flex;
     flex-direction: column;
-    font-size: 20px;
-    font-weight: 800;
-    max-width: 200px;
-    margin-left: -20px;
+
+    @include mq($from: small) {
+      font-size: 20px;
+      font-weight: 800;
+      max-width: 200px;
+      margin-left: -20px;
+    }
+
+    @include mq($until: small) {
+      align-items: center;
+    }
+
+    @include mq($until: xsmall) {
+      left: 0;
+      bottom: 0;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+    }
   }
 
   .anchor {
@@ -42,6 +57,12 @@ export default {
     justify-content: flex-start;
     padding: 13px 20px;
     text-decoration: none;
+
+    @include mq($until: small) {
+      justify-content: center;
+      padding: 0;
+      width: 60px;
+    }
 
     &:not(:last-child) {
       margin-bottom: 12px;
@@ -56,7 +77,15 @@ export default {
     }
 
     .icon {
-      margin-right: 16px;
+      @include mq($from: small) {
+        margin-right: 16px;
+      }
+    }
+
+    .text {
+      @include mq($until: small) {
+       display: none;
+      }
     }
   }
 </style>

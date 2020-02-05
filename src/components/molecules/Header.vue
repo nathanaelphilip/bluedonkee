@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="top">
-      <Avatar :src="avatar" />
+      <div>
+        <Avatar :src="avatar" />
+      </div>
       <div class="links">
         <a :href="website" target="_blank">Website</a>
         <a :href="`https://twitter.com/${twitter}`" target="_blank">{{ twitter }}</a>

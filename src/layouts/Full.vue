@@ -44,13 +44,25 @@ export default {
     border-right: 1px solid $GREY;
   }
 
+  .bug {
+    @include mq($until: small) {display: none}
+  }
+
   .logo {
     align-items: center;
     display: flex;
     justify-content: flex-start;
     margin-bottom: 36px;
 
-    img {margin-right: 12px}
+    @include mq($until: small) {
+      justify-content: center;
+    }
+
+    img {
+      @include mq($from: small) {
+        margin-right: 12px;
+      }
+    }
   }
 
   .promoted,

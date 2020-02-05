@@ -24,6 +24,6 @@ export default {
   }
 
   .icon {
-    fill: $GREY4;
+    fill: $BLACK;
   }
 </style>

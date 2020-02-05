@@ -30,11 +30,19 @@ export default {
     position: sticky;
     top: 0;
     z-index: 8;
+
+    @include mq($until: small) {
+      padding: 18px;
+    }
   }
 
   .heading {
     font-size: 22px;
     font-weight: 900;
+
+    @include mq($until: small) {
+      font-size: 18px;
+    }
   }
 
   .button-back {

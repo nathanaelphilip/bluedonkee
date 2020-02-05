@@ -1,6 +1,8 @@
 <template>
   <article class="campaign">
-    <Avatar :src="avatar" />
+    <div>
+      <Avatar :src="avatar" />
+    </div>
     <div class="info">
       <h3 class="heading">
         <router-link :to="{ name: 'campaign', params: { slug: campaign.fields.Slug } }">{{ campaign.fields.Name }}</router-link>
