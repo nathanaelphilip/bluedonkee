@@ -1,6 +1,6 @@
 <template>
-  <article v-if="!loading" class="job">
-    <div>
+  <article v-if="!loading" class="job" :class="{simple}">
+    <div class="box-avatar">
       <Avatar :src="avatar" />
     </div>
     <div>
@@ -28,7 +28,7 @@
         </time>
       </header>
       <div class="content">
-        {{ this.job.fields.Description }}
+        {{ description }}
       </div>
       <div class="tags">
         <Tags>
@@ -61,6 +61,8 @@
 
 <script>
 import moment from 'moment'
+import { truncate } from 'lodash'
+
 import {
   getByIds
 } from '@/store/helpers'
@@ -71,7 +73,7 @@ import Tags from '@/components/molecules/Tags'
 
 export default {
   name: 'components-molecules-job',
-  props: ['job'],
+  props: ['job', 'simple'],
 
   components: { Avatar, Tag, Tags },
 
@@ -97,6 +99,10 @@ export default {
 
     date () {
       return moment(this.job.fields.Create).format('MMM DD')
+    },
+
+    description () {
+      return truncate(this.job.fields.Description, { 'length': 220, 'separator': /,? +/ })
     }
   },
 
@@ -137,6 +143,8 @@ export default {
     display: grid;
     grid-template-columns: 60px 1fr;
     grid-column-gap: 16px;
+
+    &.simple { grid-template-columns: 1fr; }
   }
 
   .header {
@@ -145,6 +153,8 @@ export default {
     grid-column-gap: 16px;
     margin-bottom: 15px;
     margin-top: 11px;
+
+    .simple & {margin-top: 0}
   }
 
   .heading {
@@ -161,6 +171,12 @@ export default {
   .time {
     color: $BLUEGREY;
     font-size: 15px;
+
+    .simple & { display: none }
+  }
+
+  .box-avatar {
+    .simple & { display: none }
   }
 
   .content {

@@ -1,11 +1,11 @@
 <template lang="html">
-  <div class="jobs">
+  <div class="jobs" :class="{simple}">
     <h3 v-if="heading" class="heading">{{ heading }}</h3>
     <div
       v-for="job in jobs"
       :key="job.id"
       class="box">
-      <Job :job="job" />
+      <Job :job="job" :simple="simple" />
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 import Job from '@/components/molecules/Job'
 
 export default {
-  props: ['heading', 'jobs'],
+  props: ['heading', 'jobs', 'simple'],
   components: { Job }
 }
 </script>
@@ -23,12 +23,14 @@ export default {
   .heading {
     font-size: 18px;
     font-weight: 900;
-    margin-bottom: 5px;
+    margin-bottom: 30px;
     padding: 0 36px;
   }
 
   .box {
     padding: 25px 36px;
+
+    .simple &:nth-child(2) { padding-top: 0; }
 
     &:not(:last-child) {
       border-bottom: 1px solid $GREY;

@@ -19,10 +19,15 @@
         </div>
       </div>
     </div>
+    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true" />
+    <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
   </article>
 </template>
 
 <script>
+import Campaigns from '@/components/molecules/Campaigns'
+import Jobs from '@/components/molecules/Jobs'
+
 import {
   getByIds,
   getBySlug
@@ -34,13 +39,16 @@ import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 export default {
   name: 'campaign',
-  components: { Header, Intro, LinkPrimary },
+  components: { Campaigns, Header, Intro, Jobs, LinkPrimary },
 
   data () {
     return {
       loading: true,
       campaign: {},
-      locations: []
+      locations: [],
+
+      campaigns: [],
+      jobs: []
     }
   },
 
@@ -60,6 +68,9 @@ export default {
       ids: this.campaign.fields.Location,
       type: 'locations'
     })
+
+    this.jobs = this.$store.state.jobs.repository.slice(0, 2)
+    this.campaigns = this.$store.state.campaigns.repository.slice(0, 4)
 
     this.loading = false
   }
@@ -85,5 +96,9 @@ export default {
   .content {
     font-size: 15px;
     line-height: 1.6666;
+  }
+
+  .jobs {
+    margin-bottom: 48px;
   }
 </style>

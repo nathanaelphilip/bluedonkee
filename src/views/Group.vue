@@ -12,7 +12,7 @@
         :twitter="group.fields.Twitter"
       />
     </div>
-    <Jobs heading="Available Jobs" :jobs="jobs" />
+    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true" />
     <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
   </article>
 </template>
