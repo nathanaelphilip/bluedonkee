@@ -1,6 +1,8 @@
 <template>
   <article class="group" v-if="!loading">
-    <Intro :back="{ name: 'groups' }" :heading="group.fields.Name" />
+    <Intro :back="{ name: 'groups' }" :heading="group.fields.Name">
+      <Share :path="$route.path" />
+    </Intro>
     <div class="box">
       <Header
         :avatar="avatar"
@@ -23,14 +25,15 @@ import {
   getBySlug
 } from '@/store/helpers'
 
+import Campaigns from '@/components/molecules/Campaigns'
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
-import Campaigns from '@/components/molecules/Campaigns'
 import Jobs from '@/components/molecules/Jobs'
+import Share from '@/components/molecules/Share'
 
 export default {
   name: 'views-group',
-  components: { Campaigns, Header, Intro, Jobs },
+  components: { Campaigns, Header, Intro, Jobs, Share },
 
   data () {
     return {

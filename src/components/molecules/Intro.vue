@@ -51,7 +51,7 @@ export default {
     display: flex;
     justify-content: flex-end;
 
-    &::v-deep > *:first-child {
+    &::v-deep > *:first-child:not(:last-child) {
       margin-right: 12px;
     }
   }

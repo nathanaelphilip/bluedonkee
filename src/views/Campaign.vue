@@ -1,6 +1,7 @@
 <template>
   <article class="job" v-if="!loading">
     <Intro :back="{ name: 'campaigns' }" :heading="campaign.fields.Name">
+      <Share :path="$route.path" />
       <LinkPrimary :href="campaign.fields['Donation URL']">Donate</LinkPrimary>
     </Intro>
     <div class="boxed">
@@ -36,10 +37,11 @@ import {
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
+import Share from '@/components/molecules/Share'
 
 export default {
   name: 'campaign',
-  components: { Campaigns, Header, Intro, Jobs, LinkPrimary },
+  components: { Campaigns, Header, Intro, Jobs, LinkPrimary, Share },
 
   data () {
     return {
