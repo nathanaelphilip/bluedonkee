@@ -27,6 +27,8 @@
 
       <Report :id="job.id" />
     </div>
+
+    <Jobs heading="Related Jobs" :jobs="$store.state.jobs.repository.slice(0, 3)" :simple="true" />
   </article>
 </template>
 
@@ -38,13 +40,14 @@ import {
 
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
+import Jobs from '@/components/molecules/Jobs'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Report from '@/components/molecules/Report'
 import Share from '@/components/molecules/Share'
 
 export default {
   name: 'job',
-  components: { LinkPrimary, Header, Intro, Report, Share },
+  components: { LinkPrimary, Header, Intro, Jobs, Report, Share },
 
   data () {
     return {
