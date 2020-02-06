@@ -28,6 +28,7 @@ export default {
 <style lang="scss" scoped>
   .promoted {
     background: $BLUELIGHT;
+    border-radius: 4px;
   }
 
   .heading {
@@ -38,6 +39,6 @@ export default {
 
   .box {
     border-top: 1px solid $GREY;
-    padding: 12px 15px;
+    padding: grid(2.5);
   }
 </style>

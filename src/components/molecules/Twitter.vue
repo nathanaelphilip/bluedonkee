@@ -1,12 +1,14 @@
 <template>
   <aside class="twitter">
+    <div class="icon">
+      <IconTwitter :width="25" :height="21" theme="blue" />
+    </div>
     <div class="box">
       <h5 class="heading">Follow on Twitter</h5>
       <div class="action">
         <a href="https://twitter.com/@LetsWorkBlue" target="_blank">@LetsWorkBlue</a>
       </div>
     </div>
-    <IconTwitter :width="25" :height="21" theme="blue" />
   </aside>
 </template>
 
@@ -20,20 +22,32 @@ export default {
 
 <style lang="scss" scoped>
   .twitter {
+    align-items: center;
     background: $BLUELIGHT;
     display: grid;
-    grid-template-columns: 1fr 25px;
-    padding: 24px;
+    grid-template-columns: grid(8) 1fr;
+    grid-column-gap: grid(2);
+    padding: grid(2.5);
+  }
+
+  .icon {
+    $d: 48px;
+    @include Flex($justify: center);
+    background: $WHITE;
+    border: 1px solid $GREY;
+    border-radius: 100%;
+    height: $d;
+    width: $d;
   }
 
   .heading {
-    font-size: 18px;
-    font-weight: 900;
+    font-weight: 600;
     margin-bottom: 6px;
   }
 
   .action {
     color: $BLUE;
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: 500;
   }
 </style>

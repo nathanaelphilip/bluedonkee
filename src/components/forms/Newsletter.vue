@@ -86,7 +86,8 @@ export default {
 <style lang="scss" scoped>
   .newsletter {
     background: $BLUELIGHT;
-    padding: 24px;
+    border-radius: 4px;
+    padding: grid(2.5);
   }
 
   .heading {
