@@ -7,6 +7,9 @@
       class="box">
       <Job :job="job" :simple="simple" />
     </div>
+    <div class="empty" v-if="!jobs.length">
+      <slot name="empty"></slot>
+    </div>
   </div>
 </template>
 
@@ -39,5 +42,11 @@ export default {
     &:not(:last-child) {
       border-bottom: 1px solid $GREY;
     }
+  }
+
+  .empty {
+    margin-bottom: 48px;
+    margin-top: -15px;
+    padding: 0 36px;
   }
 </style>

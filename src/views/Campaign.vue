@@ -13,14 +13,20 @@
         :website="campaign.fields.Website"
         :twitter="campaign.fields.Twitter"
       />
-      <div class="overview">
+      <div class="overview" v-if="campaign.fields['Long Description']">
         <h3 class="subheading">Overview</h3>
         <div class="content">
           {{ campaign.fields['Long Description'] }}
         </div>
       </div>
     </div>
-    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true" />
+    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true">
+      <template v-slot:empty>
+        <JobsEmpty>
+          Check back later or view related campaigns below.
+        </JobsEmpty>
+      </template>
+    </Jobs>
     <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
   </article>
 </template>
@@ -28,6 +34,7 @@
 <script>
 import Campaigns from '@/components/molecules/Campaigns'
 import Jobs from '@/components/molecules/Jobs'
+import JobsEmpty from '@/components/molecules/JobsEmpty'
 
 import {
   getByIds,
@@ -41,7 +48,7 @@ import Share from '@/components/molecules/Share'
 
 export default {
   name: 'campaign',
-  components: { Campaigns, Header, Intro, Jobs, LinkPrimary, Share },
+  components: { Campaigns, Header, Intro, Jobs, JobsEmpty, LinkPrimary, Share },
 
   data () {
     return {
@@ -71,7 +78,11 @@ export default {
       type: 'locations'
     })
 
-    this.jobs = this.$store.state.jobs.repository.slice(0, 2)
+    this.jobs = this.campaign.fields.Jobs ? await getByIds({
+      ids: this.campaign.fields.Jobs,
+      type: 'jobs'
+    }) : []
+
     this.campaigns = this.$store.state.campaigns.repository.slice(0, 4)
 
     this.loading = false

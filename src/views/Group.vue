@@ -14,7 +14,13 @@
         :twitter="group.fields.Twitter"
       />
     </div>
-    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true" />
+    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true">
+      <template v-slot:empty>
+        <JobsEmpty>
+          Check back later or view related campaigns below.
+        </JobsEmpty>
+      </template>
+    </Jobs>
     <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
   </article>
 </template>
@@ -29,11 +35,12 @@ import Campaigns from '@/components/molecules/Campaigns'
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
+import JobsEmpty from '@/components/molecules/JobsEmpty'
 import Share from '@/components/molecules/Share'
 
 export default {
   name: 'views-group',
-  components: { Campaigns, Header, Intro, Jobs, Share },
+  components: { Campaigns, Header, Intro, Jobs, JobsEmpty, Share },
 
   data () {
     return {
