@@ -14,17 +14,19 @@
       />
     </div>
     <Campaigns :campaigns="$store.state.campaigns.repository" />
+    <BackTop />
   </div>
 </template>
 
 <script>
+import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import Intro from '@/components/molecules/Intro'
 import Campaigns from '@/components/molecules/Campaigns'
 
 export default {
   name: 'views-campaigns',
-  components: { Banner, Campaigns, Intro },
+  components: { BackTop, Banner, Campaigns, Intro },
 
   data () {
     return { closed: false }

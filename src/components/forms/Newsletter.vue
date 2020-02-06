@@ -2,7 +2,7 @@
   <form @submit.prevent="submit" class="newsletter">
     <h4 class="heading">Stay in the know</h4>
     <div class="content">Get our weekly email newsletter.</div>
-    <div class="input-container">
+    <div class="grid">
       <Input
         @input="value => form.email = value"
         required
@@ -10,10 +10,10 @@
         type="email"
         :value="form.name"
       />
+      <ButtonPrimary :full="true">
+        <Processing :processing="status === 'processing'">Sign Up</Processing>
+      </ButtonPrimary>
     </div>
-    <ButtonPrimary :full="true">
-      <Processing :processing="status === 'processing'">Sign Up</Processing>
-    </ButtonPrimary>
     <portal to="flash">
       <Flash :open="status === 'failure'" @close="status = false">
         👎 {{ messages.error }}
@@ -93,13 +93,18 @@ export default {
   .heading {
     font-size: 18px;
     font-weight: 900;
-    margin-bottom: 7px;
+    margin-bottom: grid(.75);
+  }
+
+  .grid {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    grid-column-gap: grid(2);
   }
 
   .content {
     font-size: 15px;
-    margin-bottom: 20px;
+    margin-bottom: grid(2);
   }
-
-  .input-container {margin-bottom: 10px;}
 </style>

@@ -17,10 +17,12 @@
       />
     </div>
     <Jobs :jobs="$store.state.jobs.repository" />
+    <BackTop />
   </section>
 </template>
 
 <script>
+import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import Intro from '@/components/molecules/Intro'
@@ -29,7 +31,7 @@ import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 export default {
   name: 'views-jobs',
-  components: { Banner, ButtonSecondary, Intro, Jobs, LinkPrimary },
+  components: { BackTop, Banner, ButtonSecondary, Intro, Jobs, LinkPrimary },
 
   data () {
     return {

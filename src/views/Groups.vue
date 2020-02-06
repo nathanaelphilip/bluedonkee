@@ -14,17 +14,19 @@
       />
     </div>
     <Groups :groups="$store.state.groups.repository" />
+    <BackTop />
   </div>
 </template>
 
 <script>
+import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import Groups from '@/components/molecules/Groups'
 import Intro from '@/components/molecules/Intro'
 
 export default {
   name: 'views-groups',
-  components: { Banner, Intro, Groups },
+  components: { BackTop, Banner, Intro, Groups },
 
   data () {
     return { closed: false }
