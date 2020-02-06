@@ -5,8 +5,8 @@
         <Avatar :src="avatar" />
       </div>
       <div class="links">
-        <a :href="website" target="_blank">Website</a>
-        <a :href="`https://twitter.com/${twitter}`" target="_blank">{{ twitter }}</a>
+        <a :href="website" target="_blank"><IconLink width="19" height="19" />Website</a>
+        <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" />{{ twitter }}</a>
       </div>
     </div>
 
@@ -69,6 +69,9 @@ import Locations from '@/components/molecules/Locations'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
+import IconLink from '@/components/icons/Link'
+import IconTwitter from '@/components/icons/Twitter'
+
 export default {
   props: [
     'avatar',
@@ -84,12 +87,20 @@ export default {
     'website'
   ],
 
-  components: { Avatar, Locations, Tag, Tags }
+  components: {
+    Avatar,
+    Locations,
+    Tag,
+    Tags,
+    IconLink,
+    IconTwitter
+  }
 }
 </script>
 
 <style lang="scss" scoped>
   .top {
+    align-items: flex-start;
     display: grid;
     grid-template-columns: 120px auto;
     margin-bottom: 18px;
@@ -99,9 +110,12 @@ export default {
     color: $BLUE;
     display: flex;
     font-size: 15px;
+    margin-top: 6px;
     justify-content: flex-end;
 
     > a {
+      @include Flex($justify: flex-start);
+
       &:not(:last-child) {
         margin-right: 24px;
       }
@@ -128,5 +142,11 @@ export default {
 
   .tags {
     margin-bottom: 36px;
+  }
+
+  .icon-link,
+  .icon-twitter {
+    fill: $GREY;
+    margin-right: 6px;
   }
 </style>
