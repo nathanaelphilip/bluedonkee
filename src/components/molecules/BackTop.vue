@@ -53,9 +53,13 @@ export default {
     @include Flex($justify: center);
     border: 1px solid $GREY;
     border-radius: 100%;
+    transition: background .5s, border-color .5s;
     height: $d;
     width: $d;
 
-    &:hover { cursor: pointer; }
+    &:hover {
+      background: $GREY;
+      cursor: pointer;
+    }
   }
 </style>

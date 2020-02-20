@@ -29,6 +29,8 @@
     </div>
 
     <Jobs heading="Related Jobs" :jobs="$store.state.jobs.repository.slice(0, 3)" :simple="true" />
+
+    <BackTop />
   </article>
 </template>
 
@@ -38,6 +40,7 @@ import {
   getBySlug
 } from '@/store/helpers'
 
+import BackTop from '@/components/molecules/BackTop'
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
@@ -47,7 +50,7 @@ import Share from '@/components/molecules/Share'
 
 export default {
   name: 'job',
-  components: { LinkPrimary, Header, Intro, Jobs, Report, Share },
+  components: { BackTop, LinkPrimary, Header, Intro, Jobs, Report, Share },
 
   data () {
     return {

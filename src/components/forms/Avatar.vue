@@ -100,6 +100,11 @@ export default {
     justify-content: center;
     height: 90px;
     width: 90px;
+
+    &:hover {
+      border-color: $BLUE;
+      cursor: pointer;
+    }
   }
 
   .content {

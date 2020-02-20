@@ -2,8 +2,8 @@
   <div class="checklist">
     <div class="header">
       <h5 class="heading">{{ heading }}</h5>
-      <div class="action">
-        <button @click.prevent="all" class="button">Select all that apply</button>
+      <div class="info">
+        Select all that apply
       </div>
     </div>
     <div class="box">
@@ -91,6 +91,8 @@ export default {
     background: $WHITE;
     border: 1px solid $GREY;
     border-radius: 4px;
+    max-height: 160px;
+    overflow: auto;
     padding: 12px 10px;
   }
 
@@ -98,13 +100,9 @@ export default {
     background: $BLUELIGHT;
   }
 
-  .button {
-    appearance: none;
-    background: none;
-    border: none;
+  .info {
     color: $GREY2;
     font-size: 13px;
     font-weight: 500;
-    padding: 0;
   }
 </style>

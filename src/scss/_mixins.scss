@@ -7,6 +7,7 @@
 }
 
 @mixin Button {
+  @include ButtonStripped;
   border-radius: 4px;
   display: inline-block;
   font-family: $INTER;
@@ -47,13 +48,12 @@
   display: flex;
   justify-content: center;
   height: $d;
+  transition: background .5s, border-color .5s;
   width: $d;
 
   &:hover {
-    background: $BLUE;
+    background: $GREY;
     cursor: pointer;
-
-    svg { fill: $WHITE; }
   }
 }
 
@@ -73,7 +73,7 @@
   flex: 1;
   font-family: $INTER;
   font-size: 15px;
-  line-height: 1;
+  line-height: 1.1;
   min-width: 0;
   padding: 12px;
 

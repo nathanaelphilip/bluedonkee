@@ -21,6 +21,6 @@ export default {
     display: block;
     font-size: 13px;
     text-transform: lowercase;
-    padding: 8.5px 15px;
+    padding: 8px;
   }
 </style>

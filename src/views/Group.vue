@@ -22,6 +22,7 @@
       </template>
     </Jobs>
     <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
+    <BackTop />
   </article>
 </template>
 
@@ -31,6 +32,7 @@ import {
   getBySlug
 } from '@/store/helpers'
 
+import BackTop from '@/components/molecules/BackTop'
 import Campaigns from '@/components/molecules/Campaigns'
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
@@ -40,7 +42,7 @@ import Share from '@/components/molecules/Share'
 
 export default {
   name: 'views-group',
-  components: { Campaigns, Header, Intro, Jobs, JobsEmpty, Share },
+  components: { BackTop, Campaigns, Header, Intro, Jobs, JobsEmpty, Share },
 
   data () {
     return {

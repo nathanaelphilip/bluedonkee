@@ -28,19 +28,20 @@
       </template>
     </Jobs>
     <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
+    <BackTop />
   </article>
 </template>
 
 <script>
-import Campaigns from '@/components/molecules/Campaigns'
-import Jobs from '@/components/molecules/Jobs'
-import JobsEmpty from '@/components/molecules/JobsEmpty'
-
 import {
   getByIds,
   getBySlug
 } from '@/store/helpers'
 
+import BackTop from '@/components/molecules/BackTop'
+import Campaigns from '@/components/molecules/Campaigns'
+import Jobs from '@/components/molecules/Jobs'
+import JobsEmpty from '@/components/molecules/JobsEmpty'
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
@@ -48,7 +49,7 @@ import Share from '@/components/molecules/Share'
 
 export default {
   name: 'campaign',
-  components: { Campaigns, Header, Intro, Jobs, JobsEmpty, LinkPrimary, Share },
+  components: { BackTop, Campaigns, Header, Intro, Jobs, JobsEmpty, LinkPrimary, Share },
 
   data () {
     return {

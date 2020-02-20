@@ -26,6 +26,7 @@ export default {
 
   .text {
     @include Input;
+    line-height: 1.3;
     min-height: 150px;
     resize: none;
     width: 100%;
