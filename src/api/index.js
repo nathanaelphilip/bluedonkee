@@ -17,7 +17,7 @@ const workCategories = `/Work%20Categories`
 
 const newsletterForm = process.env.VUE_APP_MAILCHIMP_URL
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: `https://api.airtable.com/v0/appkK3vHJcH4114kk`,
   timeout: 3000,
   headers: { 'Authorization': `Bearer ${process.env.VUE_APP_AIRTABLE_API_KEY}` }

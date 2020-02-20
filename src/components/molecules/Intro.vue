@@ -40,6 +40,13 @@ export default {
     font-size: 22px;
     font-weight: 900;
 
+    @include mq($from: small) {
+      max-width: 330px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     @include mq($until: small) {
       font-size: 18px;
     }

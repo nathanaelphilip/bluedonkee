@@ -19,7 +19,7 @@
             :value="location.state"
           >
             <option
-              v-for="state in $store.state.states.repository"
+              v-for="state in $store.getters['states/sortAlphabetically']"
               :value="state.fields.Name"
               :key="state.id">
               {{ state.fields.Name }}
