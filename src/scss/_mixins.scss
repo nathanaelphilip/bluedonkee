@@ -78,6 +78,7 @@
   padding: 12px;
 
   &:placeholder { color: $GREY; }
+  &[readonly] {color: $BLUEGREY}
 }
 
 @mixin Select {

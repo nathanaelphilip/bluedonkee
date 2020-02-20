@@ -36,6 +36,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .copy {
+    color: $BLUEGREY;
+  }
+
   .header {
     align-items: center;
     display: grid;

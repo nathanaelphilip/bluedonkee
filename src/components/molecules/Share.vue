@@ -1,18 +1,18 @@
 <template>
-  <div>
+  <div class="share">
     <ButtonShare @click.native.prevent="open = true" />
     <portal to="modal">
       <Modal @close="open = false" heading="Share" :open="open">
         <Copy :value="link" />
         <ul class="links">
           <li>
-            <a :href="facebook" target="_blank" class="link facebook">Facebook</a>
+            <a :href="facebook" target="_blank" class="link facebook"><IconFacebook width="20" height="20" />Facebook</a>
           </li>
           <li>
-            <a :href="twitter" target="_blank" class="link twitter">Twitter</a>
+            <a :href="twitter" target="_blank" class="link twitter"><IconTwitter width="20" height="16" />Twitter</a>
           </li>
           <li>
-            <a :href="linkedin" target="_blank" class="link linkedin">LinkedIn</a>
+            <a :href="linkedin" target="_blank" class="link linkedin"><IconLinkedIn width="18" height="18" />LinkedIn</a>
           </li>
         </ul>
       </Modal>
@@ -25,9 +25,13 @@ import ButtonShare from '@/components/atoms/ButtonShare'
 import Copy from '@/components/molecules/Copy'
 import Modal from '@/components/molecules/Modal'
 
+import IconFacebook from '@/components/icons/Facebook'
+import IconLinkedIn from '@/components/icons/LinkedIn'
+import IconTwitter from '@/components/icons/Twitter'
+
 export default {
   props: ['path'],
-  components: { ButtonShare, Copy, Modal },
+  components: { ButtonShare, Copy, IconFacebook, IconLinkedIn, IconTwitter, Modal },
 
   data () {
     return {
@@ -56,10 +60,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .icon {
-    fill: blue;
-  }
-
   .copy {
     margin-bottom: 12px;
   }
@@ -73,13 +73,15 @@ export default {
   }
 
   .link {
+    @include Flex($justify: flex-start);
     background: grey;
     border-radius: 4px;
     color: $WHITE;
-    display: block;
     font-size: 15px;
     font-weight: 500;
     padding: 12px 16px;
+
+    > svg {fill: $WHITE; margin-right: 10px;}
 
     &.facebook {
       background: $FACEBOOK;
