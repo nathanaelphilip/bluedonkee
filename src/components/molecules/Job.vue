@@ -102,7 +102,7 @@ export default {
     },
 
     description () {
-      return truncate(this.job.fields.Description, { 'length': 220, 'separator': /,? +/ })
+      return truncate(this.job.fields['Short Description'], { 'length': 220, 'separator': /,? +/ })
     }
   },
 

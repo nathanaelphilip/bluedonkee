@@ -21,7 +21,7 @@
       <div class="overview">
         <h3 class="subheading">Job Overview</h3>
         <div class="content">
-          <Markdown :content="job.fields.Description" />
+          <Markdown :content="job.fields['Long Description']" />
         </div>
       </div>
 
