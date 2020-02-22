@@ -21,7 +21,7 @@
       <div class="overview">
         <h3 class="subheading">Job Overview</h3>
         <div class="content">
-          {{ job.fields.Description }}
+          <Markdown :content="job.fields.Description" />
         </div>
       </div>
 
@@ -45,12 +45,13 @@ import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
+import Markdown from '@/components/molecules/Markdown'
 import Report from '@/components/molecules/Report'
 import Share from '@/components/molecules/Share'
 
 export default {
   name: 'job',
-  components: { BackTop, LinkPrimary, Header, Intro, Jobs, Report, Share },
+  components: { BackTop, LinkPrimary, Header, Intro, Jobs, Markdown, Report, Share },
 
   data () {
     return {

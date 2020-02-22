@@ -28,7 +28,7 @@
         </time>
       </header>
       <div class="content">
-        {{ description }}
+        <Markdown :content="description" />
       </div>
       <Tags>
         <Tag
@@ -61,6 +61,8 @@
 import moment from 'moment'
 import { truncate } from 'lodash'
 
+import Markdown from '@/components/molecules/Markdown'
+
 import {
   getByIds
 } from '@/store/helpers'
@@ -73,7 +75,7 @@ export default {
   name: 'components-molecules-job',
   props: ['job', 'simple'],
 
-  components: { Avatar, Tag, Tags },
+  components: { Avatar, Markdown, Tag, Tags },
 
   data () {
     return {
