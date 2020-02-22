@@ -16,7 +16,7 @@
       <JobsPromoted />
       <Newsletter />
       <Twitter />
-      <div class="copyright">&copy; {{ new Date().getFullYear() }} Work Blue - <router-link :to="{ name: 'questions' }">Questions</router-link></div>
+      <div class="copyright">&copy; {{ new Date().getFullYear() }} WorkBlue - <router-link :to="{ name: 'questions' }">Questions</router-link></div>
     </template>
   </Grid>
 </template>

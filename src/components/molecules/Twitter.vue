@@ -24,6 +24,7 @@ export default {
   .twitter {
     align-items: center;
     background: $BLUELIGHT;
+    border-radius: 4px;
     display: grid;
     grid-template-columns: grid(8) 1fr;
     grid-column-gap: grid(2);

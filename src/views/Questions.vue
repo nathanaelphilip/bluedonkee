@@ -10,7 +10,7 @@
       v-bind="question"
     />
     <ContactForm />
-    <div class="copyright">&copy; 2020 Blue Donkee</div>
+    <div class="copyright">&copy; 2020 WorkBlue</div>
   </article>
 </template>
 
@@ -33,7 +33,7 @@ const questions = [{
     </p><p>Suspendisse scelerisque consequat urna tempor condimentum. Praesent imperdiet eu nibh eget interdum. Mauris porta odio vitae finibus facilisis.</p>`
 }, {
   heading: `Send us a note`,
-  content: `<p>Have questions, suggestions, comments or concens? Doubt Mitch McConnell will listen, but we will. Send us a message or contact via Twitter.</p>`
+  content: `<p>Have questions, suggestions, comments or concens? Doubt <a href="https://secure.actblue.com/donate/am-website">Mitch McConnell</a> will listen, but we will. Send us a message or contact via <a href="https://twitter.com/@LetsWorkBlue">Twitter</a>.</p>`
 }]
 
 export default {

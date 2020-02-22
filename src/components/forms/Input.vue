@@ -2,7 +2,7 @@
   <div class="input">
     <label class="label" v-if="label">{{ label }}</label>
     <div class="box">
-      <div class="prefix" v-if="prefix">{{ prefix }}</div>
+      <slot name="prefix"></slot>
       <input
         @input="event => $emit('input', event.target.value)"
         :required="required"
@@ -62,6 +62,26 @@ export default {
     padding: 0 10px;
 
     & + .text {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .icon {
+    align-items: center;
+    align-self: stretch;
+    background: $WHITE;
+    display: flex;
+    border: 1px solid $GREY;
+    border-right: none;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    padding: 0 0 0 10px;
+
+    svg {fill: $GREY4}
+
+    & + .text {
+      border-left: none;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }

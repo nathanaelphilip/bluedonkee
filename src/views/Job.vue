@@ -122,7 +122,7 @@ export default {
   }
 
   .subheading {
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 900;
     margin-bottom: 10px;
   }

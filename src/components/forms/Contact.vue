@@ -10,7 +10,7 @@
           label="Your Name"
           @input="value => form.name = value"
           required
-          placeholder="Type your name"
+          placeholder="Jane Doe"
           :value="form.name"
           />
       </div>
@@ -28,7 +28,7 @@
     <div class="row">
       <div class="half">
         <Input
-          label="Organization Name"
+          label="Organization"
           @input="value => form.organization = value"
           required
           placeholder="WorkBlue"
@@ -38,12 +38,14 @@
       <div class="half">
         <Select
           label="Contact Reason"
-          placeholder="Saying Hello"
+          placeholder="Select Reason"
           @change="value => form.reason = value"
           :value="form.reason"
          >
-          <option>Saying Hello</option>
-          <option>Something Else...</option>
+          <option>General Inquiry</option>
+          <option>Opportunities</option>
+          <option>Partnership</option>
+          <option>Press</option>
         </Select>
       </div>
     </div>

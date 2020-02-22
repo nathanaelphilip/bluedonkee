@@ -5,7 +5,7 @@
         <legend class="legend">Job Description</legend>
         <div class="row">
           <div class="full">
-            <Input
+            <TextInput
               label="Job Title"
               placeholder="Senior Policy Advisor"
               @input="value => form['Job Title'] = value"
@@ -25,13 +25,16 @@
         </div>
         <div class="row">
           <div class="full">
-            <Input
+            <TextInput
               label="Application Url"
-              prefix="https://"
               instructions="Full URL where users can apply for this position."
               @input="value => form['Job Application URL'] = value"
               :required="true"
-            />
+            >
+              <template #prefix>
+                <div class="prefix">https://</div>
+              </template>
+            </TextInput>
           </div>
         </div>
       </div>
@@ -103,7 +106,7 @@
         </div>
         <div class="row">
           <div class="full">
-            <Input
+            <TextInput
               label="Company"
               placeholder="WorkBlue"
               @input="value => form['Company Name'] = value"
@@ -113,19 +116,28 @@
         </div>
         <div class="row">
           <div class="half">
-            <Input
+            <TextInput
               label="Website"
-              prefix="https://"
               @input="value => form['Company Website'] = value"
               :required="true"
-            />
+            >
+              <template #prefix>
+                <div class="prefix">https://</div>
+              </template>
+            </TextInput>
           </div>
           <div class="half">
-            <Input
+            <TextInput
               label="Twitter"
-              prefix="@"
+              placeholder="@twitter"
               @input="value => form['Company Twitter'] = value"
-            />
+            >
+              <template #prefix>
+                <div class="icon">
+                  <IconTwitter width="19" height="16" />
+                </div>
+              </template>
+            </TextInput>
           </div>
         </div>
 
@@ -159,16 +171,29 @@ import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import CheckBox from '@/components/forms/CheckBox'
 import CheckList from '@/components/forms/CheckList'
 import Flash from '@/components/molecules/Flash'
-import Input from '@/components/forms/Input'
 import Locations from '@/components/forms/Locations'
 import Processing from '@/components/forms/Processing'
+import TextInput from '@/components/forms/Input'
 import TextArea from '@/components/forms/TextArea'
+
+import IconTwitter from '@/components/icons/Twitter'
 
 const client = filestack.init(process.env.VUE_APP_FILESTACK_API_KEY)
 
 export default {
   name: 'form-post-job',
-  components: { Avatar, ButtonPrimary, CheckBox, CheckList, Flash, Input, Locations, Processing, TextArea },
+  components: {
+    Avatar,
+    ButtonPrimary,
+    CheckBox,
+    CheckList,
+    Flash,
+    IconTwitter,
+    TextInput,
+    Locations,
+    Processing,
+    TextArea
+  },
 
   data () {
     return {
