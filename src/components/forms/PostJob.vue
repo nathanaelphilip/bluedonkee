@@ -69,7 +69,7 @@
             <CheckList
               heading="Work Type"
               @change="value => form['Job Work Type'] = value"
-              :options="$store.state.workTypes.repository"
+              :options="$store.getters['workTypes/sortAlphabetically']"
               />
           </div>
         </div>
@@ -78,7 +78,7 @@
             <CheckList
               heading="Work Levels"
               @change="value => form['Job Work Level'] = value"
-              :options="$store.state.workLevels.repository"
+              :options="$store.getters['workLevels/sortAlphabetically']"
             />
           </div>
         </div>
@@ -87,7 +87,7 @@
             <CheckList
               heading="Work Categories"
               @change="value => form['Job Work Category'] = value"
-              :options="$store.state.workCategories.repository"
+              :options="$store.getters['workCategories/sortAlphabetically']"
             />
           </div>
         </div>
