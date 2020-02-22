@@ -16,7 +16,7 @@
       <div class="overview" v-if="campaign.fields['Long Description']">
         <h3 class="subheading">Overview</h3>
         <div class="content">
-          {{ campaign.fields['Long Description'] }}
+          <Markdown :content="campaign.fields['Long Description']" />
         </div>
       </div>
     </div>
@@ -45,11 +45,22 @@ import JobsEmpty from '@/components/molecules/JobsEmpty'
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
+import Markdown from '@/components/molecules/Markdown'
 import Share from '@/components/molecules/Share'
 
 export default {
   name: 'campaign',
-  components: { BackTop, Campaigns, Header, Intro, Jobs, JobsEmpty, LinkPrimary, Share },
+  components: {
+    BackTop,
+    Campaigns,
+    Header,
+    Intro,
+    Jobs,
+    JobsEmpty,
+    LinkPrimary,
+    Markdown,
+    Share
+  },
 
   data () {
     return {
@@ -110,6 +121,10 @@ export default {
   .content {
     font-size: 15px;
     line-height: 1.6666;
+
+    &::v-deep p {
+      margin-bottom: 10px;
+    }
   }
 
   .jobs {
