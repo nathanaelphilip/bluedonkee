@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="process">
+  <form @invalid="wut" @submit.prevent="process">
     <fieldset class="fieldset">
       <div>
         <legend class="legend">Job Description</legend>
@@ -264,8 +264,12 @@ export default {
   },
 
   methods: {
+    wut () {
+      console.log('wut')
+    },
     async process () {
       this.status = 'processing'
+
       const computed = {
         'Job Location': this.jobLocation,
         'Job Work Type': this.jobWorkType,

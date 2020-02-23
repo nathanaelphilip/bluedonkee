@@ -4,17 +4,24 @@
     <div class="box">
       <slot name="prefix"></slot>
       <input
-        @input="event => $emit('input', event.target.value)"
+        @input="handleInput"
+        @invalid="handleInvalid"
         :required="required"
         :placeholder="placeholder"
         :readonly="readonly"
         :type="type"
         :value="value"
         class="text"
+        :class="{error}"
        />
     </div>
-    <div class="instructions" v-if="instructions">
-      {{ instructions }}
+    <div class="meta" v-if="instructions || error">
+      <div class="instructions" v-if="instructions">
+        {{ instructions }}
+      </div>
+      <div class="error" v-if="error">
+        {{ errorMessage }}
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +37,28 @@ export default {
     'required',
     'type',
     'value'
-  ]
+  ],
+
+  data () {
+    return {
+      error: false,
+      errorMessage: 'This field is required.'
+    }
+  },
+
+  methods: {
+    handleInput (event) {
+      const value = event.target.value
+      this.$emit('input', value)
+
+      if (value) {
+        this.error = false
+      }
+    },
+    handleInvalid (value) {
+      this.error = true
+    }
+  }
 }
 </script>
 
@@ -89,6 +117,15 @@ export default {
 
   .text {
     @include Input;
+  }
+
+  .meta {
+    @include Flex;
+  }
+
+  .error {
+    color: $RED;
+    font-size: 13px;
   }
 
   .instructions {

@@ -79,6 +79,12 @@
 
   &:placeholder { color: $GREY; }
   &[readonly] {color: $BLUEGREY}
+
+  &:not(output):-moz-ui-invalid {box-shadow: none}
+
+  &.error {
+    border: 1px solid $RED;
+  }
 }
 
 @mixin Select {
