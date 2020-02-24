@@ -107,30 +107,40 @@ export default {
   },
 
   async mounted () {
-    this.groups = await getByIds({
-      ids: this.job.fields.Group,
-      type: 'groups'
-    })
+    if (this.job.fields.Group) {
+      this.groups = await getByIds({
+        ids: this.job.fields.Group,
+        type: 'groups'
+      })
+    }
 
-    this.workCategories = await getByIds({
-      ids: this.job.fields['Work Categories'],
-      type: 'workCategories'
-    })
+    if (this.job.fields['Work Categories']) {
+      this.workCategories = await getByIds({
+        ids: this.job.fields['Work Categories'],
+        type: 'workCategories'
+      })
+    }
 
-    this.workLevels = await getByIds({
-      ids: this.job.fields['Work Levels'],
-      type: 'workLevels'
-    })
+    if (this.job.fields['Work Levels']) {
+      this.workLevels = await getByIds({
+        ids: this.job.fields['Work Levels'],
+        type: 'workLevels'
+      })
+    }
 
-    this.workTypes = await getByIds({
-      ids: this.job.fields['Work Types'],
-      type: 'workTypes'
-    })
+    if (this.job.fields['Work Types']) {
+      this.workTypes = await getByIds({
+        ids: this.job.fields['Work Types'],
+        type: 'workTypes'
+      })
+    }
 
-    this.locations = await getByIds({
-      ids: this.job.fields['Location'],
-      type: 'locations'
-    })
+    if (this.job.fields['Location']) {
+      this.locations = await getByIds({
+        ids: this.job.fields['Location'],
+        type: 'locations'
+      })
+    }
 
     this.loading = false
   }

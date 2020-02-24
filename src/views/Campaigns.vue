@@ -13,7 +13,7 @@
         :items="$store.state.campaigns.repository"
       />
     </div>
-    <Campaigns :campaigns="$store.state.campaigns.repository" />
+    <Campaigns :campaigns="$store.getters['campaigns/sortAlphabetically']" />
     <BackTop />
   </div>
 </template>

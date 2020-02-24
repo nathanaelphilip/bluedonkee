@@ -6,74 +6,92 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'jobs',
-    component: () => import(/* webpackChunkName: "jobs" */ '../views/Jobs.vue'),
-    children: []
+    component: () => import(/* webpackChunkName: "jobs" */ '../views/Container.vue'),
+    redirect: '/jobs'
+  },
+  {
+    path: '/jobs',
+    component: () => import(/* webpackChunkName: "jobs" */ '../views/Container.vue'),
+    children: [{
+      path: '',
+      name: 'jobs',
+      component: () => import(/* webpackChunkName: "jobs" */ '../views/Jobs.vue')
+    },
+    {
+      path: ':slug',
+      name: 'job',
+      component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')
+    },
+    {
+      path: 'category/:slug',
+      name: 'workCategory',
+      component: () => import(/* webpackChunkName: "workCategory" */ '../views/WorkCategory.vue')
+    },
+    {
+      path: 'level/:slug',
+      name: 'workLevel',
+      component: () => import(/* webpackChunkName: "workLevel" */ '../views/WorkLevel.vue')
+    },
+    {
+      path: 'type/:slug',
+      name: 'workType',
+      component: () => import(/* webpackChunkName: "workType" */ '../views/WorkType.vue')
+    },
+    {
+      path: 'locations/:slug',
+      name: 'locationJob',
+      component: () => import(/* webpackChunkName: "locationJobs" */ '../views/LocationJobs.vue')
+    }]
   },
   {
     path: '/campaigns',
-    name: 'campaigns',
-    component: () => import(/* webpackChunkName: "campaigns" */ '../views/Campaigns.vue')
-  },
-  {
-    path: '/campaign/:slug',
-    name: 'campaign',
-    component: () => import(/* webpackChunkName: "campaign" */ '../views/Campaign.vue')
-  },
-  {
-    path: '/campaign/office/:slug',
-    name: 'office',
-    component: () => import(/* webpackChunkName: "offices" */ '../views/Offices.vue')
-  },
-  {
-    path: '/locations/campaigns/:slug',
-    name: 'locationCampaign',
-    component: () => import(/* webpackChunkName: "locationCampaigns" */ '../views/LocationCampaigns.vue')
+    component: () => import(/* webpackChunkName: "jobs" */ '../views/Container.vue'),
+    children: [{
+      path: '',
+      name: 'campaigns',
+      component: () => import(/* webpackChunkName: "campaigns" */ '../views/Campaigns.vue')
+    },
+    {
+      path: ':slug',
+      name: 'campaign',
+      component: () => import(/* webpackChunkName: "campaign" */ '../views/Campaign.vue')
+    },
+    {
+      path: 'office/:slug',
+      name: 'office',
+      component: () => import(/* webpackChunkName: "offices" */ '../views/Offices.vue')
+    },
+    {
+      path: 'locations/:slug',
+      name: 'locationCampaign',
+      component: () => import(/* webpackChunkName: "locationCampaigns" */ '../views/LocationCampaigns.vue')
+    }]
   },
   {
     path: '/groups',
-    name: 'groups',
-    component: () => import(/* webpackChunkName: "groups" */ '../views/Groups.vue')
-  },
-  {
-    path: '/group/:slug',
-    name: 'group',
-    component: () => import(/* webpackChunkName: "group" */ '../views/Group.vue')
-  },
-  {
-    path: '/group/category/:slug',
-    name: 'groupCategory',
-    component: () => import(/* webpackChunkName: "groupCategory" */ '../views/GroupCategory.vue')
-  },
-  {
-    path: '/locations/groups/:slug',
-    name: 'locationGroup',
-    component: () => import(/* webpackChunkName: "locationGroups" */ '../views/LocationGroups.vue')
-  },
-  {
-    path: '/job/:slug',
-    name: 'job',
-    component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')
-  },
-  {
-    path: '/job/category/:slug',
-    name: 'workCategory',
-    component: () => import(/* webpackChunkName: "workCategory" */ '../views/WorkCategory.vue')
-  },
-  {
-    path: '/job/level/:slug',
-    name: 'workLevel',
-    component: () => import(/* webpackChunkName: "workLevel" */ '../views/WorkLevel.vue')
-  },
-  {
-    path: '/job/type/:slug',
-    name: 'workType',
-    component: () => import(/* webpackChunkName: "workType" */ '../views/WorkType.vue')
-  },
-  {
-    path: '/locations/jobs/:slug',
-    name: 'locationJob',
-    component: () => import(/* webpackChunkName: "locationJobs" */ '../views/LocationJobs.vue')
+    component: () => import(/* webpackChunkName: "jobs" */ '../views/Container.vue'),
+    children: [
+      {
+        path: '',
+        name: 'groups',
+        component: () => import(/* webpackChunkName: "groups" */ '../views/Groups.vue')
+      },
+      {
+        path: ':slug',
+        name: 'group',
+        component: () => import(/* webpackChunkName: "group" */ '../views/Group.vue')
+      },
+      {
+        path: 'category/:slug',
+        name: 'groupCategory',
+        component: () => import(/* webpackChunkName: "groupCategory" */ '../views/GroupCategory.vue')
+      },
+      {
+        path: 'locations/:slug',
+        name: 'locationGroup',
+        component: () => import(/* webpackChunkName: "locationGroups" */ '../views/LocationGroups.vue')
+      }
+    ]
   },
   {
     path: '/post/job',

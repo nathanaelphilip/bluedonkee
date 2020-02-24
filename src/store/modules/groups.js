@@ -40,6 +40,12 @@ const getters = {
 
   getBySlug: (state) => (slug) => {
     return state.repository.find(job => job.fields.Slug === slug)
+  },
+
+  sortAlphabetically: state => {
+    return state.repository.sort((a, b) => {
+      return a.fields.Name > b.fields.Name ? 1 : -1
+    })
   }
 }
 

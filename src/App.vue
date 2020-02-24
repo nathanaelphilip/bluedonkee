@@ -4,7 +4,7 @@
     </portal-target>
     <portal-target name="modal" multiple>
     </portal-target>
-    <component :is="layout">
+    <component :is="layout" v-if="loaded">
       <router-view />
     </component>
   </div>
@@ -20,6 +20,12 @@ export default {
   components: {
     'basic': Basic,
     'full': Full
+  },
+
+  data () {
+    return {
+      loaded: false
+    }
   },
 
   computed: {
@@ -52,6 +58,12 @@ export default {
     if (!this.$store.state.workTypes.repository.length) {
       await this.$store.dispatch('workTypes/fetch')
     }
+
+    if (!this.$store.state.groups.repository.length) {
+      await this.$store.dispatch('groups/fetch')
+    }
+
+    this.loaded = true
   }
 }
 </script>

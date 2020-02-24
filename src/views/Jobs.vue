@@ -16,7 +16,7 @@
         :items="$store.state.groups.repository"
       />
     </div>
-    <Jobs :jobs="$store.state.jobs.repository" />
+    <Jobs :jobs="$store.getters['jobs/sortByDate']" />
     <BackTop />
   </section>
 </template>

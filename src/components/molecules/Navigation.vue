@@ -1,12 +1,12 @@
 <template>
   <nav class="nav">
-    <router-link exact class="anchor" :to="{ name: 'jobs' }">
+    <router-link class="anchor" :to="{ name: 'jobs' }">
       <IconJobs class="icon" width="36" height="27" /><span class="text">Jobs</span>
     </router-link>
-    <router-link exact class="anchor" :to="{ name: 'groups' }">
+    <router-link class="anchor" :to="{ name: 'groups' }">
       <IconGroups class="icon" width="36" height="36" /><span class="text">Groups</span>
     </router-link>
-    <router-link exact class="anchor" :to="{ name: 'campaigns' }">
+    <router-link class="anchor" :to="{ name: 'campaigns' }">
       <IconCampaigns class="icon" width="36" height="38" /><span class="text">Campaigns</span>
     </router-link>
   </nav>
@@ -77,7 +77,7 @@ export default {
     }
 
     &:hover,
-    &.router-link-exact-active {
+    &.router-link-active {
       background: #F7FAFC;
 
      ::v-deep .icon .st1 {fill: #3182ce;}
