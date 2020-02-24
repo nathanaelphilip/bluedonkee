@@ -44,7 +44,7 @@ const getters = {
 
   sortByDate: state => {
     return state.repository.sort((a, b) => {
-      return a.fields.Created > b.fields.Created ? 1 : -1
+      return a.fields.Created < b.fields.Created ? 1 : -1
     })
   }
 }
