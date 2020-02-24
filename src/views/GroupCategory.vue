@@ -1,7 +1,9 @@
 <template>
   <article v-if="!loading">
     <Intro :back="{ name: 'groups' }" :heading="`Category: ${category.fields.Name}`" />
-    <Groups :groups="groups" />
+    <Groups :groups="groups.sort((a, b) => {
+      return a.fields.Name > b.fields.Name ? 1 : -1
+    })" />
   </article>
 </template>
 

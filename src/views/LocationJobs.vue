@@ -1,7 +1,9 @@
 <template>
   <section v-if="!loading">
     <Intro :heading="`Location: ${location.fields.City}`" />
-    <Jobs :jobs="jobs" />
+    <Jobs :jobs="jobs.sort((a, b) => {
+      return a.fields.Created < b.fields.Created ? 1 : -1
+    })" />
   </section>
 </template>
 

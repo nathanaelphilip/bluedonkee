@@ -13,7 +13,7 @@
         :items="$store.getters['groups/sortAlphabetically']"
       />
     </div>
-    <Groups :groups="$store.state.groups.repository" />
+    <Groups :groups="$store.getters['groups/sortAlphabetically']" />
     <BackTop />
   </div>
 </template>

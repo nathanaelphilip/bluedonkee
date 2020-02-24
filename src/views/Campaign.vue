@@ -95,7 +95,7 @@ export default {
       type: 'jobs'
     }) : []
 
-    this.campaigns = this.$store.state.campaigns.repository.slice(0, 4)
+    this.campaigns = this.$store.getters['campaigns/sortAlphabetically'].slice(0, 4)
 
     this.loading = false
   }

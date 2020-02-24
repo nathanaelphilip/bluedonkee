@@ -28,7 +28,7 @@
       <Report :id="job.id" />
     </div>
 
-    <Jobs heading="Related Jobs" :jobs="$store.state.jobs.repository.slice(0, 3)" :simple="true" />
+    <Jobs heading="Related Jobs" :jobs="$store.getters['jobs/sortByDate'].slice(0, 3)" :simple="true" />
 
     <BackTop />
   </article>

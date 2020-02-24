@@ -1,7 +1,9 @@
 <template>
   <section v-if="!loading">
     <Intro :heading="`Location: ${location.fields.City}`" />
-    <Groups :groups="groups" />
+    <Groups :groups="groups.sort((a, b) => {
+      return a.fields.Name > b.fields.Name ? 1 : -1
+    })" />
   </section>
 </template>
 
