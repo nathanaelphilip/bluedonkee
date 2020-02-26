@@ -5,9 +5,9 @@
       :heading="`Positioned for <span>Change.</span>`"
     />
     <Question
-      v-for="(question, index) in questions"
+      v-for="(question, index) in $store.state.cms.questions"
       :key="index"
-      v-bind="question"
+      :question="question"
     />
     <ContactForm />
     <div class="copyright">&copy; 2020 WorkBlue</div>
@@ -19,29 +19,11 @@ import ContactForm from '@/components/forms/Contact'
 import HeaderPage from '@/components/molecules/HeaderPage'
 import Question from '@/components/molecules/Question'
 
-const questions = [{
-  heading: `What is WorkBlue?`,
-  content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis nisi non enim mollis aliquam. Fusce nec auctor massa. Integer placerat tortor neque, ac finibus magna placerat ut. Donec iaculis risus in ex commodo, nec sollicitudin orci euismod. Aenean ultrices dignissim augue ac congue.
-    </p><p>Suspendisse scelerisque consequat urna tempor condimentum. Praesent imperdiet eu nibh eget interdum. Mauris porta odio vitae finibus facilisis.</p>`
-}, {
-  heading: `What are you trying to accomplish?`,
-  content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis nisi non enim mollis aliquam. Fusce nec auctor massa. Integer placerat tortor neque, ac finibus magna placerat ut. Donec iaculis risus in ex commodo, nec sollicitudin orci euismod. Aenean ultrices dignissim augue ac congue.
-    </p><p>Suspendisse scelerisque consequat urna tempor condimentum. Praesent imperdiet eu nibh eget interdum. Mauris porta odio vitae finibus facilisis.</p>`
-}, {
-  heading: `Want to help?`,
-  content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis nisi non enim mollis aliquam. Fusce nec auctor massa. Integer placerat tortor neque, ac finibus magna placerat ut. Donec iaculis risus in ex commodo, nec sollicitudin orci euismod. Aenean ultrices dignissim augue ac congue.
-    </p><p>Suspendisse scelerisque consequat urna tempor condimentum. Praesent imperdiet eu nibh eget interdum. Mauris porta odio vitae finibus facilisis.</p>`
-}, {
-  heading: `Send us a note`,
-  content: `<p>Have questions, suggestions, comments or concens? Doubt <a href="https://secure.actblue.com/donate/am-website">Mitch McConnell</a> will listen, but we will. Send us a message or contact via <a href="https://twitter.com/@LetsWorkBlue">Twitter</a>.</p>`
-}]
-
 export default {
   name: 'views-questions',
   components: { ContactForm, HeaderPage, Question },
-
-  data () {
-    return { questions }
+  async mounted () {
+    await this.$store.dispatch('cms/fetch')
   }
 }
 </script>

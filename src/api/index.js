@@ -1,7 +1,9 @@
 import axios from 'axios'
 import jsonp from 'jsonp'
+import qs from 'qs'
 
 const campaigns = `/Campaigns`
+const cmsQuestions = '/CMS%20(Questions)'
 const contactForm = `/Contact%20Form`
 const flagged = `/Flagged`
 const groups = `/Groups`
@@ -31,6 +33,17 @@ const jsonpFetch = (params) => new Promise((resolve, reject) => jsonp(`${newslet
 
 export const postNewsletterForm = (params) => {
   return jsonpFetch(params)
+}
+
+export const getCMSQuestions = (settings) => {
+  return api.get(cmsQuestions, {
+    params: {
+      sort: [{ field: 'id' }]
+    },
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'brackets' })
+    }
+  })
 }
 
 export const getCampaigns = (settings) => {

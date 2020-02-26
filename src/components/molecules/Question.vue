@@ -1,15 +1,16 @@
 <template>
   <div class="question">
-    <div class="emoji">{{ emoji }}</div>
-    <h3 class="heading">{{ heading }}</h3>
-    <div class="subheading" v-if="subheading">{{ subheading }}</div>
-    <div class="content" v-html="content"></div>
+    <h3 class="heading">{{ question.fields.Heading }}</h3>
+    <Markdown class="content" :content="question.fields.Content" />
   </div>
 </template>
 
 <script>
+import Markdown from '@/components/molecules/Markdown'
+
 export default {
-  props: [ 'emoji', 'heading', 'subheading', 'content' ]
+  props: [ 'question' ],
+  components: { Markdown }
 }
 </script>
 
