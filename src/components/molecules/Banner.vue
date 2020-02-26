@@ -50,6 +50,7 @@ export default {
     color: $WHITE;
     overflow: hidden;
     padding: 30px;
+    max-width: 100%;
   }
 
   .grid {
@@ -57,18 +58,30 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 16px;
+
+    @include mq($until: xsmall) {
+      grid-template-columns: 1fr 50px;
+    }
   }
 
   .heading {
     font-size: 20px;
     font-weight: 900;
     margin-bottom: 5px;
+
+    @include mq($until: xsmall) {
+      font-size: 18px;
+    }
   }
 
   .content {
     font-size: 15px;
     line-height: 1.4;
     margin-bottom: 10px;
+
+    @include mq($until: xsmall) {
+      font-size: 14px;
+    }
   }
 
   .images {
@@ -79,6 +92,11 @@ export default {
     max-height: 125px;
     min-width: 0;
     min-height: 0;
+
+    @include mq($until: xsmall) {
+      grid-template-columns: repeat(5, 20%);
+      grid-template-rows: repeat(5, 20%);
+    }
   }
 
   .avatar {
@@ -91,6 +109,13 @@ export default {
       transform: translateX(25%);
       height: 72px;
       width: 72px;
+
+      @include mq($until: xsmall) {
+        grid-column-start: 2;
+        grid-row-start: 4;
+        height: 60px;
+        width: 60px;
+      }
     }
 
     &:nth-child(2) {
@@ -99,6 +124,10 @@ export default {
       transform: translateY(-100%);
       height: 48px;
       width: 48px;
+
+      @include mq($until: xsmall) {
+
+      }
     }
 
     &:nth-child(3) {
@@ -106,6 +135,10 @@ export default {
       grid-row-start: 6;
       height: 45px;
       width: 45px;
+
+      @include mq($until: xsmall) {
+
+      }
     }
 
     &:nth-child(4) {
@@ -130,6 +163,10 @@ export default {
       transform: translateY(50%);
       height: 72px;
       width: 72px;
+
+      @include mq($until: xsmall) {
+        display: none;
+      }
     }
 
     &:nth-child(7) {
@@ -137,6 +174,10 @@ export default {
       grid-row-start: 7;
       height: 45px;
       width: 45px;
+
+      @include mq($until: xsmall) {
+        display: none;
+      }
     }
 
     &:nth-child(8) {
@@ -145,6 +186,10 @@ export default {
       transform: translateX(50%);
       height: 45px;
       width: 45px;
+
+      @include mq($until: xsmall) {
+        display: none;
+      }
     }
 
     &:nth-child(9) {
@@ -152,6 +197,10 @@ export default {
       grid-row-start: 1;
       height: 60px;
       width: 60px;
+
+      @include mq($until: xsmall) {
+        display: none;
+      }
     }
   }
 </style>

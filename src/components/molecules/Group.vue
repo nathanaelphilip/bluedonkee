@@ -70,6 +70,10 @@ export default {
     display: grid;
     grid-template-columns: 60px 1fr 200px;
     grid-column-gap: 16px;
+
+    @include mq($until: xsmall) {
+      grid-template-columns: 48px 1fr 100px;
+    }
   }
 
   .heading {

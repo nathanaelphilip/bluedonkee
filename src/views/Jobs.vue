@@ -65,5 +65,9 @@ export default {
 <style lang="scss" scoped>
   .boxed {
     padding: 32px 36px 0 36px;
+
+    @include mq($until: xsmall) {
+      padding: 24px 16px 0 16px;
+    }
   }
 </style>

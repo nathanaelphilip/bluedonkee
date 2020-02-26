@@ -180,6 +180,22 @@ import IconTwitter from '@/components/icons/Twitter'
 
 const client = filestack.init(process.env.VUE_APP_FILESTACK_API_KEY)
 
+const form = {
+  'Job Title': '',
+  'Job Description': '',
+  'Job Application URL': '',
+  'Job Location': [],
+  'Job Location Remote': false,
+  'Job Work Type': [],
+  'Job Work Level': [],
+  'Job Work Category': [],
+  'Company Avatar': '',
+  'Company Name': '',
+  'Company Website': '',
+  'Company Twitter': '',
+  'Company Location': []
+}
+
 export default {
   name: 'form-post-job',
   components: {
@@ -199,21 +215,7 @@ export default {
     return {
       status: false,
       file: false,
-      form: {
-        'Job Title': '',
-        'Job Description': '',
-        'Job Application URL': '',
-        'Job Location': [],
-        'Job Location Remote': false,
-        'Job Work Type': [],
-        'Job Work Level': [],
-        'Job Work Category': [],
-        'Company Avatar': '',
-        'Company Name': '',
-        'Company Website': '',
-        'Company Twitter': '',
-        'Company Location': []
-      }
+      form: { ...form }
     }
   },
 
@@ -264,6 +266,10 @@ export default {
   },
 
   methods: {
+    reset () {
+      this.form = { ...form }
+    },
+
     async process () {
       this.status = 'processing'
 
@@ -296,6 +302,7 @@ export default {
 
         if (data) {
           this.status = 'success'
+          this.reset()
         }
       } catch (e) {
         this.status = 'error'

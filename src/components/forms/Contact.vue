@@ -96,11 +96,15 @@ export default {
   data () {
     return {
       status: false,
-      form
+      form: { ...form }
     }
   },
 
   methods: {
+    reset () {
+      this.form = { ...form }
+    },
+
     async submit () {
       this.status = 'processing'
 
@@ -117,6 +121,7 @@ export default {
 
         if (data) {
           this.status = 'success'
+          this.reset()
         }
 
         if (!data) {
