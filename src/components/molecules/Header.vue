@@ -28,6 +28,10 @@
       </template>
     </div>
 
+    <div class="description" v-if="description">
+      <Markdown :content="description" />
+    </div>
+
     <div class="tags">
       <Tags>
         <Tag
@@ -66,6 +70,7 @@
 <script>
 import Avatar from '@/components/atoms/Avatar'
 import Locations from '@/components/molecules/Locations'
+import Markdown from '@/components/molecules/Markdown'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
@@ -75,6 +80,7 @@ import IconTwitter from '@/components/icons/Twitter'
 export default {
   props: [
     'avatar',
+    'description',
     'group',
     'heading',
     'workCategories',
@@ -90,6 +96,7 @@ export default {
   components: {
     Avatar,
     Locations,
+    Markdown,
     Tag,
     Tags,
     IconLink,

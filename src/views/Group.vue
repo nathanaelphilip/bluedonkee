@@ -6,6 +6,7 @@
     <div class="box">
       <Header
         :avatar="avatar"
+        :description="campaign.fields['Short Description']"
         :heading="group.fields.Name"
         :locations="locations"
         locationroute="locationGroup"

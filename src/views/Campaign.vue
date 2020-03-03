@@ -7,6 +7,7 @@
     <div class="boxed">
       <Header
         :avatar="avatar"
+        :description="campaign.fields['Short Description']"
         :heading="campaign.fields.Name"
         :locations="locations"
         locationroute="locationCampaign"
