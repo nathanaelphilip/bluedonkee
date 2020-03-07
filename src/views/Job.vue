@@ -128,13 +128,6 @@ export default {
   }
 
   .content {
-    font-size: 15px;
-    line-height: 1.6666;
-
-    &::v-deep p {
-      &:not(:last-child) {
-        margin-bottom: 15px;
-      }
-    }
+    @include Content;
   }
 </style>

@@ -152,3 +152,42 @@
   flex-wrap: $wrap;
   justify-content: $justify;
 }
+
+@mixin Content {
+  &::v-deep p,
+  &::v-deep ul,
+  &::v-deep ol {
+    line-height: 1.5;
+
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    & + h4 {
+      margin-top: 24px;
+    }
+  }
+
+  &::v-deep ul {
+    list-style: disc;
+  }
+
+  &::v-deep ol {
+    list-style: decimal;
+  }
+
+  &::v-deep ol,
+  &::v-deep ul {
+    margin-left: 16px;
+
+    li:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+
+  &::v-deep h4 {
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+}
