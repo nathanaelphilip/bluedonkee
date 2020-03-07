@@ -41,6 +41,7 @@ export default {
   .label {
     background: $BLUELIGHT;
     border: 1px solid $BLUELIGHT;
+    border-radius: 4px;
     display: block;
     font-size: 15px;
     padding: 15px 20px;

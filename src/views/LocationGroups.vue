@@ -1,9 +1,7 @@
 <template>
   <section v-if="!loading">
     <Intro :heading="`Location: ${location.fields.City}`" />
-    <Groups :groups="groups.sort((a, b) => {
-      return a.fields.Name > b.fields.Name ? 1 : -1
-    })" />
+    <Groups :groups="groups" />
   </section>
 </template>
 
@@ -37,6 +35,10 @@ export default {
     this.groups = await getByIds({
       ids: this.location.fields.Groups,
       type: 'groups'
+    })
+
+    this.groups = this.groups.sort((a, b) => {
+      return a.fields.Name > b.fields.Name ? 1 : -1
     })
 
     this.loading = false

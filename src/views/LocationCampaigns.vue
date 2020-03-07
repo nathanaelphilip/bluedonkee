@@ -1,9 +1,7 @@
 <template>
   <section v-if="!loading">
     <Intro :heading="`Location: ${location.fields.City}`" />
-    <Campaigns :campaigns="campaigns.sort((a, b) => {
-      return a.fields.Name > b.fields.Name ? 1 : -1
-    })" />
+    <Campaigns :campaigns="campaigns" />
   </section>
 </template>
 
@@ -34,9 +32,13 @@ export default {
       type: 'locations'
     })
 
-    this.campaigns = await getByIds({
+    this.campaigns = this.location.fields.Campaigns ? await getByIds({
       ids: this.location.fields.Campaigns,
       type: 'campaigns'
+    }) : []
+
+    this.campaigns = this.campaigns.sort((a, b) => {
+      return a.fields.Name > b.fields.Name ? 1 : -1
     })
 
     this.loading = false

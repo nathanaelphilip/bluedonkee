@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
   .avatar {
     display: block;
-    border: 3px solid $GREY;
+    border: 2px solid $GREY;
     border-radius: 100%;
     object-fit: cover;
     height: 100%;

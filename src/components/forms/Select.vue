@@ -2,6 +2,7 @@
   <div class="input">
     <label class="label" v-if="label">{{ label }}</label>
     <div class="box">
+      <IconChevronDown class="icon" />
       <select
         @change="handleChange"
         @invalid="handleInvalid"
@@ -23,7 +24,11 @@
 </template>
 
 <script>
+import IconChevronDown from '@/components/icons/ChevronDown'
+
 export default {
+  components: { IconChevronDown },
+
   props: [ 'label', 'placeholder', 'value' ],
 
   data () {
@@ -56,9 +61,22 @@ export default {
   }
 
   .box {
+    position: relative;
+
     &:not(:last-child) {
       margin-bottom: 8px;
     }
+  }
+
+  .icon {
+    fill: #A0AEC0;
+    height: 6px;
+    pointer-events: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
   }
 
   .select {

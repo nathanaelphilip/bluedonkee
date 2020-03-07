@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <Intro :heading="`Office: ${office.fields.Name}`" :back="{ name: 'campaigns' }" />
     <Campaigns :campaigns="campaigns" />
   </div>
@@ -20,6 +20,7 @@ export default {
 
   data () {
     return {
+      loading: true,
       office: {},
       campaigns: []
     }
@@ -35,6 +36,12 @@ export default {
       ids: this.office.fields.Campaigns,
       type: 'campaigns'
     })
+
+    this.campaigns = this.campaigns.sort((a, b) => {
+      return a.fields.Name > b.fields.Name ? 1 : -1
+    })
+
+    this.loading = false
   }
 }
 </script>

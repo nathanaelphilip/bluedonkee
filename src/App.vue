@@ -5,7 +5,7 @@
     <portal-target name="modal" multiple>
     </portal-target>
     <component :is="layout" v-if="loaded">
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </component>
   </div>
 </template>
