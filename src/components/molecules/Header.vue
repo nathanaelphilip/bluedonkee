@@ -62,6 +62,13 @@
         :name="type.fields.Name"
         route="workType"
        />
+       <Tag
+         v-for="office in offices"
+         :key="`type-${office.id}`"
+         :slug="office.fields.Slug"
+         :name="office.fields.Name"
+         route="office"
+        />
      </Tags>
     </div>
   </header>
@@ -82,15 +89,16 @@ export default {
     'avatar',
     'description',
     'group',
-    'heading',
-    'workCategories',
-    'workLevels',
-    'workTypes',
     'groupCategories',
+    'heading',
     'locations',
     'locationroute',
+    'offices',
     'twitter',
-    'website'
+    'website',
+    'workCategories',
+    'workLevels',
+    'workTypes'
   ],
 
   components: {

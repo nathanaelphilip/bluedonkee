@@ -11,6 +11,7 @@
         :heading="campaign.fields.Name"
         :locations="locations"
         locationroute="locationCampaign"
+        :offices="offices"
         :website="campaign.fields.Website"
         :twitter="campaign.fields.Twitter"
       />
@@ -68,6 +69,7 @@ export default {
       loading: true,
       campaign: {},
       locations: [],
+      offices: [],
 
       campaigns: [],
       jobs: []
@@ -89,6 +91,11 @@ export default {
     this.locations = await getByIds({
       ids: this.campaign.fields.Location,
       type: 'locations'
+    })
+
+    this.offices = await getByIds({
+      ids: this.campaign.fields.Office,
+      type: 'offices'
     })
 
     this.jobs = this.campaign.fields.Jobs ? await getByIds({
