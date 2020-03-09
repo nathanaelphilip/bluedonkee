@@ -114,6 +114,10 @@ export default {
   .boxed {
     background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
     padding: 32px;
+
+    @include mq ($until: small) {
+      padding: 24px 16px;
+    }
   }
 
   .overview {

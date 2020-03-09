@@ -119,6 +119,10 @@ export default {
     display: grid;
     grid-template-columns: 120px auto;
     margin-bottom: 18px;
+
+    @include mq ($until: small) {
+      grid-template-columns: 90px auto;
+    }
   }
 
   .links {

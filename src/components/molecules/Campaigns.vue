@@ -24,11 +24,19 @@ export default {
     font-size: 18px;
     font-weight: 900;
     margin-bottom: 5px;
-    padding: 0 36px;
+    padding: 0 32px;
+
+    @include mq ($until: small) {
+      padding: 0px 16px;
+    }
   }
 
   .box {
-    padding: 25px 36px;
+    padding: 24px 36px;
+
+    @include mq ($until: small) {
+      padding: 24px 16px;
+    }
 
     &:not(:last-child) {
       border-bottom: 1px solid $GREY;

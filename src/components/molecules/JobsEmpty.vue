@@ -24,11 +24,14 @@ export default {
     background: $BLUELIGHT;
     border-radius: 4px;
     border: 1px solid $GREY;
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-column-gap: 36px;
-    justify-content: space-between;
     padding: 18px 24px;
+
+    @include mq ($from: small) {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-column-gap: 36px;
+      justify-content: space-between;
+    }
   }
 
   .heading {
@@ -37,7 +40,21 @@ export default {
     margin-bottom: 5px;
   }
 
+  .box {
+    @include mq ($until: small) {
+      margin-bottom: 12px;
+      text-align: center;
+    }
+  }
+
   .content {
     font-size: 15px;
+  }
+
+  .action::v-deep a {
+    @include mq ($until: small) {
+      text-align: center;
+      width: 100%;
+    }
   }
 </style>

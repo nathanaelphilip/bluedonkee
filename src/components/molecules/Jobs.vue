@@ -27,7 +27,11 @@ export default {
     font-size: 18px;
     font-weight: 900;
     margin-bottom: 30px;
-    padding: 0 36px;
+    padding: 0 32px;
+
+    @include mq ($until: small) {
+      padding: 0px 16px;
+    }
   }
 
   .box {
@@ -47,6 +51,10 @@ export default {
   .empty {
     margin-bottom: 48px;
     margin-top: -15px;
-    padding: 0 36px;
+    padding: 0 32px;
+
+    @include mq ($until: small) {
+      padding: 0px 16px;
+    }
   }
 </style>
