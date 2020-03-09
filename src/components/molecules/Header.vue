@@ -168,4 +168,10 @@ export default {
     fill: $GREY;
     margin-right: 6px;
   }
+
+  .description {
+    font-size: 17px;
+    line-height: 1.4;
+    margin-bottom: 24px;
+  }
 </style>

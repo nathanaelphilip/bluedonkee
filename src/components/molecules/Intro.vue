@@ -39,7 +39,7 @@ export default {
   .heading {
     font-size: 22px;
     font-weight: 900;
-    line-height: 1.2;
+    line-height: 1.25;
 
     @include mq($from: small) {
       max-width: 330px;
