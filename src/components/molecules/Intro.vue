@@ -31,8 +31,8 @@ export default {
     top: 0;
     z-index: 8;
 
-    @include mq($until: small) {
-      padding: 18px;
+    @include mq($until: xsmall) {
+      padding: 16px;
     }
   }
 
@@ -40,16 +40,14 @@ export default {
     font-size: 22px;
     font-weight: 900;
     line-height: 1.25;
+    max-width: 330px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-    @include mq($from: small) {
-      max-width: 330px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    @include mq($until: small) {
+    @include mq($until: xsmall) {
       font-size: 18px;
+      max-width: 160px;
     }
   }
 

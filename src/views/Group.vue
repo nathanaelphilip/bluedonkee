@@ -94,6 +94,10 @@ export default {
   .box {
     background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
     padding: 32px 32px 0 32px;
+
+    @include mq ($until: xsmall) {
+      padding: 24px 16px 0 16px;
+    }
   }
 
   .jobs {

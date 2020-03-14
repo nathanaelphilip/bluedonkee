@@ -29,7 +29,7 @@ export default {
     margin-bottom: 30px;
     padding: 0 32px;
 
-    @include mq ($until: small) {
+    @include mq ($until: xsmall) {
       padding: 0px 16px;
     }
   }
@@ -53,7 +53,7 @@ export default {
     margin-top: -15px;
     padding: 0 32px;
 
-    @include mq ($until: small) {
+    @include mq ($until: xsmall) {
       padding: 0px 16px;
     }
   }

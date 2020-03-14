@@ -26,7 +26,7 @@ export default {
     margin-bottom: 5px;
     padding: 0 32px;
 
-    @include mq ($until: small) {
+    @include mq ($until: xsmall) {
       padding: 0px 16px;
     }
   }
@@ -34,7 +34,7 @@ export default {
   .box {
     padding: 24px 36px;
 
-    @include mq ($until: small) {
+    @include mq ($until: xsmall) {
       padding: 24px 16px;
     }
 

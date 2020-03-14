@@ -76,6 +76,7 @@
   line-height: 1.1;
   min-width: 0;
   padding: 12px;
+  width: 100%;
 
   &:placeholder { color: $GREY; }
   &[readonly] {color: $BLUEGREY}
@@ -134,10 +135,22 @@
   }
 
   &:not(:last-child) {
-    margin-bottom: 24px;
+    margin-bottom: grid(4);
   }
 
-  .full { grid-column: span 2 }
+  .full {
+    @include mq ($from: xsmall) {
+      grid-column: span 2
+    }
+  }
+
+  .half {
+    &:not(:last-child) {
+      @include mq($until: xsmall) {
+        margin-bottom: grid(4);
+      }
+    }
+  }
 }
 
 @mixin Flex(

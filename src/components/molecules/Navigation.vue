@@ -9,6 +9,9 @@
     <router-link class="anchor" :to="{ name: 'campaigns' }">
       <IconCampaigns class="icon" width="36" height="38" /><span class="text">Campaigns</span>
     </router-link>
+    <button class="anchor anchor-more" @click.prevent="$store.dispatch('app/sidebar', true)">
+      <IconMore class="icon" width="36" height="38" /><span class="text">Sidebar</span>
+    </button>
   </nav>
 </template>
 
@@ -16,10 +19,11 @@
 import IconCampaigns from '@/components/icons/Campaigns'
 import IconGroups from '@/components/icons/Groups'
 import IconJobs from '@/components/icons/Jobs'
+import IconMore from '@/components/icons/More'
 
 export default {
   name: 'components-molecules-navigation',
-  components: { IconCampaigns, IconGroups, IconJobs }
+  components: { IconCampaigns, IconGroups, IconJobs, IconMore }
 }
 </script>
 
@@ -55,6 +59,8 @@ export default {
   }
 
   .anchor {
+    background: none;
+    border: none;
     align-items: center;
     display: flex;
     border-radius: 30px;
@@ -78,10 +84,15 @@ export default {
 
     &:hover,
     &.router-link-active {
-      background: #F7FAFC;
+      background: $BLUELIGHT;
+      cursor: pointer;
 
-     ::v-deep .icon .st1 {fill: #3182ce;}
+     ::v-deep .icon .st1 {fill: $BLUE;}
      ::v-deep .icon .st0 {fill: #90cdf4;}
+    }
+
+    &-more {
+      @include mq ($from: small) {display: none}
     }
 
     .icon {

@@ -120,7 +120,7 @@ export default {
     grid-template-columns: 120px auto;
     margin-bottom: 18px;
 
-    @include mq ($until: small) {
+    @include mq ($until: xsmall) {
       grid-template-columns: 90px auto;
     }
   }
@@ -148,9 +148,13 @@ export default {
   .heading {
     font-size: 26px;
     font-weight: 900;
-    line-height: 1.15;
+    line-height: 1.35;
     max-width: 405px;
     margin-bottom: 8px;
+
+    @include mq ($until: xsmall) {
+      font-size: 22px;
+    }
   }
 
   .info {

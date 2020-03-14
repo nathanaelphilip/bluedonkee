@@ -1,5 +1,5 @@
 <template>
-  <Grid>
+  <Grid class="basic">
     <template v-slot:one>
       <ButtonSecondary @click.native.prevent="back()">
         Close
@@ -29,3 +29,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .basic {
+    @include mq ($until: small) {
+      grid-template-columns: 1fr;
+      padding: grid(4);
+
+      &::v-deep .column-1 {
+        @include mq ($until: small) {
+          min-height: 0;
+        }
+
+        .sticky-top {
+          @include mq ($until: small) {
+            padding-top: 0;
+          }
+        }
+      }
+    }
+  }
+</style>

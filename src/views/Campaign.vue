@@ -115,7 +115,7 @@ export default {
     background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
     padding: 32px;
 
-    @include mq ($until: small) {
+    @include mq ($until: xsmall) {
       padding: 24px 16px;
     }
   }

@@ -45,6 +45,10 @@ export default {
   .up {
     @include Flex($justify: center);
     padding: grid(10) 0;
+
+    @include mq ($until: xsmall) {
+      padding-bottom: grid(25);
+    }
   }
 
   .button {
