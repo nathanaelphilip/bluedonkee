@@ -112,10 +112,16 @@ export default {
     })
 
     if (!this.related.length) {
+      const search = []
+
+      for (var i = 0; i < this.workCategories.length; i++) {
+        search.push(`SEARCH("${this.workCategories[i].fields.Name}", {Work Categories})`)
+      }
+
       await this.$store.dispatch('jobs/fetchRelated', {
         id: `job/${this.job.id}`,
         params: {
-          filterByFormula: `OR(SEARCH("${this.workCategories[0].fields.Name}", {Work Categories}), SEARCH("${this.workCategories[1].fields.Name}", {Work Categories}))`,
+          filterByFormula: `OR(${search.join(',')})`,
           maxRecords: 3
         }
       })
