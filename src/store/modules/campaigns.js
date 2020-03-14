@@ -1,16 +1,21 @@
 import { unionBy } from 'lodash'
 
 import { getCampaigns, getCampaign } from '@/api'
-import { CAMPAIGNS_FETCH } from '@/store/mutation-types'
+import { CAMPAIGNS_FETCH, CAMPAIGNS_RELATED_FETCH } from '@/store/mutation-types'
 
 const state = {
-  repository: []
+  repository: [],
+  related: {}
 }
 
 const mutations = {
   [CAMPAIGNS_FETCH] (state, items) {
     const merged = unionBy(state.repository, items, 'id')
     state.repository = merged
+  },
+
+  [CAMPAIGNS_RELATED_FETCH] (state, { ids, id }) {
+    state.related[id] = ids
   }
 }
 
@@ -30,22 +35,38 @@ const actions = {
     const { data } = await getCampaign(id)
     commit(CAMPAIGNS_FETCH, [data])
     return data
+  },
+
+  async fetchRelated ({ commit }, { params, id }) {
+    const { data } = await getCampaigns({ params })
+    const ids = data.records.map(record => record.id)
+    commit(CAMPAIGNS_FETCH, data.records)
+    commit(CAMPAIGNS_RELATED_FETCH, { id, ids })
+    return ids
   }
 }
 
 const getters = {
   getById: (state) => (id) => {
-    return state.repository.find(job => job.id === id)
+    return state.repository.find(campaign => campaign.id === id)
   },
 
   getBySlug: (state) => (slug) => {
-    return state.repository.find(job => job.fields.Slug === slug)
+    return state.repository.find(campaign => campaign.fields.Slug === slug)
   },
 
   sortAlphabetically: state => {
     return state.repository.sort((a, b) => {
       return a.fields.Name > b.fields.Name ? 1 : -1
     })
+  },
+
+  getRelated: state => id => {
+    if (state.related[id]) {
+      return state.repository.filter(campaign => {
+        return state.related[id].includes(campaign.id)
+      })
+    }
   }
 }
 

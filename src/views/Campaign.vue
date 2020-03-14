@@ -29,7 +29,7 @@
         </JobsEmpty>
       </template>
     </Jobs>
-    <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
+    <Campaigns heading="Related Campaigns" :campaigns="$store.getters['campaigns/getRelated'](`campaign/${this.campaign.id}`)" />
     <BackTop />
   </article>
 </template>
@@ -103,7 +103,21 @@ export default {
       type: 'jobs'
     }) : []
 
-    this.campaigns = this.$store.getters['campaigns/sortAlphabetically'].slice(0, 4)
+    if (!this.$store.getters['campaigns/getRelated'](`campaign/${this.campaign.id}`)) {
+      const search = []
+
+      for (var i = 0; i < this.offices.length; i++) {
+        search.push(`SEARCH("${this.offices[i].fields.Name}", {Office})`)
+      }
+
+      await this.$store.dispatch('campaigns/fetchRelated', {
+        id: `campaign/${this.campaign.id}`,
+        params: {
+          filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.campaign.id}")`,
+          maxRecords: 3
+        }
+      })
+    }
 
     this.loading = false
   }

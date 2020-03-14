@@ -22,7 +22,7 @@
         </JobsEmpty>
       </template>
     </Jobs>
-    <Campaigns heading="Related Campaigns" :campaigns="campaigns" />
+    <Groups heading="Related Groups" :groups="$store.getters['groups/getRelated'](`group/${this.group.id}`)" />
     <BackTop />
   </article>
 </template>
@@ -34,7 +34,7 @@ import {
 } from '@/store/helpers'
 
 import BackTop from '@/components/molecules/BackTop'
-import Campaigns from '@/components/molecules/Campaigns'
+import Groups from '@/components/molecules/Groups'
 import Header from '@/components/molecules/Header'
 import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
@@ -43,7 +43,7 @@ import Share from '@/components/molecules/Share'
 
 export default {
   name: 'views-group',
-  components: { BackTop, Campaigns, Header, Intro, Jobs, JobsEmpty, Share },
+  components: { BackTop, Groups, Header, Intro, Jobs, JobsEmpty, Share },
 
   data () {
     return {
@@ -83,7 +83,21 @@ export default {
       type: 'groupCategories'
     }) : []
 
-    this.campaigns = this.$store.state.campaigns.repository.slice(0, 4)
+    if (!this.$store.getters['groups/getRelated'](`group/${this.group.id}`)) {
+      const search = []
+
+      for (var i = 0; i < this.categories.length; i++) {
+        search.push(`SEARCH("${this.categories[i].fields.Name}", {Groups Categories})`)
+      }
+
+      await this.$store.dispatch('groups/fetchRelated', {
+        id: `group/${this.group.id}`,
+        params: {
+          filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.group.id}")`,
+          maxRecords: 3
+        }
+      })
+    }
 
     this.loading = false
   }
