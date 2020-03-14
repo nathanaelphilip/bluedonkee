@@ -19,7 +19,6 @@ export default {
 
   async mounted () {
     if (this.$store.state.jobs.promoted.length === 0) {
-      console.log('get promoted')
       await this.$store.dispatch('jobs/fetchPromoted', {
         params: { filterByFormula: 'SEARCH("Promoted", Status)' }
       })
