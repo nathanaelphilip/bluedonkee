@@ -111,14 +111,15 @@ export default {
       type: 'workTypes'
     })
 
-    // check if this job Id (or group Id; maybe prefix: 'job/{id}')
-    await this.$store.dispatch('jobs/fetchRelated', {
-      id: `job/${this.job.id}`,
-      params: {
-        filterByFormula: `OR(SEARCH("${this.workCategories[0].fields.Name}", {Work Categories}), SEARCH("${this.workCategories[1].fields.Name}", {Work Categories}))`,
-        maxRecords: 3
-      }
-    })
+    if (!this.related.length) {
+      await this.$store.dispatch('jobs/fetchRelated', {
+        id: `job/${this.job.id}`,
+        params: {
+          filterByFormula: `OR(SEARCH("${this.workCategories[0].fields.Name}", {Work Categories}), SEARCH("${this.workCategories[1].fields.Name}", {Work Categories}))`,
+          maxRecords: 3
+        }
+      })
+    }
 
     this.loading = false
   }
