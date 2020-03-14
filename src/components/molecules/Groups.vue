@@ -21,7 +21,11 @@ export default {
 
 <style lang="scss" scoped>
   .box {
-    padding: 25px 33px;
+    padding: grid(8) grid(12);
+
+    @include mq($until: xsmall) {
+      padding: grid(6) grid(4);
+    }
 
     &:not(:last-child) {
       border-bottom: 1px solid $GREY;

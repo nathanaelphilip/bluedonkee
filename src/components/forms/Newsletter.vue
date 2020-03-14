@@ -87,24 +87,24 @@ export default {
   .newsletter {
     background: $BLUELIGHT;
     border-radius: 4px;
-    padding: grid(2.5);
+    padding: grid(6);
   }
 
   .heading {
     font-size: 18px;
     font-weight: 900;
-    margin-bottom: grid(.75);
+    margin-bottom: grid(2);
   }
 
   .grid {
     align-items: center;
     display: grid;
     grid-template-columns: 1fr 100px;
-    grid-column-gap: grid(2);
+    grid-column-gap: grid(4);
   }
 
   .content {
     font-size: 15px;
-    margin-bottom: grid(2);
+    margin-bottom: grid(4);
   }
 </style>

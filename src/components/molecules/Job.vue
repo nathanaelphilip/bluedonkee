@@ -165,8 +165,12 @@ export default {
     display: grid;
     grid-template-columns: 1fr 50px;
     grid-column-gap: 16px;
-    margin-bottom: 15px;
+    margin-bottom: grid(4);
     margin-top: 11px;
+
+    @include mq ($until: xsmall) {
+      margin-top: 0;
+    }
 
     .simple & {margin-top: 0}
   }
@@ -174,6 +178,7 @@ export default {
   .heading {
     font-size: 16px;
     font-weight: 600;
+    line-height: 1.25;
     margin-bottom: 5px;
   }
 

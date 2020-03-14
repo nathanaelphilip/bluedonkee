@@ -35,10 +35,10 @@ export default {
   }
 
   .box {
-    padding: 25px 36px;
+    padding: grid(6) grid(8);
 
     @include mq($until: xsmall) {
-      padding: 24px 16px;
+      padding: grid(6) grid(4);
     }
 
     .simple &:nth-child(2) { padding-top: 0; }

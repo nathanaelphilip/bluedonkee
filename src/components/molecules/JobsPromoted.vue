@@ -39,6 +39,6 @@ export default {
 
   .box {
     border-top: 1px solid $GREY;
-    padding: grid(2.5);
+    padding: grid(4);
   }
 </style>

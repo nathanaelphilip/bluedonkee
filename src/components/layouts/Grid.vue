@@ -77,7 +77,7 @@ export default {
     .sticky-top {
       @include mq($until: small) {
         background: $WHITE;
-        padding: grid(2);
+        padding: grid(4);
         position: relative;
         width: 90%;
         z-index: 1

@@ -44,15 +44,15 @@ export default {
 <style lang="scss" scoped>
   .up {
     @include Flex($justify: center);
-    padding: grid(10) 0;
+    padding: grid(15) 0;
 
     @include mq ($until: xsmall) {
-      padding-bottom: grid(25);
+      padding-bottom: calc(grid(15) + 84px);
     }
   }
 
   .button {
-    $d: grid(8);
+    $d: grid(12);
     @include ButtonStripped;
     @include Flex($justify: center);
     border: 1px solid $GREY;

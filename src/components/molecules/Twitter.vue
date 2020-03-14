@@ -26,9 +26,9 @@ export default {
     background: $BLUELIGHT;
     border-radius: 4px;
     display: grid;
-    grid-template-columns: grid(8) 1fr;
-    grid-column-gap: grid(2);
-    padding: grid(2.5);
+    grid-template-columns: grid(12) 1fr;
+    grid-column-gap: grid(3);
+    padding: grid(4);
   }
 
   .icon {
