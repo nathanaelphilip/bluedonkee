@@ -1,11 +1,16 @@
 import { unionBy } from 'lodash'
 
 import { getJob, getJobs } from '@/api'
-import { JOBS_FETCH, JOBS_PROMOTED_FETCH } from '@/store/mutation-types'
+import {
+  JOBS_FETCH,
+  JOBS_PROMOTED_FETCH,
+  JOBS_RELATED_FETCH
+} from '@/store/mutation-types'
 
 const state = {
   repository: [],
-  promoted: [] // ids of promoted jobs
+  promoted: [], // ids of promoted jobs
+  related: {} // prefix: 'job/{id}', 'group/{id}' – returns array of ids
 }
 
 const mutations = {
@@ -16,6 +21,10 @@ const mutations = {
 
   [JOBS_PROMOTED_FETCH] (state, ids) {
     state.promoted = ids
+  },
+
+  [JOBS_RELATED_FETCH] (states, { ids, id }) {
+    state.related[id] = ids
   }
 }
 
@@ -43,6 +52,14 @@ const actions = {
     commit(JOBS_FETCH, data.records)
     commit(JOBS_PROMOTED_FETCH, ids)
     return ids
+  },
+
+  async fetchRelated ({ commit }, { params, id }) {
+    const { data } = await getJobs({ params })
+    const ids = data.records.map(record => record.id)
+    commit(JOBS_FETCH, data.records)
+    commit(JOBS_RELATED_FETCH, { id, ids })
+    return ids
   }
 }
 
@@ -65,6 +82,14 @@ const getters = {
     return state.repository.filter(job => {
       return state.promoted.includes(job.id)
     })
+  },
+
+  getRelated: state => id => {
+    if (state.related[id]) {
+      return state.repository.filter(job => {
+        return state.related[id].includes(job.id)
+      })
+    }
   }
 }
 

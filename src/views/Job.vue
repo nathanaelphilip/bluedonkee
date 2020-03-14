@@ -28,7 +28,7 @@
       <Report :id="job.id" />
     </div>
 
-    <Jobs heading="Related Jobs" :jobs="$store.getters['jobs/sortByDate'].slice(0, 3)" :simple="true" />
+    <Jobs heading="Related Jobs" :jobs="related" :simple="true" />
 
     <BackTop />
   </article>
@@ -72,6 +72,11 @@ export default {
 
     group () {
       return this.groups[0]
+    },
+
+    related () {
+      const related = this.$store.getters['jobs/getRelated'](`job/${this.job.id}`)
+      return related ? related.slice(0, 3) : []
     }
   },
 
@@ -104,6 +109,15 @@ export default {
     this.workTypes = await getByIds({
       ids: this.job.fields['Work Types'],
       type: 'workTypes'
+    })
+
+    // check if this job Id (or group Id; maybe prefix: 'job/{id}')
+    await this.$store.dispatch('jobs/fetchRelated', {
+      id: `job/${this.job.id}`,
+      params: {
+        filterByFormula: `OR(SEARCH("${this.workCategories[0].fields.Name}", {Work Categories}), SEARCH("${this.workCategories[1].fields.Name}", {Work Categories}))`,
+        maxRecords: 3
+      }
     })
 
     this.loading = false

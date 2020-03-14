@@ -55,7 +55,6 @@ export const getCampaign = (id) => {
 }
 
 export const getJobs = (settings) => {
-  console.log(settings)
   return api.get(jobs, settings)
 }
 
