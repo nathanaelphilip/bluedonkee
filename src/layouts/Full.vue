@@ -45,19 +45,27 @@ export default {
   }
 
   .bug {
-    @include mq($until: small) {display: none}
+    @include mq($until: large) {display: none}
   }
 
   .logo {
-    align-items: center;
-    display: flex;
-    justify-content: flex-start;
     margin-bottom: 36px;
 
-    @include mq($until: small) {display: none}
+    @include mq ($from: large) {
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+    }
 
     img {
-      margin-right: 12px;
+      display: block;
+      height: auto;
+      margin: 0 auto;
+      max-width: 100%;
+
+      @include mq ($from: large) {
+        margin-right: 12px;
+      }
     }
   }
 

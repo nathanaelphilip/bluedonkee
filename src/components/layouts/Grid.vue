@@ -26,16 +26,20 @@ export default {
 <style lang="scss" scoped>
   .grid {
     display: grid;
-    grid-template-columns: 1fr 2.25fr 1fr;
+    grid-template-columns: 250px 1fr 350px;
 
     @include mq($from: small) {
       grid-column-gap: 33px;
       margin: 0 auto;
-      max-width: 1400px;
+      max-width: 1350px;
       width: 95%;
     }
 
-    @include mq($until: small) {
+    @include mq($until: large) {
+     grid-template-columns: 93px 1fr 350px;
+    }
+
+    @include mq($until: medium) {
      grid-template-columns: 93px 1fr;
     }
 

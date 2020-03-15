@@ -31,14 +31,14 @@ export default {
   .nav {
     display: flex;
 
-    @include mq($from: small) {
+    @include mq($from: large) {
       font-size: 20px;
       font-weight: 800;
       max-width: 200px;
       margin-left: -20px;
     }
 
-    @include mq($until: small) {
+    @include mq($until: large) {
       align-items: center;
     }
 
@@ -92,17 +92,17 @@ export default {
     }
 
     &-more {
-      @include mq ($from: small) {display: none}
+      @include mq ($from: large) {display: none}
     }
 
     .icon {
-      @include mq($from: small) {
+      @include mq($from: large) {
         margin-right: 16px;
       }
     }
 
     .text {
-      @include mq($until: small) {
+      @include mq($until: large) {
        display: none;
       }
     }
