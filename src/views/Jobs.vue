@@ -17,7 +17,8 @@
       />
     </div>
     <Jobs :jobs="$store.getters['jobs/sortByDate']" />
-    <BackTop />
+    <Pager @load="load" v-if="$store.state.jobs.offset" />
+    <BackTop v-if="!$store.state.jobs.offset" />
   </section>
 </template>
 
@@ -27,11 +28,22 @@ import Banner from '@/components/molecules/Banner'
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
+import Pager from '@/components/molecules/Pager'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
+
+const pageSize = 25
 
 export default {
   name: 'views-jobs',
-  components: { BackTop, Banner, ButtonSecondary, Intro, Jobs, LinkPrimary },
+  components: {
+    BackTop,
+    Banner,
+    ButtonSecondary,
+    Intro,
+    Jobs,
+    Pager,
+    LinkPrimary
+  },
 
   data () {
     return {
@@ -57,7 +69,20 @@ export default {
     }
 
     await this.$store.dispatch('groups/fetch')
-    await this.$store.dispatch('jobs/fetch')
+
+    await this.load()
+  },
+
+  methods: {
+    async load () {
+      await this.$store.dispatch('jobs/fetch', {
+        params: {
+          pageSize,
+          sort: [{ field: 'Updated', direction: 'desc' }],
+          offset: this.$store.state.jobs.offset
+        }
+      })
+    }
   }
 }
 </script>

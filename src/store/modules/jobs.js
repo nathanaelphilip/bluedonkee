@@ -3,20 +3,32 @@ import { unionBy } from 'lodash'
 import { getJob, getJobs } from '@/api'
 import {
   JOBS_FETCH,
+  JOBS_LOADING,
+  JOBS_OFFSET,
   JOBS_PROMOTED_FETCH,
   JOBS_RELATED_FETCH
 } from '@/store/mutation-types'
 
 const state = {
+  loading: false,
+  offset: '',
   repository: [],
-  promoted: [], // ids of promoted jobs
-  related: {} // prefix: 'job/{id}', 'group/{id}' – returns array of ids
+  promoted: [],
+  related: {}
 }
 
 const mutations = {
   [JOBS_FETCH] (state, items) {
     const merged = unionBy(state.repository, items, 'id')
     state.repository = merged
+  },
+
+  [JOBS_LOADING] (state, status) {
+    state.loading = status
+  },
+
+  [JOBS_OFFSET] (state, offset) {
+    state.offset = offset
   },
 
   [JOBS_PROMOTED_FETCH] (state, ids) {
@@ -30,8 +42,12 @@ const mutations = {
 
 const actions = {
   async fetch ({ commit }, settings) {
+    commit(JOBS_LOADING, 'jobs')
     const { data } = await getJobs(settings)
     commit(JOBS_FETCH, data.records)
+    commit(JOBS_OFFSET, data.offset)
+    commit(JOBS_LOADING, false)
+    return data
   },
 
   async getById ({ commit }, id) {

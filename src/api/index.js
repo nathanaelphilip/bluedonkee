@@ -55,7 +55,12 @@ export const getCampaign = (id) => {
 }
 
 export const getJobs = (settings) => {
-  return api.get(jobs, settings)
+  return api.get(jobs, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'brackets' })
+    }
+  })
 }
 
 export const getJob = (id) => {
