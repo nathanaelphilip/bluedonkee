@@ -73,7 +73,12 @@ export const getJob = (id) => {
 }
 
 export const getGroups = (settings) => {
-  return api.get(groups, settings)
+  return api.get(groups, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'brackets' })
+    }
+  })
 }
 
 export const getGroup = (id) => {

@@ -1,9 +1,16 @@
 import { unionBy } from 'lodash'
 
 import { getGroups, getGroup } from '@/api'
-import { GROUPS_FETCH, GROUPS_RELATED_FETCH } from '@/store/mutation-types'
+import {
+  GROUPS_FETCH,
+  GROUPS_LOADING,
+  GROUPS_OFFSET,
+  GROUPS_RELATED_FETCH
+} from '@/store/mutation-types'
 
 const state = {
+  loading: false,
+  offset: '',
   repository: [],
   related: {}
 }
@@ -14,6 +21,14 @@ const mutations = {
     state.repository = merged
   },
 
+  [GROUPS_LOADING] (state, status) {
+    state.loading = status
+  },
+
+  [GROUPS_OFFSET] (state, offset) {
+    state.offset = offset
+  },
+
   [GROUPS_RELATED_FETCH] (state, { ids, id }) {
     state.related[id] = ids
   }
@@ -21,8 +36,11 @@ const mutations = {
 
 const actions = {
   async fetch ({ commit }, settings) {
+    commit(GROUPS_LOADING, 'groups')
     const { data } = await getGroups(settings)
     commit(GROUPS_FETCH, data.records)
+    commit(GROUPS_OFFSET, data.offset)
+    commit(GROUPS_LOADING, false)
   },
 
   async get ({ commit }, settings) {

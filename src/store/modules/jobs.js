@@ -47,7 +47,6 @@ const actions = {
     commit(JOBS_FETCH, data.records)
     commit(JOBS_OFFSET, data.offset)
     commit(JOBS_LOADING, false)
-    return data
   },
 
   async getById ({ commit }, id) {

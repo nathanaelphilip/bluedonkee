@@ -14,7 +14,12 @@
       />
     </div>
     <Groups :groups="$store.getters['groups/sortAlphabetically']" />
-    <BackTop />
+    <Pager
+      @load="load"
+      :loading="$store.state.groups.loading === 'groups'"
+      v-if="$store.state.groups.offset"
+    />
+    <BackTop v-if="!$store.state.groups.offset" />
   </div>
 </template>
 
@@ -23,10 +28,13 @@ import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import Groups from '@/components/molecules/Groups'
 import Intro from '@/components/molecules/Intro'
+import Pager from '@/components/molecules/Pager'
+
+const pageSize = 20
 
 export default {
   name: 'views-groups',
-  components: { BackTop, Banner, Intro, Groups },
+  components: { BackTop, Banner, Intro, Groups, Pager },
 
   data () {
     return { closed: false }
@@ -41,7 +49,19 @@ export default {
       await this.$store.dispatch('groupCategories/fetch')
     }
 
-    await this.$store.dispatch('groups/fetch')
+    await this.load()
+  },
+
+  methods: {
+    async load () {
+      await this.$store.dispatch('groups/fetch', {
+        params: {
+          pageSize,
+          sort: [{ field: 'Name', direction: 'asc' }],
+          offset: this.$store.state.groups.offset
+        }
+      })
+    }
   }
 }
 </script>
