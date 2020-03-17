@@ -14,7 +14,12 @@
       />
     </div>
     <Campaigns :campaigns="$store.getters['campaigns/sortAlphabetically']" />
-    <BackTop />
+    <Pager
+      @load="load"
+      :loading="$store.state.campaigns.loading === 'campaigns'"
+      v-if="$store.state.campaigns.offset"
+    />
+    <BackTop v-if="!$store.state.campaigns.offset" />
   </div>
 </template>
 
@@ -23,10 +28,19 @@ import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import Intro from '@/components/molecules/Intro'
 import Campaigns from '@/components/molecules/Campaigns'
+import Pager from '@/components/molecules/Pager'
+
+const pageSize = 20
 
 export default {
   name: 'views-campaigns',
-  components: { BackTop, Banner, Campaigns, Intro },
+  components: {
+    BackTop,
+    Banner,
+    Campaigns,
+    Intro,
+    Pager
+  },
 
   data () {
     return { closed: false }
@@ -41,7 +55,19 @@ export default {
       await this.$store.dispatch('offices/fetch')
     }
 
-    await this.$store.dispatch('campaigns/fetch')
+    await this.load()
+  },
+
+  methods: {
+    async load () {
+      await this.$store.dispatch('campaigns/fetch', {
+        params: {
+          pageSize,
+          sort: [{ field: 'Name', direction: 'asc' }],
+          offset: this.$store.state.campaigns.offset
+        }
+      })
+    }
   }
 }
 </script>

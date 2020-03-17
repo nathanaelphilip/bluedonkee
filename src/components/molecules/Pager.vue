@@ -1,8 +1,8 @@
 <template>
   <div class="pager">
     <button class="button" @click.prevent="$emit('load')">
-      <template v-if="!$store.state.jobs.loading">See More</template>
-      <template v-if="$store.state.jobs.loading === 'jobs'">
+      <template v-if="!loading">See More</template>
+      <template v-if="loading">
         <Spinner />
       </template>
     </button>
@@ -13,6 +13,7 @@
 import Spinner from '@/components/atoms/Spinner'
 
 export default {
+  props: ['loading'],
   components: { Spinner }
 }
 </script>

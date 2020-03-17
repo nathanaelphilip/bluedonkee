@@ -17,7 +17,11 @@
       />
     </div>
     <Jobs :jobs="$store.getters['jobs/getNonPromoted']" />
-    <Pager @load="load" v-if="$store.state.jobs.offset" />
+    <Pager
+      @load="load"
+      :loading="$store.state.jobs.loading === 'jobs'"
+      v-if="$store.state.jobs.offset"
+     />
     <BackTop v-if="!$store.state.jobs.offset" />
   </section>
 </template>

@@ -1,9 +1,16 @@
 import { unionBy } from 'lodash'
 
 import { getCampaigns, getCampaign } from '@/api'
-import { CAMPAIGNS_FETCH, CAMPAIGNS_RELATED_FETCH } from '@/store/mutation-types'
+import {
+  CAMPAIGNS_FETCH,
+  CAMPAIGNS_LOADING,
+  CAMPAIGNS_OFFSET,
+  CAMPAIGNS_RELATED_FETCH
+} from '@/store/mutation-types'
 
 const state = {
+  loading: false,
+  offset: '',
   repository: [],
   related: {}
 }
@@ -14,6 +21,14 @@ const mutations = {
     state.repository = merged
   },
 
+  [CAMPAIGNS_LOADING] (state, status) {
+    state.loading = status
+  },
+
+  [CAMPAIGNS_OFFSET] (state, offset) {
+    state.offset = offset
+  },
+
   [CAMPAIGNS_RELATED_FETCH] (state, { ids, id }) {
     state.related[id] = ids
   }
@@ -21,8 +36,11 @@ const mutations = {
 
 const actions = {
   async fetch ({ commit }, settings) {
+    commit(CAMPAIGNS_LOADING, 'campaigns')
     const { data } = await getCampaigns(settings)
     commit(CAMPAIGNS_FETCH, data.records)
+    commit(CAMPAIGNS_OFFSET, data.offset)
+    commit(CAMPAIGNS_LOADING, false)
   },
 
   async get ({ commit }, settings) {

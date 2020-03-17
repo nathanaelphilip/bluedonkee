@@ -47,7 +47,12 @@ export const getCMSQuestions = (settings) => {
 }
 
 export const getCampaigns = (settings) => {
-  return api.get(campaigns, settings)
+  return api.get(campaigns, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'brackets' })
+    }
+  })
 }
 
 export const getCampaign = (id) => {
