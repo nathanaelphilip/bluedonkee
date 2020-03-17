@@ -20,7 +20,7 @@ export default {
   async mounted () {
     if (this.$store.state.jobs.promoted.length === 0) {
       await this.$store.dispatch('jobs/fetchPromoted', {
-        params: { filterByFormula: 'SEARCH("Promoted", Status)' }
+        params: { filterByFormula: 'SEARCH("Promoted", Status)', pageSize: 4 }
       })
     }
   }

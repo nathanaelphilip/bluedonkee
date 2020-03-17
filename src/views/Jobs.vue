@@ -16,7 +16,7 @@
         :items="$store.state.groups.repository"
       />
     </div>
-    <Jobs :jobs="$store.getters['jobs/sortByDate']" />
+    <Jobs :jobs="$store.getters['jobs/getNonPromoted']" />
     <Pager @load="load" v-if="$store.state.jobs.offset" />
     <BackTop v-if="!$store.state.jobs.offset" />
   </section>
@@ -31,7 +31,7 @@ import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 
-const pageSize = 25
+const pageSize = 20
 
 export default {
   name: 'views-jobs',

@@ -106,6 +106,12 @@ const getters = {
         return state.related[id].includes(job.id)
       })
     }
+  },
+
+  getNonPromoted: state => {
+    return state.repository.filter(job => {
+      return !state.promoted.includes(job.id)
+    })
   }
 }
 
