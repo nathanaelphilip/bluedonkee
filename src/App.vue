@@ -60,7 +60,7 @@ export default {
     }
 
     if (!this.$store.state.groups.repository.length) {
-      await this.$store.dispatch('groups/fetch')
+      // await this.$store.dispatch('groups/fetch')
     }
 
     this.loaded = true

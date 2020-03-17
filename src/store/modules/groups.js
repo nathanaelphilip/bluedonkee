@@ -5,7 +5,8 @@ import {
   GROUPS_FETCH,
   GROUPS_LOADING,
   GROUPS_OFFSET,
-  GROUPS_RELATED_FETCH
+  GROUPS_RELATED_FETCH,
+  GROUPS_REMOVE
 } from '@/store/mutation-types'
 
 const state = {
@@ -31,6 +32,10 @@ const mutations = {
 
   [GROUPS_RELATED_FETCH] (state, { ids, id }) {
     state.related[id] = ids
+  },
+
+  [GROUPS_REMOVE] (state) {
+    state.repository = []
   }
 }
 
@@ -61,6 +66,10 @@ const actions = {
     commit(GROUPS_FETCH, data.records)
     commit(GROUPS_RELATED_FETCH, { id, ids })
     return ids
+  },
+
+  async remove ({ commit }) {
+    commit(GROUPS_REMOVE)
   }
 }
 

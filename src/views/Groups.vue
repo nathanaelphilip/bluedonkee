@@ -41,6 +41,8 @@ export default {
   },
 
   async mounted () {
+    await this.$store.dispatch('groups/remove')
+
     if (this.$cookies.isKey('banner:groups')) {
       this.closed = true
     }
