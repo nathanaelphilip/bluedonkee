@@ -75,7 +75,6 @@ export default {
     await this.$store.dispatch('groups/fetch')
 
     if (!this.$store.getters['jobs/getFetched'].length) {
-      console.log('loading', this.$store.getters['jobs/getFetched'])
       await this.load()
     }
   },
