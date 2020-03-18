@@ -66,7 +66,7 @@ export default {
   .column-1 {}
 
   .column-3 {
-    @include mq($until: small) {
+    @include mq($until: medium) {
       @include Flex($align: stretch, $justify: flex-end);
       height: 100%;
       right: 0;
@@ -79,7 +79,7 @@ export default {
     }
 
     .sticky-top {
-      @include mq($until: small) {
+      @include mq($until: medium) {
         background: $WHITE;
         padding: grid(4);
         position: relative;
@@ -89,16 +89,19 @@ export default {
     }
 
     &.»open {
-      @include mq($until: small) {
+      @include mq($until: medium) {
         transform: translateX(0);
       }
     }
   }
 
   .close {
-    @include mq($until: small) {
+    display: none;
+
+    @include mq($until: medium) {
       background: rgba($BLACK, .15);
       border: none;
+      display: block;
       padding: 0;
       position: absolute;
       left: 0%;
@@ -114,6 +117,8 @@ export default {
         transition-duration: 1s;
         transition-delay: .4s;
       }
+
+      &:hover {cursor: pointer}
     }
   }
 </style>

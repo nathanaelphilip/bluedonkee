@@ -163,7 +163,7 @@ export default {
 
   .header {
     display: grid;
-    grid-template-columns: 1fr 50px;
+    grid-template-columns: 1fr 52px;
     grid-column-gap: 16px;
     margin-bottom: grid(4);
     margin-top: 11px;
@@ -190,6 +190,7 @@ export default {
   .time {
     color: $BLUEGREY;
     font-size: 15px;
+    text-align: right;
 
     .simple & { display: none }
   }

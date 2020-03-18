@@ -14,8 +14,8 @@
     </template>
     <template v-slot:three>
       <JobsPromoted />
-      <Newsletter />
       <Twitter />
+      <Newsletter />
       <div class="copyright">&copy; {{ new Date().getFullYear() }} WorkBlue - <router-link :to="{ name: 'questions' }">Questions</router-link></div>
     </template>
   </Grid>

@@ -3,6 +3,7 @@ import { unionBy } from 'lodash'
 import { getJob, getJobs } from '@/api'
 import {
   JOBS_FETCH,
+  JOBS_FETCHED,
   JOBS_LOADING,
   JOBS_OFFSET,
   JOBS_PROMOTED_FETCH,
@@ -10,6 +11,7 @@ import {
 } from '@/store/mutation-types'
 
 const state = {
+  fetched: [],
   loading: false,
   offset: '',
   repository: [],
@@ -31,6 +33,11 @@ const mutations = {
     state.offset = offset
   },
 
+  [JOBS_FETCHED] (state, ids) {
+    const merged = unionBy(state.fetched, ids)
+    state.fetched = merged
+  },
+
   [JOBS_PROMOTED_FETCH] (state, ids) {
     state.promoted = ids
   },
@@ -44,7 +51,9 @@ const actions = {
   async fetch ({ commit }, settings) {
     commit(JOBS_LOADING, 'jobs')
     const { data } = await getJobs(settings)
+    const ids = data.records.map(record => record.id)
     commit(JOBS_FETCH, data.records)
+    commit(JOBS_FETCHED, ids)
     commit(JOBS_OFFSET, data.offset)
     commit(JOBS_LOADING, false)
   },
@@ -90,6 +99,16 @@ const getters = {
   sortByDate: state => {
     return state.repository.sort((a, b) => {
       return a.fields.Created < b.fields.Created ? 1 : -1
+    }).filter(state => {
+      return state.repository.filter(job => {
+        return state.fetched.includes(job.id)
+      })
+    })
+  },
+
+  getFetched: state => {
+    return state.repository.filter(job => {
+      return state.fetched.includes(job.id)
     })
   },
 

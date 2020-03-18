@@ -31,6 +31,8 @@ export default {
     line-height: 1.5;
 
     &::v-deep p {
+      font-size: 18px;
+
       &:not(:last-child) {
         margin-bottom: 1.5em;
       }

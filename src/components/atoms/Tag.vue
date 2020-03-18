@@ -16,11 +16,17 @@ export default {
 
 <style lang="scss" scoped>
   .tag {
+    background: $WHITE;
     border: 1px solid $GREY;
     border-radius: 4px;
     display: block;
     font-size: 13px;
     text-transform: lowercase;
+    transition: all .4s ease;
     padding: 8px;
+
+    &:hover {
+      background: $GREY;
+    }
   }
 </style>

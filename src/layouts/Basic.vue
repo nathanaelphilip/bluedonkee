@@ -32,6 +32,8 @@ export default {
 
 <style lang="scss" scoped>
   .basic {
+    grid-template-columns: 300px 1fr 300px;
+
     @include mq ($until: small) {
       grid-template-columns: 1fr;
       padding: grid(4);

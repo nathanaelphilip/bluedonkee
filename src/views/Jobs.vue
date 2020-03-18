@@ -16,7 +16,7 @@
         :items="$store.state.groups.repository"
       />
     </div>
-    <Jobs :jobs="$store.getters['jobs/getNonPromoted']" />
+    <Jobs :jobs="$store.getters['jobs/getFetched']" />
     <Pager
       @load="load"
       :loading="$store.state.jobs.loading === 'jobs'"
@@ -74,7 +74,10 @@ export default {
 
     await this.$store.dispatch('groups/fetch')
 
-    await this.load()
+    if (!this.$store.getters['jobs/getFetched'].length) {
+      console.log('loading', this.$store.getters['jobs/getFetched'])
+      await this.load()
+    }
   },
 
   methods: {
