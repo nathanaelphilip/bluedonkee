@@ -55,6 +55,7 @@ export default {
       await this.$store.dispatch('jobs/fetch', {
         id: this.id,
         params: {
+          filterByFormula: `SEARCH("${this.level.fields.Name}", {Work Levels})`,
           pageSize,
           sort: [{ field: 'Created', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)

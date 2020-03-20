@@ -1,22 +1,31 @@
 <template>
   <section v-if="!loading">
     <Intro :heading="`Location: ${location.fields.City}`" />
-    <Jobs :jobs="jobs" />
+    <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
+    <Pager
+      @load="load"
+      :loading="$store.state.jobs.loading === id"
+      v-if="$store.getters['jobs/getOffset'](id)"
+     />
+    <BackTop v-if="!$store.getters['jobs/getOffset'](id)" />
   </section>
 </template>
 
 <script>
 import {
-  getByIds,
   getBySlug
 } from '@/store/helpers'
 
+import BackTop from '@/components/molecules/BackTop'
 import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
+import Pager from '@/components/molecules/Pager'
+
+const pageSize = 20
 
 export default {
   name: 'views-location-jobs',
-  components: { Intro, Jobs },
+  components: { BackTop, Intro, Jobs, Pager },
 
   data () {
     return {
@@ -27,21 +36,32 @@ export default {
   },
 
   async mounted () {
+    this.id = `jobs/location/${this.$route.params.slug}`
+
     this.location = await getBySlug({
       slug: this.$route.params.slug,
       type: 'locations'
     })
 
-    this.jobs = await getByIds({
-      ids: this.location.fields.Jobs,
-      type: 'jobs'
-    })
-
-    this.jobs = this.jobs.sort((a, b) => {
-      return a.fields.Name > b.fields.Name ? 1 : -1
-    })
+    if (!this.$store.getters['jobs/getFetched'](this.id).length) {
+      await this.load()
+    }
 
     this.loading = false
+  },
+
+  methods: {
+    async load () {
+      await this.$store.dispatch('jobs/fetch', {
+        id: this.id,
+        params: {
+          filterByFormula: `SEARCH("${this.location.fields.City}", {Location})`,
+          pageSize,
+          sort: [{ field: 'Created', direction: 'desc' }],
+          offset: this.$store.getters['jobs/getOffset'](this.id)
+        }
+      })
+    }
   }
 }
 </script>

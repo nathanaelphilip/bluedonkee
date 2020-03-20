@@ -36,6 +36,8 @@ export default {
   },
 
   async mounted () {
+    this.id = `jobs/type/${this.$route.params.slug}`
+
     this.type = await getBySlug({
       slug: this.$route.params.slug,
       type: 'workTypes'
@@ -53,6 +55,7 @@ export default {
       await this.$store.dispatch('jobs/fetch', {
         id: this.id,
         params: {
+          filterByFormula: `SEARCH("${this.type.fields.Name}", {Work Types})`,
           pageSize,
           sort: [{ field: 'Created', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)

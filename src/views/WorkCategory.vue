@@ -53,8 +53,9 @@ export default {
   methods: {
     async load () {
       await this.$store.dispatch('jobs/fetch', {
-        id: `jobs/category/${this.$route.params.slug}`,
+        id: this.id,
         params: {
+          filterByFormula: `SEARCH("${this.category.fields.Name}", {Work Categories})`,
           pageSize,
           sort: [{ field: 'Created', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)
