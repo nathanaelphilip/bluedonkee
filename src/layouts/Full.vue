@@ -57,6 +57,10 @@ export default {
       justify-content: flex-start;
     }
 
+    @include mq($until: small) {
+      display: none;
+    }
+
     img {
       display: block;
       height: auto;

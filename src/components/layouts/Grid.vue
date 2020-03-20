@@ -63,7 +63,9 @@ export default {
     }
   }
 
-  .column-1 {}
+  .column-1 {
+
+  }
 
   .column-3 {
     @include mq($until: medium) {

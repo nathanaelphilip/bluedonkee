@@ -58,6 +58,7 @@ export default {
       loading: true,
       locations: [],
       job: {},
+      campaigns: [],
       groups: [],
       workTypes: [],
       workLevels: [],
@@ -71,7 +72,7 @@ export default {
     },
 
     group () {
-      return this.groups[0]
+      return this.groups[0] || this.campaigns[0]
     }
   },
 
@@ -86,10 +87,19 @@ export default {
       type: 'locations'
     })
 
-    this.groups = await getByIds({
-      ids: this.job.fields.Group,
-      type: 'groups'
-    })
+    if (this.job.fields.Group) {
+      this.groups = await getByIds({
+        ids: this.job.fields.Group,
+        type: 'groups'
+      })
+    }
+
+    if (this.job.fields.Campaigns) {
+      this.campaigns = await getByIds({
+        ids: this.job.fields.Campaigns,
+        type: 'groups'
+      })
+    }
 
     this.workCategories = await getByIds({
       ids: this.job.fields['Work Categories'],

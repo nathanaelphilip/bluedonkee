@@ -24,7 +24,7 @@ export default {
     padding: grid(15) 0;
 
     @include mq ($until: xsmall) {
-      padding-bottom: calc(grid(15) + 84px);
+      padding-bottom: grid(17) + 84px;
     }
   }
 
