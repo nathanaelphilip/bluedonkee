@@ -1,19 +1,20 @@
 import { unionBy } from 'lodash'
+import Vue from 'vue'
 
 import { getGroups, getGroup } from '@/api'
 import {
   GROUPS_FETCH,
+  GROUPS_FETCHED,
   GROUPS_LOADING,
   GROUPS_OFFSET,
-  GROUPS_RELATED_FETCH,
   GROUPS_REMOVE
 } from '@/store/mutation-types'
 
 const state = {
   loading: false,
-  offset: '',
+  offset: {},
   repository: [],
-  related: {}
+  fetched: {}
 }
 
 const mutations = {
@@ -22,16 +23,17 @@ const mutations = {
     state.repository = merged
   },
 
+  [GROUPS_FETCHED] (state, { ids, id }) {
+    const merged = unionBy(state.fetched[id], ids)
+    Vue.set(state.fetched, id, merged)
+  },
+
   [GROUPS_LOADING] (state, status) {
     state.loading = status
   },
 
-  [GROUPS_OFFSET] (state, offset) {
-    state.offset = offset
-  },
-
-  [GROUPS_RELATED_FETCH] (state, { ids, id }) {
-    state.related[id] = ids
+  [GROUPS_OFFSET] (state, { id, offset }) {
+    Vue.set(state.offset, id, offset)
   },
 
   [GROUPS_REMOVE] (state) {
@@ -40,11 +42,13 @@ const mutations = {
 }
 
 const actions = {
-  async fetch ({ commit }, settings) {
-    commit(GROUPS_LOADING, 'groups')
+  async fetch ({ commit }, { id, ...settings }) {
+    commit(GROUPS_LOADING, id)
     const { data } = await getGroups(settings)
+    const ids = data.records.map(record => record.id)
     commit(GROUPS_FETCH, data.records)
-    commit(GROUPS_OFFSET, data.offset)
+    commit(GROUPS_FETCHED, { id, ids })
+    commit(GROUPS_OFFSET, { id, offset: data.offset })
     commit(GROUPS_LOADING, false)
   },
 
@@ -60,14 +64,6 @@ const actions = {
     return data
   },
 
-  async fetchRelated ({ commit }, { params, id }) {
-    const { data } = await getGroups({ params })
-    const ids = data.records.map(record => record.id)
-    commit(GROUPS_FETCH, data.records)
-    commit(GROUPS_RELATED_FETCH, { id, ids })
-    return ids
-  },
-
   async remove ({ commit }) {
     commit(GROUPS_REMOVE)
   }
@@ -75,24 +71,32 @@ const actions = {
 
 const getters = {
   getById: (state) => (id) => {
-    return state.repository.find(job => job.id === id)
+    return state.repository.find(group => group.id === id)
   },
 
   getBySlug: (state) => (slug) => {
-    return state.repository.find(job => job.fields.Slug === slug)
+    return state.repository.find(group => group.fields.Slug === slug)
   },
 
-  sortAlphabetically: state => {
-    return state.repository.sort((a, b) => {
-      return a.fields.Name > b.fields.Name ? 1 : -1
-    })
-  },
-
-  getRelated: state => id => {
-    if (state.related[id]) {
+  getFetched: state => id => {
+    if (typeof (state.fetched[id]) !== 'undefined') {
       return state.repository.filter(group => {
-        return state.related[id].includes(group.id)
+        return state.fetched[id].includes(group.id)
       })
+    }
+
+    if (typeof (state.fetched[id]) === 'undefined') {
+      return []
+    }
+  },
+
+  getOffset: state => id => {
+    if (typeof (state.offset[id]) !== 'undefined') {
+      return state.offset[id]
+    }
+
+    if (typeof (state.offset[id]) === 'undefined') {
+      return ''
     }
   }
 }

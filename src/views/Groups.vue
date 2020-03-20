@@ -10,16 +10,16 @@
         heading="The Good Fight."
         content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
         :link="{name: 'questions'}"
-        :items="$store.getters['groups/sortAlphabetically']"
+        :items="$store.getters['groups/getFetched']('groups')"
       />
     </div>
-    <Groups :groups="$store.getters['groups/sortAlphabetically']" />
+    <Groups :groups="$store.getters['groups/getFetched']('groups')" />
     <Pager
       @load="load"
       :loading="$store.state.groups.loading === 'groups'"
-      v-if="$store.state.groups.offset"
+      v-if="$store.getters['groups/getOffset']('groups')"
     />
-    <BackTop v-if="!$store.state.groups.offset" />
+    <BackTop v-if="!$store.getters['groups/getOffset']('groups')" />
   </div>
 </template>
 
@@ -51,16 +51,19 @@ export default {
       await this.$store.dispatch('groupCategories/fetch')
     }
 
-    await this.load()
+    if (!this.$store.getters['groups/getFetched']('groups').length) {
+      await this.load()
+    }
   },
 
   methods: {
     async load () {
       await this.$store.dispatch('groups/fetch', {
+        id: 'groups',
         params: {
           pageSize,
           sort: [{ field: 'Name', direction: 'asc' }],
-          offset: this.$store.state.groups.offset
+          offset: this.$store.getters['groups/getOffset']('groups')
         }
       })
     }
