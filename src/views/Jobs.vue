@@ -13,7 +13,7 @@
         heading="Positioned for Change."
         content="Find campaigns and organizations fighting to make democracy more equitable. #letsworkblue"
         :link="{name: 'questions'}"
-        :items="$store.state.groups.repository"
+        :items="$store.getters['groups/getFetched']('groups')"
       />
     </div>
     <Jobs :jobs="$store.getters['jobs/getFetched']('jobs')" />
@@ -72,7 +72,7 @@ export default {
       await this.$store.dispatch('workTypes/fetch')
     }
 
-    await this.$store.dispatch('groups/fetch')
+    await this.$store.dispatch('groups/fetch', { id: 'groups' })
 
     if (!this.$store.getters['jobs/getFetched']('jobs').length) {
       await this.load()

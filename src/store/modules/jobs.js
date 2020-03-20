@@ -71,16 +71,6 @@ const getters = {
     return state.repository.find(job => job.fields.Slug === slug)
   },
 
-  sortByDate: state => {
-    return state.repository.sort((a, b) => {
-      return a.fields.Created < b.fields.Created ? 1 : -1
-    }).filter(state => {
-      return state.repository.filter(job => {
-        return state.fetched.includes(job.id)
-      })
-    })
-  },
-
   getFetched: state => id => {
     if (typeof (state.fetched[id]) !== 'undefined') {
       return state.repository.filter(job => {
