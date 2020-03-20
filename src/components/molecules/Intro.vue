@@ -1,32 +1,32 @@
 <template>
   <header class="intro">
-    <div class="box">
-      <ButtonBack :to="back" v-if="back" />
-      <h1 class="heading">{{ heading }}</h1>
+    <div class="boxes">
+      <div class="box">
+        <ButtonBack :to="back" v-if="back" />
+        <h1 class="heading">{{ heading }}</h1>
+      </div>
+      <div class="actions">
+        <slot></slot>
+      </div>
     </div>
-    <div class="actions">
-      <slot></slot>
-    </div>
+    <Filters />
   </header>
 </template>
 
 <script>
 import ButtonBack from '@/components/atoms/ButtonBack'
+import Filters from '@/components/forms/Filters'
 
 export default {
   props: ['back', 'heading'],
-  components: { ButtonBack }
+  components: { ButtonBack, Filters }
 }
 </script>
 
 <style lang="scss" scoped>
   .intro {
-    align-items: center;
     background: $WHITE;
     border-bottom: 1px solid $GREY;
-    display: flex;
-    justify-content: space-between;
-    padding: 24px 32px;
     position: sticky;
     top: 0;
     z-index: 8;
@@ -34,6 +34,11 @@ export default {
     @include mq($until: xsmall) {
       padding: 16px;
     }
+  }
+
+  .boxes {
+    @include Flex;
+    padding: grid(6) grid(8);
   }
 
   .heading {

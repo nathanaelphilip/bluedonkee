@@ -8,6 +8,8 @@
           :options="options"
           :status="status"
           :selected="selected"
+          keyLabel="label"
+          keyValue="id"
           @selected="value => selected = value"
           @close="open.modal = false"
           @process="report"
@@ -35,7 +37,7 @@ import { postFlagged } from '@/api'
 
 import Flash from '@/components/molecules/Flash'
 import Modal from '@/components/molecules/Modal'
-import OptionsList from '@/components/molecules/OptionsList'
+import OptionsList from '@/components/forms/OptionsList'
 import TextArea from '@/components/forms/TextArea'
 
 const options = [{

@@ -38,6 +38,17 @@
   &:hover {background: $GREY;}
 }
 
+@mixin Tag {
+  @include Button;
+  background: $BLUELIGHT;
+  border: 1px solid $BLUELIGHT;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 8px;
+
+  &.checked {border-color: $BLUE}
+}
+
 @mixin ButtonClose {
   $d: 35px;
   appearance: none;
@@ -153,14 +164,15 @@
   }
 }
 
-@mixin Flex(
+@mixin Flex (
   $align: center,
+  $display: flex,
   $justify: space-between,
   $direction: row,
   $wrap: wrap)
 {
   align-items: $align;
-  display: flex;
+  display: $display;
   flex-direction: $direction;
   flex-wrap: $wrap;
   justify-content: $justify;

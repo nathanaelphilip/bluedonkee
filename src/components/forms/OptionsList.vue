@@ -3,13 +3,13 @@
     <div class="list">
       <Option
         v-for="option in options"
-        :key="option.id"
-        :value="option.id"
-        :selected="selected === option.id"
+        :key="get(option, keyValue)"
+        :value="get(option, keyValue)"
+        :selected="selected === get(option, keyValue)"
         :name="_uid"
         @change="value => $emit('selected', value)"
        >
-       {{ option.label }}
+       {{ get(option, keyLabel) }}
      </Option>
      <slot></slot>
     </div>
@@ -26,14 +26,22 @@
 </template>
 
 <script>
+import { get } from 'lodash'
+
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import Option from '@/components/atoms/Option'
 import Processing from '@/components/forms/Processing'
 
 export default {
-  props: [ 'options', 'status', 'selected' ],
-  components: { ButtonPrimary, ButtonSecondary, Option, Processing }
+  props: [ 'options', 'status', 'selected', 'keyLabel', 'keyValue' ],
+  components: { ButtonPrimary, ButtonSecondary, Option, Processing },
+
+  methods: {
+    get (object, property) {
+      return get(object, property)
+    }
+  }
 }
 </script>
 
