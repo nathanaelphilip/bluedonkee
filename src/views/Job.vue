@@ -28,7 +28,7 @@
       <Report :id="job.id" />
     </div>
 
-    <Jobs heading="Related Jobs" :jobs="$store.getters['jobs/getRelated'](`job/${this.job.id}`)" :simple="true" />
+    <Jobs heading="Related Jobs" :jobs="$store.getters['jobs/getFetched'](`job/${this.job.id}`)" :simple="true" />
 
     <BackTop />
   </article>
@@ -116,14 +116,14 @@ export default {
       type: 'workTypes'
     })
 
-    if (!this.$store.getters['jobs/getRelated'](`job/${this.job.id}`)) {
+    if (!this.$store.getters['jobs/getFetched'](`job/${this.job.id}`)) {
       const search = []
 
       for (var i = 0; i < this.workCategories.length; i++) {
         search.push(`SEARCH("${this.workCategories[i].fields.Name}", {Work Categories})`)
       }
 
-      await this.$store.dispatch('jobs/fetchRelated', {
+      await this.$store.dispatch('jobs/fetch', {
         id: `job/${this.job.id}`,
         params: {
           filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.job.id}")`,

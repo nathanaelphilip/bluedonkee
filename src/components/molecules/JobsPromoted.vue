@@ -2,7 +2,7 @@
   <div class="promoted">
     <h3 class="heading">Promoted Jobs</h3>
     <div
-      v-for="job in $store.getters['jobs/getPromoted'].slice(0, 4)"
+      v-for="job in $store.getters['jobs/getFetched']('promoted')"
       :key="job.id"
       class="box"
       >
@@ -18,8 +18,9 @@ export default {
   components: { JobPromoted },
 
   async mounted () {
-    if (this.$store.state.jobs.promoted.length === 0) {
-      await this.$store.dispatch('jobs/fetchPromoted', {
+    if (this.$store.getters['jobs/getFetched']('promoted').length === 0) {
+      await this.$store.dispatch('jobs/fetch', {
+        id: 'promoted',
         params: { filterByFormula: 'SEARCH("Promoted", Status)', pageSize: 4 }
       })
     }

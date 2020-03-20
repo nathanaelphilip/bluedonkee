@@ -1,19 +1,18 @@
 import { unionBy } from 'lodash'
+import Vue from 'vue'
 
 import { getJob, getJobs } from '@/api'
 import {
   JOBS_FETCH,
   JOBS_FETCHED,
   JOBS_LOADING,
-  JOBS_OFFSET,
-  JOBS_PROMOTED_FETCH,
-  JOBS_RELATED_FETCH
+  JOBS_OFFSET
 } from '@/store/mutation-types'
 
 const state = {
-  fetched: [],
+  fetched: {},
   loading: false,
-  offset: '',
+  offset: {},
   repository: [],
   promoted: [],
   related: {}
@@ -29,32 +28,24 @@ const mutations = {
     state.loading = status
   },
 
-  [JOBS_OFFSET] (state, offset) {
-    state.offset = offset
+  [JOBS_OFFSET] (state, { id, offset }) {
+    Vue.set(state.offset, id, offset)
   },
 
-  [JOBS_FETCHED] (state, ids) {
-    const merged = unionBy(state.fetched, ids)
-    state.fetched = merged
-  },
-
-  [JOBS_PROMOTED_FETCH] (state, ids) {
-    state.promoted = ids
-  },
-
-  [JOBS_RELATED_FETCH] (states, { ids, id }) {
-    state.related[id] = ids
+  [JOBS_FETCHED] (state, { id, ids }) {
+    const merged = unionBy(state.fetched[id], ids)
+    Vue.set(state.fetched, id, merged)
   }
 }
 
 const actions = {
-  async fetch ({ commit }, settings) {
-    commit(JOBS_LOADING, 'jobs')
+  async fetch ({ commit }, { id, ...settings }) {
+    commit(JOBS_LOADING, id)
     const { data } = await getJobs(settings)
     const ids = data.records.map(record => record.id)
     commit(JOBS_FETCH, data.records)
-    commit(JOBS_FETCHED, ids)
-    commit(JOBS_OFFSET, data.offset)
+    commit(JOBS_FETCHED, { id, ids })
+    commit(JOBS_OFFSET, { id, offset: data.offset })
     commit(JOBS_LOADING, false)
   },
 
@@ -68,22 +59,6 @@ const actions = {
     const { data } = await getJobs(settings)
     commit(JOBS_FETCH, data.records)
     return data.records[0]
-  },
-
-  async fetchPromoted ({ commit }, settings) {
-    const { data } = await getJobs(settings)
-    const ids = data.records.map(record => record.id)
-    commit(JOBS_FETCH, data.records)
-    commit(JOBS_PROMOTED_FETCH, ids)
-    return ids
-  },
-
-  async fetchRelated ({ commit }, { params, id }) {
-    const { data } = await getJobs({ params })
-    const ids = data.records.map(record => record.id)
-    commit(JOBS_FETCH, data.records)
-    commit(JOBS_RELATED_FETCH, { id, ids })
-    return ids
   }
 }
 
@@ -106,30 +81,26 @@ const getters = {
     })
   },
 
-  getFetched: state => {
-    return state.repository.filter(job => {
-      return state.fetched.includes(job.id)
-    })
-  },
-
-  getPromoted: (state) => {
-    return state.repository.filter(job => {
-      return state.promoted.includes(job.id)
-    })
-  },
-
-  getRelated: state => id => {
-    if (state.related[id]) {
+  getFetched: state => id => {
+    if (typeof (state.fetched[id]) !== 'undefined') {
       return state.repository.filter(job => {
-        return state.related[id].includes(job.id)
+        return state.fetched[id].includes(job.id)
       })
+    }
+
+    if (typeof (state.fetched[id]) === 'undefined') {
+      return []
     }
   },
 
-  getNonPromoted: state => {
-    return state.repository.filter(job => {
-      return !state.promoted.includes(job.id)
-    })
+  getOffset: state => id => {
+    if (typeof (state.offset[id]) !== 'undefined') {
+      return state.offset[id]
+    }
+
+    if (typeof (state.offset[id]) === 'undefined') {
+      return ''
+    }
   }
 }
 

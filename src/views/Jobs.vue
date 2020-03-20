@@ -16,13 +16,13 @@
         :items="$store.state.groups.repository"
       />
     </div>
-    <Jobs :jobs="$store.getters['jobs/getFetched']" />
+    <Jobs :jobs="$store.getters['jobs/getFetched']('jobs')" />
     <Pager
       @load="load"
       :loading="$store.state.jobs.loading === 'jobs'"
-      v-if="$store.state.jobs.offset"
+      v-if="$store.getters['jobs/getOffset']('jobs')"
      />
-    <BackTop v-if="!$store.state.jobs.offset" />
+    <BackTop v-if="!$store.getters['jobs/getOffset']('jobs')" />
   </section>
 </template>
 
@@ -74,7 +74,7 @@ export default {
 
     await this.$store.dispatch('groups/fetch')
 
-    if (!this.$store.getters['jobs/getFetched'].length) {
+    if (!this.$store.getters['jobs/getFetched']('jobs').length) {
       await this.load()
     }
   },
@@ -82,10 +82,11 @@ export default {
   methods: {
     async load () {
       await this.$store.dispatch('jobs/fetch', {
+        id: 'jobs',
         params: {
           pageSize,
-          sort: [{ field: 'Updated', direction: 'desc' }],
-          offset: this.$store.state.jobs.offset
+          sort: [{ field: 'Created', direction: 'desc' }],
+          offset: this.$store.getters['jobs/getOffset']('jobs')
         }
       })
     }
