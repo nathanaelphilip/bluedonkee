@@ -1,6 +1,6 @@
 <template>
   <section v-if="!loading">
-    <Intro :heading="`Location: ${location.fields.City}`" />
+    <Intro :back="{ name: 'jobs' }" :heading="`Location: ${location.fields.City}`" />
     <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
     <Pager
       @load="load"

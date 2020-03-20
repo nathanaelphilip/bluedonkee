@@ -1,47 +1,67 @@
 <template>
   <section v-if="!loading">
-    <Intro :heading="`Location: ${location.fields.City}`" />
-    <Campaigns :campaigns="campaigns" />
+    <Intro :back="{ name: 'campaigns' }" :heading="`Location: ${location.fields.City}`" />
+    <Campaigns :campaigns="$store.getters['campaigns/getFetched'](id)" />
+    <Pager
+      @load="load"
+      :loading="$store.state.campaigns.loading === id"
+      v-if="$store.getters['campaigns/getOffset'](id)"
+     />
+    <BackTop v-if="!$store.getters['campaigns/getOffset'](id)" />
   </section>
 </template>
 
 <script>
 import {
-  getByIds,
   getBySlug
 } from '@/store/helpers'
 
+import BackTop from '@/components/molecules/BackTop'
 import Intro from '@/components/molecules/Intro'
 import Campaigns from '@/components/molecules/Campaigns'
+import Pager from '@/components/molecules/Pager'
+
+const pageSize = 20
 
 export default {
   name: 'views-location-campaigns',
-  components: { Intro, Campaigns },
+  components: { BackTop, Intro, Campaigns, Pager },
 
   data () {
     return {
+      id: false,
       loading: true,
-      location: {},
-      campaigns: []
+      location: {}
     }
   },
 
   async mounted () {
+    this.id = `campaigns/location/${this.$route.params.slug}`
+
     this.location = await getBySlug({
       slug: this.$route.params.slug,
       type: 'locations'
     })
 
-    this.campaigns = this.location.fields.Campaigns ? await getByIds({
-      ids: this.location.fields.Campaigns,
-      type: 'campaigns'
-    }) : []
-
-    this.campaigns = this.campaigns.sort((a, b) => {
-      return a.fields.Name > b.fields.Name ? 1 : -1
-    })
+    if (!this.$store.getters['campaigns/getFetched'](this.id).length) {
+      await this.load()
+    }
 
     this.loading = false
+  },
+
+  methods: {
+    async load () {
+      await this.$store.dispatch('campaigns/fetch', {
+        id: this.id,
+        params: {
+          filterByFormula: `SEARCH("${this.location.fields.City}", {Location})`,
+          pageSize,
+          sort: [{ field: 'Name', direction: 'asc' }],
+          offset: this.$store.getters['campaigns/getOffset'](this.id)
+        }
+      })
+    }
   }
 }
 </script>
