@@ -1,18 +1,19 @@
 import { unionBy } from 'lodash'
+import Vue from 'vue'
 
 import { getCampaigns, getCampaign } from '@/api'
 import {
   CAMPAIGNS_FETCH,
+  CAMPAIGNS_FETCHED,
   CAMPAIGNS_LOADING,
-  CAMPAIGNS_OFFSET,
-  CAMPAIGNS_RELATED_FETCH
+  CAMPAIGNS_OFFSET
 } from '@/store/mutation-types'
 
 const state = {
   loading: false,
-  offset: '',
+  offset: {},
   repository: [],
-  related: {}
+  fetched: {}
 }
 
 const mutations = {
@@ -25,21 +26,24 @@ const mutations = {
     state.loading = status
   },
 
-  [CAMPAIGNS_OFFSET] (state, offset) {
-    state.offset = offset
+  [CAMPAIGNS_OFFSET] (state, { id, offset }) {
+    Vue.set(state.offset, id, offset)
   },
 
-  [CAMPAIGNS_RELATED_FETCH] (state, { ids, id }) {
-    state.related[id] = ids
+  [CAMPAIGNS_FETCHED] (state, { ids, id }) {
+    const merged = unionBy(state.fetched[id], ids)
+    Vue.set(state.fetched, id, merged)
   }
 }
 
 const actions = {
-  async fetch ({ commit }, settings) {
-    commit(CAMPAIGNS_LOADING, 'campaigns')
+  async fetch ({ commit }, { id, ...settings }) {
+    commit(CAMPAIGNS_LOADING, id)
     const { data } = await getCampaigns(settings)
+    const ids = data.records.map(record => record.id)
     commit(CAMPAIGNS_FETCH, data.records)
-    commit(CAMPAIGNS_OFFSET, data.offset)
+    commit(CAMPAIGNS_FETCHED, { id, ids })
+    commit(CAMPAIGNS_OFFSET, { id, offset: data.offset })
     commit(CAMPAIGNS_LOADING, false)
   },
 
@@ -53,14 +57,6 @@ const actions = {
     const { data } = await getCampaign(id)
     commit(CAMPAIGNS_FETCH, [data])
     return data
-  },
-
-  async fetchRelated ({ commit }, { params, id }) {
-    const { data } = await getCampaigns({ params })
-    const ids = data.records.map(record => record.id)
-    commit(CAMPAIGNS_FETCH, data.records)
-    commit(CAMPAIGNS_RELATED_FETCH, { id, ids })
-    return ids
   }
 }
 
@@ -73,17 +69,25 @@ const getters = {
     return state.repository.find(campaign => campaign.fields.Slug === slug)
   },
 
-  sortAlphabetically: state => {
-    return state.repository.sort((a, b) => {
-      return a.fields.Name > b.fields.Name ? 1 : -1
-    })
+  getFetched: state => id => {
+    if (typeof (state.fetched[id]) !== 'undefined') {
+      return state.repository.filter(campaign => {
+        return state.fetched[id].includes(campaign.id)
+      })
+    }
+
+    if (typeof (state.fetched[id]) === 'undefined') {
+      return []
+    }
   },
 
-  getRelated: state => id => {
-    if (state.related[id]) {
-      return state.repository.filter(campaign => {
-        return state.related[id].includes(campaign.id)
-      })
+  getOffset: state => id => {
+    if (typeof (state.offset[id]) !== 'undefined') {
+      return state.offset[id]
+    }
+
+    if (typeof (state.offset[id]) === 'undefined') {
+      return ''
     }
   }
 }

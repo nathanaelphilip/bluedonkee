@@ -13,13 +13,13 @@
         :items="$store.state.campaigns.repository"
       />
     </div>
-    <Campaigns :campaigns="$store.getters['campaigns/sortAlphabetically']" />
+    <Campaigns :campaigns="$store.getters['campaigns/getFetched']('campaigns')" />
     <Pager
       @load="load"
       :loading="$store.state.campaigns.loading === 'campaigns'"
-      v-if="$store.state.campaigns.offset"
+      v-if="$store.getters['campaigns/getOffset']('campaigns')"
     />
-    <BackTop v-if="!$store.state.campaigns.offset" />
+    <BackTop v-if="!$store.getters['campaigns/getOffset']('campaigns')" />
   </div>
 </template>
 
@@ -55,16 +55,19 @@ export default {
       await this.$store.dispatch('offices/fetch')
     }
 
-    await this.load()
+    if (!this.$store.getters['campaigns/getFetched']('campaigns').length) {
+      await this.load()
+    }
   },
 
   methods: {
     async load () {
       await this.$store.dispatch('campaigns/fetch', {
+        id: 'campaigns',
         params: {
           pageSize,
           sort: [{ field: 'Name', direction: 'asc' }],
-          offset: this.$store.state.campaigns.offset
+          offset: this.$store.getters['campaigns/getOffset']('campaigns')
         }
       })
     }
