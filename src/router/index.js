@@ -18,6 +18,11 @@ const routes = [
       component: () => import(/* webpackChunkName: "jobs" */ '../views/Jobs.vue')
     },
     {
+      path: 'remote',
+      name: 'workRemote',
+      component: () => import(/* webpackChunkName: "remote" */ '../views/WorkRemote.vue')
+    },
+    {
       path: ':slug',
       name: 'job',
       component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')

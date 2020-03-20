@@ -69,6 +69,12 @@
          :name="office.fields.Name"
          route="office"
         />
+        <Tag
+          key="remote"
+          name="Remote"
+          v-if="remote"
+          route="workRemote"
+        />
      </Tags>
     </div>
   </header>
@@ -94,6 +100,7 @@ export default {
     'locations',
     'locationroute',
     'offices',
+    'remote',
     'twitter',
     'website',
     'workCategories',

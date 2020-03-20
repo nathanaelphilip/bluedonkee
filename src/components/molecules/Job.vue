@@ -52,6 +52,12 @@
           :slug="item.fields.Slug"
           route="workLevel"
         />
+        <Tag
+          v-if="job.fields.Remote"
+          key="remote"
+          name="Remote"
+          route="workRemote"
+        />
       </Tags>
     </div>
   </article>
