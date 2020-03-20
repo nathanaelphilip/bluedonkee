@@ -22,7 +22,7 @@
         </JobsEmpty>
       </template>
     </Jobs>
-    <Groups heading="Related Groups" :groups="$store.getters['groups/getRelated'](`group/${this.group.id}`)" />
+    <Groups heading="Related Groups" :groups="$store.getters['groups/getFetched'](this.id)" />
     <BackTop />
   </article>
 </template>
@@ -47,6 +47,7 @@ export default {
 
   data () {
     return {
+      id: false,
       campaigns: [],
       categories: [],
       group: {},
@@ -63,6 +64,8 @@ export default {
   },
 
   async mounted () {
+    this.id = `group/${this.group.id}`
+
     this.group = await getBySlug({
       slug: this.$route.params.slug,
       type: 'groups'
@@ -83,15 +86,15 @@ export default {
       type: 'groupCategories'
     }) : []
 
-    if (!this.$store.getters['groups/getRelated'](`group/${this.group.id}`)) {
+    if (!this.$store.getters['groups/getFetched'](this.id).length) {
       const search = []
 
       for (var i = 0; i < this.categories.length; i++) {
         search.push(`SEARCH("${this.categories[i].fields.Name}", {Groups Categories})`)
       }
 
-      await this.$store.dispatch('groups/fetchRelated', {
-        id: `group/${this.group.id}`,
+      await this.$store.dispatch('groups/fetch', {
+        id: this.id,
         params: {
           filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.group.id}")`,
           maxRecords: 3

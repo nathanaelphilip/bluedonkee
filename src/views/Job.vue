@@ -14,6 +14,7 @@
         :workCategories="workCategories"
         :workLevels="workLevels"
         :workTypes="workTypes"
+        :remote="job.fields.Remote"
         :website="group.fields.Website"
         :twitter="group.fields.Twitter"
       />

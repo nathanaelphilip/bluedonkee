@@ -29,7 +29,7 @@
         </JobsEmpty>
       </template>
     </Jobs>
-    <Campaigns heading="Related Campaigns" :campaigns="$store.getters['campaigns/getRelated'](`campaign/${this.campaign.id}`)" />
+    <Campaigns heading="Related Campaigns" :campaigns="$store.getters['campaigns/getFetched'](id)" />
     <BackTop />
   </article>
 </template>
@@ -66,6 +66,7 @@ export default {
 
   data () {
     return {
+      id: false,
       loading: true,
       campaign: {},
       locations: [],
@@ -83,6 +84,8 @@ export default {
   },
 
   async mounted () {
+    this.id = `campaign/${this.campaign.id}`
+
     this.campaign = await getBySlug({
       slug: this.$route.params.slug,
       type: 'campaigns'
@@ -103,15 +106,15 @@ export default {
       type: 'jobs'
     }) : []
 
-    if (!this.$store.getters['campaigns/getRelated'](`campaign/${this.campaign.id}`)) {
+    if (!this.$store.getters['campaigns/getFetched'](this.id).length) {
       const search = []
 
       for (var i = 0; i < this.offices.length; i++) {
         search.push(`SEARCH("${this.offices[i].fields.Name}", {Office})`)
       }
 
-      await this.$store.dispatch('campaigns/fetchRelated', {
-        id: `campaign/${this.campaign.id}`,
+      await this.$store.dispatch('campaigns/fetch', {
+        id: this.id,
         params: {
           filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.campaign.id}")`,
           maxRecords: 3
