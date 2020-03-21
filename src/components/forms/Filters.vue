@@ -31,7 +31,7 @@
         <div class="modalBox">
           <CheckTags
             :accepted="$store.getters['filters/accepted']('locations')"
-            :options="$store.state.states.repository"
+            :options="$store.getters['states/sortAlphabetically']"
             keyLabel="fields.Abbreviation"
             keyValue="id"
             @cancel="modal = false"
