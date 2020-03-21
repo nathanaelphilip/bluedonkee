@@ -3,12 +3,12 @@
     <div class="actions">
       <div class="group">
         <ButtonSecondary
-          @click.native.prevent="modal = 'location'"
-          :class="{'bugged': $store.getters['filters/accepted']('location').length}"
+          @click.native.prevent="modal = 'locations'"
+          :class="{'bugged': $store.getters['filters/accepted']('locations').length}"
         >
           Location
-          <span v-if="$store.getters['filters/accepted']('location').length" class="bug">
-            {{ $store.getters['filters/accepted']('location').length }}
+          <span v-if="$store.getters['filters/accepted']('locations').length" class="bug">
+            {{ $store.getters['filters/accepted']('locations').length }}
           </span>
         </ButtonSecondary>
         <ButtonSecondary
@@ -27,15 +27,15 @@
       </button>
     </div>
     <portal to="modal" multiple>
-      <Modal @close="modal = false" :open="modal === 'location'" heading="Location">
+      <Modal @close="modal = false" :open="modal === 'locations'" heading="Location">
         <div class="modalBox">
           <CheckTags
-            :accepted="$store.getters['filters/accepted']('location')"
+            :accepted="$store.getters['filters/accepted']('locations')"
             :options="$store.state.states.repository"
-            keyLabel="Abbreviation"
-            keyValue="Slug"
+            keyLabel="fields.Abbreviation"
+            keyValue="id"
             @cancel="modal = false"
-            @apply="items => apply('categories', items)"
+            @apply="items => apply('locations', items)"
             layout="grid"
           />
         </div>
@@ -45,8 +45,8 @@
           <CheckTags
             :accepted="$store.getters['filters/accepted']('categories')"
             :options="$store.getters['workCategories/sortAlphabetically']"
-            keyLabel="Name"
-            keyValue="Name"
+            keyLabel="fields.Name"
+            keyValue="fields.Name"
             @cancel="modal = false"
             @apply="items => apply('categories', items)"
             layout="flex"

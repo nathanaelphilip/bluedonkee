@@ -4,9 +4,9 @@
       <CheckTag
         v-for="(tag, index) in options"
         :key="`tag-${index}`"
-        :label="tag.fields[keyLabel]"
-        :value="tag.fields[keyValue]"
-        :checked="selected.includes(tag.fields[keyValue])"
+        :label="get(tag, keyLabel)"
+        :value="get(tag, keyValue)"
+        :checked="selected.includes(get(tag, keyValue))"
         @toggle="value => toggle(value)"
       />
     </div>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { get } from 'lodash'
+
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import CheckTag from '@/components/forms/CheckTag'
@@ -41,6 +43,8 @@ export default {
   },
 
   methods: {
+    get,
+
     toggle (value) {
       const index = this.selected.findIndex(item => {
         return item === value

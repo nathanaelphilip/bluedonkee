@@ -8,7 +8,7 @@ import {
 const state = {
   accepted: {
     categories: [],
-    location: [],
+    locations: [],
     type: []
   }
 }
@@ -21,7 +21,7 @@ const mutations = {
   [FILTERS_CLEAR] (state) {
     state.accepted = {
       categories: [],
-      location: [],
+      locations: [],
       type: []
     }
   }
@@ -43,19 +43,36 @@ const getters = {
   },
 
   filtered: state => {
-    return state.accepted.categories.length || state.accepted.location.length || state.accepted.type.length
+    return state.accepted.categories.length || state.accepted.locations.length || state.accepted.type.length
   },
 
-  filter: state => {
+  filter: (state, getters, rootState) => {
     let categories = []
+    let cities = []
+    let filters = []
 
     if (state.accepted.categories.length) {
       for (var i = 0; i < state.accepted.categories.length; i++) {
         categories.push(`{Work Categories} = '${state.accepted.categories[i]}'`)
       }
+
+      filters.push(`OR(${categories.join(',')})`)
     }
 
-    return `OR(${categories.join(',')})`
+    if (state.accepted.locations.length) {
+      const filtered = rootState.locations.repository.filter(location => {
+        const stateId = location.fields.State || false
+        return stateId ? state.accepted.locations.includes(stateId[0]) : false
+      })
+
+      for (var j = 0; j < filtered.length; j++) {
+        cities.push(`{Location} = '${filtered[j].fields.City}'`)
+      }
+
+      filters.push(`OR(${cities.join(',')})`)
+    }
+
+    return `OR(${filters.join(',')})`
   },
 
   key: state => {

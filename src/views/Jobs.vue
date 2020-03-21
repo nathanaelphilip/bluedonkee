@@ -69,9 +69,11 @@ export default {
 
   created () {
     this.$store.watch(
-      (state, getters) => getters['filters/filtered'],
+      (state, getters) => getters['filters/key'],
       (newValue, oldValue) => {
-        this.loadFiltered()
+        if (newValue !== oldValue) {
+          this.loadFiltered()
+        }
       }
     )
   },
