@@ -6,12 +6,14 @@
         :key="`tag-${index}`"
         :label="tag.fields[keyLabel]"
         :value="tag.fields[keyValue]"
+        :checked="selected.includes(tag.fields[keyValue])"
+        @toggle="value => toggle(value)"
       />
     </div>
     <div class="actions">
       <ButtonSecondary @click.native.prevent="$emit('cancel')">Cancel</ButtonSecondary>
       <ButtonPrimary
-        @click.native.prevent="$emit('apply')"
+        @click.native.prevent="$emit('apply', selected)"
         >
         Apply
       </ButtonPrimary>
@@ -25,8 +27,34 @@ import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import CheckTag from '@/components/forms/CheckTag'
 
 export default {
-  props: ['options', 'keyLabel', 'keyValue', 'layout'],
-  components: { ButtonPrimary, ButtonSecondary, CheckTag }
+  props: ['accepted', 'options', 'keyLabel', 'keyValue', 'layout'],
+  components: { ButtonPrimary, ButtonSecondary, CheckTag },
+
+  data () {
+    return {
+      selected: []
+    }
+  },
+
+  mounted () {
+    this.selected = JSON.parse(JSON.stringify(this.accepted))
+  },
+
+  methods: {
+    toggle (value) {
+      const index = this.selected.findIndex(item => {
+        return item === value
+      })
+
+      if (index !== -1) {
+        this.$delete(this.selected, index)
+      }
+
+      if (index === -1) {
+        this.selected.push(value)
+      }
+    }
+  }
 }
 </script>
 

@@ -38,9 +38,7 @@ export default {
   components: { ButtonPrimary, ButtonSecondary, Option, Processing },
 
   methods: {
-    get (object, property) {
-      return get(object, property)
-    }
+    get
   }
 }
 </script>

@@ -9,7 +9,7 @@
         <slot></slot>
       </div>
     </div>
-    <Filters />
+    <Filters v-if="filter" />
   </header>
 </template>
 
@@ -18,7 +18,7 @@ import ButtonBack from '@/components/atoms/ButtonBack'
 import Filters from '@/components/forms/Filters'
 
 export default {
-  props: ['back', 'heading'],
+  props: ['back', 'heading', 'filter'],
   components: { ButtonBack, Filters }
 }
 </script>
