@@ -9,7 +9,7 @@ const state = {
   accepted: {
     categories: [],
     locations: [],
-    type: []
+    type: false
   }
 }
 
@@ -22,7 +22,7 @@ const mutations = {
     state.accepted = {
       categories: [],
       locations: [],
-      type: []
+      type: false
     }
   }
 }
@@ -70,6 +70,10 @@ const getters = {
       }
 
       filters.push(`OR(${cities.join(',')})`)
+    }
+
+    if (state.accepted.type) {
+      filters.push(`{Work Types} = '${state.accepted.type}'`)
     }
 
     return `OR(${filters.join(',')})`

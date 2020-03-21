@@ -20,7 +20,15 @@
             {{ $store.getters['filters/accepted']('categories').length }}
           </span>
         </ButtonSecondary>
-        <ButtonSecondary @click.native.prevent="modal = 'type'">Work Type</ButtonSecondary>
+        <ButtonSecondary
+          @click.native.prevent="modal = 'type'"
+          :class="{'bugged': $store.getters['filters/accepted']('type')}"
+          >
+          Work Type
+          <span v-if="$store.getters['filters/accepted']('type')" class="bug">
+            1
+          </span>
+        </ButtonSecondary>
       </div>
       <button @click="$store.dispatch('filters/clear')" class="clear">
         Clear <div class="reset"><IconClose width="10" height="10" /></div>
@@ -55,10 +63,12 @@
       </Modal>
       <Modal @close="modal = false" :open="modal === 'type'" heading="Work Type">
         <OptionsList
+          :accepted="$store.getters['filters/accepted']('type')"
           :options="$store.getters['workTypes/sortAlphabetically']"
           keyLabel="fields.Name"
           keyValue="fields.Slug"
           @close="modal = false"
+          @process="items => apply('type', items)"
         />
       </Modal>
     </portal>

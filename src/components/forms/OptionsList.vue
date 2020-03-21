@@ -7,7 +7,7 @@
         :value="get(option, keyValue)"
         :selected="selected === get(option, keyValue)"
         :name="_uid"
-        @change="value => $emit('selected', value)"
+        @change="value => selected = value"
        >
        {{ get(option, keyLabel) }}
      </Option>
@@ -34,8 +34,20 @@ import Option from '@/components/atoms/Option'
 import Processing from '@/components/forms/Processing'
 
 export default {
-  props: [ 'options', 'status', 'selected', 'keyLabel', 'keyValue' ],
+  props: [ 'accepted', 'options', 'status', 'keyLabel', 'keyValue' ],
   components: { ButtonPrimary, ButtonSecondary, Option, Processing },
+
+  data () {
+    return {
+      selected: false
+    }
+  },
+
+  created () {
+    if (this.accepted) {
+      this.selected = JSON.parse(JSON.stringify(this.accepted))
+    }
+  },
 
   methods: {
     get
