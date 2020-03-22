@@ -22,7 +22,7 @@ const mutations = {
     state.accepted = {
       categories: [],
       locations: [],
-      type: []
+      types: []
     }
   }
 }
@@ -81,7 +81,7 @@ const getters = {
       filters.push(`OR(${types.join(',')})`)
     }
 
-    return `OR(${filters.join(',')})`
+    return `AND(${filters.join(',')})`
   },
 
   key: state => {
