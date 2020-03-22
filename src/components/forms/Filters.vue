@@ -21,11 +21,11 @@
           </span>
         </ButtonSecondary>
         <ButtonSecondary
-          @click.native.prevent="modal = 'type'"
-          :class="{'bugged': $store.getters['filters/accepted']('type')}"
+          @click.native.prevent="modal = 'types'"
+          :class="{'bugged': $store.getters['filters/accepted']('types').length}"
           >
           Work Type
-          <span v-if="$store.getters['filters/accepted']('type')" class="bug">
+          <span v-if="$store.getters['filters/accepted']('types').length" class="bug">
             1
           </span>
         </ButtonSecondary>
@@ -61,14 +61,15 @@
           />
         </div>
       </Modal>
-      <Modal @close="modal = false" :open="modal === 'type'" heading="Work Type">
-        <OptionsList
-          :accepted="$store.getters['filters/accepted']('type')"
+      <Modal @close="modal = false" :open="modal === 'types'" heading="Work Type">
+        <CheckTags
+          :accepted="$store.getters['filters/accepted']('types')"
           :options="$store.getters['workTypes/sortAlphabetically']"
           keyLabel="fields.Name"
-          keyValue="fields.Slug"
-          @close="modal = false"
-          @process="items => apply('type', items)"
+          keyValue="fields.Name"
+          @cancel="modal = false"
+          @apply="items => apply('types', items)"
+          layout="flex"
         />
       </Modal>
     </portal>
@@ -80,10 +81,9 @@ import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import CheckTags from '@/components/forms/CheckTags'
 import IconClose from '@/components/icons/Close'
 import Modal from '@/components/molecules/Modal'
-import OptionsList from '@/components/forms/OptionsList'
 
 export default {
-  components: { ButtonSecondary, CheckTags, IconClose, Modal, OptionsList },
+  components: { ButtonSecondary, CheckTags, IconClose, Modal },
 
   data () {
     return {

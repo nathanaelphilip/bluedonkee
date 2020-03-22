@@ -9,7 +9,7 @@ const state = {
   accepted: {
     categories: [],
     locations: [],
-    type: false
+    types: []
   }
 }
 
@@ -22,7 +22,7 @@ const mutations = {
     state.accepted = {
       categories: [],
       locations: [],
-      type: false
+      type: []
     }
   }
 }
@@ -43,16 +43,17 @@ const getters = {
   },
 
   filtered: state => {
-    return state.accepted.categories.length || state.accepted.locations.length || state.accepted.type.length
+    return state.accepted.categories.length || state.accepted.locations.length || state.accepted.types.length
   },
 
   filter: (state, getters, rootState) => {
     let categories = []
     let cities = []
+    let types = []
     let filters = []
 
     if (state.accepted.categories.length) {
-      for (var i = 0; i < state.accepted.categories.length; i++) {
+      for (let i = 0; i < state.accepted.categories.length; i++) {
         categories.push(`{Work Categories} = '${state.accepted.categories[i]}'`)
       }
 
@@ -65,15 +66,19 @@ const getters = {
         return stateId ? state.accepted.locations.includes(stateId[0]) : false
       })
 
-      for (var j = 0; j < filtered.length; j++) {
+      for (let j = 0; j < filtered.length; j++) {
         cities.push(`{Location} = '${filtered[j].fields.City}'`)
       }
 
       filters.push(`OR(${cities.join(',')})`)
     }
 
-    if (state.accepted.type) {
-      filters.push(`{Work Types} = '${state.accepted.type}'`)
+    if (state.accepted.types.length) {
+      for (let k = 0; k < state.accepted.types.length; k++) {
+        types.push(`{Work Types} = '${state.accepted.types[k]}'`)
+      }
+
+      filters.push(`OR(${types.join(',')})`)
     }
 
     return `OR(${filters.join(',')})`
