@@ -5,9 +5,9 @@
         v-for="option in options"
         :key="get(option, keyValue)"
         :value="get(option, keyValue)"
-        :selected="selected === get(option, keyValue)"
+        :selected="get(selected, keyValue) === get(option, keyValue)"
         :name="_uid"
-        @change="value => selected = value"
+        @change="selected = option"
        >
        {{ get(option, keyLabel) }}
      </Option>
