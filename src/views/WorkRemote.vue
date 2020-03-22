@@ -48,7 +48,7 @@ export default {
         params: {
           filterByFormula: `{Remote}=1`,
           pageSize,
-          sort: [{ field: 'Created', direction: 'desc' }],
+          sort: [{ field: 'Post Date', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)
         }
       })

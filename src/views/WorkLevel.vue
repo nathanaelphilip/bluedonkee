@@ -57,7 +57,7 @@ export default {
         params: {
           filterByFormula: `SEARCH("${this.level.fields.Name}", {Work Levels})`,
           pageSize,
-          sort: [{ field: 'Created', direction: 'desc' }],
+          sort: [{ field: 'Post Date', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)
         }
       })

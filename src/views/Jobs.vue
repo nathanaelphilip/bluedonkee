@@ -109,7 +109,7 @@ export default {
         params: {
           filterByFormula: this.$store.getters['filters/filter'],
           pageSize,
-          sort: [{ field: 'Created', direction: 'desc' }],
+          sort: [{ field: 'Post Date', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.$store.getters['filters/key'])
         }
       })
@@ -120,7 +120,7 @@ export default {
         id: 'jobs',
         params: {
           pageSize,
-          sort: [{ field: 'Created', direction: 'desc' }],
+          sort: [{ field: 'Post Date', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset']('jobs')
         }
       })

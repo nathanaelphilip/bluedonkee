@@ -57,7 +57,7 @@ export default {
         params: {
           filterByFormula: `SEARCH("${this.category.fields.Name}", {Work Categories})`,
           pageSize,
-          sort: [{ field: 'Created', direction: 'desc' }],
+          sort: [{ field: 'Post Date', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)
         }
       })

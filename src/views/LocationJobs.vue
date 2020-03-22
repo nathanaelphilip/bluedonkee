@@ -57,7 +57,7 @@ export default {
         params: {
           filterByFormula: `SEARCH("${this.location.fields.City}", {Location})`,
           pageSize,
-          sort: [{ field: 'Created', direction: 'desc' }],
+          sort: [{ field: 'Post Date', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)
         }
       })

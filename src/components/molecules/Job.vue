@@ -117,7 +117,7 @@ export default {
     },
 
     date () {
-      return moment(this.job.fields.Created).format('MMM DD')
+      return moment(this.job.fields['Post Date']).format('MMM DD')
     },
 
     description () {
