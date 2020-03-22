@@ -135,7 +135,7 @@ export default {
 
     if (this.job.fields.Campaigns) {
       this.campaigns = await getByIds({
-        ids: this.job.fields.Campaign,
+        ids: this.job.fields.Campaigns,
         type: 'campaigns'
       })
     }

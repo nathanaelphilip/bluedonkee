@@ -84,7 +84,7 @@ export default {
   },
 
   async mounted () {
-    this.id = `campaign/${this.campaign.id}`
+    this.id = `campaign/${this.$route.params.slug}`
 
     this.campaign = await getBySlug({
       slug: this.$route.params.slug,
