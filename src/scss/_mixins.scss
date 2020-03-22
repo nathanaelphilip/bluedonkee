@@ -46,6 +46,7 @@
   font-weight: 500;
   padding: 12px 8px;
 
+  &:hover {border-color: $GREY}
   &.checked {border-color: $BLUE}
 }
 
