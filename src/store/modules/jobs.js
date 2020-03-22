@@ -71,29 +71,10 @@ const getters = {
     return state.repository.find(job => job.fields.Slug === slug)
   },
 
-  getByEntityAndSlug: (state, getters, rootState) => ({ entity, slug }) => {
-    let entityType = false
-
-    const isGroup = rootState.groups.repository.findIndex((group) => {
-      return group.fields.Slug === entity
-    })
-
-    const isCampaign = rootState.campaigns.repository.findIndex((campaign) => {
-      return campaign.fields.Slug === entity
-    })
-
-    if (isGroup !== -1) {
-      entityType = 'Groups'
-    }
-
-    if (isCampaign !== -1) {
-      entityType = 'Campaigns'
-    }
-
-    console.log(entity, isGroup, isCampaign, entityType)
-
+  getByEntityAndSlug: (state, getters, rootState) => ({ entity, entityType, slug }) => {
     return state.repository.find(job => {
-      return job.fields.Slug === slug
+      const type = job.fields[entityType] ? job.fields[entityType].Slug : ''
+      return job.fields.Slug === slug && type === entity
     })
   },
 
