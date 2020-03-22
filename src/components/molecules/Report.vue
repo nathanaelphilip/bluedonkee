@@ -7,13 +7,14 @@
         <OptionsList
           :options="options"
           :status="status"
-          :selected="selected"
-          @selected="value => selected = value"
+          :accepted="accepted"
+          keyLabel="label"
+          keyValue="id"
           @close="open.modal = false"
           @process="report"
         >
           <TextArea
-            v-if="selected === 4"
+            v-if="accepted === 4"
             placeholder="Leave note"
             @input="value => note = value"
             :value="note"
@@ -35,7 +36,7 @@ import { postFlagged } from '@/api'
 
 import Flash from '@/components/molecules/Flash'
 import Modal from '@/components/molecules/Modal'
-import OptionsList from '@/components/molecules/OptionsList'
+import OptionsList from '@/components/forms/OptionsList'
 import TextArea from '@/components/forms/TextArea'
 
 const options = [{
@@ -70,26 +71,19 @@ export default {
       },
       options,
       note: '',
-      selected: false,
+      accepted: false,
       status: false
     }
   },
 
-  computed: {
-    reason () {
-      return this.options.find((option) => {
-        return option.id === this.selected
-      }).label
-    }
-  },
-
   methods: {
-    async report (value) {
+    async report (option) {
       this.status = 'processing'
+      this.accepted = option
 
       try {
         const { data } = await postFlagged({
-          Reason: this.reason,
+          Reason: this.accepted.label,
           Note: this.note,
           Jobs: [this.id]
         })

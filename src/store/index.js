@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import app from './modules/app'
 import campaigns from './modules/campaigns'
 import cms from './modules/cms'
+import filters from './modules/filters'
 import groups from './modules/groups'
 import groupCategories from './modules/groupCategories'
 import jobs from './modules/jobs'
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     app,
     campaigns,
     cms,
+    filters,
     groups,
     groupCategories,
     jobs,

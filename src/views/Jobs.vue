@@ -1,7 +1,7 @@
 <template>
   <section class="home">
-    <Intro heading="Jobs">
-      <ButtonSecondary>Filter</ButtonSecondary>
+    <Intro heading="Jobs" :filter="filter">
+      <ButtonSecondary @click.native.prevent="filter = !filter">Filter</ButtonSecondary>
       <LinkPrimary :to="{name: 'postJob'}">Post Job</LinkPrimary>
     </Intro>
     <div
@@ -16,13 +16,24 @@
         :items="$store.getters['groups/getFetched']('groups')"
       />
     </div>
-    <Jobs :jobs="$store.getters['jobs/getFetched']('jobs')" />
-    <Pager
-      @load="load"
-      :loading="$store.state.jobs.loading === 'jobs'"
-      v-if="$store.getters['jobs/getOffset']('jobs')"
-     />
-    <BackTop v-if="!$store.getters['jobs/getOffset']('jobs')" />
+    <template v-if="$store.getters['filters/filtered']">
+      <Jobs :jobs="$store.getters['jobs/getFetched']($store.getters['filters/key'])" />
+      <Pager
+        @load="loadFiltered"
+        :loading="$store.state.jobs.loading === $store.getters['filters/key']"
+        v-if="$store.getters['jobs/getOffset']($store.getters['filters/key'])"
+       />
+      <BackTop v-if="!$store.getters['jobs/getOffset']($store.getters['filters/key'])" />
+    </template>
+    <template v-if="!$store.getters['filters/filtered']">
+      <Jobs :jobs="$store.getters['jobs/getFetched']('jobs')" />
+      <Pager
+        @load="load"
+        :loading="$store.state.jobs.loading === 'jobs'"
+        v-if="$store.getters['jobs/getOffset']('jobs')"
+       />
+      <BackTop v-if="!$store.getters['jobs/getOffset']('jobs')" />
+    </template>
   </section>
 </template>
 
@@ -51,8 +62,20 @@ export default {
 
   data () {
     return {
+      filter: false,
       closed: false
     }
+  },
+
+  created () {
+    this.$store.watch(
+      (state, getters) => getters['filters/key'],
+      (newValue, oldValue) => {
+        if (newValue !== oldValue) {
+          this.loadFiltered()
+        }
+      }
+    )
   },
 
   async mounted () {
@@ -80,6 +103,18 @@ export default {
   },
 
   methods: {
+    async loadFiltered () {
+      await this.$store.dispatch('jobs/fetch', {
+        id: this.$store.getters['filters/key'],
+        params: {
+          filterByFormula: this.$store.getters['filters/filter'],
+          pageSize,
+          sort: [{ field: 'Created', direction: 'desc' }],
+          offset: this.$store.getters['jobs/getOffset'](this.$store.getters['filters/key'])
+        }
+      })
+    },
+
     async load () {
       await this.$store.dispatch('jobs/fetch', {
         id: 'jobs',

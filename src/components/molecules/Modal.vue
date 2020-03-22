@@ -40,14 +40,14 @@ export default {
     @include Shadow;
     background: $WHITE;
     min-width: 320px;
-    padding: 20px;
+    padding: grid(5);
   }
 
   .header {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: grid(5);
   }
 
   .heading {
