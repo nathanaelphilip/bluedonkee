@@ -13,11 +13,11 @@
     <h2 class="heading">{{ heading }}</h2>
 
     <div class="info">
-      <template v-if="group">
+      <template v-if="entity">
         <router-link :to="{
-          name: 'group',
-          params: {slug: group.fields.Slug}
-          }">{{ group.fields.Name }}
+          name: entityType,
+          params: {slug: entity.fields.Slug}
+          }">{{ entity.fields.Name }}
         </router-link> –
       </template>
       <template v-if="locations && locations.length">
@@ -94,7 +94,8 @@ export default {
   props: [
     'avatar',
     'description',
-    'group',
+    'entity',
+    'entityType',
     'groupCategories',
     'heading',
     'locations',

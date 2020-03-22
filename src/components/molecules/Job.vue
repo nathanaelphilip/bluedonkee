@@ -7,13 +7,13 @@
       <header class="header">
         <div class="box">
           <h2 class="heading">
-            <router-link :to="{ name: 'job', params: { slug: job.fields.Slug } }">
+            <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
               {{ job.fields.Title }}
             </router-link>
           </h2>
-          <div class="meta" v-if="group">
-            <router-link :to="{ name: 'group', params: { slug: group.fields.Slug } }">
-              {{ group.fields.Name }}
+          <div class="meta" v-if="entity">
+            <router-link :to="{ name: entityType, params: { slug: entity.fields.Slug } }">
+              {{ entity.fields.Name }}
             </router-link>
             <template v-if="locations.length">
               -
@@ -85,6 +85,7 @@ export default {
 
   data () {
     return {
+      campaigns: [],
       loading: true,
       groups: [],
       locations: [],
@@ -95,12 +96,24 @@ export default {
   },
 
   computed: {
-    group () {
-      return this.groups.length ? this.groups[0] : false
+    entityType () {
+      return this.groups.length ? 'group' : 'campaign'
+    },
+
+    entity () {
+      if (this.groups.length) {
+        return this.groups[0]
+      }
+
+      if (this.campaigns.length) {
+        return this.campaigns[0]
+      }
+
+      return false
     },
 
     avatar () {
-      return this.group && this.group.fields.Avatar ? this.group.fields.Avatar[0].url : ''
+      return this.entity && this.entity.fields.Avatar ? this.entity.fields.Avatar[0].url : ''
     },
 
     date () {
@@ -117,6 +130,13 @@ export default {
       this.groups = await getByIds({
         ids: this.job.fields.Group,
         type: 'groups'
+      })
+    }
+
+    if (this.job.fields.Campaigns) {
+      this.campaigns = await getByIds({
+        ids: this.job.fields.Campaign,
+        type: 'campaigns'
       })
     }
 

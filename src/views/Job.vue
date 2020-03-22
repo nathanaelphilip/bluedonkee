@@ -7,7 +7,8 @@
     <div class="boxed">
       <Header
         :avatar="avatar"
-        :group="group"
+        :entity="entity"
+        :entityType="entityType"
         :locations="locations"
         locationroute="locationJob"
         :heading="job.fields.Title"
@@ -15,8 +16,8 @@
         :workLevels="workLevels"
         :workTypes="workTypes"
         :remote="job.fields.Remote"
-        :website="group.fields.Website"
-        :twitter="group.fields.Twitter"
+        :website="entity.fields.Website"
+        :twitter="entity.fields.Twitter"
       />
 
       <div class="overview">
@@ -38,7 +39,8 @@
 <script>
 import {
   getByIds,
-  getBySlug
+  getBySlug,
+  getByEntityAndSlug
 } from '@/store/helpers'
 
 import BackTop from '@/components/molecules/BackTop'
@@ -56,11 +58,11 @@ export default {
 
   data () {
     return {
+      entity: false,
+      entityType: 'group',
       loading: true,
       locations: [],
       job: {},
-      campaigns: [],
-      groups: [],
       workTypes: [],
       workLevels: [],
       workCategories: []
@@ -69,16 +71,28 @@ export default {
 
   computed: {
     avatar () {
-      return this.group.fields.Avatar[0].url
-    },
-
-    group () {
-      return this.groups[0] || this.campaigns[0]
+      return this.entity.fields.Avatar[0].url
     }
   },
 
   async mounted () {
-    this.job = await getBySlug({
+    this.entity = await getBySlug({
+      slug: this.$route.params.entity,
+      type: 'groups'
+    })
+
+    if (this.entity === 'undefined') {
+      this.entity = await getBySlug({
+        slug: this.$route.params.entity,
+        type: 'campaigns'
+      })
+
+      this.entityType = 'campaign'
+    }
+
+    this.job = await getByEntityAndSlug({
+      entity: this.entity,
+      entityType: this.entityType === 'groups' ? 'Group' : 'Campaigns',
       slug: this.$route.params.slug,
       type: 'jobs'
     })
@@ -87,20 +101,6 @@ export default {
       ids: this.job.fields.Location,
       type: 'locations'
     })
-
-    if (this.job.fields.Group) {
-      this.groups = await getByIds({
-        ids: this.job.fields.Group,
-        type: 'groups'
-      })
-    }
-
-    if (this.job.fields.Campaigns) {
-      this.campaigns = await getByIds({
-        ids: this.job.fields.Campaigns,
-        type: 'groups'
-      })
-    }
 
     this.workCategories = await getByIds({
       ids: this.job.fields['Work Categories'],

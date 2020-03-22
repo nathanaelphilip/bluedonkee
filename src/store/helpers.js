@@ -1,5 +1,21 @@
 import $store from '@/store'
 
+export const getByEntityAndSlug = async ({ entity, entityType, slug, type }) => {
+  const stored = $store.getters[`${type}/getByEntityAndSlug`]({ entity, entityType, slug })
+
+  if (!stored) {
+    const item = await $store.dispatch(`${type}/get`, {
+      params: {
+        filterByFormula: `SEARCH("${slug}", Slug)`
+      }
+    })
+
+    return item
+  }
+
+  return stored
+}
+
 export const getBySlug = async ({ slug, type }) => {
   const stored = $store.getters[`${type}/getBySlug`](slug)
 
