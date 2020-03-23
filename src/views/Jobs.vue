@@ -1,6 +1,6 @@
 <template>
   <section class="home">
-    <Intro heading="Jobs" :filter="filter">
+    <Intro @close="filter = false" heading="Jobs" :filter="filter">
       <ButtonSecondary @click.native.prevent="filter = !filter">Filter</ButtonSecondary>
       <LinkPrimary :to="{name: 'postJob'}">Post Job</LinkPrimary>
     </Intro>

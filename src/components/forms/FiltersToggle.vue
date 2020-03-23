@@ -15,8 +15,8 @@
               :key="`tag-state-${index}`"
               :label="tag.fields.Abbreviation"
               :value="tag.id"
-              :checked="selected.states.includes(tag.id)"
-              @toggle="value => toggle('states', value)"
+              :checked="selected.locations.includes(tag.id)"
+              @toggle="value => toggle('locations', value)"
             />
           </div>
         </TogglesBox>
@@ -66,7 +66,7 @@ export default {
     return {
       selected: {
         categories: [],
-        states: [],
+        locations: [],
         types: []
       },
 
@@ -81,6 +81,8 @@ export default {
       for (const [key, items] of entries) {
         await this.$store.dispatch('filters/accept', { key, items })
       }
+
+      this.$emit('close')
     },
 
     toggle (id, value) {
