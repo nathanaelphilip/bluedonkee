@@ -20,7 +20,7 @@ const state = {
 
 const mutations = {
   [JOBS_FETCH] (state, items) {
-    const merged = unionBy(state.repository, items, 'id')
+    const merged = unionBy(items, state.repository, 'id')
     state.repository = merged
   },
 
