@@ -46,9 +46,13 @@ export default {
     font-size: 15px;
     padding: 15px 20px;
 
-    &:hover, &.selected {
-      border-color: $BLUE;
+    &:hover {
+      border-color: $GREY;
       cursor: pointer;
+    }
+
+    &.selected {
+      border-color: $BLUE;
     }
   }
 </style>

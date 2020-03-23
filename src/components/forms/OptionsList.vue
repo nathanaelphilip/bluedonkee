@@ -30,7 +30,7 @@ import { get } from 'lodash'
 
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
-import Option from '@/components/atoms/Option'
+import Option from '@/components/forms/Option'
 import Processing from '@/components/forms/Processing'
 
 export default {

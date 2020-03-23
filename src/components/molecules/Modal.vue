@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss" scoped>
   .modal {
-    background: rgba($WHITE, .25);
+    background: rgba($BLACK, .25);
     align-items: center;
     display: flex;
     height: 100%;
@@ -39,8 +39,9 @@ export default {
   .boxed {
     @include Shadow;
     background: $WHITE;
+    border-radius: grid(2);
     min-width: 320px;
-    padding: grid(5);
+    padding: grid(6);
   }
 
   .header {

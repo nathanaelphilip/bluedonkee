@@ -50,7 +50,7 @@ const getters = {
     let categories = []
     let cities = []
     let types = []
-    let filters = []
+    let filters = [`OR({Status} = 'Active', {Status} = 'Promoted')`]
 
     if (state.accepted.categories.length) {
       for (let i = 0; i < state.accepted.categories.length; i++) {

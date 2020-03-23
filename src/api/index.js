@@ -41,7 +41,7 @@ export const getCMSQuestions = (settings) => {
       sort: [{ field: 'id' }]
     },
     paramsSerializer: function (params) {
-      return qs.stringify(params, { arrayFormat: 'brackets' })
+      return qs.stringify(params, { arrayFormat: 'indices' })
     }
   })
 }
@@ -50,7 +50,7 @@ export const getCampaigns = (settings) => {
   return api.get(campaigns, {
     ...settings,
     paramsSerializer: function (params) {
-      return qs.stringify(params, { arrayFormat: 'brackets' })
+      return qs.stringify(params, { arrayFormat: 'indices' })
     }
   })
 }
@@ -63,7 +63,7 @@ export const getJobs = (settings) => {
   return api.get(jobs, {
     ...settings,
     paramsSerializer: function (params) {
-      return qs.stringify(params, { arrayFormat: 'brackets' })
+      return qs.stringify(params, { arrayFormat: 'indices' })
     }
   })
 }

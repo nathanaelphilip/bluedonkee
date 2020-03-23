@@ -71,7 +71,7 @@ export default {
 
   computed: {
     avatar () {
-      return this.entity.fields.Avatar[0].url
+      return this.entity ? this.entity.fields.Avatar[0].url : false
     }
   },
 
@@ -81,7 +81,7 @@ export default {
       type: 'groups'
     })
 
-    if (this.entity === 'undefined') {
+    if (typeof (this.entity) === 'undefined') {
       this.entity = await getBySlug({
         slug: this.$route.params.entity,
         type: 'campaigns'
