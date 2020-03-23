@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueMQ from 'vue-mq'
 import App from './App.vue'
 import PortalVue from 'portal-vue'
 import VueClipboard from 'vue-clipboard2'
@@ -13,6 +14,15 @@ Vue.config.productionTip = false
 Vue.use(PortalVue)
 Vue.use(VueClipboard)
 Vue.use(VueCookies)
+Vue.use(VueMQ, {
+  breakpoints: {
+    xsmall: 415,
+    small: 769,
+    medium: 1101,
+    large: 1198,
+    xlarge: 1379
+  }
+})
 
 new Vue({
   router,
