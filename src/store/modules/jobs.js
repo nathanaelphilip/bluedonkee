@@ -1,5 +1,6 @@
 import { unionBy } from 'lodash'
 import Vue from 'vue'
+import moment from 'moment'
 
 import { getJob, getJobs } from '@/api'
 import {
@@ -78,9 +79,9 @@ const getters = {
     })
   },
 
-  getFetched: state => id => {
+  getFetched: (state, getters) => id => {
     if (typeof (state.fetched[id]) !== 'undefined') {
-      return state.repository.filter(job => {
+      return getters.sortByPostDate.filter(job => {
         return state.fetched[id].includes(job.id)
       })
     }
@@ -98,6 +99,15 @@ const getters = {
     if (typeof (state.offset[id]) === 'undefined') {
       return ''
     }
+  },
+
+  sortByPostDate: state => {
+    return state.repository.sort((jobA, jobB) => {
+      const jobADate = moment(jobA.fields['Post Date'])
+      const jobBDate = moment(jobB.fields['Post Date'])
+
+      return jobADate < jobBDate
+    })
   }
 }
 
