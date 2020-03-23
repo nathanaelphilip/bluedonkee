@@ -40,8 +40,11 @@ export default {
 <style lang="scss" scoped>
   .main {
     min-height: 100vh;
-    border-left: 1px solid $GREY;
-    border-right: 1px solid $GREY;
+
+    @include mq ($from: xsmall) {
+      border-left: 1px solid $GREY;
+      border-right: 1px solid $GREY;
+    }
   }
 
   .bug {

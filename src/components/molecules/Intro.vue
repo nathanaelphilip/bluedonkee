@@ -9,17 +9,19 @@
         <slot></slot>
       </div>
     </div>
-    <Filters v-if="filter" />
+    <Filters v-if="filter && $mq !== 'small' && $mq !== 'xsmall'" />
+    <FiltersToggle v-if="filter && ($mq !== 'small' || $mq !== 'xsmall')" />
   </header>
 </template>
 
 <script>
 import ButtonBack from '@/components/atoms/ButtonBack'
 import Filters from '@/components/forms/Filters'
+import FiltersToggle from '@/components/forms/FiltersToggle'
 
 export default {
   props: ['back', 'heading', 'filter'],
-  components: { ButtonBack, Filters }
+  components: { ButtonBack, Filters, FiltersToggle }
 }
 </script>
 
@@ -31,14 +33,22 @@ export default {
     top: 0;
     z-index: 8;
 
+    @include mq($until: small) {
+      z-index: 12;
+    }
+
     @include mq($until: xsmall) {
-      padding: 16px;
+      padding: grid(4);
     }
   }
 
   .boxes {
     @include Flex;
     padding: grid(6) grid(8);
+
+    @include mq($until: xsmall) {
+      padding: grid(0) 0;
+    }
   }
 
   .heading {

@@ -14,6 +14,7 @@ export default {
   .button {
     @include ButtonPrimary;
 
+    &.large { padding-bottom: grid(5); padding-top: grid(5); }
     &.full {display: block; width: 100%}
     &.simple {background: none; border-color: transparent}
   }

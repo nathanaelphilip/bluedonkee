@@ -1,24 +1,24 @@
 <template>
-  <article class="job-promoted">
+  <article class="job-promoted" v-if="!loading">
     <figure class="image">
-      <router-link :to="{ name: 'job', params: { slug: job.fields.Slug } }">
+      <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
         <Avatar :src="avatar" />
       </router-link>
     </figure>
     <div class="info">
       <h4 class="heading">
-        <router-link :to="{ name: 'job', params: { slug: job.fields.Slug } }">
+        <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
           {{ job.fields.Title }}
         </router-link>
       </h4>
-      <aside class="group" v-if="group">
+      <aside class="entity" v-if="entity">
         <router-link
           :to="{
-            name: 'group',
-            params: {slug: group.fields.Slug }
+            name: entityType,
+            params: {slug: entity.fields.Slug }
           }"
           >
-          {{ group.fields.Name }}
+          {{ entity.fields.Name }}
         </router-link>
       </aside>
     </div>
@@ -36,25 +36,50 @@ export default {
 
   data () {
     return {
+      loading: true,
+      campaigns: [],
       groups: []
     }
   },
 
   computed: {
-    avatar () {
-      return this.group ? this.group.fields.Avatar[0].url : false
+    entityType () {
+      return this.groups.length ? 'group' : 'campaign'
     },
 
-    group () {
-      return this.groups.length ? this.groups[0] : false
+    entity () {
+      if (this.groups.length) {
+        return this.groups[0]
+      }
+
+      if (this.campaigns.length) {
+        return this.campaigns[0]
+      }
+
+      return false
+    },
+
+    avatar () {
+      return this.entity && this.entity.fields.Avatar ? this.entity.fields.Avatar[0].url : ''
     }
   },
 
   async mounted () {
-    this.groups = await getByIds({
-      ids: this.job.fields.Group,
-      type: 'groups'
-    })
+    if (this.job.fields.Group) {
+      this.groups = await getByIds({
+        ids: this.job.fields.Group,
+        type: 'groups'
+      })
+    }
+
+    if (this.job.fields.Campaigns) {
+      this.campaigns = await getByIds({
+        ids: this.job.fields.Campaigns,
+        type: 'campaigns'
+      })
+    }
+
+    this.loading = false
   }
 }
 </script>
@@ -72,7 +97,7 @@ export default {
     margin-bottom: 5px;
   }
 
-  .group {
+  .entity {
     color: $BLUE;
     font-size: 14px;
   }
