@@ -109,7 +109,7 @@ export default {
         params: {
           filterByFormula: this.$store.getters['filters/filter'],
           pageSize,
-          sort: [{ field: 'Post Date', direction: 'desc' }],
+          sort: [{ field: 'Post Date', direction: 'desc' }, { field: 'Group', direction: 'asc' }],
           offset: this.$store.getters['jobs/getOffset'](this.$store.getters['filters/key'])
         }
       })
@@ -121,7 +121,7 @@ export default {
         params: {
           filterByFormula: `OR({Status} = 'Active', {Status} = 'Promoted')`,
           pageSize,
-          sort: [{ field: 'Post Date', direction: 'desc' }, { field: 'Title', direction: 'asc' }],
+          sort: [{ field: 'Post Date', direction: 'desc' }, { field: 'Group', direction: 'asc' }],
           offset: this.$store.getters['jobs/getOffset']('jobs')
         }
       })
