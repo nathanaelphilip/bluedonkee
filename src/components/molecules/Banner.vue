@@ -46,10 +46,10 @@ export default {
 <style lang="scss" scoped>
   .banner {
     background: $BLUEDARK;
-    border-radius: 16px;
+    border-radius: grid(2);
     color: $WHITE;
     overflow: hidden;
-    padding: 30px;
+    padding: grid(8);
     max-width: 100%;
   }
 

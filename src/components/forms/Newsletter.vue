@@ -100,7 +100,7 @@ export default {
     align-items: start;
     display: grid;
     grid-template-columns: 1fr 100px;
-    grid-column-gap: grid(4);
+    grid-column-gap: grid(2);
   }
 
   .content {

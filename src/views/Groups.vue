@@ -71,10 +71,10 @@ export default {
 
 <style lang="scss" scoped>
   .boxed {
-    padding: 32px 36px 0 36px;
+    padding: grid(8) grid(8) 0 grid(8);
 
     @include mq($until: xsmall) {
-      padding: 24px 16px 0 16px;
+      padding: grid(6) grid(4) 0 grid(4);
     }
   }
 </style>
