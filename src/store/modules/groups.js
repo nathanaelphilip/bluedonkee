@@ -70,17 +70,17 @@ const actions = {
 }
 
 const getters = {
-  getById: (state) => (id) => {
+  getById: state => id => {
     return state.repository.find(group => group.id === id)
   },
 
-  getBySlug: (state) => (slug) => {
+  getBySlug: state => slug => {
     return state.repository.find(group => group.fields.Slug === slug)
   },
 
-  getFetched: state => id => {
+  getFetched: (state, getters) => id => {
     if (typeof (state.fetched[id]) !== 'undefined') {
-      return state.repository.filter(group => {
+      return getters.sortByName.filter(group => {
         return state.fetched[id].includes(group.id)
       })
     }
@@ -98,6 +98,12 @@ const getters = {
     if (typeof (state.offset[id]) === 'undefined') {
       return ''
     }
+  },
+
+  sortByName: state => {
+    return state.repository.sort((groupA, groupB) => {
+      return groupA.fields.Name > groupB.fields.Name
+    })
   }
 }
 
