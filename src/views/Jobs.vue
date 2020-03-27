@@ -95,7 +95,7 @@ export default {
       await this.$store.dispatch('workTypes/fetch')
     }
 
-    await this.$store.dispatch('groups/fetch', { id: 'groups' })
+    await this.$store.dispatch('groups/fetch', { id: 'prefetched' })
 
     if (!this.$store.getters['jobs/getFetched']('jobs').length) {
       await this.load()
