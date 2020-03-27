@@ -80,9 +80,13 @@ const getters = {
 
   getFetched: (state, getters) => id => {
     if (typeof (state.fetched[id]) !== 'undefined') {
-      return getters.sortByName.filter(group => {
-        return state.fetched[id].includes(group.id)
-      })
+      const fetched = []
+
+      for (var i = 0; i < state.fetched[id].length; i++) {
+        fetched.push(state.repository.find(group => group.id === state.fetched[id][i]))
+      }
+
+      return fetched
     }
 
     if (typeof (state.fetched[id]) === 'undefined') {
@@ -98,12 +102,6 @@ const getters = {
     if (typeof (state.offset[id]) === 'undefined') {
       return ''
     }
-  },
-
-  sortByName: state => {
-    return state.repository.sort((groupA, groupB) => {
-      return groupA.fields.Name > groupB.fields.Name
-    })
   }
 }
 

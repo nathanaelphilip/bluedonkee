@@ -71,9 +71,13 @@ const getters = {
 
   getFetched: (state, getters) => id => {
     if (typeof (state.fetched[id]) !== 'undefined') {
-      return getters.sortByName.filter(campaign => {
-        return state.fetched[id].includes(campaign.id)
-      })
+      const fetched = []
+
+      for (var i = 0; i < state.fetched[id].length; i++) {
+        fetched.push(state.repository.find(campaign => campaign.id === state.fetched[id][i]))
+      }
+
+      return fetched
     }
 
     if (typeof (state.fetched[id]) === 'undefined') {
@@ -89,12 +93,6 @@ const getters = {
     if (typeof (state.offset[id]) === 'undefined') {
       return ''
     }
-  },
-
-  sortByName: (state, getters) => {
-    return state.repository.sort((campaignA, campaignB) => {
-      return campaignA.fields.Name > campaignB.fields.Name
-    })
   }
 }
 
