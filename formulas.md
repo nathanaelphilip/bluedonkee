@@ -8,7 +8,7 @@ LOWER(
             SUBSTITUTE(
               SUBSTITUTE(
                 SUBSTITUTE(
-                  SUBSTITUTE(Title,"-",""),
+                  SUBSTITUTE(TRIM(Title),"-",""),
                 "'",""),
               ",",""),
             "|",""),

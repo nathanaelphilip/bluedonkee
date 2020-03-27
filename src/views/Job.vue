@@ -30,7 +30,11 @@
       <Report :id="job.id" />
     </div>
 
-    <Jobs heading="Related Jobs" :jobs="$store.getters['jobs/getFetched'](`job/${this.job.id}`)" :simple="true" />
+    <Jobs
+      heading="Related Jobs"
+      :jobs="$store.getters['jobs/getFetched'](`job/${this.job.id}`)"
+      :simple="true"
+     />
 
     <BackTop />
   </article>
@@ -117,7 +121,7 @@ export default {
       type: 'workTypes'
     })
 
-    if (!this.$store.getters['jobs/getFetched'](`job/${this.job.id}`)) {
+    if (!this.$store.getters['jobs/getFetched'](`job/${this.job.id}`).length) {
       const search = []
 
       for (var i = 0; i < this.workCategories.length; i++) {
