@@ -92,7 +92,7 @@ export default {
 
     this.job = await getByEntityAndSlug({
       entity: this.entity,
-      entityType: this.entityType === 'groups' ? 'Group' : 'Campaigns',
+      entityType: this.entityType === 'group' ? 'Group' : 'Campaigns',
       slug: this.$route.params.slug,
       type: 'jobs'
     })

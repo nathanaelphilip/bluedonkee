@@ -6,7 +6,7 @@ export const getByEntityAndSlug = async ({ entity, entityType, slug, type }) => 
   if (!stored) {
     const item = await $store.dispatch(`${type}/get`, {
       params: {
-        filterByFormula: `SEARCH("${slug}", Slug)`
+        filterByFormula: `AND({Slug} = '${slug}', {${entityType}} = '${entity.fields.Name}')`
       }
     })
 
