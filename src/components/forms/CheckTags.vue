@@ -82,6 +82,12 @@ export default {
     grid-template-columns: repeat(7, 1fr);
   }
 
+  .grid-column {
+    display: grid;
+    grid-row-gap: grid(3);
+    grid-template-columns: 1fr;
+  }
+
   .actions {
     display: flex;
     justify-content: flex-end;

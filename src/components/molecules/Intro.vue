@@ -10,7 +10,7 @@
       </div>
     </div>
     <Filters v-if="filter && $mq !== 'small' && $mq !== 'xsmall'" />
-    <FiltersToggle @close="$emit('close')" v-if="filter && ($mq !== 'small' || $mq !== 'xsmall')" />
+    <FiltersToggle @close="$emit('close')" v-if="filter && ($mq === 'small' || $mq === 'xsmall')" />
   </header>
 </template>
 

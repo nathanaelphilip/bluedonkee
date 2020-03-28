@@ -7,6 +7,7 @@
           :class="{'bugged': $store.getters['filters/accepted']('locations').length}"
         >
           Location
+          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('locations').length" />
           <span v-if="$store.getters['filters/accepted']('locations').length" class="bug">
             {{ $store.getters['filters/accepted']('locations').length }}
           </span>
@@ -16,6 +17,7 @@
           :class="{'bugged': $store.getters['filters/accepted']('categories').length}"
          >
           Category
+          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('categories').length" />
           <span v-if="$store.getters['filters/accepted']('categories').length" class="bug">
             {{ $store.getters['filters/accepted']('categories').length }}
           </span>
@@ -25,6 +27,7 @@
           :class="{'bugged': $store.getters['filters/accepted']('types').length}"
           >
           Work Type
+          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('types').length" />
           <span v-if="$store.getters['filters/accepted']('types').length" class="bug">
             1
           </span>
@@ -69,7 +72,7 @@
           keyValue="fields.Name"
           @cancel="modal = false"
           @apply="items => apply('types', items)"
-          layout="flex"
+          layout="grid-column"
         />
       </Modal>
     </portal>
@@ -80,10 +83,11 @@
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import CheckTags from '@/components/forms/CheckTags'
 import IconClose from '@/components/icons/Close'
+import IconPlus from '@/components/icons/Plus'
 import Modal from '@/components/molecules/Modal'
 
 export default {
-  components: { ButtonSecondary, CheckTags, IconClose, Modal },
+  components: { ButtonSecondary, CheckTags, IconClose, IconPlus, Modal },
 
   data () {
     return {
@@ -130,6 +134,11 @@ export default {
   .bugged {
     padding-bottom: 4px;
     padding-top: 7px;
+  }
+
+  .icon-plus {
+    fill: $BLUEGREY;
+    margin-left: grid(1);
   }
 
   .bug {
