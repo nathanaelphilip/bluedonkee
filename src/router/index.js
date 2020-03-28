@@ -109,6 +109,12 @@ const routes = [
     name: 'questions',
     component: () => import(/* webpackChunkName: "questions" */ '../views/Questions.vue'),
     meta: { layout: 'basic' }
+  },
+  {
+    path: '/sitemap.xml',
+    name: 'sitemap',
+    component: () => import(/* webpackChunkName: "questions" */ '../views/Sitemap.vue'),
+    meta: { layout: 'none' }
   }
 ]
 
