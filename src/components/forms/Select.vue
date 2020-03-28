@@ -29,7 +29,7 @@ import IconChevronDown from '@/components/icons/ChevronDown'
 export default {
   components: { IconChevronDown },
 
-  props: [ 'label', 'placeholder', 'value' ],
+  props: ['label', 'placeholder', 'value'],
 
   data () {
     return {

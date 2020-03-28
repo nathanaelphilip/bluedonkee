@@ -9,7 +9,7 @@
 import Markdown from '@/components/molecules/Markdown'
 
 export default {
-  props: [ 'question' ],
+  props: ['question'],
   components: { Markdown }
 }
 </script>

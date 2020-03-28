@@ -34,7 +34,7 @@ import Option from '@/components/forms/Option'
 import Processing from '@/components/forms/Processing'
 
 export default {
-  props: [ 'accepted', 'options', 'status', 'keyLabel', 'keyValue' ],
+  props: ['accepted', 'options', 'status', 'keyLabel', 'keyValue'],
   components: { ButtonPrimary, ButtonSecondary, Option, Processing },
 
   data () {

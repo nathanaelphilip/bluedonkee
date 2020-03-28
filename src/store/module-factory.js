@@ -2,9 +2,7 @@ import { unionBy } from 'lodash'
 import { api } from '@/api'
 
 export default ({
-  mutations: {
-    FETCH: ''
-  },
+  mutations: { },
   endpoint: ''
 }) => {
   const { FETCH } = mutations

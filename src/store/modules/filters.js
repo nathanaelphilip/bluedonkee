@@ -47,10 +47,10 @@ const getters = {
   },
 
   filter: (state, getters, rootState) => {
-    let categories = []
-    let cities = []
-    let types = []
-    let filters = [`OR({Status} = 'Active', {Status} = 'Promoted')`]
+    const categories = []
+    const cities = []
+    const types = []
+    const filters = ['OR({Status} = \'Active\', {Status} = \'Promoted\')']
 
     if (state.accepted.categories.length) {
       for (let i = 0; i < state.accepted.categories.length; i++) {

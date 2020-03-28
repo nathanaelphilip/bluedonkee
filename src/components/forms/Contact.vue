@@ -110,12 +110,12 @@ export default {
 
       try {
         const { data } = await postContactForm({
-          'fields': {
+          fields: {
             'Full Name': this.form.name,
             'Email Address': this.form.email,
             'Organization Name': this.form.organization,
             'Contact Reason': this.form.reason,
-            'Message': this.form.message
+            Message: this.form.message
           }
         })
 

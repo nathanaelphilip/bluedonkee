@@ -119,7 +119,7 @@ export default {
       await this.$store.dispatch('jobs/fetch', {
         id: 'jobs',
         params: {
-          filterByFormula: `OR({Status} = 'Active', {Status} = 'Promoted')`,
+          filterByFormula: 'OR({Status} = \'Active\', {Status} = \'Promoted\')',
           pageSize,
           sort: [{ field: 'Post Date', direction: 'desc' }, { field: 'Group', direction: 'asc' }],
           offset: this.$store.getters['jobs/getOffset']('jobs')

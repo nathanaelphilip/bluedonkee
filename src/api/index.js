@@ -2,27 +2,27 @@ import axios from 'axios'
 import jsonp from 'jsonp'
 import qs from 'qs'
 
-const campaigns = `/Campaigns`
+const campaigns = '/Campaigns'
 const cmsQuestions = '/CMS%20(Questions)'
-const contactForm = `/Contact%20Form`
-const flagged = `/Flagged`
-const groups = `/Groups`
-const groupCategories = `/Groups%20Categories`
-const jobs = `/Jobs`
-const jobSubmission = `/Job%20Submissions`
-const locations = `/Locations`
-const offices = `/Offices`
-const states = `/States`
-const workTypes = `/Work%20Types`
-const workLevels = `/Work%20Levels`
-const workCategories = `/Work%20Categories`
+const contactForm = '/Contact%20Form'
+const flagged = '/Flagged'
+const groups = '/Groups'
+const groupCategories = '/Groups%20Categories'
+const jobs = '/Jobs'
+const jobSubmission = '/Job%20Submissions'
+const locations = '/Locations'
+const offices = '/Offices'
+const states = '/States'
+const workTypes = '/Work%20Types'
+const workLevels = '/Work%20Levels'
+const workCategories = '/Work%20Categories'
 
 const newsletterForm = process.env.VUE_APP_MAILCHIMP_URL
 
 export const api = axios.create({
-  baseURL: `https://api.airtable.com/v0/appkK3vHJcH4114kk`,
+  baseURL: 'https://api.airtable.com/v0/appkK3vHJcH4114kk',
   timeout: 3000,
-  headers: { 'Authorization': `Bearer ${process.env.VUE_APP_AIRTABLE_API_KEY}` }
+  headers: { Authorization: `Bearer ${process.env.VUE_APP_AIRTABLE_API_KEY}` }
 })
 
 export const postContactForm = (data) => {

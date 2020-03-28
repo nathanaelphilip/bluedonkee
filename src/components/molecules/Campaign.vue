@@ -50,15 +50,15 @@ export default {
   },
 
   async mounted () {
-    if (this.campaign.fields['Office'] && this.campaign.fields['Office'].length) {
+    if (this.campaign.fields.Office && this.campaign.fields.Office.length) {
       this.offices = await getByIds({
-        ids: this.campaign.fields['Office'],
+        ids: this.campaign.fields.Office,
         type: 'offices'
       })
     }
 
-    this.locations = this.campaign.fields['Location'] ? await getByIds({
-      ids: this.campaign.fields['Location'],
+    this.locations = this.campaign.fields.Location ? await getByIds({
+      ids: this.campaign.fields.Location,
       type: 'locations'
     }) : []
   }

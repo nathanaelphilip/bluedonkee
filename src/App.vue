@@ -18,8 +18,8 @@ export default {
   name: 'app',
 
   components: {
-    'basic': Basic,
-    'full': Full
+    basic: Basic,
+    full: Full
   },
 
   data () {
@@ -30,7 +30,7 @@ export default {
 
   computed: {
     layout () {
-      return this.$route.meta.layout ? this.$route.meta.layout : `full`
+      return this.$route.meta.layout ? this.$route.meta.layout : 'full'
     }
   },
 

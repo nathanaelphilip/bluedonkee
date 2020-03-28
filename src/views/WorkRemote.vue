@@ -32,7 +32,7 @@ export default {
   },
 
   async mounted () {
-    this.id = `jobs/remote`
+    this.id = 'jobs/remote'
 
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()
@@ -46,7 +46,7 @@ export default {
       await this.$store.dispatch('jobs/fetch', {
         id: this.id,
         params: {
-          filterByFormula: `{Remote}=1`,
+          filterByFormula: '{Remote}=1',
           pageSize,
           sort: [{ field: 'Post Date', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)

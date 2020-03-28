@@ -67,7 +67,7 @@ export default {
     },
 
     remove () {
-      const locations = [ ...this.locations ]
+      const locations = [...this.locations]
       locations.pop()
 
       this.$emit('update:locations', locations)

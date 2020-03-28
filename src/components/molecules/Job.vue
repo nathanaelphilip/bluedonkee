@@ -121,7 +121,7 @@ export default {
     },
 
     description () {
-      return truncate(this.job.fields['Long Description'], { 'length': 220, 'separator': /,? +/ })
+      return truncate(this.job.fields['Long Description'], { length: 220, separator: /,? +/ })
     }
   },
 
@@ -161,9 +161,9 @@ export default {
       })
     }
 
-    if (this.job.fields['Location']) {
+    if (this.job.fields.Location) {
       this.locations = await getByIds({
-        ids: this.job.fields['Location'],
+        ids: this.job.fields.Location,
         type: 'locations'
       })
     }

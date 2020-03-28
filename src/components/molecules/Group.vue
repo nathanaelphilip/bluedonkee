@@ -56,8 +56,8 @@ export default {
       type: 'groupCategories'
     }) : []
 
-    this.locations = this.group.fields['Location'] ? await getByIds({
-      ids: this.group.fields['Location'],
+    this.locations = this.group.fields.Location ? await getByIds({
+      ids: this.group.fields.Location,
       type: 'locations'
     }) : []
   }
