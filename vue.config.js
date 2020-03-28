@@ -10,17 +10,5 @@ module.exports = {
         `
       }
     }
-  },
-  pluginOptions: {
-    prerenderSpa: {
-      registry: undefined,
-      renderRoutes: [
-        '/',
-        '/sitemap.xml'
-      ],
-      useRenderEvent: true,
-      headless: true,
-      onlyProduction: true
-    }
   }
 }
