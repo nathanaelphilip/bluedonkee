@@ -86,6 +86,13 @@ export default {
     display: grid;
     grid-row-gap: grid(3);
     grid-template-columns: 1fr;
+
+    &::v-deep {
+      .checkbox {
+        padding: grid(3) grid(5);
+        text-align: left;
+      }
+    }
   }
 
   .actions {
