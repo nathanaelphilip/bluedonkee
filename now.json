@@ -1,7 +1,7 @@
 {
-  "name": "Work Blue",
   "build": {
     "env": {
+      "NODE_ENV": "production",
       "VUE_APP_AIRTABLE_API_KEY": "@vue_app_airtable_api_key",
       "VUE_APP_FILESTACK_API_KEY": "@vue_app_filestack_api_key",
       "VUE_APP_MAILCHIMP_URL": "@vue_app_mailchimp_url",
