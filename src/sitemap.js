@@ -1,7 +1,14 @@
+const dotenv = require('dotenv');
 const fs = require('fs')
 
+const envConfig = dotenv.parse(fs.readFileSync('.env.local'))
+
+for (const k in envConfig) {
+  process.env[k] = envConfig[k]
+}
+
 const Airtable = require('airtable')
-var base = new Airtable({apiKey: 'keygoihFMlDmSxbL3'}).base('appkK3vHJcH4114kk');
+var base = new Airtable({apiKey: process.env.VUE_APP_AIRTABLE_API_KEY}).base('appkK3vHJcH4114kk');
 
 const processRecords = (table, options) => {
   let records = []
