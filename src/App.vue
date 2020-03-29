@@ -56,7 +56,11 @@ export default {
     }
 
     if (!this.$store.state.workTypes.repository.length) {
-      await this.$store.dispatch('workTypes/fetch')
+      await this.$store.dispatch('workTypes/fetch', {
+        params: {
+          sort: [{ field: 'Order', direction: 'asc' }]
+        }
+      })
     }
 
     this.loaded = true

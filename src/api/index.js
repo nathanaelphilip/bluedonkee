@@ -86,7 +86,12 @@ export const getGroup = (id) => {
 }
 
 export const getGroupCategories = (settings) => {
-  return api.get(groupCategories, settings)
+  return api.get(groupCategories, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
+    }
+  })
 }
 
 export const getGroupCategory = (id) => {
@@ -94,7 +99,12 @@ export const getGroupCategory = (id) => {
 }
 
 export const getWorkTypes = (settings) => {
-  return api.get(workTypes, settings)
+  return api.get(workTypes, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
+    }
+  })
 }
 
 export const getWorkType = (id) => {
@@ -102,7 +112,12 @@ export const getWorkType = (id) => {
 }
 
 export const getWorkLevels = (settings) => {
-  return api.get(workLevels, settings)
+  return api.get(workLevels, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
+    }
+  })
 }
 
 export const getWorkLevel = (id) => {
@@ -110,7 +125,12 @@ export const getWorkLevel = (id) => {
 }
 
 export const getWorkCategories = (settings) => {
-  return api.get(workCategories, settings)
+  return api.get(workCategories, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
+    }
+  })
 }
 
 export const getWorkCategory = (id) => {
@@ -118,7 +138,12 @@ export const getWorkCategory = (id) => {
 }
 
 export const getLocations = (settings) => {
-  return api.get(locations, settings)
+  return api.get(locations, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
+    }
+  })
 }
 
 export const getLocation = (id) => {
@@ -126,7 +151,12 @@ export const getLocation = (id) => {
 }
 
 export const getStates = (settings) => {
-  return api.get(states, settings)
+  return api.get(states, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
+    }
+  })
 }
 
 export const getState = (id) => {
@@ -134,7 +164,12 @@ export const getState = (id) => {
 }
 
 export const getOffices = (settings) => {
-  return api.get(offices, settings)
+  return api.get(offices, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
+    }
+  })
 }
 
 export const getOffice = (id) => {

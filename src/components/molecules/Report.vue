@@ -7,14 +7,15 @@
         <OptionsList
           :options="options"
           :status="status"
-          :accepted="accepted"
+          :selected="selected"
           keyLabel="label"
           keyValue="id"
+          @selected="value => selected = value"
           @close="open.modal = false"
           @process="report"
         >
           <TextArea
-            v-if="accepted === 4"
+            v-if="selected === 4 || selected === 3"
             placeholder="Leave note"
             @input="value => note = value"
             :value="note"
@@ -71,19 +72,26 @@ export default {
       },
       options,
       note: '',
-      accepted: false,
+      selected: false,
       status: false
     }
   },
 
+  computed: {
+    reason () {
+      return this.options.find((option) => {
+        return option.id === this.selected
+      }).label
+    }
+  },
+
   methods: {
-    async report (option) {
+    async report (value) {
       this.status = 'processing'
-      this.accepted = option
 
       try {
         const { data } = await postFlagged({
-          Reason: this.accepted.label,
+          Reason: this.reason,
           Note: this.note,
           Jobs: [this.id]
         })

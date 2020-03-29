@@ -5,9 +5,9 @@
         v-for="option in options"
         :key="get(option, keyValue)"
         :value="get(option, keyValue)"
-        :selected="get(selected, keyValue) === get(option, keyValue)"
+        :selected="selected === get(option, keyValue)"
         :name="_uid"
-        @change="selected = option"
+        @change="value => $emit('selected', value)"
        >
        {{ get(option, keyLabel) }}
      </Option>
@@ -34,14 +34,8 @@ import Option from '@/components/forms/Option'
 import Processing from '@/components/forms/Processing'
 
 export default {
-  props: ['accepted', 'options', 'status', 'keyLabel', 'keyValue'],
+  props: ['options', 'status', 'selected', 'keyLabel', 'keyValue'],
   components: { ButtonPrimary, ButtonSecondary, Option, Processing },
-
-  data () {
-    return {
-      selected: false
-    }
-  },
 
   created () {
     if (this.accepted) {
