@@ -12,7 +12,7 @@
       <div class="icon" v-if="!src">
         <IconUpload width="30" />
       </div>
-      <input @change="addFile" id="upload-file" type="file" class="input">
+      <input @change="addFile" @click="$event.target.value = null" id="upload-file" type="file" class="input">
     </label>
     <div class="content">
       We recommend using at least a 500x500px (1:1 ratio) image that's no larger than 2MB.
@@ -39,6 +39,7 @@ export default {
 
   methods: {
     addFile (event) {
+      console.log(event)
       let files = false
 
       if (event.dataTransfer) {
@@ -70,6 +71,7 @@ export default {
       this.src = false
       this.files = []
       this.$emit('change', false)
+      console.log(this.src)
     }
   }
 }
