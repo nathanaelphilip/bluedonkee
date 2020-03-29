@@ -2,7 +2,7 @@
   <article class="job" v-if="!loading">
     <Intro :back="{ name: 'campaigns' }" :heading="campaign.fields.Name">
       <Share :path="$route.path" />
-      <LinkPrimary :href="campaign.fields['Donation URL']">Donate</LinkPrimary>
+      <LinkPrimary classes="small" :href="campaign.fields['Donation URL']">Donate</LinkPrimary>
     </Intro>
     <div class="boxed">
       <Header

@@ -2,7 +2,7 @@
   <article class="job" v-if="!loading">
     <Intro :back="{ name: 'jobs' }" :heading="job.fields.Title">
       <Share :path="$route.path" />
-      <LinkPrimary :href="job.fields['Application URL']">Apply</LinkPrimary>
+      <LinkPrimary classes="small" :href="job.fields['Application URL']">Apply</LinkPrimary>
     </Intro>
     <div class="boxed">
       <Header

@@ -7,5 +7,7 @@
 <style lang="scss" scoped>
   .button {
     @include ButtonSecondary;
+
+    &.small { padding: 10px 12px; }
   }
 </style>
