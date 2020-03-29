@@ -39,7 +39,6 @@ export default {
 
   methods: {
     addFile (event) {
-      console.log(event)
       let files = false
 
       if (event.dataTransfer) {
@@ -71,7 +70,6 @@ export default {
       this.src = false
       this.files = []
       this.$emit('change', false)
-      console.log(this.src)
     }
   }
 }
