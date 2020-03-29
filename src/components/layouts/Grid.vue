@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div class="grid" :class="{'modal': $store.state.app.modalOpen}">
     <div class="column column-1">
       <div class="sticky-top">
         <slot name="one"></slot>
@@ -24,6 +24,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .modal {
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: 250px 1fr 350px;
