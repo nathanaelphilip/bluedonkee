@@ -1,32 +1,69 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Jobs</router-link> |
-      <router-link to="/groups">Groups</router-link>
-    </div>
-    <router-view/>
+    <portal-target name="flash" multiple>
+    </portal-target>
+    <portal-target name="modal" multiple>
+    </portal-target>
+    <component :is="layout" v-if="loaded">
+      <router-view :key="$route.fullPath" />
+    </component>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Basic from '@/layouts/Basic'
+import Full from '@/layouts/Full'
 
-#nav {
-  padding: 30px;
+export default {
+  name: 'app',
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  components: {
+    basic: Basic,
+    full: Full
+  },
 
-    &.router-link-exact-active {
-      color: #42b983;
+  data () {
+    return {
+      loaded: false
     }
+  },
+
+  computed: {
+    layout () {
+      return this.$route.meta.layout ? this.$route.meta.layout : 'full'
+    }
+  },
+
+  async mounted () {
+    if (!this.$store.state.states.repository.length) {
+      await this.$store.dispatch('states/fetch')
+    }
+
+    if (!this.$store.state.locations.repository.length) {
+      await this.$store.dispatch('locations/fetch')
+    }
+
+    if (!this.$store.state.groupCategories.repository.length) {
+      await this.$store.dispatch('groupCategories/fetch')
+    }
+
+    if (!this.$store.state.workCategories.repository.length) {
+      await this.$store.dispatch('workCategories/fetch')
+    }
+
+    if (!this.$store.state.workLevels.repository.length) {
+      await this.$store.dispatch('workLevels/fetch')
+    }
+
+    if (!this.$store.state.workTypes.repository.length) {
+      await this.$store.dispatch('workTypes/fetch', {
+        params: {
+          sort: [{ field: 'Order', direction: 'asc' }]
+        }
+      })
+    }
+
+    this.loaded = true
   }
 }
-</style>
+</script>

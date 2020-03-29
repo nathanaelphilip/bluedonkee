@@ -1,15 +1,36 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import app from './modules/app'
+import campaigns from './modules/campaigns'
+import cms from './modules/cms'
+import filters from './modules/filters'
+import groups from './modules/groups'
+import groupCategories from './modules/groupCategories'
+import jobs from './modules/jobs'
+import locations from './modules/locations'
+import offices from './modules/offices'
+import states from './modules/states'
+import workCategories from './modules/workCategories'
+import workLevels from './modules/workLevels'
+import workTypes from './modules/workTypes'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    app,
+    campaigns,
+    cms,
+    filters,
+    groups,
+    groupCategories,
+    jobs,
+    locations,
+    offices,
+    states,
+    workCategories,
+    workLevels,
+    workTypes
   }
 })

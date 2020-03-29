@@ -1,0 +1,219 @@
+@mixin ButtonStripped {
+  background: none;
+  appearance: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin Button {
+  @include ButtonStripped;
+  border-radius: 4px;
+  display: inline-block;
+  font-family: $INTER;
+  font-weight: 600;
+  line-height: 1;
+  position: relative;
+  transition: background .5s, border-color .5s;
+
+  &:hover {cursor: pointer}
+}
+
+@mixin ButtonPrimary {
+  @include Button;
+  background: $BLUE2;
+  border: 1px solid $BLUE2;
+  color: $WHITE;
+  padding: 12px 14px;
+
+  &:hover { background: $BLUE; border-color:  $BLUE; }
+}
+
+@mixin ButtonSecondary {
+  @include Button;
+  background: none;
+  border: 1px solid $GREY;
+  padding: 10px 18px;
+
+  &:hover {background: $GREY;}
+}
+
+@mixin Tag {
+  @include Button;
+  background: $BLUELIGHT;
+  border: 1px solid $BLUELIGHT;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 8px;
+
+  &:hover {border-color: $GREY}
+  &.checked {border-color: $BLUE}
+}
+
+@mixin ButtonClose {
+  $d: 35px;
+  appearance: none;
+  align-items: center;
+  background: $BLUELIGHT;
+  border: none;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  height: $d;
+  transition: background .5s, border-color .5s;
+  width: $d;
+
+  &:hover {
+    background: $GREY;
+    cursor: pointer;
+  }
+}
+
+@mixin Label {
+  color: $GREY2;
+  display: block;
+  font-size: 15px;
+}
+
+@mixin Input {
+  appearance: none;
+  background: $WHITE;
+  border: 1px solid $GREY;
+  border-radius: 4px;
+  color: $BLACK;
+  display: block;
+  flex: 1;
+  font-family: $INTER;
+  font-size: 15px;
+  line-height: 1.1;
+  min-width: 0;
+  padding: 12px;
+  width: 100%;
+
+  &:placeholder { color: $GREY; }
+  &[readonly] {color: $BLUEGREY}
+
+  &:not(output):-moz-ui-invalid {box-shadow: none}
+
+  &.error {
+    border: 1px solid $RED;
+  }
+}
+
+@mixin Select {
+  @include Input;
+
+  option {color: $BLACK}
+
+  &:invalid:required { color: grey; }
+}
+
+
+@mixin Shadow {
+  box-shadow: 0 2px 12px rgba(#BEBEBE, .5);
+}
+
+
+@mixin FormAction {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@mixin FormFieldset {
+  background: $BLUELIGHT;
+  border-radius: 12px;
+  display: block;
+  padding: 32px;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}
+
+@mixin FormLegend {
+  display: block;
+  font-size: 19px;
+  font-weight: 800;
+  margin-bottom: 22px;
+}
+
+@mixin FormRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 32px;
+
+  @include mq($until: xsmall) {
+   grid-template-columns: 1fr;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: grid(4);
+  }
+
+  .full {
+    @include mq ($from: xsmall) {
+      grid-column: span 2
+    }
+  }
+
+  .half {
+    &:not(:last-child) {
+      @include mq($until: xsmall) {
+        margin-bottom: grid(4);
+      }
+    }
+  }
+}
+
+@mixin Flex (
+  $align: center,
+  $display: flex,
+  $justify: space-between,
+  $direction: row,
+  $wrap: wrap)
+{
+  align-items: $align;
+  display: $display;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+}
+
+@mixin Content {
+  &::v-deep p,
+  &::v-deep ul,
+  &::v-deep ol {
+    line-height: 1.5;
+
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    & + h4 {
+      margin-top: 24px;
+    }
+  }
+
+  &::v-deep ul {
+    list-style: disc;
+  }
+
+  &::v-deep ol {
+    list-style: decimal;
+  }
+
+  &::v-deep ol,
+  &::v-deep ul {
+    margin-left: 16px;
+
+    li:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+
+  &::v-deep h4 {
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+}

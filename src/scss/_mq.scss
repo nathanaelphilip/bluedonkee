@@ -1,0 +1,11 @@
+$mq-breakpoints: (
+  xsmall:  415px,
+  small:   769px,
+  medium:  1101px,
+  large:   1198px,
+  xlarge:  1379px
+);
+
+$mq-show-breakpoints: (xsmall, small, medium, large, xlarge);
+
+@import "~sass-mq";
