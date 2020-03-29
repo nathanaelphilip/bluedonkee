@@ -1,5 +1,4 @@
 {
-  "name": "Work Blue",
   "build": {
     "env": {
       "NODE_ENV": "production",
