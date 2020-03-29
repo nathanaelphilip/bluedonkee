@@ -3,7 +3,7 @@
     <template v-slot:one>
       <div class="logo">
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
-        <Bug>Alpha</Bug>
+        <Bug>Beta</Bug>
       </div>
       <Navigation />
     </template>
