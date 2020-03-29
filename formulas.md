@@ -8,13 +8,15 @@ LOWER(
             SUBSTITUTE(
               SUBSTITUTE(
                 SUBSTITUTE(
-                  SUBSTITUTE(TRIM(Title),"-",""),
-                "'",""),
-              ",",""),
-            "|",""),
-          "/", ""),
-        ")", ""),
-      "(", ""),
-    ".", ""),
+                  SUBSTITUTE(
+                    SUBSTITUTE(TRIM(Title),"-",""),
+                  "'",""),
+                ",",""),
+              "|",""),
+            "/", ""),
+          ")", ""),
+        "(", ""),
+      ".", ""),
+    ":", ""),
   " ","-")
 )

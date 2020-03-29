@@ -1,4 +1,6 @@
 {
+  "name": "Work Blue",
+  "alias": "workblue.com",
   "build": {
     "env": {
       "VUE_APP_AIRTABLE_API_KEY": "@vue_app_airtable_api_key",
