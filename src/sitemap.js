@@ -30,7 +30,6 @@ const generate = async function () {
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\r\n`
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\r\n`
-  xml += `</urlset>\r\n`
 
   const groups = await processRecords('Groups')
   const campaigns = await processRecords('Campaigns')
@@ -60,6 +59,8 @@ const generate = async function () {
   for (var i = 0; i < campaigns.length; i++) {
     xml += `<url>\r\n\xa0\xa0<loc>https://workblue.com/campaigns/${campaigns[i].fields.Slug}</loc>\r\n\xa0\xa0<lastmod>${campaigns[i].fields.Updated}</lastmod>\r\n</url>\r\n`
   }
+
+  xml += `</urlset>\r\n`
 
   fs.appendFileSync(`public/sitemap.xml`, xml);
 }
