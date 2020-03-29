@@ -2,7 +2,7 @@
   <section class="filters-toggle">
     <header class="header">
       <div class="heading">Filter Jobs</div>
-      <button @click="$store.dispatch('filters/clear')" class="clear">
+      <button @click.prevent="clear" class="clear">
         Clear <div class="reset"><IconClose width="9" height="9" /></div>
       </button>
     </header>
@@ -74,7 +74,22 @@ export default {
     }
   },
 
+  mounted () {
+    this.selected.categories = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('categories')))
+    this.selected.locations = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('locations')))
+    this.selected.types = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('types')))
+  },
+
   methods: {
+    clear () {
+      this.$store.dispatch('filters/clear')
+      this.selected = {
+        categories: [],
+        locations: [],
+        types: []
+      }
+    },
+
     async apply () {
       const entries = Object.entries(this.selected)
 
@@ -131,8 +146,9 @@ export default {
 
   .reset {
     @include ButtonClose;
-    height: 20px;
-    width: 20px;
+    margin-left: grid(3);
+    height: 24px;
+    width: 24px;
   }
 
   .clear {
@@ -147,6 +163,14 @@ export default {
       display: grid;
       grid-gap: grid(3);
       grid-template-columns: repeat(7, 1fr);
+
+      @include mq ($until: small) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      @include mq ($until: xsmall) {
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
 
     &.flex {

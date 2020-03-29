@@ -29,11 +29,11 @@
           Work Type
           <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('types').length" />
           <span v-if="$store.getters['filters/accepted']('types').length" class="bug">
-            1
+            {{ $store.getters['filters/accepted']('types').length }}
           </span>
         </ButtonSecondary>
       </div>
-      <button @click="$store.dispatch('filters/clear')" class="clear">
+      <button @click.prevent="$store.dispatch('filters/clear')" class="clear">
         Clear <div class="reset"><IconClose width="10" height="10" /></div>
       </button>
     </div>
