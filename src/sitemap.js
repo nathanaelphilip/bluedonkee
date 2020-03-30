@@ -33,8 +33,6 @@ const processRecords = (table, options) => {
 }
 
 const generate = async function () {
-  fs.unlinkSync('public/sitemap.xml')
-
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\r\n`
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\r\n`
 
@@ -69,7 +67,7 @@ const generate = async function () {
 
   xml += `</urlset>\r\n`
 
-  fs.appendFileSync(`public/sitemap.xml`, xml);
+  fs.appendFileSync(`dist/sitemap.xml`, xml);
 }
 
 generate()
