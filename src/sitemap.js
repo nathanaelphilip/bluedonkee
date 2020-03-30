@@ -1,10 +1,12 @@
 const dotenv = require('dotenv');
 const fs = require('fs')
 
-const envConfig = dotenv.parse(fs.readFileSync('.env.local'))
+if (fs.existsSync('.env.local')) {
+  const envConfig = dotenv.parse(fs.readFileSync('.env.local'))
 
-for (const k in envConfig) {
-  process.env[k] = envConfig[k]
+  for (const k in envConfig) {
+    process.env[k] = envConfig[k]
+  }
 }
 
 const Airtable = require('airtable')
