@@ -3,7 +3,7 @@
     <router-link :to="to" v-if="to" class="button" :class="classes">
       <slot></slot>
     </router-link>
-    <a :href="href" v-if="href" target="_blank" class="button" :class="classes">
+    <a @click="$emit('clicked')" :href="href" v-if="href" target="_blank" class="button" :class="classes">
       <slot></slot>
     </a>
   </Fragment>

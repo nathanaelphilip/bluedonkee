@@ -2,7 +2,12 @@
   <article class="job" v-if="!loading">
     <Intro :back="{ name: 'jobs' }" :heading="job.fields.Title">
       <Share :path="$route.path" />
-      <LinkPrimary classes="small" :href="job.fields['Application URL']">Apply</LinkPrimary>
+      <LinkPrimary
+        classes="small"
+        @clicked="track"
+        :href="job.fields['Application URL']">
+        Apply
+      </LinkPrimary>
     </Intro>
     <div class="boxed">
       <Header
@@ -145,6 +150,16 @@ export default {
     }
 
     this.loading = false
+  },
+
+  methods: {
+    track () {
+      window.analytics.track('Applied for Job', {
+        id: this.job.id,
+        title: this.job.fields.Title,
+        entity: this.entity.fields.Name
+      })
+    }
   }
 }
 </script>
