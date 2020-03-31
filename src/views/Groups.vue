@@ -34,6 +34,11 @@ const pageSize = 20
 
 export default {
   name: 'views-groups',
+
+  metaInfo: {
+    title: 'Groups'
+  },
+
   components: { BackTop, Banner, Intro, Groups, Pager },
 
   data () {

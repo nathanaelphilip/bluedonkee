@@ -25,6 +25,13 @@ const pageSize = 20
 
 export default {
   name: 'views-location-campaigns',
+
+  metaInfo () {
+    return {
+      title: this.location && this.location.fields ? `Location Campaigns: ${this.location.fields.City}` : 'Location Campaigns'
+    }
+  },
+
   components: { BackTop, Intro, Campaigns, Pager },
 
   data () {

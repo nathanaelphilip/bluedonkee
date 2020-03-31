@@ -34,6 +34,11 @@ const pageSize = 20
 
 export default {
   name: 'views-campaigns',
+
+  metaInfo: {
+    title: 'Campaigns'
+  },
+
   components: {
     BackTop,
     Banner,

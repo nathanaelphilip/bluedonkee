@@ -25,6 +25,13 @@ const pageSize = 20
 
 export default {
   name: 'work-type',
+
+  metaInfo () {
+    return {
+      title: this.type && this.type.fields ? `Job Type: ${this.type.fields.Name}` : 'Job Type'
+    }
+  },
+
   components: { BackTop, Intro, Jobs, Pager },
 
   data () {

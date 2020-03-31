@@ -25,6 +25,13 @@ const pageSize = 20
 
 export default {
   name: 'views-location-jobs',
+
+  metaInfo () {
+    return {
+      title: this.location && this.location.fields ? `Location Jobs: ${this.location.fields.City}` : 'Location Jobs'
+    }
+  },
+
   components: { BackTop, Intro, Jobs, Pager },
 
   data () {

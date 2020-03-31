@@ -52,6 +52,13 @@ import Share from '@/components/molecules/Share'
 
 export default {
   name: 'campaign',
+
+  metaInfo () {
+    return {
+      title: this.campaign && this.campaign.fields ? this.campaign.fields.Name : 'Campaign'
+    }
+  },
+
   components: {
     BackTop,
     Campaigns,

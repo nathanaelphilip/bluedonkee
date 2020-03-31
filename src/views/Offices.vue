@@ -25,6 +25,13 @@ const pageSize = 20
 
 export default {
   name: 'views-campaigns',
+
+  metaInfo () {
+    return {
+      title: this.office && this.office.fields ? `Office: ${this.office.fields.Name}` : 'Office'
+    }
+  },
+
   components: { BackTop, Campaigns, Intro, Pager },
 
   data () {

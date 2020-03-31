@@ -21,6 +21,9 @@ const pageSize = 20
 
 export default {
   name: 'work-remote',
+
+  metaInfo: { title: 'Remote Jobs' },
+
   components: { BackTop, Intro, Jobs, Pager },
 
   data () {

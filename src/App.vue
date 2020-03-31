@@ -17,6 +17,12 @@ import Full from '@/layouts/Full'
 export default {
   name: 'app',
 
+  metaInfo: {
+    title: 'WorkBlue',
+    titleTemplate: '%s + WorkBlue',
+    htmlAttrs: { lang: 'en' }
+  },
+
   components: {
     basic: Basic,
     full: Full

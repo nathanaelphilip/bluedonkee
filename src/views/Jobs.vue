@@ -54,6 +54,11 @@ const pageSize = 20
 
 export default {
   name: 'views-jobs',
+
+  metaInfo: {
+    title: 'Jobs'
+  },
+
   components: {
     BackTop,
     Banner,

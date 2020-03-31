@@ -58,6 +58,13 @@ import Share from '@/components/molecules/Share'
 
 export default {
   name: 'job',
+
+  metaInfo () {
+    return {
+      title: this.job && this.job.fields && this.entity && this.entity.fields ? `${this.job.fields.Title}, ${this.entity.fields.Name}` : 'Office'
+    }
+  },
+
   components: { BackTop, LinkPrimary, Header, Intro, Jobs, Markdown, Report, Share },
 
   data () {

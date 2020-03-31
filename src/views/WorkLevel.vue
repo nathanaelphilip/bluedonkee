@@ -25,6 +25,13 @@ const pageSize = 20
 
 export default {
   name: 'work-level',
+
+  metaInfo () {
+    return {
+      title: this.level && this.level.fields ? `Job Level: ${this.level.fields.Name}` : 'Job Level'
+    }
+  },
+
   components: { BackTop, Intro, Jobs, Pager },
 
   data () {

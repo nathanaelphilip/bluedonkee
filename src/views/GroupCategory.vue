@@ -25,6 +25,13 @@ const pageSize = 20
 
 export default {
   name: 'group-category',
+
+  metaInfo () {
+    return {
+      title: this.category && this.category.fields ? `Group Category: ${this.category.fields.Name}` : 'Group Category'
+    }
+  },
+
   components: { BackTop, Groups, Intro, Pager },
 
   data () {
