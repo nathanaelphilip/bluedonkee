@@ -124,6 +124,8 @@ export default {
     if (!this.$store.getters['jobs/getFetched']('jobs').length) {
       await this.load()
     }
+
+    window.analytics.page('Jobs')
   },
 
   methods: {

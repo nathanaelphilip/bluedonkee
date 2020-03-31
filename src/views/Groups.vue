@@ -57,6 +57,8 @@ export default {
     if (!this.$store.getters['groups/getFetched']('groups').length) {
       await this.load()
     }
+
+    window.analytics.page('Groups')
   },
 
   methods: {

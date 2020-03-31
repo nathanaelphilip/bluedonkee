@@ -30,6 +30,8 @@ export default {
 
   async mounted () {
     await this.$store.dispatch('cms/fetch')
+
+    window.analytics.page('Questions')
   }
 }
 </script>
