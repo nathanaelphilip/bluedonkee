@@ -60,7 +60,7 @@ export default {
     grid-column-gap: 16px;
 
     @include mq($until: xsmall) {
-      grid-template-columns: 1fr 50px;
+      grid-template-columns: 1fr;
     }
   }
 
@@ -94,8 +94,7 @@ export default {
     min-height: 0;
 
     @include mq($until: xsmall) {
-      grid-template-columns: repeat(5, 20%);
-      grid-template-rows: repeat(5, 20%);
+      display: none;
     }
   }
 

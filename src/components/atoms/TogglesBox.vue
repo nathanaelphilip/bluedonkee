@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="box">
+  <div class="box" :class="{'visible': visible == _uid}">
     <button class="heading" @click.prevent="toggle">
       {{ heading }}
       <IconChevronDown width="10" height="6" class="icon-chevron-down" />
@@ -27,7 +27,7 @@ export default {
 
 <style lang="scss" scoped>
   .box {
-    &:not(:last-child) {
+    &.visible:not(:last-child) {
       border-bottom: 1px solid $GREY;
     }
   }

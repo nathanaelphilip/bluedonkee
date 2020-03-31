@@ -2,7 +2,7 @@
   <form @submit.prevent="submit" class="form-contact">
     <div class="header">
       <h3 class="heading">Send A Note</h3>
-      <div class="subheading">Doubt <span>Mitch McConnell</span> will listen, but we will.</div>
+      <div class="subheading">Doubt <a href="https://secure.actblue.com/donate/amy-mcgrath-1" target="_blank">Mitch McConnell</a> will listen, but we will.</div>
     </div>
     <div class="row">
       <div class="half">
@@ -42,6 +42,7 @@
           @change="value => form.reason = value"
           :value="form.reason"
          >
+          <option>Feedback</option>
           <option>General Inquiry</option>
           <option>Opportunities</option>
           <option>Partnership</option>
@@ -157,7 +158,7 @@ export default {
   .subheading {
     font-size: 18px;
 
-    span { color: $BLUE; }
+    a { color: $BLUE; }
   }
 
   .row {

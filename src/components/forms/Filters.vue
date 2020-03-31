@@ -121,6 +121,7 @@ export default {
 
   .reset {
     @include ButtonClose;
+    margin-left: grid(2);
   }
 
   .group {

@@ -1,5 +1,5 @@
 <template>
-  <img src="~@/assets/logo.svg" width="80" heigt="45" alt="WorkBlue" />
+  <img src="~@/assets/logo.svg" width="110" heigt="63" alt="WorkBlue" />
 </template>
 
 <script>

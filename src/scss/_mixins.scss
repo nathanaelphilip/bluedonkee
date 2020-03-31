@@ -44,7 +44,7 @@
   border: 1px solid $BLUELIGHT;
   font-size: 15px;
   font-weight: 500;
-  padding: 12px 8px;
+  padding: 10px grid(3);
 
   &:hover {border-color: $GREY}
   &.checked {border-color: $BLUE}
