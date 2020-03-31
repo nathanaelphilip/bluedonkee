@@ -150,6 +150,8 @@ export default {
     }
 
     this.loading = false
+
+    window.analytics.page('Job')
   },
 
   methods: {

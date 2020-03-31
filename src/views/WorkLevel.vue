@@ -55,6 +55,8 @@ export default {
     }
 
     this.loading = false
+
+    window.analytics.page('Work Level')
   },
 
   methods: {

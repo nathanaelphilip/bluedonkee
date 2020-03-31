@@ -19,7 +19,11 @@ export default {
     title: 'Post a Job'
   },
 
-  components: { PostJob }
+  components: { PostJob },
+
+  async mounted () {
+    window.analytics.page('Post Job')
+  }
 }
 </script>
 

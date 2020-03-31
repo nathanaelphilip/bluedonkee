@@ -63,6 +63,8 @@ export default {
     if (!this.$store.getters['campaigns/getFetched']('campaigns').length) {
       await this.load()
     }
+
+    window.analytics.page('Campaigns')
   },
 
   methods: {

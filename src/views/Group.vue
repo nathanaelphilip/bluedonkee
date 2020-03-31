@@ -116,6 +116,8 @@ export default {
     }
 
     this.loading = false
+
+    window.analytics.page('Group')
   }
 }
 </script>
