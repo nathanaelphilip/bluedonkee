@@ -20,11 +20,19 @@ export default {
     display: inline-block;
     font-size: 85px;
     margin-bottom: 15px;
+
+    @include mq ($until: small) {
+      font-size: 72px;
+    }
   }
 
   .heading {
     font-size: 72px;
     font-weight: 900;
+
+    @include mq ($until: small) {
+      font-size: 28px;
+    }
 
     &::v-deep span { color: $BLUE; }
   }
