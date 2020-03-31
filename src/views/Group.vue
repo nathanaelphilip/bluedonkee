@@ -22,12 +22,14 @@
         </JobsEmpty>
       </template>
     </Jobs>
-    <Groups heading="Related Groups" :groups="$store.getters['groups/getFetched'](this.id)" />
+    <Groups heading="Related Groups" :groups="related" />
     <BackTop />
   </article>
 </template>
 
 <script>
+import { shuffle } from 'lodash'
+
 import {
   getByIds,
   getBySlug
@@ -60,11 +62,15 @@ export default {
   computed: {
     avatar () {
       return this.group.fields.Avatar[0].url
+    },
+
+    related () {
+      return shuffle(this.$store.getters['groups/getFetched'](this.id)).slice(0, 3)
     }
   },
 
   async mounted () {
-    this.id = `group/${this.group.id}`
+    this.id = `group/${this.$route.params.slug}`
 
     this.group = await getBySlug({
       slug: this.$route.params.slug,
@@ -97,7 +103,7 @@ export default {
         id: this.id,
         params: {
           filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.group.id}")`,
-          maxRecords: 3
+          maxRecords: 10
         }
       })
     }
