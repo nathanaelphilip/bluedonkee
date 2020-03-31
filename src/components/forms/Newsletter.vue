@@ -74,6 +74,10 @@ export default {
         if (result === 'success') {
           this.status = 'success'
           this.messages.success = msg
+
+          window.analytics.identify({
+            email: this.form.email
+          })
         }
       } catch (e) {
         this.status = 'failure'
