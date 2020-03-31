@@ -70,12 +70,12 @@ export default {
   },
 
   async mounted () {
+    this.id = `group/${this.$route.params.slug}`
+
     this.group = await getBySlug({
       slug: this.$route.params.slug,
       type: 'groups'
     })
-
-    this.id = `group/${this.group.id}`
 
     this.jobs = this.group.fields.Jobs ? await getByIds({
       ids: this.group.fields.Jobs,
@@ -96,7 +96,7 @@ export default {
       const search = []
 
       for (var i = 0; i < this.categories.length; i++) {
-        search.push(`{Groups Categories} = '${this.categories[i].fields.Name}'`)
+        search.push(`SEARCH("${this.categories[i].fields.Name}", {Groups Categories})`)
       }
 
       await this.$store.dispatch('groups/fetch', {
