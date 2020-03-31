@@ -1,7 +1,10 @@
 <template>
   <section class="home">
     <Intro @close="filter = false" heading="Jobs" :filter="filter">
-      <ButtonSecondary @click.native.prevent="filter = !filter">Filter</ButtonSecondary>
+      <ButtonSecondary :class="{'bugged': filterCount}" @click.native.prevent="filter = !filter">
+        Filter
+        <Count v-if="filterCount">{{ filterCount }}</Count>
+      </ButtonSecondary>
       <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
     </Intro>
     <div
@@ -41,6 +44,7 @@
 import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
+import Count from '@/components/atoms/Count'
 import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
@@ -54,6 +58,7 @@ export default {
     BackTop,
     Banner,
     ButtonSecondary,
+    Count,
     Intro,
     Jobs,
     Pager,
@@ -74,6 +79,10 @@ export default {
       }
 
       return this.$store.getters['campaigns/getFetched']('prefetched')
+    },
+
+    filterCount () {
+      return this.$store.getters['filters/count']
     }
   },
 

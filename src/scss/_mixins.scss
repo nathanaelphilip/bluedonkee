@@ -35,6 +35,12 @@
   border: 1px solid $GREY;
   padding: 10px 18px;
 
+  &.bugged {
+    @include Flex;
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+
   &:hover {background: $GREY;}
 }
 

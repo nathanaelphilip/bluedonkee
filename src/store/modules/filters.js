@@ -42,6 +42,17 @@ const getters = {
     return state.accepted[key]
   },
 
+  count: state => {
+    let count = 0
+    const values = Object.values(state.accepted)
+
+    values.map(array => {
+      count += array.length ? 1 : 0
+    })
+
+    return count
+  },
+
   filtered: state => {
     return state.accepted.categories.length || state.accepted.locations.length || state.accepted.types.length
   },

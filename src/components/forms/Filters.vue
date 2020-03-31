@@ -8,9 +8,9 @@
         >
           Location
           <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('locations').length" />
-          <span v-if="$store.getters['filters/accepted']('locations').length" class="bug">
+          <Count v-if="$store.getters['filters/accepted']('locations').length">
             {{ $store.getters['filters/accepted']('locations').length }}
-          </span>
+          </Count>
         </ButtonSecondary>
         <ButtonSecondary
           @click.native.prevent="modal = 'category'"
@@ -18,9 +18,9 @@
          >
           Category
           <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('categories').length" />
-          <span v-if="$store.getters['filters/accepted']('categories').length" class="bug">
+          <Count v-if="$store.getters['filters/accepted']('categories').length" class="bug">
             {{ $store.getters['filters/accepted']('categories').length }}
-          </span>
+          </Count>
         </ButtonSecondary>
         <ButtonSecondary
           @click.native.prevent="modal = 'types'"
@@ -28,9 +28,9 @@
           >
           Work Type
           <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('types').length" />
-          <span v-if="$store.getters['filters/accepted']('types').length" class="bug">
+          <Count v-if="$store.getters['filters/accepted']('types').length" class="bug">
             {{ $store.getters['filters/accepted']('types').length }}
-          </span>
+          </Count>
         </ButtonSecondary>
       </div>
       <button @click.prevent="$store.dispatch('filters/clear')" class="clear">
@@ -81,13 +81,14 @@
 
 <script>
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
+import Count from '@/components/atoms/Count'
 import CheckTags from '@/components/forms/CheckTags'
 import IconClose from '@/components/icons/Close'
 import IconPlus from '@/components/icons/Plus'
 import Modal from '@/components/molecules/Modal'
 
 export default {
-  components: { ButtonSecondary, CheckTags, IconClose, IconPlus, Modal },
+  components: { ButtonSecondary, CheckTags, Count, IconClose, IconPlus, Modal },
 
   data () {
     return {
@@ -140,21 +141,6 @@ export default {
   .icon-plus {
     fill: $BLUEGREY;
     margin-left: grid(1);
-  }
-
-  .bug {
-    $d: grid(6);
-    @include Flex($display: inline-flex, $justify: center);
-    background: $BLUE;
-    border-radius: 100%;
-    color: $WHITE;
-    font-size: 12px;
-    font-weight: 800;
-    margin-left: grid(1);
-    position: relative;
-    top: -1px;
-    height: $d;
-    width: $d;
   }
 
   .modalBox {
