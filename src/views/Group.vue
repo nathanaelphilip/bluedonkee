@@ -45,6 +45,13 @@ import Share from '@/components/molecules/Share'
 
 export default {
   name: 'views-group',
+
+  metaInfo () {
+    return {
+      title: this.group && this.group.fields ? this.group.fields.Name : 'Group'
+    }
+  },
+
   components: { BackTop, Groups, Header, Intro, Jobs, JobsEmpty, Share },
 
   data () {

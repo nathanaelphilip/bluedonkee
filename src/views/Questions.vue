@@ -21,7 +21,13 @@ import Question from '@/components/molecules/Question'
 
 export default {
   name: 'views-questions',
+
+  metaInfo: {
+    title: 'Questions'
+  },
+
   components: { ContactForm, HeaderPage, Question },
+
   async mounted () {
     await this.$store.dispatch('cms/fetch')
   }

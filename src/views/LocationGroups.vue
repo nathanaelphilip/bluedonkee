@@ -25,6 +25,13 @@ const pageSize = 20
 
 export default {
   name: 'views-location-groups',
+
+  metaInfo () {
+    return {
+      title: this.location && this.location.fields ? `Location Groups: ${this.location.fields.City}` : 'Location Groups'
+    }
+  },
+
   components: { BackTop, Intro, Groups, Pager },
 
   data () {

@@ -4,6 +4,7 @@ import App from './App.vue'
 import PortalVue from 'portal-vue'
 import VueClipboard from 'vue-clipboard2'
 import VueCookies from 'vue-cookies'
+import VueMeta from 'vue-meta'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
@@ -23,6 +24,7 @@ Vue.use(VueMQ, {
     xlarge: 1379
   }
 })
+Vue.use(VueMeta)
 
 new Vue({
   router,

@@ -14,6 +14,11 @@ import PostJob from '@/components/forms/PostJob'
 
 export default {
   name: 'views-post-job',
+
+  metaInfo: {
+    title: 'Post a Job'
+  },
+
   components: { PostJob }
 }
 </script>
