@@ -80,6 +80,11 @@ export default {
     display: grid;
     grid-gap: grid(3);
     grid-template-columns: repeat(7, 1fr);
+
+    &::v-deep .checkbox {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   .grid-column {
