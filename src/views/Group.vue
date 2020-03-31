@@ -22,12 +22,14 @@
         </JobsEmpty>
       </template>
     </Jobs>
-    <Groups heading="Related Groups" :groups="$store.getters['groups/getFetched'](this.id)" />
+    <Groups heading="Related Groups" :groups="related" />
     <BackTop />
   </article>
 </template>
 
 <script>
+import { shuffle } from 'lodash'
+
 import {
   getByIds,
   getBySlug
@@ -60,16 +62,20 @@ export default {
   computed: {
     avatar () {
       return this.group.fields.Avatar[0].url
+    },
+
+    related () {
+      return shuffle(this.$store.getters['groups/getFetched'](this.id)).slice(0, 3)
     }
   },
 
   async mounted () {
-    this.id = `group/${this.group.id}`
-
     this.group = await getBySlug({
       slug: this.$route.params.slug,
       type: 'groups'
     })
+
+    this.id = `group/${this.group.id}`
 
     this.jobs = this.group.fields.Jobs ? await getByIds({
       ids: this.group.fields.Jobs,
@@ -90,14 +96,14 @@ export default {
       const search = []
 
       for (var i = 0; i < this.categories.length; i++) {
-        search.push(`SEARCH("${this.categories[i].fields.Name}", {Groups Categories})`)
+        search.push(`{Groups Categories} = '${this.categories[i].fields.Name}'`)
       }
 
       await this.$store.dispatch('groups/fetch', {
         id: this.id,
         params: {
           filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.group.id}")`,
-          maxRecords: 3
+          maxRecords: 10
         }
       })
     }
