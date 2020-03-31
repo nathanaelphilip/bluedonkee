@@ -1,13 +1,13 @@
 <template>
   <nav class="nav">
     <router-link class="anchor" :to="{ name: 'jobs' }">
-      <IconJobs class="icon" width="36" height="27" /><span class="text">Jobs</span>
+      <IconJobs class="icon" width="32" height="24" /><span class="text">Jobs</span>
     </router-link>
     <router-link class="anchor" :to="{ name: 'groups' }">
-      <IconGroups class="icon" width="36" height="36" /><span class="text">Groups</span>
+      <IconGroups class="icon" width="32" height="32" /><span class="text">Groups</span>
     </router-link>
     <router-link class="anchor" :to="{ name: 'campaigns' }">
-      <IconCampaigns class="icon" width="36" height="38" /><span class="text">Campaigns</span>
+      <IconCampaigns class="icon" width="32" height="33" /><span class="text">Campaigns</span>
     </router-link>
     <button class="anchor anchor-more" @click.prevent="$store.dispatch('app/sidebar', true)">
       <IconMore class="icon" width="36" height="38" /><span class="text">Sidebar</span>

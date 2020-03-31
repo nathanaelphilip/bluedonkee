@@ -127,7 +127,8 @@ export default {
     @include Flex($align: stretch, $direction: column, $justify: flex-start, $wrap: nowrap);
     background: $WHITE;
     position: absolute;
-    height: calc(100vh - 75px);
+    height: calc(100vh - max(180px, constant(safe-area-inset-bottom)));
+    height: calc(100vh - max(180px, env(safe-area-inset-bottom)));
     left: 0;
     top: calc(100% + 1px);
     width: 100%;

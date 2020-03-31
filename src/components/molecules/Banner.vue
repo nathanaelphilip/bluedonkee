@@ -59,8 +59,8 @@ export default {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 16px;
 
-    @include mq($until: xsmall) {
-      grid-template-columns: 1fr 50px;
+    @include mq($until: small) {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -93,9 +93,8 @@ export default {
     min-width: 0;
     min-height: 0;
 
-    @include mq($until: xsmall) {
-      grid-template-columns: repeat(5, 20%);
-      grid-template-rows: repeat(5, 20%);
+    @include mq($until: small) {
+      display: none;
     }
   }
 

@@ -16,7 +16,7 @@
       <JobsPromoted />
       <Twitter />
       <Newsletter />
-      <div class="copyright">&copy; {{ new Date().getFullYear() }} WorkBlue - <router-link :to="{ name: 'questions' }">Questions</router-link></div>
+      <div class="copyright">&copy; WorkBlue {{ new Date().getFullYear() }} Paid for by Work Blue Organization. Not authorized by any candidate or candidate’s committee. <router-link :to="{ name: 'questions' }">Questions</router-link></div>
     </template>
   </Grid>
 </template>
@@ -85,6 +85,7 @@ export default {
   .copyright {
     color: $BLUEGREY;
     font-size: 13px;
+    line-height: 1.4;
     text-align: center;
   }
 </style>

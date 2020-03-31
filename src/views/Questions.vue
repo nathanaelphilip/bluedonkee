@@ -10,7 +10,7 @@
       :question="question"
     />
     <ContactForm />
-    <div class="copyright">&copy; 2020 WorkBlue</div>
+    <div class="copyright">&copy; WorkBlue {{ new Date().getFullYear() }}. Paid for by Work Blue Organization. Not authorized by any candidate or candidate’s committee.</div>
   </article>
 </template>
 

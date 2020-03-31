@@ -86,7 +86,7 @@ export default {
       transition: transform .5s ease;
       top: 0;
       width: 100%;
-      z-index: 11;
+      z-index: 12;
     }
 
     .sticky-top {

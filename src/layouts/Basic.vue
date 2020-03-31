@@ -32,7 +32,12 @@ export default {
 
 <style lang="scss" scoped>
   .basic {
-    grid-template-columns: 300px 1fr 300px;
+    grid-template-columns: 100px 1fr 100px;
+
+    &::v-deep .column-2 {
+      margin: 0 auto;
+      max-width: 680px;
+    }
 
     @include mq ($until: small) {
       grid-template-columns: 1fr;

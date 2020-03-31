@@ -6,7 +6,7 @@
     <div class="box">
       <h5 class="heading">Follow on Twitter</h5>
       <div class="action">
-        <a href="https://twitter.com/@LetsWorkBlue" target="_blank">@LetsWorkBlue</a>
+        <a href="https://twitter.com/@WorkBlueOrg" target="_blank">@WorkBlueOrg</a>
       </div>
     </div>
   </aside>

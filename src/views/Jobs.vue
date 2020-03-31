@@ -1,7 +1,10 @@
 <template>
   <section class="home">
     <Intro @close="filter = false" heading="Jobs" :filter="filter">
-      <ButtonSecondary class="small" @click.native.prevent="filter = !filter">Filter</ButtonSecondary>
+      <ButtonSecondary :class="{'bugged': filterCount}" @click.native.prevent="filter = !filter">
+        Filter
+        <Count v-if="filterCount">{{ filterCount }}</Count>
+      </ButtonSecondary>
       <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
     </Intro>
     <div
@@ -13,7 +16,7 @@
         heading="Positioned for Change."
         content="Find campaigns and organizations fighting to make democracy more equitable. #letsworkblue"
         :link="{name: 'questions'}"
-        :items="$store.getters['groups/getFetched']('groups')"
+        :items="avatars"
       />
     </div>
     <template v-if="$store.getters['filters/filtered']">
@@ -41,6 +44,7 @@
 import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import ButtonSecondary from '@/components/atoms/ButtonSecondary'
+import Count from '@/components/atoms/Count'
 import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
@@ -54,6 +58,7 @@ export default {
     BackTop,
     Banner,
     ButtonSecondary,
+    Count,
     Intro,
     Jobs,
     Pager,
@@ -64,6 +69,20 @@ export default {
     return {
       filter: false,
       closed: false
+    }
+  },
+
+  computed: {
+    avatars () {
+      if (this.$store.getters['groups/getFetched']('prefetched').length) {
+        return this.$store.getters['groups/getFetched']('prefetched')
+      }
+
+      return this.$store.getters['campaigns/getFetched']('prefetched')
+    },
+
+    filterCount () {
+      return this.$store.getters['filters/count']
     }
   },
 
