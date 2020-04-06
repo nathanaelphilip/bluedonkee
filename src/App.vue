@@ -14,8 +14,6 @@
 import Basic from '@/layouts/Basic'
 import Full from '@/layouts/Full'
 
-import OG from '@/assets/og/workblue.jpg'
-
 export default {
   name: 'app',
 
