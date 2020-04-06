@@ -25,7 +25,7 @@ export default {
     htmlAttrs: { lang: 'en' },
     meta: [{
       property: 'og:image',
-      content: `${OG}`
+      content: `${window.location.origin}/${OG}`
     }]
   },
 
