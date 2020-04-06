@@ -22,11 +22,7 @@ export default {
   metaInfo: {
     title: 'WorkBlue',
     titleTemplate: '%s + WorkBlue',
-    htmlAttrs: { lang: 'en' },
-    meta: [{
-      property: 'og:image',
-      content: `${window.location.origin}${OG}`
-    }]
+    htmlAttrs: { lang: 'en' }
   },
 
   components: {
