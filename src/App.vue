@@ -14,13 +14,19 @@
 import Basic from '@/layouts/Basic'
 import Full from '@/layouts/Full'
 
+import OG from '@/assets/og/workblue.jpg'
+
 export default {
   name: 'app',
 
   metaInfo: {
     title: 'WorkBlue',
     titleTemplate: '%s + WorkBlue',
-    htmlAttrs: { lang: 'en' }
+    htmlAttrs: { lang: 'en' },
+    meta: [{
+      property: 'og:image',
+      content: `${OG}`
+    }]
   },
 
   components: {
