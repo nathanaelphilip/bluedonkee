@@ -109,7 +109,7 @@ export default {
       await this.$store.dispatch('groups/fetch', {
         id: this.id,
         params: {
-          filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.group.id}")`,
+          filterByFormula: `AND(OR(${search.join(',')}), OR({Status} = 'Active', {Status} = 'Promoted'), RECORD_ID() != "${this.group.id}")`,
           maxRecords: 10
         }
       })
