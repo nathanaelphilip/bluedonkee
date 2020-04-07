@@ -51,7 +51,12 @@ const actions = {
 
   async getById ({ commit }, id) {
     const { data } = await getJob(id)
-    commit(JOBS_FETCH, [data])
+    const { Status } = data.fields
+
+    if (Status === 'Active' || Status === 'Promoted') {
+      commit(JOBS_FETCH, [data])
+    }
+
     return data
   },
 
