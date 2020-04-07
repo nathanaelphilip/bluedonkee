@@ -89,6 +89,8 @@ export default {
       type: 'jobs'
     }) : []
 
+    // OR({Status} = 'Active', {Status} = 'Promoted')
+
     this.locations = await getByIds({
       ids: this.group.fields.Location,
       type: 'locations'
@@ -109,7 +111,7 @@ export default {
       await this.$store.dispatch('groups/fetch', {
         id: this.id,
         params: {
-          filterByFormula: `AND(OR(${search.join(',')}), OR({Status} = 'Active', {Status} = 'Promoted'), RECORD_ID() != "${this.group.id}")`,
+          filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.group.id}")`,
           maxRecords: 10
         }
       })

@@ -123,7 +123,7 @@ export default {
       await this.$store.dispatch('campaigns/fetch', {
         id: this.id,
         params: {
-          filterByFormula: `AND(OR(${search.join(',')}), OR({Status} = 'Active', {Status} = 'Promoted'), RECORD_ID() != "${this.campaign.id}")`,
+          filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.campaign.id}")`,
           maxRecords: 3
         }
       })
