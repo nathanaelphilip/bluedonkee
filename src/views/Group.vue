@@ -89,8 +89,6 @@ export default {
       type: 'jobs'
     }) : []
 
-    // OR({Status} = 'Active', {Status} = 'Promoted')
-
     this.locations = await getByIds({
       ids: this.group.fields.Location,
       type: 'locations'
