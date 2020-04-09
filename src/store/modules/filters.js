@@ -78,7 +78,11 @@ const getters = {
       })
 
       for (let j = 0; j < filtered.length; j++) {
-        cities.push(`{Location} = '${filtered[j].fields.City}'`)
+        const state = rootState.states.repository.find(state => {
+          return state.id === filtered[j].fields.State[0]
+        })
+
+        cities.push(`{Location} = '${filtered[j].fields.City}, ${state.fields.Name}'`)
       }
 
       filters.push(`OR(${cities.join(',')})`)
