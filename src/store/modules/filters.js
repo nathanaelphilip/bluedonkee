@@ -82,7 +82,7 @@ const getters = {
           return state.id === filtered[j].fields.State[0]
         })
 
-        cities.push(`{Location} = '${filtered[j].fields.City}, ${state.fields.Name}'`)
+        cities.push(`FIND('${state.fields.Name}', {Location})`)
       }
 
       filters.push(`OR(${cities.join(',')})`)
