@@ -61,10 +61,12 @@ export default {
 
   methods: {
     async load () {
+      const state = this.$store.getters['states/getById'](this.location.fields.State[0])
+
       await this.$store.dispatch('groups/fetch', {
         id: this.id,
         params: {
-          filterByFormula: `SEARCH("${this.location.fields.City}", {Location})`,
+          filterByFormula: `SEARCH("${this.location.fields.City}, ${state.fields.Name}", {Location})`,
           pageSize,
           sort: [{ field: 'Name', direction: 'asc' }],
           offset: this.$store.getters['groups/getOffset'](this.id)
