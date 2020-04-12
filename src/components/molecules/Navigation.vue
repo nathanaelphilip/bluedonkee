@@ -19,20 +19,46 @@
       <li class="top">
         <a href="#">More</a>
       </li>
+      <li class="top">
+        <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
+import LinkPrimary from '@/components/atoms/LinkPrimary'
+
 export default {
-  name: 'components-molecules-navigation'
+  name: 'components-molecules-navigation',
+  components: { LinkPrimary }
 }
 </script>
 
 <style lang="scss" scoped>
-  .nav {}
+  .nav {
+    color: $BLUEGREY;
+    font-weight: 500;
+    font-size: 15px;
+  }
 
   .parent {
     @include Flex ($justify: flex-end);
+  }
+
+  .top {
+    &:not(:last-child) {
+      margin-right: grid(3);
+    }
+  }
+
+  .anchor {
+    border-radius: 4px;
+    padding: grid(2) grid(3);
+
+    &:hover, &.router-link-active {
+      background: $GREY;
+      color: $BLACK;
+    }
   }
 </style>
