@@ -223,3 +223,9 @@
     margin-bottom: 8px;
   }
 }
+
+@mixin Container {
+  margin:  0 auto;
+  max-width: grid(256);
+  width: 95%;
+}

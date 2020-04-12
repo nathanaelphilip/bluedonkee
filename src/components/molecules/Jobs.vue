@@ -42,10 +42,6 @@ export default {
     }
 
     .simple &:nth-child(2) { padding-top: 0; }
-
-    &:not(:last-child) {
-      border-bottom: 1px solid $GREY;
-    }
   }
 
   .empty {

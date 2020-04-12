@@ -1,26 +1,22 @@
 <template>
-  <Grid class="basic">
-    <template v-slot:one>
-      <ButtonSecondary @click.native.prevent="back()">
-        Close
-      </ButtonSecondary>
-    </template>
-    <template v-slot:two>
+  <main class="site">
+    <Header />
+    <Grid class="basic">
       <slot />
-    </template>
-    <template v-slot:three>
-      &nbsp;
-    </template>
-  </Grid>
+      <template v-slot:three>
+        &nbsp;
+      </template>
+    </Grid>
+  </main>
 </template>
 
 <script>
-import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import Grid from '@/components/layouts/Grid'
+import Header from '@/components/molecules/HeaderGlobal'
 
 export default {
   name: 'layout-basic',
-  components: { Grid, ButtonSecondary },
+  components: { Grid, Header },
 
   methods: {
     back () {
