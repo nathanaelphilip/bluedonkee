@@ -2,9 +2,8 @@
   <main class="site">
     <Header />
     <Grid class="basic">
-      <slot />
-      <template v-slot:three>
-        &nbsp;
+      <template v-slot:one>
+        <slot />
       </template>
     </Grid>
   </main>
@@ -28,28 +27,11 @@ export default {
 
 <style lang="scss" scoped>
   .basic {
-    grid-template-columns: 100px 1fr 100px;
+    justify-content: center;
+    grid-template-columns: 650px;
 
     &::v-deep .column-2 {
-      margin: 0 auto;
-      max-width: 680px;
-    }
-
-    @include mq ($until: small) {
-      grid-template-columns: 1fr;
-      padding: grid(4);
-
-      &::v-deep .column-1 {
-        @include mq ($until: small) {
-          min-height: 0;
-        }
-
-        .sticky-top {
-          @include mq ($until: small) {
-            padding-top: 0;
-          }
-        }
-      }
+      display: none;
     }
   }
 </style>
