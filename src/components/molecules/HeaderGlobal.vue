@@ -22,8 +22,12 @@ export default {
 
 <style lang="scss" scoped>
   .header {
+    background: $WHITE;
     border-bottom: 1px solid $GREY;
     padding: grid(4);
+    position: sticky;
+    top: 0;
+    z-index: 8;
   }
 
   .container {

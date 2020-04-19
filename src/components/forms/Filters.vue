@@ -2,7 +2,8 @@
   <div class="filters">
     <div class="actions">
       <div class="group">
-        <ButtonSecondary
+        <button
+          class="button"
           @click.native.prevent="modal = 'locations'"
           :class="{'bugged': $store.getters['filters/accepted']('locations').length}"
         >
@@ -11,8 +12,9 @@
           <Count v-if="$store.getters['filters/accepted']('locations').length">
             {{ $store.getters['filters/accepted']('locations').length }}
           </Count>
-        </ButtonSecondary>
-        <ButtonSecondary
+        </button>
+        <button
+          class="button"
           @click.native.prevent="modal = 'category'"
           :class="{'bugged': $store.getters['filters/accepted']('categories').length}"
          >
@@ -21,8 +23,9 @@
           <Count v-if="$store.getters['filters/accepted']('categories').length" class="bug">
             {{ $store.getters['filters/accepted']('categories').length }}
           </Count>
-        </ButtonSecondary>
-        <ButtonSecondary
+        </button>
+        <button
+          class="button"
           @click.native.prevent="modal = 'types'"
           :class="{'bugged': $store.getters['filters/accepted']('types').length}"
           >
@@ -31,10 +34,10 @@
           <Count v-if="$store.getters['filters/accepted']('types').length" class="bug">
             {{ $store.getters['filters/accepted']('types').length }}
           </Count>
-        </ButtonSecondary>
+        </button>
       </div>
       <button @click.prevent="$store.dispatch('filters/clear')" class="clear">
-        Clear <div class="reset"><IconClose width="10" height="10" /></div>
+        Clear Filters
       </button>
     </div>
     <portal to="modal" multiple>
@@ -80,15 +83,13 @@
 </template>
 
 <script>
-import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import Count from '@/components/atoms/Count'
 import CheckTags from '@/components/forms/CheckTags'
-import IconClose from '@/components/icons/Close'
 import IconPlus from '@/components/icons/Plus'
 import Modal from '@/components/molecules/Modal'
 
 export default {
-  components: { ButtonSecondary, CheckTags, Count, IconClose, IconPlus, Modal },
+  components: { CheckTags, Count, IconPlus, Modal },
 
   data () {
     return {
@@ -107,12 +108,11 @@ export default {
 
 <style lang="scss" scoped>
   .filters {
-    border-top: 1px solid $GREY;
-    padding: grid(4) grid(8);
+    background: $WHITE;
   }
 
   .actions {
-    @include Flex;
+    @include Flex ($justify: center);
   }
 
   .clear {
@@ -131,6 +131,10 @@ export default {
     > *:not(:last-child) {
       margin-right: grid(3);
     }
+  }
+
+  .button {
+    @include ButtonSimple;
   }
 
   .bugged {

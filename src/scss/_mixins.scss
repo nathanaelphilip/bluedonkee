@@ -19,6 +19,16 @@
   &:hover {cursor: pointer}
 }
 
+@mixin ButtonSimple {
+  @include Button;
+  padding: grid(2) grid(3);
+
+  &:hover, &.router-link-active {
+    background: $GREY;
+    color: $BLACK;
+  }
+}
+
 @mixin ButtonPrimary {
   @include Button;
   background: $BLUE2;

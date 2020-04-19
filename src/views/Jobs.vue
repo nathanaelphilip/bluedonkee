@@ -1,5 +1,14 @@
 <template>
   <section class="home">
+    <portal to="banner">
+      <Banner
+          heading="People-Powered Groups"
+          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla consectetur erat eget vulputate pharetra. Praesent vitae enim non risus rhoncus lobortis."
+      />
+    </portal>
+    <portal to="filters">
+      <Filters />
+    </portal>
     <template v-if="$store.getters['filters/filtered']">
       <Jobs :jobs="$store.getters['jobs/getFetched']($store.getters['filters/key'])" />
       <Pager
@@ -22,7 +31,9 @@
 </template>
 
 <script>
+import Banner from '@/components/molecules/Banner'
 import BackTop from '@/components/molecules/BackTop'
+import Filters from '@/components/forms/Filters'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 
@@ -36,7 +47,9 @@ export default {
   },
 
   components: {
+    Banner,
     BackTop,
+    Filters,
     Jobs,
     Pager
   },

@@ -53,12 +53,6 @@ export default {
   }
 
   .anchor {
-    border-radius: 4px;
-    padding: grid(2) grid(3);
-
-    &:hover, &.router-link-active {
-      background: $GREY;
-      color: $BLACK;
-    }
+    @include ButtonSimple;
   }
 </style>

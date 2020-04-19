@@ -1,6 +1,12 @@
 <template>
   <main class="site">
     <Header />
+    <portal-target name="banner">
+    </portal-target>
+    <div class="filters">
+      <portal-target name="filters">
+      </portal-target>
+    </div>
     <Grid>
       <template v-slot:one>
         <main class="main">
@@ -35,5 +41,11 @@ export default {
   .newsletter,
   .twitter {
     margin-bottom: 26px;
+  }
+
+  .filters {
+    position: sticky;
+    top: 70px;
+    z-index: 8;
   }
 </style>

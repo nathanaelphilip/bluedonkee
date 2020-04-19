@@ -53,7 +53,7 @@ export default {
     @include mq($from: xsmall) {
       padding-top: 36px;
       position: sticky;
-      top: 0;
+      top: 120px;
     }
   }
 
