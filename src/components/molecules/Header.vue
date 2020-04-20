@@ -5,8 +5,16 @@
         <Avatar :src="avatar" />
       </div>
       <div class="links">
+        <Share :path="$route.path" />
         <a :href="website" target="_blank"><IconLink width="19" height="19" />Website</a>
         <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" />{{ twitter }}</a>
+        <LinkPrimary
+           v-if="apply"
+           classes="small"
+           @clicked="track"
+           :href="apply">
+           Apply
+        </LinkPrimary>
       </div>
     </div>
 
@@ -82,8 +90,10 @@
 
 <script>
 import Avatar from '@/components/atoms/Avatar'
+import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Locations from '@/components/molecules/Locations'
 import Markdown from '@/components/molecules/Markdown'
+import Share from '@/components/molecules/Share'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
@@ -92,6 +102,7 @@ import IconTwitter from '@/components/icons/Twitter'
 
 export default {
   props: [
+    'apply',
     'avatar',
     'description',
     'entity',
@@ -111,12 +122,24 @@ export default {
 
   components: {
     Avatar,
+    LinkPrimary,
     Locations,
     Markdown,
+    Share,
     Tag,
     Tags,
     IconLink,
     IconTwitter
+  },
+
+  methods: {
+    track () {
+      window.analytics.track('Applied for Job', {
+        id: this.job.id,
+        title: this.job.fields.Title,
+        entity: this.entity.fields.Name
+      })
+    }
   }
 }
 </script>

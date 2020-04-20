@@ -24,10 +24,9 @@ export default {
 
 <style lang="scss" scoped>
   .heading {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 900;
-    margin-bottom: 30px;
-    padding: 0 32px;
+    margin-bottom: grid(10);
 
     @include mq ($until: xsmall) {
       padding: 0px 16px;
@@ -35,22 +34,13 @@ export default {
   }
 
   .box {
-    padding: grid(6) grid(8);
-
-    @include mq($until: xsmall) {
-      padding: grid(6) grid(4);
+    &:not(:last-child) {
+      margin-bottom: grid(14);
     }
-
-    .simple &:nth-child(2) { padding-top: 0; }
   }
 
   .empty {
-    margin-bottom: 48px;
-    margin-top: -15px;
-    padding: 0 32px;
-
-    @include mq ($until: xsmall) {
-      padding: 0px 16px;
-    }
+    margin-bottom: grid(12);
+    margin-top: grid(-4);
   }
 </style>

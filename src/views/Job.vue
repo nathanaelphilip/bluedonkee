@@ -1,14 +1,5 @@
 <template>
   <article class="job" v-if="!loading">
-    <Intro :back="{ name: 'jobs' }" :heading="job.fields.Title">
-      <Share :path="$route.path" />
-      <LinkPrimary
-        classes="small"
-        @clicked="track"
-        :href="job.fields['Application URL']">
-        Apply
-      </LinkPrimary>
-    </Intro>
     <div class="boxed">
       <Header
         :avatar="avatar"
@@ -23,6 +14,7 @@
         :remote="job.fields.Remote"
         :website="entity.fields.Website"
         :twitter="entity.fields.Twitter"
+        :apply="job.fields['Application URL']"
       />
 
       <div class="overview">
@@ -38,7 +30,6 @@
     <Jobs
       heading="Related Jobs"
       :jobs="$store.getters['jobs/getFetched'](`job/${this.job.id}`)"
-      :simple="true"
      />
 
     <BackTop />
@@ -54,12 +45,9 @@ import {
 
 import BackTop from '@/components/molecules/BackTop'
 import Header from '@/components/molecules/Header'
-import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
-import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Markdown from '@/components/molecules/Markdown'
 import Report from '@/components/molecules/Report'
-import Share from '@/components/molecules/Share'
 
 export default {
   name: 'job',
@@ -70,7 +58,7 @@ export default {
     }
   },
 
-  components: { BackTop, LinkPrimary, Header, Intro, Jobs, Markdown, Report, Share },
+  components: { BackTop, Header, Jobs, Markdown, Report },
 
   data () {
     return {
@@ -152,32 +140,21 @@ export default {
     this.loading = false
 
     window.analytics.page('Job')
-  },
-
-  methods: {
-    track () {
-      window.analytics.track('Applied for Job', {
-        id: this.job.id,
-        title: this.job.fields.Title,
-        entity: this.entity.fields.Name
-      })
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .boxed {
-    background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
-    padding: 32px;
+    padding: grid(8) 0;
 
     @include mq ($until: xsmall) {
-      padding: 24px 16px;
+      padding: grid(6) 0;
     }
   }
 
   .overview {
-    margin-bottom: 24px;
+    margin-bottom: grid(6);
   }
 
   .subheading {
