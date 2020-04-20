@@ -41,7 +41,7 @@
 
 @mixin ButtonSecondary {
   @include Button;
-  background: none;
+  background: $WHITE;
   border: 1px solid $GREY;
   padding: 10px 18px;
 
