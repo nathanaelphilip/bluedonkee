@@ -109,6 +109,16 @@ const routes = [
     name: 'questions',
     component: () => import(/* webpackChunkName: "questions" */ '../views/Questions.vue'),
     meta: { layout: 'basic' }
+  },
+  {
+    path: '/about',
+    name: 'about',
+    meta: { layout: 'basic' }
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    meta: { layout: 'basic' }
   }
 ]
 
