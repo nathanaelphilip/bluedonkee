@@ -8,6 +8,7 @@
         :locations="locations"
         locationroute="locationJob"
         :heading="job.fields.Title"
+        :isNew="isNew"
         :workCategories="workCategories"
         :workLevels="workLevels"
         :workTypes="workTypes"
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 import {
   getByIds,
   getBySlug,
@@ -76,6 +79,10 @@ export default {
   computed: {
     avatar () {
       return this.entity ? this.entity.fields.Avatar[0].url : false
+    },
+
+    isNew () {
+      return moment(this.job.fields['Post Date']) > moment().subtract(5, 'days')
     }
   },
 

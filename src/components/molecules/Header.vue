@@ -28,6 +28,7 @@
     <h2 class="heading">{{ heading }}</h2>
 
     <div class="info">
+      <Bug v-if="isNew">New</Bug>
       <template v-if="entity">
         <router-link :to="{
           name: entityType,
@@ -97,6 +98,7 @@
 
 <script>
 import Avatar from '@/components/atoms/Avatar'
+import Bug from '@/components/atoms/Bug'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Locations from '@/components/molecules/Locations'
 import Markdown from '@/components/molecules/Markdown'
@@ -116,6 +118,7 @@ export default {
     'entityType',
     'groupCategories',
     'heading',
+    'isNew',
     'locations',
     'locationroute',
     'offices',
@@ -129,6 +132,7 @@ export default {
 
   components: {
     Avatar,
+    Bug,
     LinkPrimary,
     Locations,
     Markdown,
@@ -198,9 +202,14 @@ export default {
   }
 
   .info {
+    @include Flex ($justify: flex-start);
     color: $BLUE;
     font-size: 17px;
     margin-bottom: grid(6);
+
+    .bug {
+      margin-right: grid(3)
+    }
   }
 
   .tags {
