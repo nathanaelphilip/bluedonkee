@@ -1,18 +1,11 @@
 <template>
-  <div>
-    <Intro heading="Groups" />
-    <div
-      class="boxed"
-      v-if="!closed"
-      >
+  <section>
+    <portal to="banner">
       <Banner
-        @close="$cookies.set('banner:groups'); closed = true"
-        heading="The Good Fight."
+        heading="People-Powered Groups"
         content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
-        :link="{name: 'questions'}"
-        :items="$store.getters['groups/getFetched']('groups')"
       />
-    </div>
+    </portal>
     <Groups :groups="$store.getters['groups/getFetched']('groups')" />
     <Pager
       @load="load"
@@ -20,14 +13,13 @@
       v-if="$store.getters['groups/getOffset']('groups')"
     />
     <BackTop v-if="!$store.getters['groups/getOffset']('groups')" />
-  </div>
+  </section>
 </template>
 
 <script>
 import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import Groups from '@/components/molecules/Groups'
-import Intro from '@/components/molecules/Intro'
 import Pager from '@/components/molecules/Pager'
 
 const pageSize = 20
@@ -39,7 +31,7 @@ export default {
     title: 'Groups'
   },
 
-  components: { BackTop, Banner, Intro, Groups, Pager },
+  components: { BackTop, Banner, Groups, Pager },
 
   data () {
     return { closed: false }

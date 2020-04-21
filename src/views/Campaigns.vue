@@ -1,18 +1,11 @@
 <template>
-  <div>
-    <Intro heading="Campaigns" />
-    <div
-      class="boxed"
-      v-if="!closed"
-      >
+  <section>
+    <portal to="banner">
       <Banner
-        @close="$cookies.set('banner:campaigns'); closed = true"
-        heading="Pick a Race, Get Involved"
-        content="Volunteer, knock doors, phone bank or apply for a job. Its go time. #letsworkblue"
-        :link="{name: 'questions'}"
-        :items="$store.state.campaigns.repository"
+        heading="People-Powered Campaigns"
+        content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
       />
-    </div>
+    </portal>
     <Campaigns :campaigns="$store.getters['campaigns/getFetched']('campaigns')" />
     <Pager
       @load="load"
@@ -20,13 +13,12 @@
       v-if="$store.getters['campaigns/getOffset']('campaigns')"
     />
     <BackTop v-if="!$store.getters['campaigns/getOffset']('campaigns')" />
-  </div>
+  </section>
 </template>
 
 <script>
 import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
-import Intro from '@/components/molecules/Intro'
 import Campaigns from '@/components/molecules/Campaigns'
 import Pager from '@/components/molecules/Pager'
 
@@ -43,7 +35,6 @@ export default {
     BackTop,
     Banner,
     Campaigns,
-    Intro,
     Pager
   },
 
