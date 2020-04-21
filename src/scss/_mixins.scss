@@ -54,6 +54,20 @@
   &:hover {background: $GREY;}
 }
 
+@mixin ButtonSquareIcon {
+  @include ButtonSecondary;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: grid(9);
+  padding: 0;
+  width: grid(9);
+
+  .icon {
+    fill: $BLACK;
+  }
+}
+
 @mixin Tag {
   @include Button;
   background: $BLUELIGHT;

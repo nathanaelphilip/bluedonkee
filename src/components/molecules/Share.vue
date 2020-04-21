@@ -1,6 +1,8 @@
 <template>
   <div class="share">
-    <ButtonShare @click.native.prevent="open = true" />
+    <button @click.native.prevent="open = true" class="button-share">
+      <IconShare width="18" height="19" class="icon" />
+    </button>
     <portal to="modal">
       <Modal @close="open = false" heading="Share" :open="open">
         <Copy :value="link" />
@@ -21,17 +23,17 @@
 </template>
 
 <script>
-import ButtonShare from '@/components/atoms/ButtonShare'
 import Copy from '@/components/molecules/Copy'
 import Modal from '@/components/molecules/Modal'
 
 import IconFacebook from '@/components/icons/Facebook'
 import IconLinkedIn from '@/components/icons/LinkedIn'
+import IconShare from '@/components/icons/Share'
 import IconTwitter from '@/components/icons/Twitter'
 
 export default {
   props: ['path'],
-  components: { ButtonShare, Copy, IconFacebook, IconLinkedIn, IconTwitter, Modal },
+  components: { Copy, IconFacebook, IconLinkedIn, IconTwitter, IconShare, Modal },
 
   data () {
     return {
@@ -60,6 +62,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .button-share {
+    @include ButtonSquareIcon;
+  }
+
   .copy {
     margin-bottom: 12px;
   }

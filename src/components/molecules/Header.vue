@@ -5,15 +5,22 @@
         <Avatar :src="avatar" />
       </div>
       <div class="links">
+        <a :href="website" target="_blank"><IconLink width="19" height="19" class="icon" /></a>
+        <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" class="icon" /></a>
         <Share :path="$route.path" />
-        <a :href="website" target="_blank"><IconLink width="19" height="19" />Website</a>
-        <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" />{{ twitter }}</a>
         <LinkPrimary
            v-if="apply"
            classes="small"
-           @clicked="track"
+           @clicked="track('Applied for Job')"
            :href="apply">
            Apply
+        </LinkPrimary>
+        <LinkPrimary
+           v-if="donate"
+           classes="small"
+           @clicked="track('Donated')"
+           :href="donate">
+           Donate
         </LinkPrimary>
       </div>
     </div>
@@ -133,8 +140,8 @@ export default {
   },
 
   methods: {
-    track () {
-      window.analytics.track('Applied for Job', {
+    track (text) {
+      window.analytics.track(text, {
         id: this.job.id,
         title: this.job.fields.Title,
         entity: this.entity.fields.Name
@@ -157,23 +164,25 @@ export default {
   }
 
   .links {
+    @include Flex;
     color: $BLUE;
-    display: flex;
     font-size: 15px;
     margin-top: 6px;
     justify-content: flex-end;
 
-    > a {
-      @include Flex($justify: flex-start);
-
+    > * {
       &:not(:last-child) {
-        margin-right: 24px;
+        margin-right: grid(3);
       }
+    }
+
+    > a {
+      @include ButtonSquareIcon;
     }
   }
 
   .header {
-    margin-bottom: 24px;
+    margin-bottom: grid(15);
   }
 
   .heading {
@@ -191,22 +200,16 @@ export default {
   .info {
     color: $BLUE;
     font-size: 17px;
-    margin-bottom: 24px;
+    margin-bottom: grid(6);
   }
 
   .tags {
-    margin-bottom: 36px;
-  }
-
-  .icon-link,
-  .icon-twitter {
-    fill: $GREY;
-    margin-right: 6px;
+    margin-bottom: grid(9);
   }
 
   .description {
     font-size: 17px;
     line-height: 1.4;
-    margin-bottom: 24px;
+    margin-bottom: grid(6);
   }
 </style>

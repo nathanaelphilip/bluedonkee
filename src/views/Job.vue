@@ -160,7 +160,7 @@ export default {
   }
 
   .subheading {
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 900;
     margin-bottom: 10px;
   }
