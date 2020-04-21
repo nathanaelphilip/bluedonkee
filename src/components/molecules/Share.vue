@@ -1,6 +1,6 @@
 <template>
   <div class="share">
-    <button @click.native.prevent="open = true" class="button-share">
+    <button @click.prevent="open = true" class="button-share">
       <IconShare width="18" height="19" class="icon" />
     </button>
     <portal to="modal">

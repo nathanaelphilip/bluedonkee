@@ -114,6 +114,7 @@ export default {
     'apply',
     'avatar',
     'description',
+    'donate',
     'entity',
     'entityType',
     'groupCategories',
