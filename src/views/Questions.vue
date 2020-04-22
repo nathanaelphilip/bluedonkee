@@ -2,6 +2,7 @@
   <article class="questions">
     <HeaderPage
       :heading="`Frequently Asked Questions`"
+      :content="`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis malesuada bibendum ligula, eu consequat velit placerat id.`"
     />
     <Question
       v-for="(question, index) in $store.state.cms.questions"
@@ -45,15 +46,5 @@ export default {
     &:not(:last-child) {
       margin-bottom: 40px;
     }
-  }
-
-  .form-contact {
-    margin-bottom: 25px;
-  }
-
-  .copyright {
-    color: $BLUEGREY;
-    font-size: 13px;
-    text-align: center;
   }
 </style>

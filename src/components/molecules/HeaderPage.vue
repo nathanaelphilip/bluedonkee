@@ -1,12 +1,13 @@
 <template>
    <header class="header">
      <h2 class="heading" v-html="heading"></h2>
+     <div class="content">{{ content }}</div>
    </header>
 </template>
 
 <script>
 export default {
-  props: ['emoji', 'heading']
+  props: ['content', 'heading']
 }
 </script>
 
@@ -23,5 +24,14 @@ export default {
     @include mq ($until: small) {
       font-size: 28px;
     }
+
+    &:not(:last-child) {
+      margin-bottom: grid(6);
+    }
+  }
+
+  .content {
+    font-size: 16px;
+    line-height: 24px;
   }
 </style>
