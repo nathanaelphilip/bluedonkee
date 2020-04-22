@@ -23,7 +23,6 @@
         <LinkSecondary classes="large" :to="{'name': 'contact'}">Contact Us</LinkSecondary>
       </div>
     </div>
-
   </article>
 </template>
 

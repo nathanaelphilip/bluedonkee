@@ -24,6 +24,7 @@ export default {
 
 <style lang="scss" scoped>
   .contact {
+    padding-bottom: grid(18);
     padding-top: grid(22);
   }
 

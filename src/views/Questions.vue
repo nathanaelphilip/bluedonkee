@@ -39,7 +39,8 @@ export default {
   }
 
   .questions {
-    padding: 60px 0;
+    padding-bottom: grid(18);
+    padding-top: grid(22);
   }
 
   .question {
