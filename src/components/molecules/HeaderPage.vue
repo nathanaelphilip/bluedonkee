@@ -33,5 +33,7 @@ export default {
   .content {
     font-size: 16px;
     line-height: 24px;
+    margin: 0 auto;
+    max-width: 530px;
   }
 </style>

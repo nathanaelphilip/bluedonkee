@@ -213,10 +213,11 @@
   &::v-deep p,
   &::v-deep ul,
   &::v-deep ol {
-    line-height: 1.5;
+    font-size: 17px;
+    line-height: 1.45;
 
     &:not(:last-child) {
-      margin-bottom: 12px;
+      margin-bottom: grid(5);
     }
 
     & + h4 {
@@ -245,6 +246,10 @@
     font-size: 17px;
     font-weight: 800;
     margin-bottom: 8px;
+  }
+
+  a {
+    color: $BLUE2;
   }
 }
 
