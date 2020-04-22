@@ -1,15 +1,15 @@
 <template>
   <article class="post">
-    <header class="header">
-      <em class="emoji">👍🏽</em>
-      <h2 class="heading">Are you ready for change?</h2>
-      <div class="subheading">Fill out the form below and we will post and promote the opportunity</div>
-    </header>
+    <HeaderPage
+      :heading="`Are you ready for change?`"
+      :content="`Fill out the form below and we will post and promote the opportunity`"
+    />
     <PostJob />
   </article>
 </template>
 
 <script>
+import HeaderPage from '@/components/molecules/HeaderPage'
 import PostJob from '@/components/forms/PostJob'
 
 export default {
@@ -19,7 +19,7 @@ export default {
     title: 'Post a Job'
   },
 
-  components: { PostJob },
+  components: { HeaderPage, PostJob },
 
   async mounted () {
     window.analytics.page('Post Job')
@@ -33,25 +33,6 @@ export default {
   }
 
   .header {
-    margin: 0 auto 70px auto;
-    max-width: 385px;
-    text-align: center;
-  }
-
-  .emoji {
-    display: inline-block;
-    font-size: 72px;
-    margin-bottom: 16px;
-  }
-
-  .heading {
-    font-size: 28px;
-    font-weight: 900;
-    margin-bottom: 14px;
-  }
-
-  .subheading {
-    font-size: 18px;
-    line-height: 1.4;
+    margin-bottom: grid(17);
   }
 </style>
