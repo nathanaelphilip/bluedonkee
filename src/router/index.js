@@ -113,11 +113,13 @@ const routes = [
   {
     path: '/about',
     name: 'about',
+    component: () => import(/* webpackChunkName: "questions" */ '../views/About.vue'),
     meta: { layout: 'basic' }
   },
   {
     path: '/contact',
     name: 'contact',
+    component: () => import(/* webpackChunkName: "questions" */ '../views/Contact.vue'),
     meta: { layout: 'basic' }
   }
 ]
