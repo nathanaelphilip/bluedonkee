@@ -4,18 +4,20 @@
     <Grid class="basic">
       <template v-slot:one>
         <slot />
+        <Colophon />
       </template>
     </Grid>
   </main>
 </template>
 
 <script>
+import Colophon from '@/components/molecules/Colophon'
 import Grid from '@/components/layouts/Grid'
 import Header from '@/components/molecules/HeaderGlobal'
 
 export default {
   name: 'layout-basic',
-  components: { Grid, Header },
+  components: { Colophon, Grid, Header },
 
   methods: {
     back () {

@@ -4,12 +4,10 @@
       :heading="`Positioned for Change.`"
     />
     <ContactForm />
-    <Colophon />
   </article>
 </template>
 
 <script>
-import Colophon from '@/components/molecules/Colophon'
 import ContactForm from '@/components/forms/Contact'
 import HeaderPage from '@/components/molecules/HeaderPage'
 
@@ -20,7 +18,7 @@ export default {
     title: 'Contact'
   },
 
-  components: { Colophon, ContactForm, HeaderPage }
+  components: { ContactForm, HeaderPage }
 }
 </script>
 
@@ -31,9 +29,5 @@ export default {
 
   .header {
     margin-bottom: grid(17);
-  }
-
-  .form-contact {
-    margin-bottom: grid(6);
   }
 </style>

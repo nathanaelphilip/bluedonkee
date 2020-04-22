@@ -8,12 +8,10 @@
       :key="index"
       :question="question"
     />
-    <Colophon />
   </article>
 </template>
 
 <script>
-import Colophon from '@/components/molecules/Colophon'
 import HeaderPage from '@/components/molecules/HeaderPage'
 import Question from '@/components/molecules/Question'
 
@@ -24,7 +22,7 @@ export default {
     title: 'Questions'
   },
 
-  components: { Colophon, HeaderPage, Question },
+  components: { HeaderPage, Question },
 
   async mounted () {
     await this.$store.dispatch('cms/fetch')

@@ -3,12 +3,10 @@
     <HeaderPage
       :heading="`Positioned for <span>Change.</span>`"
     />
-    <Colophon />
   </article>
 </template>
 
 <script>
-import Colophon from '@/components/molecules/Colophon'
 import HeaderPage from '@/components/molecules/HeaderPage'
 
 export default {
@@ -18,7 +16,7 @@ export default {
     title: 'About'
   },
 
-  components: { Colophon, HeaderPage }
+  components: { HeaderPage }
 }
 </script>
 
