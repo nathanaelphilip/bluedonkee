@@ -24,8 +24,13 @@ export default {
 <style lang="scss" scoped>
   .question {
     background: $BLUELIGHT;
+    border: 1px solid transparent;
     border-radius: 12px;
     padding: grid(6);
+
+    &:hover {
+      border: 1px solid $GREY3;
+    }
   }
 
   .heading {
@@ -33,7 +38,9 @@ export default {
     font-size: 22px;
     font-weight: 800;
 
-    &:hover { cursor: pointer; }
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .plus {

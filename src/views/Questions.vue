@@ -44,7 +44,7 @@ export default {
 
   .question {
     &:not(:last-child) {
-      margin-bottom: 40px;
+      margin-bottom: grid(6);
     }
   }
 </style>
