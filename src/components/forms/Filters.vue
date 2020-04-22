@@ -4,7 +4,7 @@
       <div class="group">
         <button
           class="button"
-          @click.native.prevent="modal = 'locations'"
+          @click.prevent="modal = 'locations'"
           :class="{'bugged': $store.getters['filters/accepted']('locations').length}"
         >
           Location
@@ -15,7 +15,7 @@
         </button>
         <button
           class="button"
-          @click.native.prevent="modal = 'category'"
+          @click.prevent="modal = 'category'"
           :class="{'bugged': $store.getters['filters/accepted']('categories').length}"
          >
           Category
@@ -26,7 +26,7 @@
         </button>
         <button
           class="button"
-          @click.native.prevent="modal = 'types'"
+          @click.prevent="modal = 'types'"
           :class="{'bugged': $store.getters['filters/accepted']('types').length}"
           >
           Work Type
