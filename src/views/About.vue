@@ -17,13 +17,20 @@
     </div>
     <div class="content">
       <h3>Press Kit</h3>
-      <p>Thanks for your interest in WorkBlue! We're also happy to help with any questions you have. Just contact us and you'll reach a real human who can provide original materials. Here's our logo and product screenshots. </p>
+      <p>Thanks for your interest in WorkBlue! We're also happy to help with any questions you have. Just contact us and you'll reach a real human who can provide original materials. Here's our logo and product screenshots.</p>
+      <div class="actions">
+        <LinkPrimary href="#">Download Press Package</LinkPrimary>
+        <LinkSecondary classes="large" :to="{'name': 'contact'}">Contact Us</LinkSecondary>
+      </div>
     </div>
+
   </article>
 </template>
 
 <script>
 import HeaderPage from '@/components/molecules/HeaderPage'
+import LinkPrimary from '@/components/atoms/LinkPrimary'
+import LinkSecondary from '@/components/atoms/LinkSecondary'
 
 export default {
   name: 'views-questions',
@@ -32,7 +39,7 @@ export default {
     title: 'About'
   },
 
-  components: { HeaderPage }
+  components: { HeaderPage, LinkPrimary, LinkSecondary }
 }
 </script>
 
@@ -57,6 +64,14 @@ export default {
       font-size: 28px;
       font-weight: 900;
       margin-bottom: grid(6);
+    }
+  }
+
+  .actions {
+    @include Flex ($justify: flex-start);
+
+    ::v-deep .button {
+      margin-right: grid(4);
     }
   }
 </style>
