@@ -1,21 +1,19 @@
 <template>
   <article class="questions">
     <HeaderPage
-      emoji="🗽"
-      :heading="`Positioned for <span>Change.</span>`"
+      :heading="`Frequently Asked Questions`"
     />
     <Question
       v-for="(question, index) in $store.state.cms.questions"
       :key="index"
       :question="question"
     />
-    <ContactForm />
-    <div class="copyright">&copy; WorkBlue {{ new Date().getFullYear() }}. Paid for by Work Blue Organization. Not authorized by any candidate or candidate’s committee.</div>
+    <Colophon />
   </article>
 </template>
 
 <script>
-import ContactForm from '@/components/forms/Contact'
+import Colophon from '@/components/molecules/Colophon'
 import HeaderPage from '@/components/molecules/HeaderPage'
 import Question from '@/components/molecules/Question'
 
@@ -26,7 +24,7 @@ export default {
     title: 'Questions'
   },
 
-  components: { ContactForm, HeaderPage, Question },
+  components: { Colophon, HeaderPage, Question },
 
   async mounted () {
     await this.$store.dispatch('cms/fetch')

@@ -16,7 +16,8 @@ export default {
   }
 
   .heading {
-    font-size: 72px;
+    font-size: 48px;
+    line-height: 52px;
     font-weight: 900;
 
     @include mq ($until: small) {

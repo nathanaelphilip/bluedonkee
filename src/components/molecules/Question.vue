@@ -1,7 +1,7 @@
 <template>
   <div class="question">
-    <h3 class="heading">{{ question.fields.Heading }}</h3>
-    <Markdown class="content" :content="question.fields.Content" />
+    <h3 @click.prevent="open = !open" class="heading">{{ question.fields.Heading }}</h3>
+    <Markdown v-if="open" class="content" :content="question.fields.Content" />
   </div>
 </template>
 
@@ -10,7 +10,12 @@ import Markdown from '@/components/molecules/Markdown'
 
 export default {
   props: ['question'],
-  components: { Markdown }
+  components: { Markdown },
+  data () {
+    return {
+      open: false
+    }
+  }
 }
 </script>
 
@@ -18,17 +23,17 @@ export default {
   .question {
     background: $BLUELIGHT;
     border-radius: 12px;
-    padding: 32px;
+    padding: grid(6);
   }
 
   .heading {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 800;
-    margin-bottom: 15px;
   }
 
   .content {
     line-height: 1.5;
+    margin-top: grid(4);
 
     &::v-deep p {
       font-size: 18px;
