@@ -27,7 +27,7 @@ export default {
     padding: grid(4);
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 8;
   }
 
   .container {
