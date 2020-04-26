@@ -1,9 +1,5 @@
 <template>
   <article class="job" v-if="!loading">
-    <Intro :back="{ name: 'campaigns' }" :heading="campaign.fields.Name">
-      <Share :path="$route.path" />
-      <LinkPrimary classes="small" :href="campaign.fields['Donation URL']">Donate</LinkPrimary>
-    </Intro>
     <div class="boxed">
       <Header
         :avatar="avatar"
@@ -14,6 +10,7 @@
         :offices="offices"
         :website="campaign.fields.Website"
         :twitter="campaign.fields.Twitter"
+        :donate="campaign.fields['Donation URL']"
       />
       <div class="overview" v-if="campaign.fields['Long Description']">
         <h3 class="subheading">Overview</h3>
@@ -45,10 +42,7 @@ import Campaigns from '@/components/molecules/Campaigns'
 import Jobs from '@/components/molecules/Jobs'
 import JobsEmpty from '@/components/molecules/JobsEmpty'
 import Header from '@/components/molecules/Header'
-import Intro from '@/components/molecules/Intro'
-import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Markdown from '@/components/molecules/Markdown'
-import Share from '@/components/molecules/Share'
 
 export default {
   name: 'campaign',
@@ -63,12 +57,9 @@ export default {
     BackTop,
     Campaigns,
     Header,
-    Intro,
     Jobs,
     JobsEmpty,
-    LinkPrimary,
-    Markdown,
-    Share
+    Markdown
   },
 
   data () {
@@ -138,12 +129,8 @@ export default {
 
 <style lang="scss" scoped>
   .boxed {
-    background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
-    padding: 32px;
-
-    @include mq ($until: xsmall) {
-      padding: 24px 16px;
-    }
+    margin-bottom: grid(15);
+    padding-top: grid(15);
   }
 
   .overview {

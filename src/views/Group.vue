@@ -10,7 +10,6 @@
         :groupCategories="categories"
         :website="group.fields.Website"
         :twitter="group.fields.Twitter"
-        :share="$route.path"
       />
     </div>
     <Jobs heading="Available Jobs" :jobs="jobs" :simple="true">
