@@ -22,7 +22,7 @@ import Banner from '@/components/molecules/Banner'
 import Groups from '@/components/molecules/Groups'
 import Pager from '@/components/molecules/Pager'
 
-const pageSize = 20
+const pageSize = 5
 
 export default {
   name: 'views-groups',
