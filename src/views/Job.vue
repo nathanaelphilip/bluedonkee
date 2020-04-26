@@ -154,7 +154,7 @@ export default {
 <style lang="scss" scoped>
   .boxed {
     margin-bottom: grid(15);
-    padding-top: grid(8);
+    padding-top: grid(15);
 
     @include mq ($until: xsmall) {
       margin-bottom: grid(12);

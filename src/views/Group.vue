@@ -119,6 +119,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .group {
+    margin-bottom: grid(15);
+    padding-top: grid(15);
+
+    @include mq ($until: xsmall) {
+      margin-bottom: grid(12);
+      padding-top: grid(6);
+    }
+  }
   .jobs {
     margin-bottom: 24px;
   }
