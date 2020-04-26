@@ -8,7 +8,7 @@
         :location="location"
         :route="route"
       />
-      <template v-if="locations.length > 1 && index !== locations.length - 1"> • </template>
+      <template v-if="locations.length > 1 && index !== locations.length - 1"><div class="divider" :key="`${location.id}-divider`">•</div></template>
     </template>
   </Fragment>
 </template>
@@ -24,4 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .divider {
+    margin: 0 grid(1);
+  }
 </style>

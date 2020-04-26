@@ -27,10 +27,6 @@ export default {
     font-size: 22px;
     font-weight: 900;
     margin-bottom: grid(10);
-
-    @include mq ($until: xsmall) {
-      padding: 0px 16px;
-    }
   }
 
   .box {

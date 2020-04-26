@@ -1,8 +1,5 @@
 <template>
   <article class="group" v-if="!loading">
-    <Intro :back="{ name: 'groups' }" :heading="group.fields.Name">
-      <Share :path="$route.path" />
-    </Intro>
     <div class="box">
       <Header
         :avatar="avatar"
@@ -13,6 +10,7 @@
         :groupCategories="categories"
         :website="group.fields.Website"
         :twitter="group.fields.Twitter"
+        :share="$route.path"
       />
     </div>
     <Jobs heading="Available Jobs" :jobs="jobs" :simple="true">
@@ -22,7 +20,7 @@
         </JobsEmpty>
       </template>
     </Jobs>
-    <Groups heading="Related Groups" :groups="related" />
+    <Groups heading="Related Groups" :groups="related" :jobs="false" />
     <BackTop />
   </article>
 </template>
@@ -38,10 +36,8 @@ import {
 import BackTop from '@/components/molecules/BackTop'
 import Groups from '@/components/molecules/Groups'
 import Header from '@/components/molecules/Header'
-import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 import JobsEmpty from '@/components/molecules/JobsEmpty'
-import Share from '@/components/molecules/Share'
 
 export default {
   name: 'views-group',
@@ -52,7 +48,7 @@ export default {
     }
   },
 
-  components: { BackTop, Groups, Header, Intro, Jobs, JobsEmpty, Share },
+  components: { BackTop, Groups, Header, Jobs, JobsEmpty },
 
   data () {
     return {
@@ -123,15 +119,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .box {
-    background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
-    padding: 32px 32px 0 32px;
-
-    @include mq ($until: xsmall) {
-      padding: 24px 16px 0 16px;
-    }
-  }
-
   .jobs {
     margin-bottom: 24px;
   }

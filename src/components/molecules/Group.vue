@@ -82,6 +82,7 @@ export default {
   }
 
   .location {
+    @include Flex ($justify: flex-start);
     color: $BLUE;
     font-size: 15px;
   }

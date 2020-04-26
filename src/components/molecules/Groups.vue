@@ -6,40 +6,32 @@
       v-for="group in groups"
       :key="group.id"
       >
-      <Group :group="group" />
+      <GroupWithJobs :group="group" v-if="showJobs" />
+      <Group :group="group" v-if="!showJobs" />
     </div>
   </div>
 </template>
 
 <script>
 import Group from '@/components/molecules/Group'
+import GroupWithJobs from '@/components/molecules/GroupWithJobs'
 
 export default {
-  props: ['groups', 'heading'],
-  components: { Group }
+  props: ['groups', 'heading', 'showJobs'],
+  components: { Group, GroupWithJobs }
 }
 </script>
 
 <style lang="scss" scoped>
   .heading {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 900;
-    margin-bottom: grid(2);
-    padding: 0 grid(8);
-
-    @include mq ($until: xsmall) {
-      padding: 0 grid(4);
-    }
+    margin-bottom: grid(10);
   }
+
   .box {
-    padding: grid(6) grid(8);
-
-    @include mq($until: xsmall) {
-      padding: grid(6) grid(4);
-    }
-
     &:not(:last-child) {
-      border-bottom: 1px solid $GREY;
+      margin-bottom: grid(14);
     }
   }
 </style>
