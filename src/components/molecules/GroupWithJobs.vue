@@ -18,7 +18,7 @@
         </div>
       </div>
     </header>
-    <div class="jobs">
+    <div class="jobs" v-if="jobs.length">
       <JobMini v-for="job in jobs" :key="job.id" :job="job" />
     </div>
   </article>
