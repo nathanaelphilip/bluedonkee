@@ -1,41 +1,39 @@
 <template>
   <div class="filters">
     <div class="actions">
-      <div class="group">
-        <button
-          class="button"
-          @click.prevent="modal = 'locations'"
-          :class="{'bugged': $store.getters['filters/accepted']('locations').length}"
+      <button
+        class="button"
+        @click.prevent="modal = 'locations'"
+        :class="{'bugged': $store.getters['filters/accepted']('locations').length}"
+      >
+        Location
+        <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('locations').length" />
+        <Count v-if="$store.getters['filters/accepted']('locations').length">
+          {{ $store.getters['filters/accepted']('locations').length }}
+        </Count>
+      </button>
+      <button
+        class="button"
+        @click.prevent="modal = 'category'"
+        :class="{'bugged': $store.getters['filters/accepted']('categories').length}"
+       >
+        Category
+        <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('categories').length" />
+        <Count v-if="$store.getters['filters/accepted']('categories').length" class="bug">
+          {{ $store.getters['filters/accepted']('categories').length }}
+        </Count>
+      </button>
+      <button
+        class="button"
+        @click.prevent="modal = 'types'"
+        :class="{'bugged': $store.getters['filters/accepted']('types').length}"
         >
-          Location
-          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('locations').length" />
-          <Count v-if="$store.getters['filters/accepted']('locations').length">
-            {{ $store.getters['filters/accepted']('locations').length }}
-          </Count>
-        </button>
-        <button
-          class="button"
-          @click.prevent="modal = 'category'"
-          :class="{'bugged': $store.getters['filters/accepted']('categories').length}"
-         >
-          Category
-          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('categories').length" />
-          <Count v-if="$store.getters['filters/accepted']('categories').length" class="bug">
-            {{ $store.getters['filters/accepted']('categories').length }}
-          </Count>
-        </button>
-        <button
-          class="button"
-          @click.prevent="modal = 'types'"
-          :class="{'bugged': $store.getters['filters/accepted']('types').length}"
-          >
-          Work Type
-          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('types').length" />
-          <Count v-if="$store.getters['filters/accepted']('types').length" class="bug">
-            {{ $store.getters['filters/accepted']('types').length }}
-          </Count>
-        </button>
-      </div>
+        Work Type
+        <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('types').length" />
+        <Count v-if="$store.getters['filters/accepted']('types').length" class="bug">
+          {{ $store.getters['filters/accepted']('types').length }}
+        </Count>
+      </button>
       <button @click.prevent="$store.dispatch('filters/clear')" class="clear">
         Clear Filters
       </button>
@@ -109,6 +107,7 @@ export default {
 <style lang="scss" scoped>
   .filters {
     background: $WHITE;
+    margin-bottom: grid(20)
   }
 
   .actions {
@@ -117,7 +116,8 @@ export default {
 
   .clear {
     @include ButtonStripped;
-    @include Flex($justify: flex-end);
+    color: $BLUEGREY;
+    margin: 0 grid(3)
   }
 
   .reset {
@@ -125,16 +125,9 @@ export default {
     margin-left: grid(2);
   }
 
-  .group {
-    @include Flex;
-
-    > *:not(:last-child) {
-      margin-right: grid(3);
-    }
-  }
-
   .button {
     @include ButtonSimple;
+    margin: 0 grid(3)
   }
 
   .bugged {
@@ -143,8 +136,10 @@ export default {
   }
 
   .icon-plus {
-    fill: $BLUEGREY;
+    fill: $BLACK;
     margin-left: grid(1);
+    position: relative;
+    top: -1px
   }
 
   .modalBox {
