@@ -23,8 +23,9 @@
   @include Button;
   padding: grid(2) grid(3);
 
-  &:hover, &.router-link-active {
-    background: $GREY;
+  &:hover,
+  &.router-link-active {
+    background: $BLUELIGHT;
     color: $BLACK;
   }
 }

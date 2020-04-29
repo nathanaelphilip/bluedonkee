@@ -127,12 +127,17 @@ export default {
 
   .button {
     @include ButtonSimple;
-    margin: 0 grid(3)
+    margin: 0 grid(3);
+
+    .bug {
+      position: relative;
+      top: -1px;
+    }
   }
 
   .bugged {
-    padding-bottom: 4px;
-    padding-top: 7px;
+    padding-bottom: 5px;
+    padding-top: 6px;
   }
 
   .icon-plus {

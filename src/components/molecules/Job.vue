@@ -60,6 +60,7 @@
         />
       </Tags>
     </div>
+    <router-link :to="{ name: '', params: {} }" class="bottom-link"></router-link>
   </article>
 </template>
 
