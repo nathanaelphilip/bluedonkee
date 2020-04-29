@@ -51,9 +51,8 @@ export default {
 
   .sticky-top {
     @include mq($from: xsmall) {
-      padding-top: 36px;
       position: sticky;
-      top: 120px;
+      top: 140px;
     }
   }
 

@@ -31,7 +31,7 @@ export default {
 
   .box {
     &:not(:last-child) {
-      margin-bottom: grid(14);
+      margin-bottom: grid(8);
     }
   }
 

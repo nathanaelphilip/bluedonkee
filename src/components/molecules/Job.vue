@@ -1,9 +1,11 @@
 <template>
-  <article v-if="!loading" class="job" :class="{simple}">
+  <article @click.prevent="go" v-if="!loading" class="job" :class="{simple}">
     <div class="box-avatar">
-      <Avatar :src="avatar" />
+      <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
+        <Avatar :src="avatar" />
+      </router-link>
     </div>
-    <div>
+    <div class="box-content">
       <header class="header">
         <div class="box">
           <h2 class="heading">
@@ -24,11 +26,15 @@
           </div>
         </div>
         <time class="time">
-          {{ date }}
+          <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
+            {{ date }}
+          </router-link>
         </time>
       </header>
       <div class="content">
-        <Markdown :content="description" />
+        <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
+          <Markdown :content="description" />
+        </router-link>
       </div>
       <Tags>
         <Tag
@@ -60,7 +66,9 @@
         />
       </Tags>
     </div>
-    <router-link :to="{ name: '', params: {} }" class="bottom-link"></router-link>
+    <router-link
+      :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }" class="background-link">
+    </router-link>
   </article>
 </template>
 
@@ -126,6 +134,12 @@ export default {
     }
   },
 
+  methods: {
+    go () {
+      this.$router.push({ name: 'job', params: { entityType: this.entityType, entity: this.entity.fields.Slug, slug: this.job.fields.Slug } })
+    }
+  },
+
   async mounted () {
     if (this.job.fields.Group) {
       this.groups = await getByIds({
@@ -178,14 +192,24 @@ export default {
   .job {
     align-items: start;
     display: grid;
+    border: 1px solid transparent;
+    border-radius: grid(2);
     grid-template-columns: 60px 1fr;
     grid-column-gap: 16px;
+    padding: grid(6) grid(6);
+    position: relative;
 
     @include mq($until: xsmall) {
       grid-template-columns: 48px 1fr;
     }
 
     &.simple { grid-template-columns: 1fr; }
+
+    &:hover {
+      background: $BLUELIGHT;
+      border-color: $GREY3;
+      cursor: pointer;
+    }
   }
 
   .header {

@@ -107,7 +107,8 @@ export default {
 <style lang="scss" scoped>
   .filters {
     background: $WHITE;
-    margin-bottom: grid(20)
+    padding: grid(2) 0;
+    margin-bottom: grid(18);
   }
 
   .actions {

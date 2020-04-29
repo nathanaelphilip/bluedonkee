@@ -4,7 +4,7 @@
       <h3 class="heading">{{ heading }}</h3>
       <div class="content">{{ content }}</div>
       <div class="actions">
-        <LinkPrimary :to="{name: 'jobPost'}"><strong>Post a Job</strong> – Save Democracy</LinkPrimary>
+        <LinkPrimary :to="{name: 'postJob'}"><strong>Post a Job</strong> – Save Democracy</LinkPrimary>
       </div>
     </div>
   </aside>
