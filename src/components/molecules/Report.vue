@@ -1,7 +1,7 @@
 <template>
   <aside class="report">
     <h6 class="heading">Something off with this post?</h6>
-    <ButtonSecondary @click.prevent="open.modal = true">Flag Posting</ButtonSecondary>
+    <ButtonSecondary @click.native.prevent="open.modal = true">Flag Posting</ButtonSecondary>
     <portal to="modal">
       <Modal @close="open.modal = false" :open="open.modal" heading="Flag Posting">
         <OptionsList
