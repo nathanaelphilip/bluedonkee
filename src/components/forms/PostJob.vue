@@ -144,7 +144,7 @@
         <Locations :locations.sync="form['Company Location']" />
 
         <div class="action">
-          <ButtonPrimary>
+          <ButtonPrimary :disabled="status === 'processing'">
             <Processing :processing="status === 'processing'">Post Job</Processing>
           </ButtonPrimary>
         </div>
@@ -215,7 +215,7 @@ export default {
     return {
       status: false,
       file: false,
-      form: { ...form }
+      form: JSON.parse(JSON.stringify(form))
     }
   },
 
@@ -266,11 +266,7 @@ export default {
   },
 
   methods: {
-    reset () {
-      this.form = { ...form }
-    },
-
-    async process () {
+    async process (event) {
       this.status = 'processing'
 
       const computed = {
@@ -302,7 +298,8 @@ export default {
 
         if (data) {
           this.status = 'success'
-          this.reset()
+          this.form = JSON.parse(JSON.stringify(form))
+          event.target.reset()
         }
       } catch (e) {
         this.status = 'error'
