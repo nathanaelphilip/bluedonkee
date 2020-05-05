@@ -189,7 +189,7 @@ export default {
 
   .header {
     display: grid;
-    grid-template-columns: 1fr 52px;
+    grid-template-columns: 1fr 54px;
     grid-column-gap: 16px;
     margin-bottom: grid(4);
     margin-top: 11px;
