@@ -144,7 +144,7 @@
         <Locations :locations.sync="form['Company Location']" />
 
         <div class="action">
-          <ButtonPrimary>
+          <ButtonPrimary :disabled="status === 'processing'">
             <Processing :processing="status === 'processing'">Post Job</Processing>
           </ButtonPrimary>
         </div>

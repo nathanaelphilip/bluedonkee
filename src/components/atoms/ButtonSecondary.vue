@@ -1,8 +1,14 @@
 <template>
-  <button class="button">
+  <button :disabled="disabled" class="button">
     <slot></slot>
   </button>
 </template>
+
+<script>
+export default {
+  props: ['disabled']
+}
+</script>
 
 <style lang="scss" scoped>
   .button {
