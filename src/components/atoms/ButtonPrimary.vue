@@ -1,12 +1,12 @@
 <template>
-  <button :class="{button: true, full, simple}">
+  <button :disabled="disabled" :class="{button: true, full, simple}">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  props: ['full', 'simple']
+  props: ['disabled', 'full', 'simple']
 }
 </script>
 
