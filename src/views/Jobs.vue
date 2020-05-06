@@ -109,6 +109,8 @@ export default {
       await this.load()
     }
 
+    this.$store.dispatch('app/setHeading', false)
+
     window.analytics.page('Jobs')
   },
 

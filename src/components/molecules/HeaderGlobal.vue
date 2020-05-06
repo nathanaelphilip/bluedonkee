@@ -1,7 +1,11 @@
 <template>
   <header class="header">
     <div class="container">
-      <div class="logo">
+      <div class="back" v-if="$store.state.app.heading">
+        <ButtonBack v-if="back" />
+        {{ $store.state.app.heading }}
+      </div>
+      <div class="logo" v-if="!$store.state.app.heading">
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
         <Bug>Beta</Bug>
       </div>
@@ -12,11 +16,18 @@
 
 <script>
 import Bug from '@/components/atoms/Bug'
+import ButtonBack from '@/components/atoms/ButtonBack'
 import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
 
 export default {
-  components: { Bug, Logo, Navigation }
+  components: { Bug, ButtonBack, Logo, Navigation },
+
+  computed: {
+    back () {
+      return false
+    }
+  }
 }
 </script>
 

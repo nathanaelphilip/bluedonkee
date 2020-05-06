@@ -1,6 +1,5 @@
 <template>
   <section v-if="!loading">
-    <Intro :back="{ name: 'jobs' }" :heading="`Remote`" />
     <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
     <Pager
       @load="load"
@@ -13,7 +12,6 @@
 
 <script>
 import BackTop from '@/components/molecules/BackTop'
-import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 
@@ -24,7 +22,7 @@ export default {
 
   metaInfo: { title: 'Remote Jobs' },
 
-  components: { BackTop, Intro, Jobs, Pager },
+  components: { BackTop, Jobs, Pager },
 
   data () {
     return {

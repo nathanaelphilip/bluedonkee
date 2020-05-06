@@ -1,6 +1,5 @@
 <template>
   <section v-if="!loading">
-    <Intro :back="{ name: 'jobs' }" :heading="`Type: ${type.fields.Name}`" />
     <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
     <Pager
       @load="load"
@@ -17,7 +16,6 @@ import {
 } from '@/store/helpers'
 
 import BackTop from '@/components/molecules/BackTop'
-import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 
@@ -32,7 +30,7 @@ export default {
     }
   },
 
-  components: { BackTop, Intro, Jobs, Pager },
+  components: { BackTop, Jobs, Pager },
 
   data () {
     return {
@@ -53,6 +51,8 @@ export default {
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()
     }
+
+    this.$store.dispatch('app/setHeading', this.type.fields.Name)
 
     this.loading = false
 

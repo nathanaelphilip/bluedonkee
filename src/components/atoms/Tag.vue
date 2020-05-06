@@ -1,5 +1,6 @@
 <template>
   <router-link
+    @click.native="$event.stopImmediatePropagation()"
     class="tag"
     :to="{ name: route, params: { slug } }"
   >

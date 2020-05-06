@@ -5,6 +5,7 @@ import PortalVue from 'portal-vue'
 import VueClipboard from 'vue-clipboard2'
 import VueCookies from 'vue-cookies'
 import VueMeta from 'vue-meta'
+import VuexRouterSync from 'vuex-router-sync';
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
@@ -25,6 +26,8 @@ Vue.use(VueMQ, {
   }
 })
 Vue.use(VueMeta)
+
+VuexRouterSync.sync(store, router);
 
 new Vue({
   router,
