@@ -35,6 +35,8 @@ export default {
   async mounted () {
     this.id = 'jobs/remote'
 
+    this.$store.dispatch('app/setHeading', 'Work Remote')
+
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()
     }

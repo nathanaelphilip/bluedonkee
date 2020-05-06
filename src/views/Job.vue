@@ -108,6 +108,8 @@ export default {
       type: 'jobs'
     })
 
+    this.$store.dispatch('app/setHeading', this.job.fields.Title)
+
     this.locations = await getByIds({
       ids: this.job.fields.Location,
       type: 'locations'

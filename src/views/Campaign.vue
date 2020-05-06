@@ -89,6 +89,8 @@ export default {
       type: 'campaigns'
     })
 
+    this.$store.dispatch('app/setHeading', this.campaign.fields.Name)
+
     this.locations = await getByIds({
       ids: this.campaign.fields.Location,
       type: 'locations'

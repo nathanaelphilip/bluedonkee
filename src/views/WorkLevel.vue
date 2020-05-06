@@ -48,6 +48,8 @@ export default {
       type: 'workLevels'
     })
 
+    this.$store.dispatch('app/setHeading', `Work Level: ${this.level.fields.Name}`)
+
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()
     }

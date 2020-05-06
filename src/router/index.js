@@ -1,3 +1,5 @@
+import store from '@/store'
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -129,6 +131,10 @@ const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
   }
+})
+
+router.afterEach((to, from) => {
+  store.dispatch('app/setHeading', false)
 })
 
 export default router

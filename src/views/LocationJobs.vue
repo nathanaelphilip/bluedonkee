@@ -50,6 +50,8 @@ export default {
       type: 'locations'
     })
 
+    this.$store.dispatch('app/setHeading', `Location: ${this.location.fields.City}`)
+
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()
     }

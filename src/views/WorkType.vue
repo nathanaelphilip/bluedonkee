@@ -48,11 +48,11 @@ export default {
       type: 'workTypes'
     })
 
+    this.$store.dispatch('app/setHeading', `Work Type: ${this.type.fields.Name}`)
+
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()
     }
-
-    this.$store.dispatch('app/setHeading', this.type.fields.Name)
 
     this.loading = false
 

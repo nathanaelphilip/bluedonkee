@@ -2,8 +2,8 @@
   <header class="header">
     <div class="container">
       <div class="back" v-if="$store.state.app.heading">
-        <ButtonBack v-if="back" />
-        {{ $store.state.app.heading }}
+        <ButtonBack :to="back" v-if="back" />
+        <h2 class="heading">{{ $store.state.app.heading }}</h2>
       </div>
       <div class="logo" v-if="!$store.state.app.heading">
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
@@ -25,6 +25,11 @@ export default {
 
   computed: {
     back () {
+      if (this.$store.state.route.from) {
+        const { name, params } = this.$store.state.route.from
+        return { name, params }
+      }
+
       return false
     }
   }
@@ -39,6 +44,16 @@ export default {
     position: sticky;
     top: 0;
     z-index: 8;
+  }
+
+  .back {
+    @include Flex;
+  }
+
+  .heading {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: grid(4);
   }
 
   .container {

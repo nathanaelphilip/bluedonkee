@@ -50,6 +50,8 @@ export default {
       type: 'offices'
     })
 
+    this.$store.dispatch('app/setHeading', `Offices: ${this.office.fields.Name}`)
+
     if (!this.$store.getters['campaigns/getFetched'](this.id).length) {
       await this.load()
     }

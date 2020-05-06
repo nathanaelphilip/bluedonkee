@@ -79,6 +79,8 @@ export default {
       type: 'groups'
     })
 
+    this.$store.dispatch('app/setHeading', this.group.fields.Name)
+
     this.jobs = this.group.fields.Jobs ? await getByIds({
       ids: this.group.fields.Jobs,
       type: 'jobs'

@@ -48,6 +48,8 @@ export default {
       type: 'workCategories'
     })
 
+    this.$store.dispatch('app/setHeading', `Work Category: ${this.category.fields.Name}`)
+
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()
     }
