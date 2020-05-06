@@ -25,7 +25,7 @@ export default {
 
   computed: {
     back () {
-      if (this.$store.state.route.from) {
+      if (this.$store.state.route.from && this.$store.state.route.from.name !== null) {
         const { name, params } = this.$store.state.route.from
         return { name, params }
       }
@@ -50,10 +50,13 @@ export default {
     @include Flex;
   }
 
+  .button-back {
+    margin-right: grid(4);
+  }
+
   .heading {
     font-size: 18px;
     font-weight: 600;
-    margin-left: grid(4);
   }
 
   .container {
