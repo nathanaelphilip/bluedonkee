@@ -23,11 +23,6 @@ const routes = [
       component: () => import(/* webpackChunkName: "remote" */ '../views/WorkRemote.vue')
     },
     {
-      path: ':entity/:slug',
-      name: 'job',
-      component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')
-    },
-    {
       path: 'category/:slug',
       name: 'workCategory',
       component: () => import(/* webpackChunkName: "workCategory" */ '../views/WorkCategory.vue')
@@ -46,6 +41,10 @@ const routes = [
       path: 'locations/:slug',
       name: 'locationJob',
       component: () => import(/* webpackChunkName: "locationJobs" */ '../views/LocationJobs.vue')
+    }, {
+      path: ':entity/:slug',
+      name: 'job',
+      component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')
     }]
   },
   {
