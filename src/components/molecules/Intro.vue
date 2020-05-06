@@ -19,10 +19,6 @@ export default {
     font-size: 36px;
     font-weight: 900;
     line-height: 1.25;
-    max-width: 330px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 
     @include mq($until: xsmall) {
       font-size: 18px;

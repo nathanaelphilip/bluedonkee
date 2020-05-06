@@ -1,5 +1,6 @@
 <template>
   <section v-if="!loading">
+    <Intro :heading="level.fields.Name" />
     <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
     <Pager
       @load="load"
@@ -16,6 +17,7 @@ import {
 } from '@/store/helpers'
 
 import BackTop from '@/components/molecules/BackTop'
+import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 
@@ -30,7 +32,7 @@ export default {
     }
   },
 
-  components: { BackTop, Jobs, Pager },
+  components: { BackTop, Intro, Jobs, Pager },
 
   data () {
     return {

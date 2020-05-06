@@ -1,5 +1,6 @@
 <template>
   <section v-if="!loading">
+    <Intro heading="Remote Jobs" />
     <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
     <Pager
       @load="load"
@@ -12,6 +13,7 @@
 
 <script>
 import BackTop from '@/components/molecules/BackTop'
+import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 
@@ -22,7 +24,7 @@ export default {
 
   metaInfo: { title: 'Remote Jobs' },
 
-  components: { BackTop, Jobs, Pager },
+  components: { BackTop, Intro, Jobs, Pager },
 
   data () {
     return {
@@ -35,7 +37,7 @@ export default {
   async mounted () {
     this.id = 'jobs/remote'
 
-    this.$store.dispatch('app/setHeading', 'Work Remote')
+    this.$store.dispatch('app/setHeading', 'Remote Jobs')
 
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()
