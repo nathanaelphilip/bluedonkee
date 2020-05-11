@@ -22,6 +22,6 @@ export default {
   .button {
     @include ButtonPrimary;
 
-    &.small {padding: 9px 12px 10px 12px}
+    &.small {padding: 9px 12px 9px 12px}
   }
 </style>

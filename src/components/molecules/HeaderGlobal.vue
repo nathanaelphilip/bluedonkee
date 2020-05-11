@@ -9,7 +9,15 @@
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
         <Bug>Beta</Bug>
       </div>
-      <Navigation />
+      <mq-layout mq="small+">
+        <Navigation />
+      </mq-layout>
+      <mq-layout mq="xsmall">
+        <div class="alt-menu">
+          <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
+          <Hamburger />
+        </div>
+      </mq-layout>
     </div>
   </header>
 </template>
@@ -17,11 +25,13 @@
 <script>
 import Bug from '@/components/atoms/Bug'
 import ButtonBack from '@/components/atoms/ButtonBack'
+import Hamburger from '@/components/atoms/Hamburger'
+import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
 
 export default {
-  components: { Bug, ButtonBack, Logo, Navigation },
+  components: { Bug, ButtonBack, Hamburger, LinkPrimary, Logo, Navigation },
 
   computed: {
     back () {
@@ -66,5 +76,13 @@ export default {
 
   .logo {
     @include Flex ($justify: flex-start);
+  }
+
+  .alt-menu {
+    @include Flex ($justify: flex-end);
+
+    > *:last-child {
+      margin-left: grid(2);
+    }
   }
 </style>
