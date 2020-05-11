@@ -7,7 +7,6 @@
       <div class="sticky-top">
         <slot name="two"></slot>
       </div>
-      <button @click.prevent="$store.dispatch('app/sidebar', false)" class="close"></button>
     </div>
   </div>
 </template>
@@ -19,15 +18,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .modal {
-    height: 100%;
-    left: 0;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-
   .grid {
     display: grid;
     grid-template-columns: 1fr 350px;

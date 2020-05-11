@@ -1,23 +1,22 @@
 <template>
   <main class="site">
     <Header />
-    <Grid class="basic">
-      <template v-slot:one>
+    <div class="grid">
+      <div class="column">
         <slot />
         <Colophon />
-      </template>
-    </Grid>
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
 import Colophon from '@/components/molecules/Colophon'
-import Grid from '@/components/layouts/Grid'
 import Header from '@/components/molecules/HeaderGlobal'
 
 export default {
   name: 'layout-basic',
-  components: { Colophon, Grid, Header },
+  components: { Colophon, Header },
 
   methods: {
     back () {
@@ -28,12 +27,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .basic {
+  .grid {
+    display: grid;
     justify-content: center;
-    grid-template-columns: 650px;
+    grid-template-columns: minmax(auto, 650px);
+  }
 
-    &::v-deep .column-2 {
-      display: none;
-    }
+  .column {
+    padding: 0 grid(5);
   }
 </style>

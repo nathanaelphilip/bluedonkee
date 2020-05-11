@@ -22,7 +22,8 @@ export default {
     font-weight: 900;
 
     @include mq ($until: small) {
-      font-size: 28px;
+      font-size: 24px;
+      line-height: 30px;
     }
 
     &:not(:last-child) {

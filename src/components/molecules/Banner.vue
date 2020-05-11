@@ -23,6 +23,10 @@ export default {
   .banner {
     padding: grid(15) 0;
     text-align: center;
+
+    @include mq ($until: small) {
+      padding: grid(15) grid(10);
+    }
   }
 
   .heading {
@@ -30,11 +34,20 @@ export default {
     font-weight: 900;
     line-height: 42px;
     margin-bottom: grid(3);
+
+    @include mq ($until: small) {
+      font-size: 24px;
+      line-height: 30px;
+    }
   }
 
   .content {
     margin: 0 auto grid(6) auto;
     line-height: 24px;
     max-width: 420px;
+
+    @include mq ($until: small) {
+      font-size: 14px;
+    }
   }
 </style>
