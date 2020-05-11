@@ -1,5 +1,5 @@
 <template>
-  <article class="group">
+  <article @click.prevent="go" class="group">
     <div class="box">
       <Avatar :src="group.fields.Avatar[0].url" />
     </div>
@@ -60,6 +60,12 @@ export default {
       ids: this.group.fields.Location,
       type: 'locations'
     }) : []
+  },
+
+  methods: {
+    go () {
+      return this.$router.push({ name: 'group', params: { slug: this.group.fields.Slug } })
+    }
   }
 }
 </script>
@@ -67,12 +73,21 @@ export default {
 <style lang="scss" scoped>
   .group {
     align-items: center;
+    border: 1px solid transparent;
+    border-radius: grid(2);
     display: grid;
     grid-template-columns: 60px 1fr 200px;
     grid-column-gap: 16px;
+    padding: grid(6);
 
     @include mq($until: xsmall) {
       grid-template-columns: 48px 1fr 100px;
+    }
+
+    &:hover {
+      background: $BLUELIGHT;
+      border-color: $GREY3;
+      cursor: pointer;
     }
   }
 
