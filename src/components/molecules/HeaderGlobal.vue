@@ -79,6 +79,18 @@ export default {
   .heading {
     font-size: 18px;
     font-weight: 600;
+    line-height: 1.3;
+
+    @include mq ($until: small) {
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    @include mq ($until: xxsmall) {
+      max-width: 120px;
+    }
   }
 
   .container {

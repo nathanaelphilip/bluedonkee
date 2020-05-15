@@ -160,6 +160,8 @@ export default {
 
     @include mq ($until: xsmall) {
       margin-bottom: grid(12);
+      padding-left: grid(6);
+      padding-right: grid(6);
       padding-top: grid(6);
     }
   }
