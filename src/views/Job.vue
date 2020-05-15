@@ -174,6 +174,10 @@ export default {
     font-size: 22px;
     font-weight: 900;
     margin-bottom: 10px;
+
+    @include mq ($until: xsmall) {
+      font-size: 19px;
+    }
   }
 
   .content {

@@ -225,6 +225,10 @@ export default {
 
   .header {
     margin-bottom: grid(15);
+
+    @include mq ($until: xsmall) {
+      margin-bottom: grid(12);
+    }
   }
 
   .heading {
@@ -235,7 +239,7 @@ export default {
     margin-bottom: 8px;
 
     @include mq ($until: xsmall) {
-      font-size: 22px;
+      font-size: 24px;
     }
   }
 

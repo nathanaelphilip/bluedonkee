@@ -217,6 +217,10 @@
     font-size: 17px;
     line-height: 1.45;
 
+    @include mq ($until: xsmall) {
+      font-size: 15px;
+    }
+
     &:not(:last-child) {
       margin-bottom: grid(5);
     }
