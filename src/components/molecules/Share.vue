@@ -51,7 +51,7 @@ export default {
     },
 
     twitter () {
-      return `https://twitter.com/share?url=${this.link}&via=WorkBlue`
+      return `https://twitter.com/share?url=${this.link}&via=WorkBlueOrg`
     },
 
     linkedin () {
