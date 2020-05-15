@@ -4,7 +4,7 @@
       <div>
         <Avatar :src="avatar" />
       </div>
-      <div class="links">
+      <mq-layout class="links" mq="small+">
         <a :href="website" target="_blank"><IconLink width="19" height="19" class="icon" /></a>
         <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" class="icon" /></a>
         <Share :path="$route.path" />
@@ -22,7 +22,28 @@
            :href="donate">
            Donate
         </LinkPrimary>
-      </div>
+      </mq-layout>
+      <mq-layout class="links" :mq="['xxsmall', 'xsmall', 'small']">
+        <a :href="website" target="_blank"><IconLink width="19" height="19" class="icon" /></a>
+        <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" class="icon" /></a>
+      </mq-layout>
+      <mq-layout class="links-mobile" :mq="['xxsmall', 'xsmall', 'small']">
+        <Share :path="$route.path" />
+        <LinkPrimary
+           v-if="apply"
+           classes="small"
+           @clicked="track('Applied for Job')"
+           :href="apply">
+           Apply
+        </LinkPrimary>
+        <LinkPrimary
+           v-if="donate"
+           classes="small"
+           @clicked="track('Donated')"
+           :href="donate">
+           Donate
+        </LinkPrimary>
+      </mq-layout>
     </div>
 
     <h2 class="heading">{{ heading }}</h2>
@@ -165,6 +186,22 @@ export default {
 
     @include mq ($until: xsmall) {
       grid-template-columns: 90px auto;
+    }
+  }
+
+  .links-mobile {
+    @include Flex;
+    background: $WHITE;
+    bottom: 0px;
+    left: 0;
+    padding: grid(3) grid(6);
+    position: fixed;
+    width: 100%;
+
+    ::v-deep a {
+      flex: 1;
+      margin-left: grid(4);
+      text-align: center;
     }
   }
 
