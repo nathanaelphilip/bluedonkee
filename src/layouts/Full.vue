@@ -1,5 +1,5 @@
 <template>
-  <main class="site">
+  <main class="site" :class="{'»mobilesticky' : $store.state.app.mobileNavOpen}">
     <Header />
     <portal-target name="banner">
     </portal-target>
@@ -37,6 +37,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .»mobilesticky {
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
   .promoted,
   .newsletter,
   .twitter {

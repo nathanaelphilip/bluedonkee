@@ -1,5 +1,5 @@
 <template>
-  <main class="site">
+  <main class="site" :class="{'»mobilesticky' : $store.state.app.mobileNavOpen}">
     <Header />
     <div class="grid">
       <div class="column">
@@ -27,6 +27,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .»mobilesticky {
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
   .grid {
     display: grid;
     justify-content: center;
