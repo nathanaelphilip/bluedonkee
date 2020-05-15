@@ -18,6 +18,7 @@ Vue.use(VueClipboard)
 Vue.use(VueCookies)
 Vue.use(VueMQ, {
   breakpoints: {
+    xxsmall: 380,
     xsmall: 415,
     small: 769,
     medium: 1101,

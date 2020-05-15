@@ -12,13 +12,16 @@
       <mq-layout mq="small+">
         <Navigation />
       </mq-layout>
-      <mq-layout mq="xsmall">
+      <mq-layout :mq="['xxsmall', 'xsmall']">
         <div class="alt-menu">
           <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
-          <Hamburger />
+          <Hamburger @click.native.prevent="$store.dispatch('app/mobileNavToggle', !$store.state.app.mobileNavOpen)" />
         </div>
       </mq-layout>
     </div>
+    <mq-layout v-if="$store.state.app.mobileNavOpen" :mq="['xxsmall', 'xsmall', 'small']">
+      <NavigationMobile />
+    </mq-layout>
   </header>
 </template>
 
@@ -29,9 +32,18 @@ import Hamburger from '@/components/atoms/Hamburger'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
+import NavigationMobile from '@/components/molecules/NavigationMobile'
 
 export default {
-  components: { Bug, ButtonBack, Hamburger, LinkPrimary, Logo, Navigation },
+  components: {
+    Bug,
+    ButtonBack,
+    Hamburger,
+    LinkPrimary,
+    Logo,
+    Navigation,
+    NavigationMobile
+  },
 
   computed: {
     back () {

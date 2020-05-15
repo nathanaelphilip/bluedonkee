@@ -7,7 +7,9 @@
       />
     </portal>
     <portal to="filters">
-      <Filters />
+      <mq-layout mq="small+">
+        <Filters />
+      </mq-layout>
     </portal>
     <template v-if="$store.getters['filters/filtered']">
       <Jobs :jobs="$store.getters['jobs/getFetched']($store.getters['filters/key'])" />

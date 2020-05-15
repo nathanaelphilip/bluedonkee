@@ -135,6 +135,7 @@ const router = new VueRouter({
 
 router.afterEach((to, from) => {
   store.dispatch('app/setHeading', false)
+  store.dispatch('app/mobileNavToggle', false)
 })
 
 export default router
