@@ -30,9 +30,21 @@ export default {
     margin-bottom: grid(8);
   }
 
-  .box.»grouped {
-    &:not(:last-child) {
-      margin-bottom: grid(8);
+  .box {
+    @include mq($until: medium) {
+      padding: 0 grid(8);
+    }
+
+    &:not(.»grouped) {
+      @include mq($until: medium) {
+        border-bottom: 1px solid $GREY;
+      }
+    }
+
+    &.»grouped {
+      &:not(:last-child) {
+        margin-bottom: grid(8);
+      }
     }
   }
 </style>

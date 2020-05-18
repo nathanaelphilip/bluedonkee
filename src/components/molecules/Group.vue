@@ -80,6 +80,10 @@ export default {
     grid-column-gap: 16px;
     padding: grid(6);
 
+    @include mq($until: small) {
+      padding: grid(6) 0;
+    }
+
     @include mq($until: xsmall) {
       grid-template-columns: 48px 1fr 100px;
     }

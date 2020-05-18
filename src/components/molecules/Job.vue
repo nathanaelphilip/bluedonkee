@@ -196,7 +196,7 @@ export default {
     border-radius: grid(2);
     grid-template-columns: 60px 1fr;
     grid-column-gap: 16px;
-    padding: grid(6) grid(6);
+    padding: grid(5) grid(6) grid(6) grid(6);
     position: relative;
 
     @include mq($until: xsmall) {

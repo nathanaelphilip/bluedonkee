@@ -13,6 +13,11 @@ export default {
 <style lang="scss" scoped>
   .intro {
     margin: grid(16) 0 grid(15) 0;
+
+    @include mq($until: medium) {
+      margin: grid(8) 0 grid(4) 0;
+      padding: 0 grid(8);
+    }
   }
 
   .heading {

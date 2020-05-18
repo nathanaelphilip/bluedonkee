@@ -25,4 +25,10 @@ export default {
     font-weight: 900;
     margin-bottom: grid(8);
   }
+
+  .box {
+    @include mq ($until: small) {
+      border-bottom: 1px solid $GREY;
+    }
+  }
 </style>
