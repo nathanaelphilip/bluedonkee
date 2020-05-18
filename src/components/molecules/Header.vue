@@ -4,7 +4,7 @@
       <div>
         <Avatar :src="avatar" />
       </div>
-      <mq-layout class="links" mq="small+">
+      <mq-layout class="links" mq="medium+">
         <a :href="website" target="_blank"><IconLink width="19" height="19" class="icon" /></a>
         <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" class="icon" /></a>
         <Share :path="$route.path" />
@@ -197,6 +197,7 @@ export default {
     padding: grid(3) grid(6);
     position: fixed;
     width: 100%;
+    z-index: 10;
 
     ::v-deep a {
       flex: 1;

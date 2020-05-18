@@ -28,7 +28,7 @@ export default {
     }
 
     @include mq($until: medium) {
-      grid-template-columns: auto 630px auto;
+      grid-template-columns: auto minmax(auto, 630px) auto;
     }
 
     @include mq($until: xsmall) {

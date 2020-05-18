@@ -28,7 +28,7 @@ export default {
     font-weight: 900;
     margin-bottom: grid(10);
 
-    @include mq ($until: xsmall) {
+    @include mq ($until: small) {
       margin-bottom: grid(6);
       padding: 0 grid(6);
     }

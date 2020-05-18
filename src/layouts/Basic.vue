@@ -27,6 +27,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .site {
+    padding-bottom: grid(15);
+  }
+
   .»mobilesticky {
     height: 100%;
     left: 0;

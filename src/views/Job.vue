@@ -158,7 +158,7 @@ export default {
     margin-bottom: grid(15);
     padding-top: grid(15);
 
-    @include mq ($until: xsmall) {
+    @include mq ($until: small) {
       margin-bottom: grid(12);
       padding-left: grid(6);
       padding-right: grid(6);

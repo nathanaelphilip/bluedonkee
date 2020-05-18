@@ -9,10 +9,10 @@
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
         <Bug>Beta</Bug>
       </div>
-      <mq-layout mq="small+">
+      <mq-layout mq="medium+">
         <Navigation />
       </mq-layout>
-      <mq-layout :mq="['xxsmall', 'xsmall']">
+      <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
         <div class="alt-menu">
           <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
           <Hamburger @click.native.prevent="$store.dispatch('app/mobileNavToggle', !$store.state.app.mobileNavOpen)" />
@@ -82,7 +82,8 @@ export default {
     line-height: 1.3;
 
     @include mq ($until: small) {
-      max-width: 150px;
+      font-size: 15px;
+      max-width: 350px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
