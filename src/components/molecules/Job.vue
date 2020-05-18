@@ -219,6 +219,10 @@ export default {
     margin-bottom: grid(4);
     margin-top: 11px;
 
+    @include mq ($until: small) {
+      grid-template-columns: 1fr;
+    }
+
     @include mq ($until: xsmall) {
       margin-top: 0;
     }
@@ -242,6 +246,10 @@ export default {
     color: $BLUEGREY;
     font-size: 15px;
     text-align: right;
+
+    @include mq ($until: small) {
+      display: none;
+    }
 
     .simple & { display: none }
   }

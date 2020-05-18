@@ -70,6 +70,10 @@ export default {
 
     &:not(:last-child) {
       margin-right: grid(3);
+
+      @include mq ($until: medium) {
+        margin-right: grid(2);
+      }
     }
   }
 

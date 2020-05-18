@@ -25,7 +25,7 @@ export default {
     text-align: center;
 
     @include mq ($until: small) {
-      padding: grid(15) grid(10);
+      padding: grid(8) grid(10);
     }
   }
 

@@ -81,9 +81,9 @@ export default {
     font-weight: 600;
     line-height: 1.3;
 
-    @include mq ($until: small) {
+    @include mq ($until: medium) {
       font-size: 15px;
-      max-width: 350px;
+      max-width: 250px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
