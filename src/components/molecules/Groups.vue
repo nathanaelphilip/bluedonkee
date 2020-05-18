@@ -3,6 +3,7 @@
     <h3 v-if="heading" class="heading">{{ heading }}</h3>
     <div
       class="box"
+      :class="{'»grouped': showJobs}"
       v-for="group in groups"
       :key="group.id"
       >
@@ -27,5 +28,11 @@ export default {
     font-size: 22px;
     font-weight: 900;
     margin-bottom: grid(8);
+  }
+
+  .box.»grouped {
+    &:not(:last-child) {
+      margin-bottom: grid(8);
+    }
   }
 </style>

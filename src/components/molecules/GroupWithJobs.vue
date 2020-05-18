@@ -95,10 +95,4 @@ export default {
     color: $BLUE;
     font-size: 15px;
   }
-
-  .jobs {}
-
-  .job {
-
-  }
 </style>

@@ -27,6 +27,10 @@ export default {
       grid-column-gap: 55px;
     }
 
+    @include mq($until: medium) {
+      grid-template-columns: auto 630px auto;
+    }
+
     @include mq($until: xsmall) {
      grid-template-columns: 1fr;
     }
@@ -47,7 +51,9 @@ export default {
   }
 
   .column-1 {
-
+    @include mq($until: medium) {
+      grid-column: 2 / 3;
+    }
   }
 
   .column-2 {
