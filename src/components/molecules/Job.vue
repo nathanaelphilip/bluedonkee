@@ -14,12 +14,12 @@
             </router-link>
           </h2>
           <div class="meta" v-if="entity">
-            <router-link :to="{ name: entityType, params: { slug: entity.fields.Slug } }">
+            <router-link @click.native="$event.stopImmediatePropagation()" :to="{ name: entityType, params: { slug: entity.fields.Slug } }">
               {{ entity.fields.Name }}
             </router-link>
             <template v-if="locations.length">
               -
-              <router-link :to="{ name: 'locationJob', params: { slug: locations[0].fields.Slug } }">
+              <router-link @click.native="$event.stopImmediatePropagation()" :to="{ name: 'locationJob', params: { slug: locations[0].fields.Slug } }">
                 {{ locations[0].fields.City }}
               </router-link>
             </template>
