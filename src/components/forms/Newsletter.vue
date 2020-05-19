@@ -1,7 +1,13 @@
 <template>
-  <form @submit.prevent="submit" class="newsletter">
-    <h4 class="heading">Stay in the know</h4>
-    <div class="content">Get our weekly email newsletter.</div>
+  <form
+    @submit.prevent="submit"
+    class="newsletter"
+    :class="{'»full': !simple}"
+    >
+    <template v-if="!simple">
+      <h4 class="heading">Stay in the know</h4>
+      <div class="content">Get our weekly email newsletter.</div>
+    </template>
     <div class="grid">
       <Input
         @input="value => form.email = value"
@@ -40,6 +46,14 @@ const form = {
 
 export default {
   name: 'components-molecules-newsletter',
+
+  props: {
+    simple: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   components: { Flash, ButtonPrimary, Input, Processing },
 
   data () {
@@ -89,9 +103,11 @@ export default {
 
 <style lang="scss" scoped>
   .newsletter {
-    background: $BLUELIGHT;
-    border-radius: 4px;
-    padding: grid(6);
+    &.»full {
+      background: $BLUELIGHT;
+      border-radius: 4px;
+      padding: grid(6);
+    }
   }
 
   .heading {

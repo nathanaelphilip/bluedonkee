@@ -1,6 +1,7 @@
 <template>
   <article class="about">
     <HeaderPage
+      :newsletter="true"
       :heading="`We believe the power lies with the people`"
       :content="`WorkBlue is a nonprofit tech organization that helps change-makers find jobs with Democratic candidates and committees, progressive organizations, and other nonprofits.`"
     />

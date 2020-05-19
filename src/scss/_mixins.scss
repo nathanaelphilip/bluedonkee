@@ -118,7 +118,7 @@
   font-size: 15px;
   line-height: 1.1;
   min-width: 0;
-  padding: 12px;
+  padding: grid(3) - 1px grid(3);
   width: 100%;
 
   &:placeholder { color: $GREY; }
@@ -133,6 +133,7 @@
 
 @mixin Select {
   @include Input;
+  padding: grid(3);
 
   option {color: $BLACK}
 

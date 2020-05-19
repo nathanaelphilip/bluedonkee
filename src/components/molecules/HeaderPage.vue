@@ -2,12 +2,16 @@
    <header class="header">
      <h2 class="heading" v-html="heading"></h2>
      <div class="content">{{ content }}</div>
+     <Newsletter :simple="true" v-if="newsletter" />
    </header>
 </template>
 
 <script>
+import Newsletter from '@/components/forms/Newsletter'
+
 export default {
-  props: ['content', 'heading']
+  props: ['content', 'heading', 'newsletter'],
+  components: { Newsletter }
 }
 </script>
 
@@ -36,5 +40,14 @@ export default {
     line-height: 24px;
     margin: 0 auto;
     max-width: 530px;
+
+    &:not(:last-child) {
+      margin-bottom: grid(8);
+    }
+  }
+
+  .newsletter {
+    margin: 0 auto;
+    max-width: grid(100);
   }
 </style>
