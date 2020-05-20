@@ -109,6 +109,11 @@ export default {
     background: $WHITE;
     padding: grid(2) 0;
     margin-bottom: grid(18);
+
+    #sticky-filters.»stuck & {
+      border-bottom: 1px solid $GREY;
+      border-top: 1px solid $GREY;
+    }
   }
 
   .actions {

@@ -3,7 +3,7 @@
     <Header />
     <portal-target name="banner">
     </portal-target>
-    <div class="filters">
+    <div id="sticky-filters" class="filters">
       <portal-target name="filters">
       </portal-target>
     </div>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import stickybits from 'stickybits'
+
 import Grid from '@/components/layouts/Grid'
 import Header from '@/components/molecules/HeaderGlobal'
 import Newsletter from '@/components/forms/Newsletter'
@@ -32,7 +34,17 @@ import Twitter from '@/components/molecules/Twitter'
 export default {
   name: 'layout-full',
 
-  components: { Grid, Header, Newsletter, JobsPromoted, Twitter }
+  components: { Grid, Header, Newsletter, JobsPromoted, Twitter },
+
+  mounted () {
+    stickybits('#sticky-filters', {
+      useStickyClasses: true,
+      noStyles: true,
+      stickyClass: '»stuck',
+      stuckClass: '»stuck',
+      useGetBoundingClientRect: true
+    })
+  }
 }
 </script>
 
