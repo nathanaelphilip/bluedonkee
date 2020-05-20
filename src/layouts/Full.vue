@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import stickybits from 'stickybits'
+import _ from 'lodash'
 
 import Grid from '@/components/layouts/Grid'
 import Header from '@/components/molecules/HeaderGlobal'
@@ -37,13 +37,11 @@ export default {
   components: { Grid, Header, Newsletter, JobsPromoted, Twitter },
 
   mounted () {
-    stickybits('#sticky-filters', {
-      useStickyClasses: true,
-      noStyles: true,
-      stickyClass: '»stuck',
-      stuckClass: '»stuck',
-      useGetBoundingClientRect: true
-    })
+    const element = document.getElementById('sticky-filters')
+
+    document.addEventListener('scroll', _.throttle(event => {
+      element.classList.toggle('»stuck', element.offsetTop <= (window.scrollY + 70))
+    }, 150))
   }
 }
 </script>
