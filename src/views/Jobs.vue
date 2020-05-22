@@ -7,7 +7,7 @@
       />
     </portal>
     <portal to="filters">
-      <mq-layout mq="small+">
+      <mq-layout mq="medium+">
         <Filters />
       </mq-layout>
       <mq-layout :mq="['xxsmall', 'xsmall', 'small']">

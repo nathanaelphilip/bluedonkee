@@ -1,12 +1,13 @@
 <template>
-  <label class="toggle">
-    <input type="checkbox" />
+  <label @click.prevent="$emit('toggled')" class="toggle">
+    <input :checked="checked" type="checkbox" />
     <div class="dot"></div>
   </label>
 </template>
 
 <script>
 export default {
+  props: ['checked']
 }
 </script>
 

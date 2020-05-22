@@ -9,13 +9,14 @@ const state = {
   accepted: {
     categories: [],
     locations: [],
-    types: []
+    types: [],
+    remote: false
   }
 }
 
 const mutations = {
-  [FILTERS_ACCEPT] (state, { key, items }) {
-    state.accepted[key] = items
+  [FILTERS_ACCEPT] (state, { key, value }) {
+    state.accepted[key] = value
   },
 
   [FILTERS_CLEAR] (state) {
@@ -28,8 +29,8 @@ const mutations = {
 }
 
 const actions = {
-  async accept ({ commit }, { key, items }) {
-    commit(FILTERS_ACCEPT, { key, items })
+  async accept ({ commit }, { key, value }) {
+    commit(FILTERS_ACCEPT, { key, value })
   },
 
   async clear ({ commit }) {
