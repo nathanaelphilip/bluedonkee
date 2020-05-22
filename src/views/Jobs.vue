@@ -11,7 +11,8 @@
         <Filters />
       </mq-layout>
       <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
-        <FiltersToggle />
+        <button @click.prevent="mobileFilter = !mobileFilter" class="toggle-filter">Filter +</button>
+        <FiltersToggle v-if="mobileFilter" />
       </mq-layout>
     </portal>
     <template v-if="$store.getters['filters/filtered']">
@@ -64,7 +65,7 @@ export default {
   data () {
     return {
       filter: false,
-      closed: false
+      mobileFilter: false
     }
   },
 
@@ -94,10 +95,6 @@ export default {
   },
 
   async mounted () {
-    if (this.$cookies.isKey('banner:jobs')) {
-      this.closed = true
-    }
-
     if (!this.$store.state.workCategories.repository.length) {
       await this.$store.dispatch('workCategories/fetch')
     }
@@ -148,4 +145,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .toggle-filter {
+    background: $WHITE;
+    border: none;
+    border-bottom: 1px solid $GREY;
+    display: block;
+    font-weight: 500;
+    padding: grid(3) 0;
+    text-align: center;
+    width: 100%;
+  }
 </style>

@@ -62,5 +62,9 @@ export default {
     position: sticky;
     top: 70px;
     z-index: 8;
+
+    @include mq ($until: small) {
+      top: 69px;
+    }
   }
 </style>
