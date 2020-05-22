@@ -34,14 +34,14 @@ export default {
 
   .dot {
     $d: grid(4);
-    background: $GREY;
+    background: $BLUELIGHT;
     border-radius: 100%;
     height: $d;
     transition: background .2s ease, transform .35s ease;
     width: $d;
 
     .toggle:hover input:not(:checked) + & {
-      background: $BLUE;
+      background: $GREY;
     }
 
     input:checked + & {
