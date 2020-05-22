@@ -236,7 +236,7 @@ export default {
   .heading {
     font-size: 36px;
     font-weight: 900;
-    line-height: 1.35;
+    line-height: 1.15;
     max-width: 405px;
     margin-bottom: 8px;
 

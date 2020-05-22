@@ -41,6 +41,9 @@
     <portal to="modal" multiple>
       <Modal @close="modal = false" :open="modal === 'locations'" heading="Location">
         <div class="modalBox">
+          <div class="remote">
+            Include remote positions <Toggle />
+          </div>
           <CheckTags
             :accepted="$store.getters['filters/accepted']('locations')"
             :options="$store.getters['states/sortAlphabetically']"
@@ -85,9 +88,10 @@ import Count from '@/components/atoms/Count'
 import CheckTags from '@/components/forms/CheckTags'
 import IconPlus from '@/components/icons/Plus'
 import Modal from '@/components/molecules/Modal'
+import Toggle from '@/components/forms/Toggle'
 
 export default {
-  components: { CheckTags, Count, IconPlus, Modal },
+  components: { CheckTags, Count, IconPlus, Modal, Toggle },
 
   data () {
     return {
@@ -139,6 +143,16 @@ export default {
       position: relative;
       top: -1px;
     }
+  }
+
+  .remote {
+    @include Flex;
+    background: $BLUELIGHT;
+    border-radius: grid(1);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: grid(6);
+    padding: grid(3) grid(5);
   }
 
   .bugged {

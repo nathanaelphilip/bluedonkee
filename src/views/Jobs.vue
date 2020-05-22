@@ -10,6 +10,9 @@
       <mq-layout mq="small+">
         <Filters />
       </mq-layout>
+      <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
+        <FiltersToggle />
+      </mq-layout>
     </portal>
     <template v-if="$store.getters['filters/filtered']">
       <Jobs :jobs="$store.getters['jobs/getFetched']($store.getters['filters/key'])" />
@@ -36,6 +39,7 @@
 import Banner from '@/components/molecules/Banner'
 import BackTop from '@/components/molecules/BackTop'
 import Filters from '@/components/forms/Filters'
+import FiltersToggle from '@/components/forms/FiltersToggle'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 
@@ -52,6 +56,7 @@ export default {
     Banner,
     BackTop,
     Filters,
+    FiltersToggle,
     Jobs,
     Pager
   },
