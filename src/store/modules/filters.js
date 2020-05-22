@@ -55,7 +55,7 @@ const getters = {
   },
 
   filtered: state => {
-    return state.accepted.categories.length || state.accepted.locations.length || state.accepted.types.length
+    return state.accepted.categories.length || state.accepted.locations.length || state.accepted.types.length || state.accepted.remote === true
   },
 
   filter: (state, getters, rootState) => {
@@ -97,11 +97,15 @@ const getters = {
       filters.push(`OR(${types.join(',')})`)
     }
 
+    if (state.accepted.remote) {
+      filters.push('AND({Remote} = 1)')
+    }
+
     return `AND(${filters.join(',')})`
   },
 
   key: state => {
-    return hash(state.accepted)
+    return `${hash(state.accepted)}-${state.accepted.remote ? 'remote' : 'noremote'}`
   }
 }
 

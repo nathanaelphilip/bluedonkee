@@ -42,7 +42,7 @@
       <Modal @close="modal = false" :open="modal === 'locations'" heading="Location">
         <div class="modalBox">
           <div class="remote">
-            Include remote positions <Toggle :checked="$store.state.filters.accepted.remote" @toggled="applyRemote" />
+            Include remote positions <Toggle :checked="remote" @toggled="remote = !remote" />
           </div>
           <CheckTags
             :accepted="$store.getters['filters/accepted']('locations')"
@@ -95,20 +95,14 @@ export default {
 
   data () {
     return {
-      modal: false
+      modal: false,
+      remote: false
     }
   },
 
   methods: {
-    async applyRemote () {
-      console.log(this.$store.state.filters.accepted.remote)
-      const key = 'remote'
-      const value = !this.$store.state.filters.accepted.remote
-      await this.$store.dispatch('filters/accept', { key, value })
-      console.log(this.$store.state.filters.accepted.remote)
-    },
-
     async apply (key, value) {
+      await this.$store.dispatch('filters/accept', { key: 'remote', value: this.remote })
       await this.$store.dispatch('filters/accept', { key, value })
       this.modal = false
     }
