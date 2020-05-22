@@ -11,7 +11,13 @@
         <Filters />
       </mq-layout>
       <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
-        <button @click.prevent="mobileFilter = !mobileFilter" class="toggle-filter">Filter +</button>
+        <button @click.prevent="mobileFilter = !mobileFilter" class="toggle-filter">
+          Filter
+          <IconPlus v-if="!$store.getters['filters/accepted']('count')" :width="10" :height="10" />
+          <template v-if="$store.getters['filters/accepted']('count')">
+            {{ $store.getters['filters/accepted']('count') }}
+          </template>
+        </button>
         <FiltersToggle v-if="mobileFilter" />
       </mq-layout>
     </portal>
@@ -41,6 +47,7 @@ import Banner from '@/components/molecules/Banner'
 import BackTop from '@/components/molecules/BackTop'
 import Filters from '@/components/forms/Filters'
 import FiltersToggle from '@/components/forms/FiltersToggle'
+import IconPlus from '@/components/icons/Plus'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 
@@ -58,6 +65,7 @@ export default {
     BackTop,
     Filters,
     FiltersToggle,
+    IconPlus,
     Jobs,
     Pager
   },
@@ -146,6 +154,7 @@ export default {
 
 <style lang="scss" scoped>
   .toggle-filter {
+    @include Flex ($justify: center);
     background: $WHITE;
     border: none;
     border-bottom: 1px solid $GREY;
@@ -154,5 +163,11 @@ export default {
     padding: grid(3) 0;
     text-align: center;
     width: 100%;
+
+    svg {
+      margin-left: grid(1);
+      position: relative;
+      top: -1px;
+    }
   }
 </style>
