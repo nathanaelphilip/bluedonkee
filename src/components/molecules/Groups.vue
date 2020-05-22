@@ -28,13 +28,14 @@ export default {
     font-size: 22px;
     font-weight: 900;
     margin-bottom: grid(8);
+
+    @include mq ($until: small) {
+      margin-bottom: grid(6);
+      padding: 0 grid(6);
+    }
   }
 
   .box {
-    @include mq($until: medium) {
-      padding: 0 grid(8);
-    }
-
     &:not(.»grouped) {
       @include mq($until: medium) {
         border-bottom: 1px solid $GREY;

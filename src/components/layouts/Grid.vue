@@ -54,6 +54,10 @@ export default {
     @include mq($until: medium) {
       grid-column: 2 / 3;
     }
+
+    @include mq($until: xsmall) {
+      grid-column: 1 / 3;
+    }
   }
 
   .column-2 {

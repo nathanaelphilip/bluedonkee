@@ -6,7 +6,10 @@
         content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
       />
     </portal>
-    <Groups :groups="$store.getters['groups/getFetched']('groups')" :showJobs="true" />
+    <Groups
+      :groups="$store.getters['groups/getFetched']('groups')"
+      :showJobs="$mq !== 'small' && $mq !== 'xsmall' && $mq !== 'xxsmall'"
+    />
     <Pager
       @load="load"
       :loading="$store.state.groups.loading === 'groups'"

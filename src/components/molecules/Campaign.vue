@@ -5,24 +5,37 @@
     </div>
     <div class="info">
       <h3 class="heading">
-        <router-link :to="{ name: 'campaign', params: { slug: campaign.fields.Slug } }">{{ campaign.fields.Name }}</router-link>
+        <router-link
+          @click.native="$event.stopImmediatePropagation()"
+          :to="{
+            name: 'campaign',
+            params: { slug: campaign.fields.Slug }
+          }">
+          {{ campaign.fields.Name }}
+        </router-link>
       </h3>
-      <div class="location" v-if="locations.length">
-        <Locations
-          :locations="locations"
-          route="locationCampaign"
-        />
+      <div class="meta">
+        <template v-if="offices.length">
+          <router-link
+            @click.native="$event.stopImmediatePropagation()"
+            :to="{
+              name: 'office',
+              params: { slug: offices[0].fields.Slug }
+            }">
+            {{ offices[0].fields.Name }}
+          </router-link>
+        </template>
+        <template v-if="offices.length && locations.length">
+          <div class="meta-divider">•</div>
+        </template>
+        <template v-if="locations.length">
+          <Locations
+            :locations="locations"
+            route="locationCampaign"
+          />
+        </template>
       </div>
     </div>
-    <Tags>
-      <Tag
-        v-for="office in offices"
-        :key="office.id"
-        route="office"
-        :slug="office.fields.Slug"
-        :name="office.fields.Name"
-      />
-    </Tags>
   </article>
 </template>
 
@@ -31,12 +44,10 @@ import { getByIds } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
 import Locations from '@/components/molecules/Locations'
-import Tag from '@/components/atoms/Tag'
-import Tags from '@/components/molecules/Tags'
 
 export default {
   props: ['campaign'],
-  components: { Avatar, Locations, Tag, Tags },
+  components: { Avatar, Locations },
 
   data () {
     return {
@@ -79,7 +90,7 @@ export default {
     border: 1px solid transparent;
     border-radius: grid(2);
     display: grid;
-    grid-template-columns: 60px 1fr 1fr;
+    grid-template-columns: 60px 1fr;
     grid-column-gap: 12px;
     padding: grid(6);
 
@@ -95,10 +106,16 @@ export default {
     margin-bottom: 5px;
   }
 
-  .location {
+  .meta {
     @include Flex ($justify: flex-start);
     color: $BLUE;
     font-size: 15px;
+
+    a:hover {text-decoration: underline;}
+  }
+
+  .meta-divider {
+    margin: 0 grid(1);
   }
 
   .tags {

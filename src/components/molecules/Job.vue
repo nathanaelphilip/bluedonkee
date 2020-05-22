@@ -18,7 +18,7 @@
               {{ entity.fields.Name }}
             </router-link>
             <template v-if="locations.length">
-              -
+              •
               <router-link @click.native="$event.stopImmediatePropagation()" :to="{ name: 'locationJob', params: { slug: locations[0].fields.Slug } }">
                 {{ locations[0].fields.City }}
               </router-link>
@@ -231,8 +231,8 @@ export default {
   }
 
   .heading {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 800;
     line-height: 1.25;
     margin-bottom: 5px;
   }
@@ -240,6 +240,10 @@ export default {
   .meta {
     color: $BLUE;
     font-size: 15px;
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
   .time {

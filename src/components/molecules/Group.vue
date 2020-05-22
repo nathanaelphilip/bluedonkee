@@ -9,23 +9,28 @@
           {{ group.fields.Name }}
         </router-link>
       </h2>
-      <div class="location" v-if="locations.length">
-        <Locations
-          :locations="locations"
-          route="locationGroup"
-        />
+      <div class="meta">
+        <template v-if="categories.length">
+          <router-link
+            @click.native="$event.stopImmediatePropagation()"
+            :to="{
+              name: 'groupCategory',
+              params: { slug: categories[0].fields.Slug }
+            }"
+            >
+            {{ categories[0].fields.Name }}
+          </router-link>
+        </template>
+        <template v-if="categories.length && locations.length">
+          <div class="meta-divider">•</div>
+        </template>
+        <template v-if="locations.length">
+          <Locations
+            :locations="locations"
+            route="locationGroup"
+          />
+        </template>
       </div>
-    </div>
-    <div class="tags">
-       <Tags>
-         <Tag
-           v-for="category in categories"
-           :key="`group-category-${category.id}`"
-           :name="category.fields.Name"
-           :slug="category.fields.Slug"
-           route="groupCategory"
-         />
-       </Tags>
     </div>
   </article>
 </template>
@@ -35,13 +40,11 @@ import { getByIds } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
 import Locations from '@/components/molecules/Locations'
-import Tag from '@/components/atoms/Tag'
-import Tags from '@/components/molecules/Tags'
 
 export default {
   name: 'components-molecules-group',
   props: ['group'],
-  components: { Avatar, Locations, Tag, Tags },
+  components: { Avatar, Locations },
 
   data () {
     return {
@@ -76,16 +79,16 @@ export default {
     border: 1px solid transparent;
     border-radius: grid(2);
     display: grid;
-    grid-template-columns: 60px 1fr 200px;
+    grid-template-columns: 60px 1fr;
     grid-column-gap: 16px;
     padding: grid(6);
 
     @include mq($until: small) {
-      padding: grid(6) 0;
+      padding: grid(6) grid(6);
     }
 
     @include mq($until: xsmall) {
-      grid-template-columns: 48px 1fr 100px;
+      grid-template-columns: 48px 1fr;
     }
 
     &:hover {
@@ -96,18 +99,18 @@ export default {
   }
 
   .heading {
-    font-weight: 600;
-    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: grid(1);
   }
 
-  .location {
+  .meta {
     @include Flex ($justify: flex-start);
     color: $BLUE;
     font-size: 15px;
+
+    a:hover { text-decoration: underline; }
   }
 
-  .tags {
-    display: flex;
-    justify-content: flex-end
-  }
+  .meta-divider { margin: 0 grid(1); }
 </style>

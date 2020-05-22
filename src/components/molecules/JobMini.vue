@@ -82,6 +82,7 @@ export default {
     background: $WHITE;
     border: 1px solid $GREY3;
     border-radius: grid(1);
+    font-size: 14px;
     line-height: 1.4;
     padding: grid(4);
 

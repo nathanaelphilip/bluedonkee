@@ -10,11 +10,26 @@
             {{ group.fields.Name }}
           </router-link>
         </h2>
-        <div class="location" v-if="locations.length">
-          <Locations
-            :locations="locations"
-            route="locationGroup"
-          />
+        <div class="meta">
+          <template v-if="categories.length">
+            <router-link
+              @click.native="$event.stopImmediatePropagation()"
+              :to="{
+                name: 'groupCategory',
+                params: { slug: categories[0].fields.Slug }
+              }">
+              {{ categories[0].fields.Name }}
+            </router-link>
+          </template>
+          <template v-if="categories.length && locations.length">
+            <div class="meta-divider">•</div>
+          </template>
+          <template v-if="locations.length">
+            <Locations
+              :locations="locations"
+              route="locationGroup"
+            />
+          </template>
         </div>
       </div>
     </header>
@@ -45,9 +60,9 @@ export default {
   },
 
   async mounted () {
-    this.categories = this.group.fields.Categories ? await getByIds({
-      ids: this.group.fields.Categories,
-      type: 'categories'
+    this.categories = this.group.fields['Groups Categories'] ? await getByIds({
+      ids: this.group.fields['Groups Categories'],
+      type: 'groupCategories'
     }) : []
 
     this.jobs = this.group.fields.Jobs ? await getByIds({
@@ -86,13 +101,20 @@ export default {
   }
 
   .heading {
-    font-weight: 600;
-    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: grid(1);
   }
 
-  .location {
+  .meta {
     @include Flex ($justify: flex-start);
     color: $BLUE;
     font-size: 15px;
+
+    a:hover { text-decoration: underline; }
+  }
+
+  .meta-divider {
+    margin: 0 grid(1);
   }
 </style>

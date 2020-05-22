@@ -101,6 +101,10 @@ export default {
 
   .logo {
     @include Flex ($justify: flex-start);
+
+    .bug {
+      margin-left: grid(1);
+    }
   }
 
   .alt-menu {

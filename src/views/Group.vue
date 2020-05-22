@@ -1,6 +1,6 @@
 <template>
   <article class="group" v-if="!loading">
-    <div class="box">
+    <div class="boxed">
       <Header
         :avatar="avatar"
         :description="group.fields['Short Description']"
@@ -120,15 +120,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .group {
+  .boxed {
     margin-bottom: grid(15);
     padding-top: grid(15);
 
-    @include mq ($until: xsmall) {
+    @include mq ($until: small) {
       margin-bottom: grid(12);
+      padding-left: grid(6);
+      padding-right: grid(6);
       padding-top: grid(6);
     }
   }
+
   .jobs {
     margin-bottom: 24px;
   }

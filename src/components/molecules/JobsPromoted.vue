@@ -31,13 +31,13 @@ export default {
 <style lang="scss" scoped>
   .promoted {
     background: $BLUELIGHT;
-    border-radius: 4px;
+    border-radius: grid(2);
   }
 
   .heading {
     font-size: 18px;
     font-weight: 900;
-    padding: 20px 16px;
+    padding: grid(5) grid(4);
   }
 
   .box {

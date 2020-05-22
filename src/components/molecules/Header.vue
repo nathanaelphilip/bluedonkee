@@ -55,7 +55,8 @@
           name: entityType,
           params: {slug: entity.fields.Slug}
           }">{{ entity.fields.Name }}
-        </router-link> –
+        </router-link>
+        <span class="info-divider">•</span>
       </template>
       <template v-if="locations && locations.length">
         <Locations
@@ -255,13 +256,17 @@ export default {
     }
   }
 
+  .info-divider {
+    margin: 0 grid(1);
+  }
+
   .tags {
     margin-bottom: grid(9);
   }
 
   .description {
-    font-size: 17px;
-    line-height: 1.4;
+    font-size: 19px;
+    line-height: 1.47;
     margin-bottom: grid(6);
   }
 </style>
