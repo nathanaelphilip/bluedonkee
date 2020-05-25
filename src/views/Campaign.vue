@@ -21,9 +21,7 @@
     </div>
     <Jobs heading="Available Jobs" :jobs="$store.getters['jobs/getFetched'](id)" :simple="true">
       <template v-slot:empty>
-        <JobsEmpty>
-          Check back later or view related campaigns below.
-        </JobsEmpty>
+        <JobsEmpty />
       </template>
     </Jobs>
     <Campaigns heading="Related Campaigns" :campaigns="$store.getters['campaigns/getFetched'](id)" />
