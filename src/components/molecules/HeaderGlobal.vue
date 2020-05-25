@@ -89,6 +89,10 @@ export default {
       white-space: nowrap;
     }
 
+    @include mq ($until: xsmall) {
+      max-width: 160px;
+    }
+
     @include mq ($until: xxsmall) {
       max-width: 120px;
     }
