@@ -61,7 +61,7 @@ export default {
       await this.$store.dispatch('groups/fetch', {
         id: 'groups',
         params: {
-          pageSize,
+          pageSize: ['xxsmall', 'xsmall'].includes(this.$mq) ? 20 : pageSize,
           sort: [{ field: 'Name', direction: 'asc' }],
           offset: this.$store.getters['groups/getOffset']('groups')
         }
