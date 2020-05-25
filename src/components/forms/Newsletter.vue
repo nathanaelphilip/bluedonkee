@@ -105,7 +105,7 @@ export default {
   .newsletter {
     &.»full {
       background: $BLUELIGHT;
-      border-radius: grid(8);
+      border-radius: grid(2);
       padding: grid(6);
     }
   }
