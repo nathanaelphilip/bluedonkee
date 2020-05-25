@@ -1,5 +1,9 @@
 <template>
-  <button @click.prevent class="hamburger">
+  <button
+    @click.prevent
+    class="hamburger"
+    :class="{'»active': $store.state.app.mobileNavOpen}"
+    >
     <div class="line"></div>
     <div class="line"></div>
     <div class="line"></div>
@@ -25,5 +29,22 @@ export default {
   .line {
     background: $BLACK;
     height: 2px;
+    position: relative;
+
+    $o: 6px;
+
+    .hamburger.»active &:nth-child(1) {
+      transform: rotate(45deg);
+      top: $o;
+    }
+
+    .hamburger.»active &:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.»active &:nth-child(3) {
+      transform: rotate(-45deg);
+      top: -$o;
+    }
   }
 </style>
