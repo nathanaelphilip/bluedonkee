@@ -127,9 +127,11 @@ export default {
   }
 
   .clear {
-    @include ButtonStripped;
+    @include ButtonSimple;
     color: $BLUEGREY;
-    margin: 0 grid(3)
+    margin: 0 grid(3);
+
+    &:hover { background: none; }
   }
 
   .reset {
