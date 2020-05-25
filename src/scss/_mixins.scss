@@ -223,11 +223,11 @@
     }
 
     &:not(:last-child) {
-      margin-bottom: grid(5);
+      margin-bottom: grid(6);
     }
 
     & + h4 {
-      margin-top: 24px;
+      margin-top: grid(6);
     }
   }
 
@@ -241,17 +241,17 @@
 
   &::v-deep ol,
   &::v-deep ul {
-    margin-left: 16px;
+    margin-left: grid(4);
 
     li:not(:last-child) {
-      margin-bottom: 12px;
+      margin-bottom: grid(2);
     }
   }
 
   &::v-deep h4 {
     font-size: 17px;
     font-weight: 800;
-    margin-bottom: 8px;
+    margin-bottom: grid(2);
   }
 
   a {

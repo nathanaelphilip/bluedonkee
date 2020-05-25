@@ -88,6 +88,7 @@ export default {
   .group {
     background: $BLUELIGHT;
     border: 1px solid $GREY3;
+    border-radius: grid(2);
     padding: grid(5);
   }
 

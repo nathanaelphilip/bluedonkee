@@ -102,6 +102,7 @@ export default {
   }
 
   .heading {
+    font-size: 18px;
     font-weight: 800;
     margin-bottom: 5px;
   }
