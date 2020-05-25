@@ -106,6 +106,7 @@ export default {
 
     @include mq ($until: xsmall) {
       font-size: 15px;
+      line-height: 1.4;
     }
   }
 

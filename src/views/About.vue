@@ -45,10 +45,11 @@ export default {
 
 <style lang="scss" scoped>
   .about {
-    padding-bottom: grid(18);
+    padding-bottom: grid(15);
     padding-top: grid(22);
 
     @include mq ($until: xsmall) {
+      padding-bottom: grid(8);
       padding-top: grid(8);
     }
   }
@@ -72,6 +73,11 @@ export default {
       font-size: 28px;
       font-weight: 900;
       margin-bottom: grid(6);
+
+      @include mq ($until: xsmall) {
+        font-size: 19px;
+        margin-bottom: grid(3);
+      }
     }
   }
 

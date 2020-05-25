@@ -86,6 +86,10 @@ export default {
     line-height: 1.4;
     padding: grid(4);
 
+    &:hover {
+      background: $GREY3;
+    }
+
     &:not(:last-child) {
       margin-bottom: grid(3);
     }

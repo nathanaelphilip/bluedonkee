@@ -43,10 +43,11 @@ export default {
   }
 
   .questions {
-    padding-bottom: grid(18);
+    padding-bottom: grid(15);
     padding-top: grid(22);
 
     @include mq ($until: xsmall) {
+      padding-bottom: grid(8);
       padding-top: grid(8);
     }
   }

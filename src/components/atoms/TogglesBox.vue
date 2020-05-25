@@ -13,7 +13,7 @@
 import IconPlus from '@/components/icons/Plus'
 
 export default {
-  props: ['heading', 'open', 'visible'],
+  props: ['heading', 'visible'],
   components: { IconPlus },
 
   methods: {

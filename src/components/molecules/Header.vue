@@ -237,7 +237,7 @@ export default {
     font-size: 36px;
     font-weight: 900;
     line-height: 1.15;
-    max-width: 405px;
+    max-width: 500px;
     margin-bottom: 8px;
 
     @include mq ($until: xsmall) {

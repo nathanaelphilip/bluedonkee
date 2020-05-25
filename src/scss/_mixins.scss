@@ -84,11 +84,10 @@
 }
 
 @mixin ButtonClose {
+  @include ButtonStripped;
   $d: 35px;
-  appearance: none;
   align-items: center;
   background: $BLUELIGHT;
-  border: none;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -249,7 +248,7 @@
       margin-bottom: grid(2);
     }
   }
-
+  
   &::v-deep h4 {
     font-size: 17px;
     font-weight: 800;

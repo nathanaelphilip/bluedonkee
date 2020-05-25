@@ -235,6 +235,11 @@ export default {
     font-weight: 800;
     line-height: 1.25;
     margin-bottom: 5px;
+
+    @include mq ($until: xsmall) {
+      font-size: 15px;
+      line-height: 1.4;
+    }
   }
 
   .meta {

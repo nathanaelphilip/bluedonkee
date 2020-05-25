@@ -29,6 +29,10 @@ export default {
 <style lang="scss" scoped>
   .site {
     padding-bottom: grid(15);
+
+    @include mq ($until: xsmall) {
+      padding-bottom: grid(8);
+    }
   }
 
   .»mobilesticky {

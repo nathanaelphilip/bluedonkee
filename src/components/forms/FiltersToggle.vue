@@ -96,8 +96,8 @@ export default {
     async apply () {
       const entries = Object.entries(this.selected)
 
-      for (const [key, items] of entries) {
-        await this.$store.dispatch('filters/accept', { key, items })
+      for (const [key, value] of entries) {
+        await this.$store.dispatch('filters/accept', { key, value })
       }
 
       this.$emit('close')
