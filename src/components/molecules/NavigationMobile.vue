@@ -1,14 +1,12 @@
 <template>
   <nav class="nav">
-    <div>
-      <router-link class="anchor-large" :to="{name: 'postJob'}">
-        <div>
-          <h3 class="heading »alt">Post Job</h3>
-          Save Democracy. <strong>Its 100% Free</strong>
-        </div>
-        <IconChevronRight class="icon-right" width="6" height="10" />
-      </router-link>
-    </div>
+    <router-link class="anchor-large" :to="{name: 'postJob'}">
+      <div>
+        <h3 class="heading »alt">Post Job</h3>
+        Save Democracy. <strong>Its 100% Free</strong>
+      </div>
+      <IconChevronRight class="icon-right" width="6" height="10" />
+    </router-link>
     <div class="group">
       <h3 class="heading">
         Get Involved
@@ -65,7 +63,8 @@ export default {
     height: 100vh;
     height: calc(100vh - 73px);
     left: 0;
-    padding: grid(6);
+    overflow: auto;
+    padding: grid(4) grid(6);
     position: absolute;
     top: 100%;
     transform: translateY(1px);
@@ -98,8 +97,11 @@ export default {
     @include Flex;
     background: rgba($BLUE2, .1);
     border-radius: grid(2);
-    margin-bottom: grid(6);
     padding: grid(5);
+
+    &:not(:last-child) {
+      margin-bottom: grid(6);
+    }
 
     @include mq ($until: xxsmall) {
       margin-bottom: grid(4);
