@@ -29,10 +29,18 @@ export default {
 
 <style lang="scss" scoped>
   .post {
-    padding: 60px 0;
+    padding: grid(15) 0;
+
+    @include mq ($until: xsmall) {
+      padding-top: grid(8);
+    }
   }
 
   .header {
     margin-bottom: grid(17);
+
+    @include mq ($until: xsmall) {
+      margin-bottom: grid(10);
+    }
   }
 </style>

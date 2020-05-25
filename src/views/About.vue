@@ -78,8 +78,21 @@ export default {
   .actions {
     @include Flex ($justify: flex-start);
 
+    @include mq ($until: xsmall) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
     ::v-deep .button {
-      margin-right: grid(4);
+      &:not(:last-child) {
+        @include mq ($from: xsmall) {
+          margin-right: grid(4);
+        }
+
+        @include mq ($until: xsmall) {
+          margin-bottom: grid(2);
+        }
+      }
     }
   }
 </style>
