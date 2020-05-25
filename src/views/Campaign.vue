@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true">
+    <Jobs heading="Available Jobs" :jobs="$store.getters['jobs/getFetched'](id)" :simple="true">
       <template v-slot:empty>
         <JobsEmpty>
           Check back later or view related campaigns below.
@@ -101,10 +101,13 @@ export default {
       type: 'offices'
     })
 
-    this.jobs = this.campaign.fields.Jobs ? await getByIds({
-      ids: this.campaign.fields.Jobs,
-      type: 'jobs'
-    }) : []
+    await this.$store.dispatch('jobs/fetch', {
+      id: this.id,
+      params: {
+        filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), {Campaigns} = '${this.campaign.fields.Name}')`,
+        sort: [{ field: 'Post Date', direction: 'desc' }]
+      }
+    })
 
     if (!this.$store.getters['campaigns/getFetched'](this.id).length) {
       const search = []
