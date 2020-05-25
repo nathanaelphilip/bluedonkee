@@ -12,7 +12,7 @@
         :twitter="group.fields.Twitter"
       />
     </div>
-    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true">
+    <Jobs heading="Available Jobs" :jobs="$store.getters['jobs/getFetched'](id)" :simple="true">
       <template v-slot:empty>
         <JobsEmpty>
           Check back later or view related campaigns below.
@@ -81,10 +81,13 @@ export default {
 
     this.$store.dispatch('app/setHeading', this.group.fields.Name)
 
-    this.jobs = this.group.fields.Jobs ? await getByIds({
-      ids: this.group.fields.Jobs,
-      type: 'jobs'
-    }) : []
+    await this.$store.dispatch('jobs/fetch', {
+      id: this.id,
+      params: {
+        filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), {Group} = '${this.group.fields.Name}')`,
+        sort: [{ field: 'Post Date', direction: 'desc' }]
+      }
+    })
 
     this.locations = await getByIds({
       ids: this.group.fields.Location,

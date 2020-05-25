@@ -33,8 +33,8 @@
         </div>
       </div>
     </header>
-    <div class="jobs" v-if="jobs.length">
-      <JobMini v-for="job in jobs" :key="job.id" :job="job" />
+    <div class="jobs" v-if="$store.getters['jobs/getFetched'](id).length">
+      <JobMini v-for="job in $store.getters['jobs/getFetched'](id)" :key="job.id" :job="job" />
     </div>
   </article>
 </template>
@@ -53,6 +53,7 @@ export default {
 
   data () {
     return {
+      id: false,
       categories: [],
       jobs: [],
       locations: []
@@ -60,15 +61,20 @@ export default {
   },
 
   async mounted () {
+    this.id = `group/${this.group.fields.Slug}`
+
     this.categories = this.group.fields['Groups Categories'] ? await getByIds({
       ids: this.group.fields['Groups Categories'],
       type: 'groupCategories'
     }) : []
 
-    this.jobs = this.group.fields.Jobs ? await getByIds({
-      ids: this.group.fields.Jobs,
-      type: 'jobs'
-    }) : []
+    await this.$store.dispatch('jobs/fetch', {
+      id: this.id,
+      params: {
+        filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), {Group} = '${this.group.fields.Name}')`,
+        sort: [{ field: 'Post Date', direction: 'desc' }]
+      }
+    })
 
     this.locations = this.group.fields.Location ? await getByIds({
       ids: this.group.fields.Location,
