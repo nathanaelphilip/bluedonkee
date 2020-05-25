@@ -26,9 +26,17 @@ export default {
   .contact {
     padding-bottom: grid(18);
     padding-top: grid(22);
+
+    @include mq ($until: xsmall) {
+      padding-top: grid(8);
+    }
   }
 
   .header {
     margin-bottom: grid(17);
+
+    @include mq ($until: xsmall) {
+      margin-bottom: grid(9);
+    }
   }
 </style>
