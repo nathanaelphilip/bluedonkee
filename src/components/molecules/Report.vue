@@ -123,14 +123,22 @@ export default {
     align-items: center;
     display: grid;
     background: $BLUELIGHT;
-    border-radius: 4px;
+    border-radius: grid(1);
     border: 1px solid $GREY;
     font-size: 16px;
-    padding: grid(5) grid(5);
+    font-weight: 500;
+    padding: grid(3) grid(4);
     grid-template-columns: 1fr auto;
+
+    @include mq ($until: small) {
+      align-items: stretch;
+      grid-template-columns: 1fr;
+      grid-row-gap: grid(3);
+      padding: grid(4) grid(4);
+      text-align: center;
+    }
   }
 
   .heading {
-    color: $GREY2;
   }
 </style>
