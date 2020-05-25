@@ -198,7 +198,7 @@ export default {
     padding: grid(3) grid(6);
     position: fixed;
     width: 100%;
-    z-index: 10;
+    z-index: 7;
 
     ::v-deep a {
       flex: 1;

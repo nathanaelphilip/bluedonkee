@@ -95,10 +95,11 @@ export default {
   .header {
     align-items: center;
     display: grid;
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: grid(15) 1fr;
     grid-column-gap: 16px;
 
     @include mq($until: xsmall) {
+      grid-template-columns: grid(12) 1fr;
       grid-template-columns: 48px 1fr;
     }
 
@@ -111,6 +112,10 @@ export default {
     font-size: 18px;
     font-weight: 800;
     margin-bottom: grid(1);
+
+    @include mq ($until: xsmall) {
+      font-size: 15px;
+    }
   }
 
   .meta {

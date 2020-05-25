@@ -79,11 +79,12 @@ export default {
     border: 1px solid transparent;
     border-radius: grid(2);
     display: grid;
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: grid(15) 1fr;
     grid-column-gap: 16px;
     padding: grid(6);
 
     @include mq($until: small) {
+      grid-template-columns: grid(12) 1fr;
       padding: grid(6) grid(6);
     }
 
@@ -102,6 +103,10 @@ export default {
     font-size: 18px;
     font-weight: 800;
     margin-bottom: grid(1);
+
+    @include mq ($until: xsmall) {
+      font-size: 15px;
+    }
   }
 
   .meta {

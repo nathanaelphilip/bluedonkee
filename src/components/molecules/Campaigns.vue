@@ -24,11 +24,24 @@ export default {
     font-size: 22px;
     font-weight: 900;
     margin-bottom: grid(8);
+
+    @include mq ($until: small) {
+      margin-bottom: grid(6);
+      padding: 0 grid(6);
+    }
   }
 
   .box {
     @include mq ($until: small) {
       border-bottom: 1px solid $GREY;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: grid(8);
+
+      @include mq ($until: small) {
+        margin-bottom: grid(0);
+      }
     }
   }
 </style>

@@ -90,9 +90,13 @@ export default {
     border: 1px solid transparent;
     border-radius: grid(2);
     display: grid;
-    grid-template-columns: 60px 1fr;
-    grid-column-gap: 12px;
+    grid-template-columns: grid(15) 1fr;
+    grid-column-gap: grid(3);
     padding: grid(6);
+
+    @include mq ($until: xsmall) {
+      grid-template-columns: grid(12) 1fr;
+    }
 
     &:hover {
       background: $BLUELIGHT;
@@ -105,6 +109,10 @@ export default {
     font-size: 18px;
     font-weight: 800;
     margin-bottom: 5px;
+
+    @include mq ($until: xsmall) {
+      font-size: 15px;
+    }
   }
 
   .meta {

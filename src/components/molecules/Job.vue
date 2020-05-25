@@ -194,13 +194,13 @@ export default {
     display: grid;
     border: 1px solid transparent;
     border-radius: grid(2);
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: grid(15) 1fr;
     grid-column-gap: 16px;
     padding: grid(5) grid(6) grid(6) grid(6);
     position: relative;
 
     @include mq($until: xsmall) {
-      grid-template-columns: 48px 1fr;
+      grid-template-columns: grid(12) 1fr;
     }
 
     &.simple { grid-template-columns: 1fr; }

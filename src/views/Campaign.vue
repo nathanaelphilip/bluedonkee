@@ -134,6 +134,13 @@ export default {
   .boxed {
     margin-bottom: grid(15);
     padding-top: grid(15);
+
+    @include mq ($until: small) {
+      margin-bottom: grid(12);
+      padding-left: grid(6);
+      padding-right: grid(6);
+      padding-top: grid(8);
+    }
   }
 
   .overview {
@@ -147,12 +154,7 @@ export default {
   }
 
   .content {
-    font-size: 15px;
-    line-height: 1.6666;
-
-    &::v-deep p {
-      margin-bottom: 10px;
-    }
+    @include Content;
   }
 
   .jobs {

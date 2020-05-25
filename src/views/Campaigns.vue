@@ -77,8 +77,8 @@ export default {
   .boxed {
     padding: grid(8) grid(8) 0 grid(8);
 
-    @include mq($until: xsmall) {
-      padding: grid(6) grid(4) 0 grid(4);
+    @include mq($until: small) {
+      padding: grid(8) grid(4) 0 grid(4);
     }
   }
 </style>

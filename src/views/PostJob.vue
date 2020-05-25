@@ -1,8 +1,8 @@
 <template>
   <article class="post">
     <HeaderPage
-      :heading="`Are you ready for change?`"
-      :content="`Fill out the form below and we will post and promote the opportunity`"
+      :heading="`Post a Job.<br>Save Democracy`"
+      :content="`Fill out the form below and we will review and post the opportunity. For more information please view our F.A.Q`"
     />
     <PostJob />
   </article>

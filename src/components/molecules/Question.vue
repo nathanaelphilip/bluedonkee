@@ -25,8 +25,12 @@ export default {
   .question {
     background: $BLUELIGHT;
     border: 1px solid transparent;
-    border-radius: 12px;
+    border-radius: grid(3);
     padding: grid(6);
+
+    @include mq ($until: xsmall) {
+      padding: grid(3) grid(5);
+    }
 
     &:hover {
       border: 1px solid $GREY3;
@@ -37,6 +41,10 @@ export default {
     @include Flex;
     font-size: 22px;
     font-weight: 800;
+
+    @include mq ($until: xsmall) {
+      font-size: 16px;
+    }
 
     &:hover {
       cursor: pointer;
