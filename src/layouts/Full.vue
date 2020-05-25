@@ -61,7 +61,7 @@ export default {
   .filters {
     position: sticky;
     top: 70px;
-    z-index: 8;
+    z-index: 7;
 
     @include mq ($until: small) {
       top: 69px;
