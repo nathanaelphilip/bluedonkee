@@ -10,7 +10,7 @@
         <Bug>Beta</Bug>
       </div>
       <mq-layout mq="medium+">
-        <Navigation />
+        <Navigation :menu="menu" />
       </mq-layout>
       <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
         <div class="alt-menu">
@@ -53,6 +53,39 @@ export default {
       }
 
       return false
+    },
+
+    menu () {
+      return [{
+        type: 'shallow',
+        name: 'Jobs',
+        to: { name: 'jobs' }
+      }, {
+        type: 'shallow',
+        name: 'Groups',
+        to: { name: 'groups' }
+      }, {
+        type: 'shallow',
+        name: 'Campaigns',
+        to: { name: 'campaigns' }
+      }, {
+        type: 'deep',
+        name: 'More',
+        menu: [{
+          name: 'About Us',
+          to: { name: 'about' }
+        }, {
+          name: 'Questions',
+          to: { name: 'questions' }
+        }, {
+          name: 'Contact Us',
+          to: { name: 'contact' }
+        }]
+      }, {
+        type: 'button',
+        name: 'Post Job',
+        to: { name: 'postJob' }
+      }]
     }
   }
 }

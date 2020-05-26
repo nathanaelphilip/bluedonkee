@@ -1,45 +1,27 @@
 <template>
-  <nav class="nav">
+  <nav class="nav" :class="[alignment]">
     <ul class="parent">
-      <li class="primary">
-        <router-link class="anchor" :to="{ name: 'jobs' }">
-          Jobs
-        </router-link>
-      </li>
-      <li class="primary">
-        <router-link class="anchor" :to="{ name: 'groups' }">
-          Groups
-        </router-link>
-      </li>
-      <li class="primary">
-        <router-link class="anchor" :to="{ name: 'campaigns' }">
-          Campaigns
-        </router-link>
-      </li>
-      <li class="primary">
-        <a href="#" class="anchor">More</a>
-        <div class="child">
-          <ul class="submenu">
-            <li class="secondary">
-              <router-link class="anchor" :to="{ name: 'about' }">
-                About Us
-              </router-link>
-            </li>
-            <li class="secondary">
-              <router-link class="anchor" :to="{ name: 'questions' }">
-                Questions
-              </router-link>
-            </li>
-            <li class="secondary">
-              <router-link class="anchor" :to="{ name: 'contact' }">
-                Contact Us
-              </router-link>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="primary">
-        <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
+      <li :key="index" class="primary" v-for="(item, index) in menu">
+        <template v-if="item.type === 'shallow'">
+          <router-link class="anchor" :to="item.to">
+            {{ item.name }}
+          </router-link>
+        </template>
+        <template v-if="item.type === 'deep'">
+          <a href="#" class="anchor">{{ item.name }}</a>
+          <div class="child">
+            <ul class="submenu">
+              <li :key="`sub-${index}`" v-for="(subitem, index) in item.menu" class="secondary">
+                <router-link class="anchor" :to="subitem.to">
+                  {{ subitem.name }}
+                </router-link>
+              </li>
+            </ul>
+          </div>
+        </template>
+        <template v-if="item.type === 'button'">
+          <LinkPrimary classes="small" :to="item.to">{{ item.name }}</LinkPrimary>
+        </template>
       </li>
     </ul>
   </nav>
@@ -50,6 +32,7 @@ import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 export default {
   name: 'components-molecules-navigation',
+  props: ['alignment', 'menu'],
   components: { LinkPrimary }
 }
 </script>
@@ -63,6 +46,10 @@ export default {
 
   .parent {
     @include Flex ($justify: flex-end);
+
+    .»center & {
+      justify-content: center;
+    }
   }
 
   .primary {
