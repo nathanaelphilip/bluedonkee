@@ -64,7 +64,7 @@ export default {
     height: calc(100vh - 73px);
     left: 0;
     overflow: auto;
-    padding: grid(4) grid(6);
+    padding: grid(6) grid(6);
     position: absolute;
     top: 100%;
     transform: translateY(1px);
@@ -114,7 +114,7 @@ export default {
   }
 
   .group {
-    margin-bottom: grid(3);
+    margin-bottom: grid(6);
   }
 
   .anchor {
