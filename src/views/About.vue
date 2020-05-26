@@ -5,6 +5,9 @@
       :heading="`We believe the power lies with the people`"
       :content="`WorkBlue is a nonprofit tech organization that helps change-makers find jobs with Democratic candidates and committees, progressive organizations, and other nonprofits.`"
     />
+    <div class="people">
+      <AvatarGrid :entities="entities" />
+    </div>
     <div class="content">
       <h3>Our Story</h3>
       <p>Short answer: We were frustrated. Frustrated by not being able to find places to work whose causes aligned with our own. (Googling “progressive organizations” only got us so far.)</p>
@@ -28,6 +31,9 @@
 </template>
 
 <script>
+import { shuffle, slice } from 'lodash'
+
+import AvatarGrid from '@/components/molecules/AvatarGrid'
 import HeaderPage from '@/components/molecules/HeaderPage'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 import LinkSecondary from '@/components/atoms/LinkSecondary'
@@ -39,7 +45,35 @@ export default {
     title: 'About'
   },
 
-  components: { HeaderPage, LinkPrimary, LinkSecondary }
+  components: { AvatarGrid, HeaderPage, LinkPrimary, LinkSecondary },
+
+  computed: {
+    entities () {
+      const campaigns = this.$store.state.campaigns.repository
+      const groups = this.$store.state.groups.repository
+      const entities = shuffle(campaigns.concat(groups))
+
+      return slice(entities, 0, 14)
+    }
+  },
+
+  async mounted () {
+    await this.$store.dispatch('groups/fetch', {
+      id: 'groups-avatars',
+      params: {
+        pageSize: 20,
+        sort: [{ field: 'Name', direction: 'asc' }]
+      }
+    })
+
+    await this.$store.dispatch('campaigns/fetch', {
+      id: 'groups-campaigns',
+      params: {
+        pageSize: 20,
+        sort: [{ field: 'Name', direction: 'asc' }]
+      }
+    })
+  }
 }
 </script>
 
@@ -55,11 +89,21 @@ export default {
   }
 
   .header {
-    margin-bottom: grid(17);
+    margin-bottom: grid(11);
 
     @include mq ($until: xsmall) {
       margin-bottom: grid(12);
     }
+  }
+
+  .people {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-bottom: grid(16);
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 
   .content {
