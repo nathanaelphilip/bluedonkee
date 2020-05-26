@@ -58,21 +58,25 @@ export default {
   },
 
   async mounted () {
-    await this.$store.dispatch('groups/fetch', {
-      id: 'groups-avatars',
-      params: {
-        pageSize: 20,
-        sort: [{ field: 'Name', direction: 'asc' }]
-      }
-    })
+    if (this.$store.state.campaigns.repository.length <= 7) {
+      await this.$store.dispatch('campaigns/fetch', {
+        id: 'groups-campaigns',
+        params: {
+          pageSize: 20,
+          sort: [{ field: 'Name', direction: 'asc' }]
+        }
+      })
+    }
 
-    await this.$store.dispatch('campaigns/fetch', {
-      id: 'groups-campaigns',
-      params: {
-        pageSize: 20,
-        sort: [{ field: 'Name', direction: 'asc' }]
-      }
-    })
+    if (this.$store.state.groups.repository.length <= 7) {
+      await this.$store.dispatch('groups/fetch', {
+        id: 'groups-avatars',
+        params: {
+          pageSize: 20,
+          sort: [{ field: 'Name', direction: 'asc' }]
+        }
+      })
+    }
   }
 }
 </script>
