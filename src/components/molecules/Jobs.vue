@@ -50,7 +50,10 @@ export default {
 
   .empty {
     margin-bottom: grid(12);
-    margin-top: grid(-4);
+
+    @include mq ($from: small) {
+      margin-top: grid(-4);
+    }
 
     @include mq ($until: small) {
       padding: 0 grid(6);
