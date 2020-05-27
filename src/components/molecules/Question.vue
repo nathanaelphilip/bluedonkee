@@ -68,15 +68,7 @@ export default {
   }
 
   .content {
-    line-height: 1.5;
+    @include Content;
     margin-top: grid(4);
-
-    &::v-deep p {
-      font-size: 18px;
-
-      &:not(:last-child) {
-        margin-bottom: 1.5em;
-      }
-    }
   }
 </style>
