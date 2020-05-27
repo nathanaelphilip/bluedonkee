@@ -27,7 +27,6 @@ export default {
 
     @include mq($until: xsmall) {
       font-size: 18px;
-      max-width: 160px;
     }
   }
 </style>
