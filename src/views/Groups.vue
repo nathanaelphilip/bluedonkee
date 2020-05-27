@@ -123,9 +123,7 @@ export default {
 
     .filters.»stuck & {
       border-bottom: 1px solid $GREY;
-      position: relative;
       padding: grid(3) 0;
-      top: -1px;
     }
   }
 </style>

@@ -118,7 +118,6 @@ export default {
 
     #sticky-filters.»stuck & {
       border-bottom: 1px solid $GREY;
-      border-top: 1px solid $GREY;
     }
   }
 

@@ -37,7 +37,7 @@ export default {
   components: { Grid, Header, Newsletter, JobsPromoted, Twitter },
 
   mounted () {
-    sticky('sticky-filters', 70)
+    sticky('sticky-filters', 69)
   }
 }
 </script>
@@ -60,7 +60,7 @@ export default {
 
   .filters {
     position: sticky;
-    top: 70px;
+    top: 69px;
     z-index: 7;
 
     @include mq ($until: small) {
