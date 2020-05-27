@@ -22,7 +22,7 @@
     </div>
     <portal to="flash">
       <Flash :open="status === 'failure'" @close="status = false">
-        👎 {{ messages.error }}
+        👎 <template v-html="messages.error"></template>
       </Flash>
       <Flash :open="status === 'success'" @close="status = false">
         👍 {{ messages.success }}
