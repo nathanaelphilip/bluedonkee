@@ -107,6 +107,12 @@ export default {
       margin-bottom: grid(4);
       padding: grid(4);
     }
+
+    &:last-child {
+      @include mq ($until: xxsmall) {
+        margin-bottom: grid(15);
+      }
+    }
   }
 
   .icon-right {

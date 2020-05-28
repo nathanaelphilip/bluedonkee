@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import VueScrollTo from 'vue-scrollto'
+
 import Banner from '@/components/molecules/Banner'
 import BackTop from '@/components/molecules/BackTop'
 import Bug from '@/components/atoms/Bug'
@@ -149,6 +151,16 @@ export default {
           offset: this.$store.getters['jobs/getOffset']('jobs')
         }
       })
+    }
+  },
+
+  watch: {
+    mobileFilter (value) {
+      if (value === true) {
+        VueScrollTo.scrollTo(document.getElementById('sticky-filters'), 500, {
+          offset: 60
+        })
+      }
     }
   }
 }

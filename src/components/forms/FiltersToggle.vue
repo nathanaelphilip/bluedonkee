@@ -161,6 +161,12 @@ export default {
     width: 100%;
   }
 
+  .actions {
+    @include mq ($until: xsmall) {
+      padding: grid(4);
+    }
+  }
+
   .tags {
     width: 100%;
 
