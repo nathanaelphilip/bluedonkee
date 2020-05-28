@@ -134,8 +134,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(store.state.breadcrumbs.repository)
-
   if (from.name !== null) {
     store.dispatch('breadcrumbs/add', from)
   }
