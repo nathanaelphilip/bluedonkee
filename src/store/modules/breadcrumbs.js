@@ -13,7 +13,9 @@ const mutations = {
   },
 
   [BREADCRUMBS_REMOVE] (state) {
-    state.repository = state.repository.splice(state.repository.length - 2, 2)
+    const current = state.repository
+    current.splice(state.repository.length - 2, 2)
+    state.repository = current
   }
 }
 
