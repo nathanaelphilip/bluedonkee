@@ -5,7 +5,7 @@
     </div>
     <div class="box">
       <h2 class="heading">
-        <router-link :to="{ name: 'group', params: { slug: group.fields.Slug } }">
+        <router-link @click.native="$event.stopImmediatePropagation()" :to="{ name: 'group', params: { slug: group.fields.Slug } }">
           {{ group.fields.Name }}
         </router-link>
       </h2>

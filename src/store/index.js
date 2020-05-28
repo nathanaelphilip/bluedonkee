@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import app from './modules/app'
+import breadcrumbs from './modules/breadcrumbs'
 import campaigns from './modules/campaigns'
 import cms from './modules/cms'
 import filters from './modules/filters'
@@ -20,6 +21,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     app,
+    breadcrumbs,
     campaigns,
     cms,
     filters,

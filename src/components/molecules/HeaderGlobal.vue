@@ -1,11 +1,11 @@
 <template>
   <header class="header">
     <div class="container">
-      <div class="back" v-if="$store.state.app.heading">
+      <div class="back" v-if="$store.state.app.heading && back">
         <ButtonBack :to="back" v-if="back" />
         <h2 class="heading">{{ $store.state.app.heading }}</h2>
       </div>
-      <div class="logo" v-if="!$store.state.app.heading">
+      <div class="logo" v-if="!$store.state.app.heading || !back">
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
         <Bug>Beta</Bug>
       </div>
@@ -47,8 +47,8 @@ export default {
 
   computed: {
     back () {
-      if (this.$store.state.route.from && this.$store.state.route.from.name !== null) {
-        const { name, params } = this.$store.state.route.from
+      if (this.$store.state.breadcrumbs.repository.length) {
+        const { name, params } = this.$store.getters['breadcrumbs/current']
         return { name, params }
       }
 

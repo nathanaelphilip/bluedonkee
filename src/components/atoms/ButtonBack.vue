@@ -1,5 +1,5 @@
 <template>
-  <router-link class="button-back" :to="to">
+  <router-link @click.native="$store.dispatch('breadcrumbs/remove')" class="button-back" :to="to">
     <ArrowLeft width="14" height="14" />
   </router-link>
 </template>
