@@ -157,9 +157,7 @@ export default {
   watch: {
     mobileFilter (value) {
       if (value === true) {
-        VueScrollTo.scrollTo(document.getElementById('sticky-filters'), 500, {
-          offset: 60
-        })
+        VueScrollTo.scrollTo(document.getElementById('sticky-filters'), 500)
       }
     }
   }

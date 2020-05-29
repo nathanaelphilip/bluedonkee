@@ -1,5 +1,8 @@
 <template lang="html">
-  <section class="filters-toggle">
+  <section
+    class="filters-toggle"
+    :style="{'height': `${height}px`}"
+    >
     <header class="header">
       <button @click.prevent="clear" class="clear">
         Clear All
@@ -68,7 +71,8 @@ export default {
         types: []
       },
 
-      visible: false
+      visible: false,
+      height: window.innerHeight - 110
     }
   },
 
@@ -77,6 +81,10 @@ export default {
     this.selected.categories = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('categories')))
     this.selected.locations = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('locations')))
     this.selected.types = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('types')))
+
+    document.addEventListener('scroll', () => {
+      this.height = window.innerHeight - 110
+    })
   },
 
   destroyed () {
@@ -142,9 +150,7 @@ export default {
     flex: 1;
   }
 
-  .apply {
-    border-radius: 0;
-  }
+  .apply {}
 
   .reset {
     @include ButtonClose;
