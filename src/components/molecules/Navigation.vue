@@ -85,6 +85,7 @@ export default {
   .submenu-wrapper {
     @include Shadow;
     background: $WHITE;
+    border-radius: grid(1);
     padding: grid(3) 0;
     position: relative;
     width: 200px;
