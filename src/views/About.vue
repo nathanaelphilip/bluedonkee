@@ -3,7 +3,7 @@
     <HeaderPage
       :newsletter="true"
       :heading="`Empower People<br>Power Democracy`"
-      :content="`WorkBlue is a digital tool designed to build a community of Democraitc job seekers and employers; designed to help talented change-makers (like you!) find opportunities to work for Democratic candidates and committees, progressive organizations, and nonprofits.`"
+      :content="`WorkBlue is a digital tool designed to build a community of Democratic job seekers and employers; designed to help talented change-makers (like you!) find opportunities working with Democratic candidates and committees, progressive organizations, and nonprofits.`"
     />
     <div class="people">
       <AvatarGrid :entities="entities" />
@@ -20,7 +20,7 @@
       <h3>People-Powered</h3>
       <p>We’re a community-run platform — meaning we rely on our WorkBlue community to help find new job postings from committees and candidates, organizations and nonprofits. So if you know of a job opportunity, let us know!</p>
       <p>Click “Post Job” at WorkBlue.org or tweet at us (<a href="https://twitter.com/@workblueorg">@WorkBlueOrg</a>), and we’ll happily add the posting.</p>
-      <p>We are currently in Beta mode — welcoming any and all feedback and suggestions for improvements to WorkBlue. Fill out our contact form, and a real human we’ll be in touch.</p>
+      <p>We are currently in early-stage Beta — welcoming any and all feedback and suggestions for improvements to WorkBlue. Fill out our contact form, and a real human will be in touch.</p>
     </div>
     <div class="content">
       <h3>Press Kit</h3>
