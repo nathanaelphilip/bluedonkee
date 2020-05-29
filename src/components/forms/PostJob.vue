@@ -2,7 +2,7 @@
   <form @submit.prevent="process">
     <portal to="flash">
        <Flash @close="status = false" :open="status === 'success'">
-         🏄‍♀️  Surfing into success!
+         🇺🇸 Posting successfully submitted!
        </Flash>
        <Flash @close="status = false" :open="status === 'error'">
          😱 Something went wrong

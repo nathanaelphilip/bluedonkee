@@ -1,5 +1,10 @@
 <template>
   <form @submit.prevent="submit" class="form-contact">
+    <portal to="flash">
+      <Flash :open="status === 'success'" @close="status = false">
+        🎉 Success. We will be in touch!
+      </Flash>
+    </portal>
     <div class="header">
       <h3 class="heading">Send A Note</h3>
       <div class="subheading">Doubt <a href="https://secure.actblue.com/donate/amy-mcgrath-1" target="_blank">Mitch McConnell</a> will listen, but we will.</div>
@@ -65,11 +70,6 @@
         <Processing :processing="status === 'processing'">Submit</Processing>
       </ButtonPrimary>
     </div>
-    <portal to="flash">
-      <Flash :open="status === 'success'" @close="status = false">
-        👍 Form Submission Successful
-      </Flash>
-    </portal>
   </form>
 </template>
 
