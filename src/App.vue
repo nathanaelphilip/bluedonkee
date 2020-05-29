@@ -50,7 +50,9 @@ export default {
     }
 
     if (!this.$store.state.groupCategories.repository.length) {
-      await this.$store.dispatch('groupCategories/fetch')
+      await this.$store.dispatch('groupCategories/fetch', {
+        params: { view: 'Grid view' }
+      })
     }
 
     if (!this.$store.state.workCategories.repository.length) {
