@@ -31,7 +31,7 @@ import Groups from '@/components/molecules/Groups'
 import Navigation from '@/components/molecules/Navigation'
 import Pager from '@/components/molecules/Pager'
 
-const pageSize = 5
+const pageSize = 15
 
 export default {
   name: 'views-groups',
