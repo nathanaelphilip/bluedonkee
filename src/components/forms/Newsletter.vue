@@ -81,8 +81,8 @@ export default {
         const { result, msg } = await postNewsletterForm(params)
 
         if (result === 'error') {
-          const invalidEmail = `👀 Invalid email. Please try again`
-          const alreadySubscribed = `👍 You are already signed up`
+          const invalidEmail = '👀 Invalid email. Please try again'
+          const alreadySubscribed = '👍 You are already signed up'
 
           if (msg.includes('already subscribed')) {
             this.messages.error = alreadySubscribed
@@ -93,7 +93,6 @@ export default {
           }
 
           this.status = 'failure'
-
         }
 
         if (result === 'success') {
