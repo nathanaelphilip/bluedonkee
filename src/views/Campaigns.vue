@@ -3,7 +3,7 @@
     <portal to="banner">
       <Banner
         heading="People-Powered Campaigns"
-        content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
+        content="Find job opportunities with Democratic candidates across the country — up and down the ballot — fighting for all of us."
       />
     </portal>
     <Campaigns :campaigns="$store.getters['campaigns/getFetched']('campaigns')" />

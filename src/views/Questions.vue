@@ -1,8 +1,8 @@
 <template>
   <article class="questions">
     <HeaderPage
-      :heading="`Frequently Asked Questions`"
-      :content="`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis malesuada bibendum ligula, eu consequat velit placerat id.`"
+      :heading="`Get to know WorkBlue`"
+      :content="`You’ve got questions, we’ve got answers.`"
     />
     <Question
       v-for="(question, index) in $store.state.cms.questions"

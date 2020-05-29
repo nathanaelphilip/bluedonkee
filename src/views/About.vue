@@ -2,26 +2,29 @@
   <article class="about">
     <HeaderPage
       :newsletter="true"
-      :heading="`We believe the power lies with the people`"
-      :content="`WorkBlue is a nonprofit tech organization that helps change-makers find jobs with Democratic candidates and committees, progressive organizations, and other nonprofits.`"
+      :heading="`Empower People<br>Power Democracy`"
+      :content="`WorkBlue is a digital tool designed to build a community of Democraitc job seekers and employers; designed to help talented change-makers (like you!) find opportunities to work for Democratic candidates and committees, progressive organizations, and nonprofits.`"
     />
     <div class="people">
       <AvatarGrid :entities="entities" />
     </div>
     <div class="content">
       <h3>Our Story</h3>
-      <p>Short answer: We were frustrated. Frustrated by not being able to find places to work whose causes aligned with our own. (Googling “progressive organizations” only got us so far.)</p>
-      <p>So we built WorkBlue. We do the sifting for you to identify credible groups and organizations working for the right causes — and we’ve put them all in one central, searchable place.</p>
-      <p>We fundamentally believe people want to work for inspiring people-powered campaigns and organizations. Our goal is to connect them.</p>
+      <p>Finding a job in the world of Democratic politics is not exactly easy — but it should be.</p>
+      <p>Here’s how we see it: If folks want to get involved in changing our country for the better, shouldn’t we do everything we can to help them get connected with the groups and people doing that good work?</p>
+      <p>So we set out to do something about it.</p>
+      <p>WorkBlue is a digital tool designed to build a community of Democraitc job seekers and employers; designed to help talented change-makers (like you!) find opportunities to work for Democratic candidates and committees, progressive organizations, and nonprofits.</p>
+      <p>Our team sifts through job postings from credible groups, organizations, and campaigns in the world of Democraitc politics. We compile the active job postings into one central and searchable place — WorkBlue.org.</p>
     </div>
     <div class="content">
-      <h3>Get Involved</h3>
-      <p>We’re currently a community-run platform — meaning we rely on our community to help find new organizations and jobs. So if you have a job at your organization, please let us know. Click “Post Job” or tweet at us <a href="https://twitter.com/@workblueorg">@workblueorg</a>, and we’ll happily add it.</p>
-      <p>We are currently in a limited Beta. We welcome all product feedback and suggestions for improvements to WorkBlue. Fill out our contact form, and a real human we’ll be in touch.</p>
+      <h3>People-Powered</h3>
+      <p>We’re a community-run platform — meaning we rely on our WorkBlue community to help find new job postings from committees and candidates, organizations and nonprofits. So if you know of a job opportunity, let us know!</p>
+      <p>Click “Post Job” at WorkBlue.org or tweet at us (<a href="https://twitter.com/@workblueorg">@WorkBlueOrg</a>), and we’ll happily add the posting.</p>
+      <p>We are currently in Beta mode — welcoming any and all feedback and suggestions for improvements to WorkBlue. Fill out our contact form, and a real human we’ll be in touch.</p>
     </div>
     <div class="content">
       <h3>Press Kit</h3>
-      <p>Thanks for your interest in WorkBlue! We're also happy to help with any questions you have. Just contact us and you'll reach a real human who can provide original materials. Here's our logo and product screenshots.</p>
+      <p>Thanks for your interest in WorkBlue! We're happy to help with any questions you have. Send us a message and you'll reach a real human who can help you navigate the WorkBlue story. Here's our logo and product screenshots.</p>
       <div class="actions">
         <LinkPrimary href="#">Download Press Package</LinkPrimary>
         <LinkSecondary classes="large" :to="{'name': 'contact'}">Contact Us</LinkSecondary>

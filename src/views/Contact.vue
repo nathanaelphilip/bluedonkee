@@ -1,7 +1,7 @@
 <template>
   <article class="contact">
     <HeaderPage
-      :heading="`Positioned for Change.`"
+      :heading="`Positioned for Change`"
     />
     <ContactForm />
   </article>

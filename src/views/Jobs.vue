@@ -2,8 +2,8 @@
   <section class="home">
     <portal to="banner">
       <Banner
-        heading="People-Powered Groups"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla consectetur erat eget vulputate pharetra. Praesent vitae enim non risus rhoncus lobortis."
+        heading="WorkBlue: Positioned for Change"
+        content="Finding a job in the world of Democratic politics is not exactly easy — but it should be. Get started with WorkBlue."
       />
     </portal>
     <portal to="filters">

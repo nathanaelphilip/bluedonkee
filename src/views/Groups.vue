@@ -3,7 +3,7 @@
     <portal to="banner">
       <Banner
         heading="People-Powered Groups"
-        content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
+        content="Find job opportunities with Democratic and progressive organizations working to make build a better tomorrow."
       />
     </portal>
     <portal to="filters">
