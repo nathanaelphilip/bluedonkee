@@ -10,13 +10,15 @@
         <template v-if="item.type === 'deep'">
           <a href="#" class="anchor">{{ item.name }}</a>
           <div class="child">
-            <ul class="submenu">
-              <li :key="`sub-${index}`" v-for="(subitem, index) in item.menu" class="secondary">
-                <router-link class="anchor" :to="subitem.to">
-                  {{ subitem.name }}
-                </router-link>
-              </li>
-            </ul>
+            <div class="submenu-wrapper">
+              <ul class="submenu">
+                <li :key="`sub-${index}`" v-for="(subitem, index) in item.menu" class="secondary">
+                  <router-link class="anchor" :to="subitem.to">
+                    {{ subitem.name }}
+                  </router-link>
+                </li>
+              </ul>
+            </div>
           </div>
         </template>
         <template v-if="item.type === 'button'">
@@ -80,10 +82,10 @@ export default {
     }
   }
 
-  .submenu {
+  .submenu-wrapper {
     @include Shadow;
     background: $WHITE;
-    padding: grid(3);
+    padding: grid(3) 0;
     position: relative;
     width: 200px;
 
@@ -98,6 +100,12 @@ export default {
       right: grid(3);
       bottom: 100%;
     }
+  }
+
+  .submenu {
+    max-height: 275px;
+    overflow: auto;
+    padding: 0 grid(3);
   }
 
   .secondary {
