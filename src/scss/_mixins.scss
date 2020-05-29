@@ -156,7 +156,11 @@
   background: $BLUELIGHT;
   border-radius: 12px;
   display: block;
-  padding: 32px;
+  padding: grid(8);
+
+  @include mq ($until: xsmall) {
+    padding: grid(6);
+  }
 
   &:not(:last-child) {
     margin-bottom: 24px;
@@ -248,7 +252,7 @@
       margin-bottom: grid(2);
     }
   }
-  
+
   &::v-deep h4 {
     font-size: 17px;
     font-weight: 800;

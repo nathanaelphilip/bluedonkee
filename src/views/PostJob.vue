@@ -32,7 +32,7 @@ export default {
     padding: grid(15) 0;
 
     @include mq ($until: xsmall) {
-      padding-top: grid(8);
+      padding: grid(8) 0;
     }
   }
 
