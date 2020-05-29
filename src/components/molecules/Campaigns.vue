@@ -35,13 +35,5 @@ export default {
     @include mq ($until: small) {
       border-bottom: 1px solid $GREY;
     }
-
-    &:not(:last-child) {
-      margin-bottom: grid(8);
-
-      @include mq ($until: small) {
-        margin-bottom: grid(0);
-      }
-    }
   }
 </style>
