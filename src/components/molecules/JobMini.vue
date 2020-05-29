@@ -2,6 +2,8 @@
   <router-link v-if="!loading" class="job" :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
     <Bug v-if="isNew">New</Bug>
     <h3 class="heading">{{ job.fields.Title }}</h3>
+    <div class="divider">•</div>
+    <Locations :simple="true" :locations="locations" />
   </router-link>
 </template>
 
@@ -10,15 +12,17 @@ import { getByIds } from '@/store/helpers'
 import moment from 'moment'
 
 import Bug from '@/components/atoms/Bug'
+import Locations from '@/components/molecules/Locations'
 
 export default {
   props: ['job'],
-  components: { Bug },
+  components: { Bug, Locations },
 
   data () {
     return {
       campaigns: [],
       groups: [],
+      locations: false,
       loading: true
     }
   },
@@ -46,6 +50,13 @@ export default {
   },
 
   async mounted () {
+    if (this.job.fields.Location) {
+      this.locations = this.job.fields.Location ? await getByIds({
+        ids: this.job.fields.Location,
+        type: 'locations'
+      }) : []
+    }
+
     if (this.job.fields.Group) {
       this.groups = await getByIds({
         ids: this.job.fields.Group,
@@ -91,5 +102,9 @@ export default {
 
   .heading {
     font-weight: 600;
+  }
+
+  .divider {
+    margin: 0 grid(1);
   }
 </style>

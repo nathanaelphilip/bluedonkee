@@ -7,6 +7,7 @@
         :key="location.id"
         :location="location"
         :route="route"
+        :simple="simple"
       />
       <template v-if="locations.length > 1 && index !== locations.length - 1"><div class="divider" :key="`${location.id}-divider`">•</div></template>
     </template>
@@ -18,7 +19,7 @@ import { Fragment } from 'vue-fragment'
 import Location from '@/components/atoms/Location'
 
 export default {
-  props: ['locations', 'route'],
+  props: ['locations', 'route', 'simple'],
   components: { Fragment, Location }
 }
 </script>

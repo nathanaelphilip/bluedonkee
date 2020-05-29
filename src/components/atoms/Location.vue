@@ -1,22 +1,30 @@
 <template>
-  <router-link
-    @click.native="$event.stopImmediatePropagation()"
-    :to="{
-      name: route,
-      params: {
-        slug: location.fields.Slug
-      }
-    }"
-  >
-    {{ location.fields.City }}<template v-if="state">, {{ state }}</template>
-  </router-link>
+  <Fragment>
+    <router-link
+      v-if="!simple"
+      @click.native="$event.stopImmediatePropagation()"
+      :to="{
+        name: route,
+        params: {
+          slug: location.fields.Slug
+        }
+      }"
+    >
+      {{ location.fields.City }}<template v-if="state">, {{ state }}</template>
+    </router-link>
+    <div v-if="simple">
+      {{ location.fields.City }}<template v-if="state">, {{ state }}</template>
+    </div>
+  </Fragment>
 </template>
 
 <script>
 import { getByIds } from '@/store/helpers'
+import { Fragment } from 'vue-fragment'
 
 export default {
-  props: ['location', 'route'],
+  props: ['location', 'route', 'simple'],
+  components: { Fragment },
 
   data () {
     return { states: [] }
