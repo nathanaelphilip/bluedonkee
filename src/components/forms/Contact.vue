@@ -6,8 +6,7 @@
       </Flash>
     </portal>
     <div class="header">
-      <h3 class="heading">Send A Note</h3>
-      <div class="subheading">Doubt <a href="https://secure.actblue.com/donate/amy-mcgrath-1" target="_blank">Mitch McConnell</a> will listen, but we will.</div>
+      <h3 class="heading">Contact Us</h3>
     </div>
     <div class="row">
       <div class="half">

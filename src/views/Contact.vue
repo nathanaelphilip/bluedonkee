@@ -2,6 +2,7 @@
   <article class="contact">
     <HeaderPage
       :heading="`Positioned for Change`"
+      :content="`Doubt Mitch McConnell will listen, but we will.`"
     />
     <ContactForm />
   </article>
