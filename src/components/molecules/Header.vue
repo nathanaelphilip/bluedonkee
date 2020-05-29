@@ -49,7 +49,9 @@
     <h2 class="heading">{{ heading }}</h2>
 
     <div class="info">
-      <Bug v-if="isNew">New</Bug>
+      <mq-layout mq="small+">
+        <Bug v-if="isNew">New</Bug>
+      </mq-layout>
       <template v-if="entity">
         <router-link :to="{
           name: entityType,
@@ -229,7 +231,7 @@ export default {
     margin-bottom: grid(15);
 
     @include mq ($until: xsmall) {
-      margin-bottom: grid(12);
+      margin-bottom: grid(9);
     }
   }
 
@@ -250,6 +252,11 @@ export default {
     color: $BLUE;
     font-size: 17px;
     margin-bottom: grid(6);
+
+    @include mq ($until: small) {
+      line-height: 1.23;
+      margin-bottom: grid(3);
+    }
 
     .bug {
       margin-right: grid(3)
