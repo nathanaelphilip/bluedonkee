@@ -74,6 +74,9 @@
 
     <div class="tags">
       <Tags>
+        <mq-layout :mq="['xxsmall', 'xsmall']">
+          <Bug v-if="isNew">New</Bug>
+        </mq-layout>
         <Tag
           v-for="category in groupCategories"
           :key="`work-category-${category.id}`"
@@ -254,6 +257,7 @@ export default {
     margin-bottom: grid(6);
 
     @include mq ($until: small) {
+      font-size: 15px;
       line-height: 1.23;
       margin-bottom: grid(3);
     }
