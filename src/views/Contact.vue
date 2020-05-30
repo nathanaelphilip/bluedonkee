@@ -1,8 +1,8 @@
 <template>
-  <article class="contact">
+  <article class="contact" v-if="!loading">
     <HeaderPage
-      :heading="`Positioned for Change`"
-      :content="`Doubt Mitch McConnell will listen, but we will.`"
+      :heading="fields.Heading"
+      :content="fields.Subheading"
     />
     <ContactForm />
   </article>
@@ -19,7 +19,25 @@ export default {
     title: 'Contact'
   },
 
-  components: { ContactForm, HeaderPage }
+  components: { ContactForm, HeaderPage },
+
+  data () {
+    return {
+      fields: false,
+      loading: true
+    }
+  },
+
+  async mounted () {
+    const key = 'Contact Us'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
+    }
+
+    this.fields = this.$store.state.cms.pages[key].fields
+    this.loading = false
+  }
 }
 </script>
 
