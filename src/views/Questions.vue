@@ -1,8 +1,8 @@
 <template>
-  <article class="questions">
+  <article class="questions" v-if="!loading">
     <HeaderPage
-      :heading="`Get to know WorkBlue`"
-      :content="`You’ve got questions, we’ve got answers.`"
+      :heading="fields.Heading"
+      :content="fields.Subheading"
     />
     <Question
       v-for="(question, index) in $store.state.cms.questions"
@@ -25,10 +25,27 @@ export default {
 
   components: { HeaderPage, Question },
 
+  data () {
+    return {
+      fields: false,
+      loading: true
+    }
+  },
+
   async mounted () {
+    const key = 'Questions'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
+    }
+
+    this.fields = this.$store.state.cms.pages[key].fields
+
     await this.$store.dispatch('cms/fetchQuestions')
 
     window.analytics.page('Questions')
+
+    this.loading = false
   }
 }
 </script>
