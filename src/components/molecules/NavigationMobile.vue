@@ -41,7 +41,7 @@
         <IconChevronRight class="icon-right" width="6" height="10" />
       </router-link>
     </div>
-    <a href="https://twitter.com/@WorkBlueOrg" class="anchor-large">
+    <a href="https://twitter.com/@WorkBlueOrg" target="_blank" class="anchor-large">
       <h3 class="heading »alt">Follow on Twitter</h3>
       <IconChevronRight class="icon-right" width="6" height="10" />
     </a>
