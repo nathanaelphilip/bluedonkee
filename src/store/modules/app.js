@@ -1,12 +1,14 @@
 import {
   GLOBAL_MODAL_TOGGLE,
   GLOBAL_HEADING,
+  GLOBAL_INNER_HEIGHT,
   GLOBAL_MOBILE_NAVIGATION_TOGGLE,
   GLOBAL_SIDEBAR_TOGGLE
 } from '@/store/mutation-types'
 
 const state = {
   heading: '',
+  innerHeight: false,
   sidebar: false,
   modalOpen: false,
   mobileNavOpen: false
@@ -27,6 +29,10 @@ const mutations = {
 
   [GLOBAL_HEADING] (state, heading) {
     state.heading = heading
+  },
+
+  [GLOBAL_INNER_HEIGHT] (state, height) {
+    state.innerHeight = height - 110 // this is the mobile nav height
   }
 }
 
@@ -45,6 +51,10 @@ const actions = {
 
   setHeading ({ commit }, heading) {
     commit(GLOBAL_HEADING, heading)
+  },
+
+  setInnerHeight ({ commit }, height) {
+    commit(GLOBAL_INNER_HEIGHT, height)
   }
 }
 

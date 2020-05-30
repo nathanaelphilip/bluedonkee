@@ -7,7 +7,12 @@
       />
     </portal>
     <portal to="filters">
-      <Navigation alignment="»center" :menu="menu" />
+      <mq-layout mq="medium+">
+        <Navigation alignment="»center" :menu="menu" />
+      </mq-layout>
+      <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
+        <NavigationMobileAlt heading="Select area of interest" :menu="menu" />
+      </mq-layout>
     </portal>
     <Groups
       :groups="$store.getters['groups/getFetched']('groups')"
@@ -29,6 +34,7 @@ import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import Groups from '@/components/molecules/Groups'
 import Navigation from '@/components/molecules/Navigation'
+import NavigationMobileAlt from '@/components/molecules/NavigationMobileAlt'
 import Pager from '@/components/molecules/Pager'
 
 const pageSize = 15
@@ -40,7 +46,7 @@ export default {
     title: 'Groups'
   },
 
-  components: { BackTop, Banner, Groups, Pager, Navigation },
+  components: { BackTop, Banner, Groups, Pager, Navigation, NavigationMobileAlt },
 
   data () {
     return { closed: false }

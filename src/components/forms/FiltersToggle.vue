@@ -1,7 +1,7 @@
 <template lang="html">
   <section
     class="filters-toggle"
-    :style="{'height': `${height}px`}"
+    :style="{'height': `${$store.state.app.innerHeight}px`}"
     >
     <header class="header">
       <button @click.prevent="clear" class="clear">
@@ -71,8 +71,7 @@ export default {
         types: []
       },
 
-      visible: false,
-      height: window.innerHeight - 110
+      visible: false
     }
   },
 
@@ -81,10 +80,6 @@ export default {
     this.selected.categories = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('categories')))
     this.selected.locations = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('locations')))
     this.selected.types = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('types')))
-
-    document.addEventListener('scroll', () => {
-      this.height = window.innerHeight - 110
-    })
   },
 
   destroyed () {

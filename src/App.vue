@@ -41,6 +41,8 @@ export default {
   },
 
   async mounted () {
+    this.$store.dispatch('app/setInnerHeight', window.innerHeight)
+
     if (!this.$store.state.states.repository.length) {
       await this.$store.dispatch('states/fetch')
     }
@@ -70,6 +72,10 @@ export default {
         }
       })
     }
+
+    document.addEventListener('scroll', () => {
+      this.$store.dispatch('app/setInnerHeight', window.innerHeight)
+    })
 
     this.loaded = true
   }

@@ -176,9 +176,7 @@ export default {
     width: 100%;
 
     svg {
-      margin-left: grid(1);
-      position: relative;
-      top: -1px;
+      margin-left: grid(2);
     }
 
     .bug {
