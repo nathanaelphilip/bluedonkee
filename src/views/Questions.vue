@@ -26,7 +26,7 @@ export default {
   components: { HeaderPage, Question },
 
   async mounted () {
-    await this.$store.dispatch('cms/fetch')
+    await this.$store.dispatch('cms/fetchQuestions')
 
     window.analytics.page('Questions')
   }

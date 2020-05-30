@@ -231,6 +231,10 @@
       margin-bottom: grid(6);
     }
 
+    & + h3 {
+      margin-top: grid(12);
+    }
+
     & + h4 {
       margin-top: grid(6);
     }
@@ -250,6 +254,17 @@
 
     li:not(:last-child) {
       margin-bottom: grid(2);
+    }
+  }
+
+  &::v-deep h3 {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: grid(6);
+
+    @include mq ($until: xsmall) {
+      font-size: 19px;
+      margin-bottom: grid(3);
     }
   }
 
