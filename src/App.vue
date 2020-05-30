@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 import Basic from '@/layouts/Basic'
 import Full from '@/layouts/Full'
 
@@ -73,9 +75,9 @@ export default {
       })
     }
 
-    document.addEventListener('scroll', () => {
+    document.addEventListener('scroll', _.throttle(event => {
       this.$store.dispatch('app/setInnerHeight', window.innerHeight)
-    })
+    }, 200))
 
     this.loaded = true
   }
