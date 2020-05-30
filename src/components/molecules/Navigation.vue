@@ -116,11 +116,12 @@ export default {
 
     &::-webkit-scrollbar-track {
       background: $GREY3;
+      border-radius: grid(4);
     }
 
     &::-webkit-scrollbar-thumb {
       background: $GREY5;
-      border-radius: grid(2);
+      border-radius: grid(4);
     }
   }
 
