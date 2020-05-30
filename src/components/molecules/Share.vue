@@ -4,7 +4,7 @@
       <IconShare width="18" height="19" class="icon" />
     </button>
     <portal to="modal">
-      <Modal @close="open = false" heading="Share" :open="open">
+      <Modal class="»mobile-bottom" @close="open = false" heading="Share" :open="open">
         <Copy :value="link" />
         <ul class="links">
           <li>
