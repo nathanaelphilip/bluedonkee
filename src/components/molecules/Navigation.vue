@@ -107,6 +107,21 @@ export default {
     max-height: 275px;
     overflow: auto;
     padding: 0 grid(3);
+    scrollbar-width: thin;
+    scrollbar-color: $GREY5 $GREY3;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $GREY3;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $GREY5;
+      border-radius: grid(2);
+    }
   }
 
   .secondary {
