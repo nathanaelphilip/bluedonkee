@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section v-if="!loading">
     <portal to="banner">
       <Banner
-        heading="People-Powered Groups"
-        content="Find job opportunities with Democratic and progressive organizations working to make build a better tomorrow."
+        :heading="fields.Heading"
+        :content="fields.Content"
       />
     </portal>
     <portal to="filters">
@@ -49,7 +49,10 @@ export default {
   components: { BackTop, Banner, Groups, Pager, Navigation, NavigationMobileAlt },
 
   data () {
-    return { closed: false }
+    return {
+      fields: false,
+      loading: true
+    }
   },
 
   computed: {
@@ -92,6 +95,14 @@ export default {
   },
 
   async mounted () {
+    const key = 'Groups'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
+    }
+
+    this.fields = this.$store.state.cms.pages[key].fields
+
     if (this.$cookies.isKey('banner:groups')) {
       this.closed = true
     }
@@ -105,6 +116,8 @@ export default {
     }
 
     window.analytics.page('Groups')
+
+    this.loading = false
   },
 
   methods: {

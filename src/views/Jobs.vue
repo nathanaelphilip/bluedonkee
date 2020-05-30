@@ -1,9 +1,9 @@
 <template>
-  <section class="home">
+  <section class="home" v-if="!loading">
     <portal to="banner">
       <Banner
-        heading="WorkBlue: Positioned for Change"
-        content="Finding a job in the world of Democratic politics is not exactly easy — but it should be. Get started with WorkBlue."
+        :heading="fields.Heading"
+        :content="fields.Content"
       />
     </portal>
     <portal to="filters">
@@ -77,7 +77,9 @@ export default {
   data () {
     return {
       filter: false,
-      mobileFilter: false
+      mobileFilter: false,
+      fields: false,
+      loading: true
     }
   },
 
@@ -107,6 +109,14 @@ export default {
   },
 
   async mounted () {
+    const key = 'Jobs'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
+    }
+
+    this.fields = this.$store.state.cms.pages[key].fields
+
     if (!this.$store.state.workCategories.repository.length) {
       await this.$store.dispatch('workCategories/fetch')
     }
@@ -126,6 +136,8 @@ export default {
     }
 
     window.analytics.page('Jobs')
+
+    this.loading = false
   },
 
   methods: {

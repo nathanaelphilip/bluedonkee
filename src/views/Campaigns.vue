@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section v-if="!loading">
     <portal to="banner">
       <Banner
-        heading="People-Powered Campaigns"
-        content="Find job opportunities with Democratic candidates across the country — up and down the ballot — fighting for all of us."
+        :heading="fields.Heading"
+        :content="fields.Content"
       />
     </portal>
     <Campaigns :campaigns="$store.getters['campaigns/getFetched']('campaigns')" />
@@ -39,13 +39,20 @@ export default {
   },
 
   data () {
-    return { closed: false }
+    return {
+      fields: false,
+      loading: true
+    }
   },
 
   async mounted () {
-    if (this.$cookies.isKey('banner:campaigns')) {
-      this.closed = true
+    const key = 'Campaigns'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
     }
+
+    this.fields = this.$store.state.cms.pages[key].fields
 
     if (!this.$store.state.offices.repository.length) {
       await this.$store.dispatch('offices/fetch')
@@ -56,6 +63,8 @@ export default {
     }
 
     window.analytics.page('Campaigns')
+
+    this.loading = false
   },
 
   methods: {
