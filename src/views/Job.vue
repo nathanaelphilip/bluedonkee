@@ -56,8 +56,40 @@ export default {
   name: 'job',
 
   metaInfo () {
+    const job = this.job && this.job.fields ? this.job : false
+    const entity = this.entity && this.entity.fields ? this.entity : false
+
+    const title = job && entity ? `${job.fields.Title}, ${entity.fields.Name}` : 'Job'
+
+    const description = job ? this.job.fields.Description : ''
+    const datePosted = job ? this.job.fields['Post Date'] : ''
+    const employmentType = this.workTypes.length ? this.workTypes[0].fields.Name : ''
+
+    const formatEmploymentType = (value) => {
+      return employmentType.replace('-', '_').toUpperCase()
+    }
+
+    const hiringOrganization = {
+      '@type': 'Organization',
+      name: entity ? entity.fields.Name : '',
+      logo: entity ? entity.fields.Avatar[0].url : '',
+      sameAs: entity ? entity.fields.Website : ''
+    }
+
     return {
-      title: this.job && this.job.fields && this.entity && this.entity.fields ? `${this.job.fields.Title}, ${this.entity.fields.Name}` : 'Office'
+      title,
+      script: [{
+        type: 'application/ld+json',
+        json: {
+          '@context': 'http://schema.org',
+          '@type': 'JobPosting',
+          title,
+          description,
+          datePosted,
+          employmentType: formatEmploymentType(employmentType),
+          hiringOrganization
+        }
+      }]
     }
   },
 
