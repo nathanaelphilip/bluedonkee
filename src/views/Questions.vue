@@ -1,21 +1,18 @@
 <template>
-  <article class="questions">
+  <article class="questions" v-if="!loading">
     <HeaderPage
-      emoji="🗽"
-      :heading="`Positioned for <span>Change.</span>`"
+      :heading="fields.Heading"
+      :content="fields.Subheading"
     />
     <Question
       v-for="(question, index) in $store.state.cms.questions"
       :key="index"
       :question="question"
     />
-    <ContactForm />
-    <div class="copyright">&copy; WorkBlue {{ new Date().getFullYear() }}. Paid for by Work Blue Organization. Not authorized by any candidate or candidate’s committee.</div>
   </article>
 </template>
 
 <script>
-import ContactForm from '@/components/forms/Contact'
 import HeaderPage from '@/components/molecules/HeaderPage'
 import Question from '@/components/molecules/Question'
 
@@ -26,38 +23,55 @@ export default {
     title: 'Questions'
   },
 
-  components: { ContactForm, HeaderPage, Question },
+  components: { HeaderPage, Question },
+
+  data () {
+    return {
+      fields: false,
+      loading: true
+    }
+  },
 
   async mounted () {
-    await this.$store.dispatch('cms/fetch')
+    const key = 'Questions'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
+    }
+
+    this.fields = this.$store.state.cms.pages[key].fields
+
+    await this.$store.dispatch('cms/fetchQuestions')
 
     window.analytics.page('Questions')
+
+    this.loading = false
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .header {
-    margin-bottom: 70px;
+    margin-bottom: grid(17);
+
+    @include mq ($until: xsmall) {
+      margin-bottom: grid(9);
+    }
   }
 
   .questions {
-    padding: 60px 0;
+    padding-bottom: grid(15);
+    padding-top: grid(22);
+
+    @include mq ($until: xsmall) {
+      padding-bottom: grid(8);
+      padding-top: grid(8);
+    }
   }
 
   .question {
     &:not(:last-child) {
-      margin-bottom: 40px;
+      margin-bottom: grid(6);
     }
-  }
-
-  .form-contact {
-    margin-bottom: 25px;
-  }
-
-  .copyright {
-    color: $BLUEGREY;
-    font-size: 13px;
-    text-align: center;
   }
 </style>

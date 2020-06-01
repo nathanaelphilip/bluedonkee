@@ -4,6 +4,7 @@ import qs from 'qs'
 
 const campaigns = '/Campaigns'
 const cmsQuestions = '/CMS%20(Questions)'
+const cmsPages = '/CMS%20(Pages)'
 const contactForm = '/Contact%20Form'
 const flagged = '/Flagged'
 const groups = '/Groups'
@@ -35,7 +36,16 @@ export const postNewsletterForm = (params) => {
   return jsonpFetch(params)
 }
 
-export const getCMSQuestions = (settings) => {
+export const getCMSPages = (settings) => {
+  return api.get(cmsPages, {
+    ...settings,
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
+    }
+  })
+}
+
+export const getCMSQuestions = () => {
   return api.get(cmsQuestions, {
     params: {
       sort: [{ field: 'id' }]

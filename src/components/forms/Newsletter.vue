@@ -1,7 +1,21 @@
 <template>
-  <form @submit.prevent="submit" class="newsletter">
-    <h4 class="heading">Stay in the know</h4>
-    <div class="content">Get our weekly email newsletter.</div>
+  <form
+    @submit.prevent="submit"
+    class="newsletter"
+    :class="{'»full': !simple}"
+    >
+    <portal to="flash">
+      <Flash :open="status === 'failure'" @close="status = false">
+        {{ messages.error }}
+      </Flash>
+      <Flash :open="status === 'success'" @close="status = false">
+        {{ messages.success }}
+      </Flash>
+    </portal>
+    <template v-if="!simple">
+      <h4 class="heading">Stay in the know</h4>
+      <div class="content">Get our weekly email newsletter.</div>
+    </template>
     <div class="grid">
       <Input
         @input="value => form.email = value"
@@ -14,14 +28,6 @@
         <Processing :processing="status === 'processing'">Sign Up</Processing>
       </ButtonPrimary>
     </div>
-    <portal to="flash">
-      <Flash :open="status === 'failure'" @close="status = false">
-        👎 {{ messages.error }}
-      </Flash>
-      <Flash :open="status === 'success'" @close="status = false">
-        👍 {{ messages.success }}
-      </Flash>
-    </portal>
   </form>
 </template>
 
@@ -40,6 +46,14 @@ const form = {
 
 export default {
   name: 'components-molecules-newsletter',
+
+  props: {
+    simple: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   components: { Flash, ButtonPrimary, Input, Processing },
 
   data () {
@@ -67,13 +81,23 @@ export default {
         const { result, msg } = await postNewsletterForm(params)
 
         if (result === 'error') {
+          const invalidEmail = '👀 Invalid email. Please try again'
+          const alreadySubscribed = '👍 You are already signed up'
+
+          if (msg.includes('already subscribed')) {
+            this.messages.error = alreadySubscribed
+          }
+
+          if (msg.includes('a different email address')) {
+            this.messages.error = invalidEmail
+          }
+
           this.status = 'failure'
-          this.messages.error = msg
         }
 
         if (result === 'success') {
           this.status = 'success'
-          this.messages.success = msg
+          this.messages.success = `📬 ${msg}`
 
           window.analytics.identify({
             email: this.form.email
@@ -89,9 +113,11 @@ export default {
 
 <style lang="scss" scoped>
   .newsletter {
-    background: $BLUELIGHT;
-    border-radius: 4px;
-    padding: grid(6);
+    &.»full {
+      background: $BLUELIGHT;
+      border-radius: grid(2);
+      padding: grid(6);
+    }
   }
 
   .heading {

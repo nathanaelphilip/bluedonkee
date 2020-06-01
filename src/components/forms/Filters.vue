@@ -1,45 +1,49 @@
 <template>
   <div class="filters">
     <div class="actions">
-      <div class="group">
-        <ButtonSecondary
-          @click.native.prevent="modal = 'locations'"
-          :class="{'bugged': $store.getters['filters/accepted']('locations').length}"
+      <button
+        class="button"
+        @click.prevent="modal = 'locations'"
+        :class="{'bugged': $store.getters['filters/accepted']('locations').length}"
+      >
+        Location
+        <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('locations').length" />
+        <Count v-if="$store.getters['filters/accepted']('locations').length">
+          {{ $store.getters['filters/accepted']('locations').length }}
+        </Count>
+      </button>
+      <button
+        class="button"
+        @click.prevent="modal = 'category'"
+        :class="{'bugged': $store.getters['filters/accepted']('categories').length}"
+       >
+        Category
+        <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('categories').length" />
+        <Count v-if="$store.getters['filters/accepted']('categories').length" class="bug">
+          {{ $store.getters['filters/accepted']('categories').length }}
+        </Count>
+      </button>
+      <button
+        class="button"
+        @click.prevent="modal = 'types'"
+        :class="{'bugged': $store.getters['filters/accepted']('types').length}"
         >
-          Location
-          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('locations').length" />
-          <Count v-if="$store.getters['filters/accepted']('locations').length">
-            {{ $store.getters['filters/accepted']('locations').length }}
-          </Count>
-        </ButtonSecondary>
-        <ButtonSecondary
-          @click.native.prevent="modal = 'category'"
-          :class="{'bugged': $store.getters['filters/accepted']('categories').length}"
-         >
-          Category
-          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('categories').length" />
-          <Count v-if="$store.getters['filters/accepted']('categories').length" class="bug">
-            {{ $store.getters['filters/accepted']('categories').length }}
-          </Count>
-        </ButtonSecondary>
-        <ButtonSecondary
-          @click.native.prevent="modal = 'types'"
-          :class="{'bugged': $store.getters['filters/accepted']('types').length}"
-          >
-          Work Type
-          <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('types').length" />
-          <Count v-if="$store.getters['filters/accepted']('types').length" class="bug">
-            {{ $store.getters['filters/accepted']('types').length }}
-          </Count>
-        </ButtonSecondary>
-      </div>
+        Work Type
+        <IconPlus width="10" height="10" class="icon-plus" v-if="!$store.getters['filters/accepted']('types').length" />
+        <Count v-if="$store.getters['filters/accepted']('types').length" class="bug">
+          {{ $store.getters['filters/accepted']('types').length }}
+        </Count>
+      </button>
       <button @click.prevent="$store.dispatch('filters/clear')" class="clear">
-        Clear <div class="reset"><IconClose width="10" height="10" /></div>
+        Clear Filters
       </button>
     </div>
     <portal to="modal" multiple>
       <Modal @close="modal = false" :open="modal === 'locations'" heading="Location">
         <div class="modalBox">
+          <div class="remote">
+            Include remote positions <Toggle :checked="remote" @toggled="remote = !remote" />
+          </div>
           <CheckTags
             :accepted="$store.getters['filters/accepted']('locations')"
             :options="$store.getters['states/sortAlphabetically']"
@@ -80,25 +84,26 @@
 </template>
 
 <script>
-import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import Count from '@/components/atoms/Count'
 import CheckTags from '@/components/forms/CheckTags'
-import IconClose from '@/components/icons/Close'
 import IconPlus from '@/components/icons/Plus'
 import Modal from '@/components/molecules/Modal'
+import Toggle from '@/components/forms/Toggle'
 
 export default {
-  components: { ButtonSecondary, CheckTags, Count, IconClose, IconPlus, Modal },
+  components: { CheckTags, Count, IconPlus, Modal, Toggle },
 
   data () {
     return {
-      modal: false
+      modal: false,
+      remote: false
     }
   },
 
   methods: {
-    async apply (key, items) {
-      await this.$store.dispatch('filters/accept', { key, items })
+    async apply (key, value) {
+      await this.$store.dispatch('filters/accept', { key: 'remote', value: this.remote })
+      await this.$store.dispatch('filters/accept', { key, value })
       this.modal = false
     }
   }
@@ -107,17 +112,25 @@ export default {
 
 <style lang="scss" scoped>
   .filters {
-    border-top: 1px solid $GREY;
-    padding: grid(4) grid(8);
+    background: $WHITE;
+    padding: grid(2) 0;
+    margin-bottom: grid(18);
+
+    #sticky-filters.»stuck & {
+      border-bottom: 1px solid $GREY;
+    }
   }
 
   .actions {
-    @include Flex;
+    @include Flex ($justify: center);
   }
 
   .clear {
-    @include ButtonStripped;
-    @include Flex($justify: flex-end);
+    @include ButtonSimple;
+    color: $BLUEGREY;
+    margin: 0 grid(3);
+
+    &:hover { background: none; }
   }
 
   .reset {
@@ -125,22 +138,36 @@ export default {
     margin-left: grid(2);
   }
 
-  .group {
-    @include Flex;
+  .button {
+    @include ButtonSimple;
+    margin: 0 grid(3);
 
-    > *:not(:last-child) {
-      margin-right: grid(3);
+    .bug {
+      position: relative;
+      top: -1px;
     }
   }
 
+  .remote {
+    @include Flex;
+    background: $BLUELIGHT;
+    border-radius: grid(1);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: grid(6);
+    padding: grid(3) grid(5);
+  }
+
   .bugged {
-    padding-bottom: 4px;
-    padding-top: 7px;
+    padding-bottom: 5px;
+    padding-top: 6px;
   }
 
   .icon-plus {
-    fill: $BLUEGREY;
+    fill: $BLACK;
     margin-left: grid(1);
+    position: relative;
+    top: -1px
   }
 
   .modalBox {

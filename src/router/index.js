@@ -1,3 +1,5 @@
+import store from '@/store'
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -23,11 +25,6 @@ const routes = [
       component: () => import(/* webpackChunkName: "remote" */ '../views/WorkRemote.vue')
     },
     {
-      path: ':entity/:slug',
-      name: 'job',
-      component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')
-    },
-    {
       path: 'category/:slug',
       name: 'workCategory',
       component: () => import(/* webpackChunkName: "workCategory" */ '../views/WorkCategory.vue')
@@ -46,6 +43,10 @@ const routes = [
       path: 'locations/:slug',
       name: 'locationJob',
       component: () => import(/* webpackChunkName: "locationJobs" */ '../views/LocationJobs.vue')
+    }, {
+      path: ':entity/:slug',
+      name: 'job',
+      component: () => import(/* webpackChunkName: "job" */ '../views/Job.vue')
     }]
   },
   {
@@ -109,6 +110,18 @@ const routes = [
     name: 'questions',
     component: () => import(/* webpackChunkName: "questions" */ '../views/Questions.vue'),
     meta: { layout: 'basic' }
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "questions" */ '../views/About.vue'),
+    meta: { layout: 'basic' }
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: () => import(/* webpackChunkName: "questions" */ '../views/Contact.vue'),
+    meta: { layout: 'basic' }
   }
 ]
 
@@ -118,6 +131,19 @@ const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
   }
+})
+
+router.beforeEach((to, from, next) => {
+  if (from.name !== null) {
+    store.dispatch('breadcrumbs/add', from)
+  }
+
+  next()
+})
+
+router.afterEach((to, from) => {
+  store.dispatch('app/setHeading', false)
+  store.dispatch('app/mobileNavToggle', false)
 })
 
 export default router

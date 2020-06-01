@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 import Basic from '@/layouts/Basic'
 import Full from '@/layouts/Full'
 
@@ -41,6 +43,8 @@ export default {
   },
 
   async mounted () {
+    this.$store.dispatch('app/setInnerHeight', window.innerHeight)
+
     if (!this.$store.state.states.repository.length) {
       await this.$store.dispatch('states/fetch')
     }
@@ -50,7 +54,9 @@ export default {
     }
 
     if (!this.$store.state.groupCategories.repository.length) {
-      await this.$store.dispatch('groupCategories/fetch')
+      await this.$store.dispatch('groupCategories/fetch', {
+        params: { view: 'Grid view' }
+      })
     }
 
     if (!this.$store.state.workCategories.repository.length) {
@@ -68,6 +74,10 @@ export default {
         }
       })
     }
+
+    document.addEventListener('scroll', _.throttle(event => {
+      this.$store.dispatch('app/setInnerHeight', window.innerHeight)
+    }, 200))
 
     this.loaded = true
   }

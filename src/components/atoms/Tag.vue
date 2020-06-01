@@ -1,5 +1,6 @@
 <template>
   <router-link
+    @click.native="$event.stopImmediatePropagation()"
     class="tag"
     :to="{ name: route, params: { slug } }"
   >
@@ -23,7 +24,12 @@ export default {
     font-size: 13px;
     text-transform: lowercase;
     transition: all .4s ease;
-    padding: 8px;
+    padding: grid(2);
+
+    @include mq ($until: xsmall) {
+      font-size: 12px;
+      padding: grid(1.5);
+    }
 
     &:hover {
       background: $GREY;

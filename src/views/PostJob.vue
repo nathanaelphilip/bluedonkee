@@ -1,15 +1,15 @@
 <template>
   <article class="post">
-    <header class="header">
-      <em class="emoji">👍🏽</em>
-      <h2 class="heading">Are you ready for change?</h2>
-      <div class="subheading">Fill out the form below and we will post and promote the opportunity</div>
-    </header>
+    <HeaderPage
+      :heading="`Post a Job<br>Save Democracy`"
+      :content="`Fill out the form below and we will review and post the opportunity. For more information please view our F.A.Q`"
+    />
     <PostJob />
   </article>
 </template>
 
 <script>
+import HeaderPage from '@/components/molecules/HeaderPage'
 import PostJob from '@/components/forms/PostJob'
 
 export default {
@@ -19,7 +19,7 @@ export default {
     title: 'Post a Job'
   },
 
-  components: { PostJob },
+  components: { HeaderPage, PostJob },
 
   async mounted () {
     window.analytics.page('Post Job')
@@ -29,29 +29,18 @@ export default {
 
 <style lang="scss" scoped>
   .post {
-    padding: 60px 0;
+    padding: grid(15) 0;
+
+    @include mq ($until: xsmall) {
+      padding: grid(8) 0;
+    }
   }
 
   .header {
-    margin: 0 auto 70px auto;
-    max-width: 385px;
-    text-align: center;
-  }
+    margin-bottom: grid(17);
 
-  .emoji {
-    display: inline-block;
-    font-size: 72px;
-    margin-bottom: 16px;
-  }
-
-  .heading {
-    font-size: 28px;
-    font-weight: 900;
-    margin-bottom: 14px;
-  }
-
-  .subheading {
-    font-size: 18px;
-    line-height: 1.4;
+    @include mq ($until: xsmall) {
+      margin-bottom: grid(10);
+    }
   }
 </style>

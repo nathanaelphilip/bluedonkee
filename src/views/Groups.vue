@@ -1,36 +1,43 @@
 <template>
-  <div>
-    <Intro heading="Groups" />
-    <div
-      class="boxed"
-      v-if="!closed"
-      >
+  <section v-if="!loading">
+    <portal to="banner">
       <Banner
-        @close="$cookies.set('banner:groups'); closed = true"
-        heading="The Good Fight."
-        content="Find jobs with advocacy groups working to make our democracy more equitable. #letsworkblue"
-        :link="{name: 'questions'}"
-        :items="$store.getters['groups/getFetched']('groups')"
+        :heading="fields.Heading"
+        :content="fields.Content"
       />
-    </div>
-    <Groups :groups="$store.getters['groups/getFetched']('groups')" />
+    </portal>
+    <portal to="filters">
+      <mq-layout mq="medium+">
+        <Navigation alignment="»center" :menu="menu" />
+      </mq-layout>
+      <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
+        <NavigationMobileAlt heading="Select area of interest" :menu="menu" />
+      </mq-layout>
+    </portal>
+    <Groups
+      :groups="$store.getters['groups/getFetched']('groups')"
+      :showJobs="$mq !== 'small' && $mq !== 'xsmall' && $mq !== 'xxsmall'"
+    />
     <Pager
       @load="load"
       :loading="$store.state.groups.loading === 'groups'"
       v-if="$store.getters['groups/getOffset']('groups')"
     />
     <BackTop v-if="!$store.getters['groups/getOffset']('groups')" />
-  </div>
+  </section>
 </template>
 
 <script>
+import { slice } from 'lodash'
+
 import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
 import Groups from '@/components/molecules/Groups'
-import Intro from '@/components/molecules/Intro'
+import Navigation from '@/components/molecules/Navigation'
+import NavigationMobileAlt from '@/components/molecules/NavigationMobileAlt'
 import Pager from '@/components/molecules/Pager'
 
-const pageSize = 20
+const pageSize = 15
 
 export default {
   name: 'views-groups',
@@ -39,13 +46,63 @@ export default {
     title: 'Groups'
   },
 
-  components: { BackTop, Banner, Intro, Groups, Pager },
+  components: { BackTop, Banner, Groups, Pager, Navigation, NavigationMobileAlt },
 
   data () {
-    return { closed: false }
+    return {
+      fields: false,
+      loading: true
+    }
+  },
+
+  computed: {
+    menu () {
+      const menu = []
+      const more = []
+      const categories = this.$store.state.groupCategories.repository
+      const exposed = slice(categories, 0, 6)
+      const rest = slice(categories, 6, categories.length)
+
+      menu.push({
+        type: 'shallow',
+        name: 'All',
+        to: { name: 'groups' }
+      })
+
+      for (let i = 0; i < exposed.length; i++) {
+        menu.push({
+          type: 'shallow',
+          name: exposed[i].fields.Name,
+          to: { name: 'groupCategory', params: { slug: exposed[i].fields.Slug } }
+        })
+      }
+
+      for (let i = 0; i < rest.length; i++) {
+        more.push({
+          name: rest[i].fields.Name,
+          to: { name: 'groupCategory', params: { slug: rest[i].fields.Slug } }
+        })
+      }
+
+      menu.push({
+        type: 'deep',
+        name: 'More',
+        menu: more
+      })
+
+      return menu
+    }
   },
 
   async mounted () {
+    const key = 'Groups'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
+    }
+
+    this.fields = this.$store.state.cms.pages[key].fields
+
     if (this.$cookies.isKey('banner:groups')) {
       this.closed = true
     }
@@ -59,6 +116,8 @@ export default {
     }
 
     window.analytics.page('Groups')
+
+    this.loading = false
   },
 
   methods: {
@@ -66,7 +125,7 @@ export default {
       await this.$store.dispatch('groups/fetch', {
         id: 'groups',
         params: {
-          pageSize,
+          pageSize: ['xxsmall', 'xsmall'].includes(this.$mq) ? 20 : pageSize,
           sort: [{ field: 'Name', direction: 'asc' }],
           offset: this.$store.getters['groups/getOffset']('groups')
         }
@@ -77,11 +136,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .boxed {
-    padding: grid(8) grid(8) 0 grid(8);
+  .nav {
+    background: $WHITE;
+    margin-bottom: grid(18);
 
-    @include mq($until: xsmall) {
-      padding: grid(6) grid(4) 0 grid(4);
+    .filters.»stuck & {
+      border-bottom: 1px solid $GREY;
+      padding: grid(3) 0;
     }
   }
 </style>

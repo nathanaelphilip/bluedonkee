@@ -3,43 +3,49 @@
     <h3 v-if="heading" class="heading">{{ heading }}</h3>
     <div
       class="box"
+      :class="{'»grouped': showJobs}"
       v-for="group in groups"
       :key="group.id"
       >
-      <Group :group="group" />
+      <GroupWithJobs :group="group" v-if="showJobs" />
+      <Group :group="group" v-if="!showJobs" />
     </div>
   </div>
 </template>
 
 <script>
 import Group from '@/components/molecules/Group'
+import GroupWithJobs from '@/components/molecules/GroupWithJobs'
 
 export default {
-  props: ['groups', 'heading'],
-  components: { Group }
+  props: ['groups', 'heading', 'showJobs'],
+  components: { Group, GroupWithJobs }
 }
 </script>
 
 <style lang="scss" scoped>
   .heading {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 900;
-    margin-bottom: grid(2);
-    padding: 0 grid(8);
+    margin-bottom: grid(8);
 
-    @include mq ($until: xsmall) {
-      padding: 0 grid(4);
+    @include mq ($until: small) {
+      margin-bottom: grid(6);
+      padding: 0 grid(6);
     }
   }
-  .box {
-    padding: grid(6) grid(8);
 
-    @include mq($until: xsmall) {
-      padding: grid(6) grid(4);
+  .box {
+    &:not(.»grouped) {
+      @include mq($until: medium) {
+        border-bottom: 1px solid $GREY;
+      }
     }
 
-    &:not(:last-child) {
-      border-bottom: 1px solid $GREY;
+    &.»grouped {
+      &:not(:last-child) {
+        margin-bottom: grid(8);
+      }
     }
   }
 </style>

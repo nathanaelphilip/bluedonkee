@@ -1,5 +1,13 @@
 <template>
   <form @submit.prevent="process">
+    <portal to="flash">
+       <Flash @close="status = false" :open="status === 'success'">
+         🇺🇸 Posting successfully submitted!
+       </Flash>
+       <Flash @close="status = false" :open="status === 'error'">
+         😱 Something went wrong
+       </Flash>
+    </portal>
     <fieldset class="fieldset">
       <div>
         <legend class="legend">Job Description</legend>
@@ -150,15 +158,6 @@
         </div>
       </div>
     </fieldset>
-
-    <portal to="flash">
-       <Flash @close="status = false" :open="status === 'success'">
-         🏄‍♀️  Surfing into success!
-       </Flash>
-       <Flash @close="status = false" :open="status === 'error'">
-         😱 Something went wrong
-       </Flash>
-    </portal>
   </form>
 </template>
 
@@ -341,5 +340,9 @@ export default {
 
   .action {
     @include FormAction;
+
+    @include mq ($until: xsmall) {
+      flex-direction: column;
+    }
   }
 </style>

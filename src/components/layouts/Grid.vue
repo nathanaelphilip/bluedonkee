@@ -1,18 +1,12 @@
 <template>
   <div class="grid" :class="{'modal': $store.state.app.modalOpen}">
     <div class="column column-1">
-      <div class="sticky-top">
-        <slot name="one"></slot>
-      </div>
+      <slot name="one"></slot>
     </div>
-    <div class="column column-2">
-      <slot name="two"></slot>
-    </div>
-    <div class="column column-3" :class="{'»open': $store.state.app.sidebar}">
+    <div class="column column-2" :class="{'»open': $store.state.app.sidebar}">
       <div class="sticky-top">
-        <slot name="three"></slot>
+        <slot name="two"></slot>
       </div>
-      <button @click.prevent="$store.dispatch('app/sidebar', false)" class="close"></button>
     </div>
   </div>
 </template>
@@ -24,32 +18,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .modal {
-    height: 100%;
-    left: 0;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-
   .grid {
     display: grid;
-    grid-template-columns: 250px 1fr 350px;
+    grid-template-columns: 1fr 350px;
 
     @include mq($from: small) {
-      grid-column-gap: 33px;
-      margin: 0 auto;
-      max-width: 1350px;
-      width: 95%;
-    }
-
-    @include mq($until: large) {
-     grid-template-columns: 93px 1fr 350px;
+      @include Container;
+      grid-column-gap: 55px;
     }
 
     @include mq($until: medium) {
-     grid-template-columns: 93px 1fr;
+      grid-template-columns: auto minmax(auto, 630px) auto;
     }
 
     @include mq($until: xsmall) {
@@ -66,17 +45,22 @@ export default {
 
   .sticky-top {
     @include mq($from: xsmall) {
-      padding-top: 36px;
       position: sticky;
-      top: 0;
+      top: 140px;
     }
   }
 
   .column-1 {
+    @include mq($until: medium) {
+      grid-column: 2 / 3;
+    }
 
+    @include mq($until: xsmall) {
+      grid-column: 1 / 3;
+    }
   }
 
-  .column-3 {
+  .column-2 {
     @include mq($until: medium) {
       @include Flex($align: stretch, $justify: flex-end);
       height: 100%;

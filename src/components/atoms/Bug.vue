@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
   .bug {
-    background: $BLUE;
+    background: $BLUE2;
     border-radius: 12px;
     color: $WHITE;
     font-size: 10px;

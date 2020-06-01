@@ -13,6 +13,18 @@ export default {
   .tags {
     @include Flex($justify: flex-start);
 
-    > *:not(:last-child) {margin-right: 6px}
+    @include mq ($until: xsmall) {
+      margin-top: grid(-2);
+    }
+
+    > * {
+      &:not(:last-child) {
+        margin-right: grid(2);
+      }
+
+      @include mq ($until: xsmall) {
+        margin-top: grid(2);
+      }
+    }
   }
 </style>

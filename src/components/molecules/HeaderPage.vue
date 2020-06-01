@@ -1,13 +1,17 @@
 <template>
    <header class="header">
-     <em class="emoji">{{ emoji }}</em>
      <h2 class="heading" v-html="heading"></h2>
+     <div class="content">{{ content }}</div>
+     <Newsletter :simple="true" v-if="newsletter" />
    </header>
 </template>
 
 <script>
+import Newsletter from '@/components/forms/Newsletter'
+
 export default {
-  props: ['emoji', 'heading']
+  props: ['content', 'heading', 'newsletter'],
+  components: { Newsletter }
 }
 </script>
 
@@ -16,24 +20,34 @@ export default {
     text-align: center;
   }
 
-  .emoji {
-    display: inline-block;
-    font-size: 85px;
-    margin-bottom: 15px;
-
-    @include mq ($until: small) {
-      font-size: 72px;
-    }
-  }
-
   .heading {
-    font-size: 72px;
+    font-size: 48px;
+    line-height: 52px;
     font-weight: 900;
 
     @include mq ($until: small) {
-      font-size: 28px;
+      font-size: 24px;
+      line-height: 30px;
     }
 
-    &::v-deep span { color: $BLUE; }
+    &:not(:last-child) {
+      margin-bottom: grid(6);
+    }
+  }
+
+  .content {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 auto;
+    max-width: 530px;
+
+    &:not(:last-child) {
+      margin-bottom: grid(8);
+    }
+  }
+
+  .newsletter {
+    margin: 0 auto;
+    max-width: grid(100);
   }
 </style>

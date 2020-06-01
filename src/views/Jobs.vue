@@ -1,24 +1,26 @@
 <template>
-  <section class="home">
-    <Intro @close="filter = false" heading="Jobs" :filter="filter">
-      <ButtonSecondary :class="{'bugged': filterCount}" @click.native.prevent="filter = !filter">
-        Filter
-        <Count v-if="filterCount">{{ filterCount }}</Count>
-      </ButtonSecondary>
-      <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
-    </Intro>
-    <div
-      class="boxed"
-      v-if="!closed"
-      >
+  <section class="home" v-if="!loading">
+    <portal to="banner">
       <Banner
-        @close="$cookies.set('banner:jobs'); closed = true"
-        heading="Positioned for Change."
-        content="Find campaigns and organizations fighting to make democracy more equitable. #letsworkblue"
-        :link="{name: 'questions'}"
-        :items="avatars"
+        :heading="fields.Heading"
+        :content="fields.Content"
       />
-    </div>
+    </portal>
+    <portal to="filters">
+      <mq-layout mq="medium+">
+        <Filters />
+      </mq-layout>
+      <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
+        <button @click.prevent="mobileFilter = !mobileFilter" class="toggle-filter">
+          Filter
+          <IconPlus v-if="!$store.getters['filters/count']" :width="10" :height="10" />
+          <template v-if="$store.getters['filters/count']">
+            <Bug>{{ $store.getters['filters/count'] }}</Bug>
+          </template>
+        </button>
+        <FiltersToggle @close="mobileFilter = false" v-if="mobileFilter" />
+      </mq-layout>
+    </portal>
     <template v-if="$store.getters['filters/filtered']">
       <Jobs :jobs="$store.getters['jobs/getFetched']($store.getters['filters/key'])" />
       <Pager
@@ -41,14 +43,16 @@
 </template>
 
 <script>
-import BackTop from '@/components/molecules/BackTop'
+import VueScrollTo from 'vue-scrollto'
+
 import Banner from '@/components/molecules/Banner'
-import ButtonSecondary from '@/components/atoms/ButtonSecondary'
-import Count from '@/components/atoms/Count'
-import Intro from '@/components/molecules/Intro'
+import BackTop from '@/components/molecules/BackTop'
+import Bug from '@/components/atoms/Bug'
+import Filters from '@/components/forms/Filters'
+import FiltersToggle from '@/components/forms/FiltersToggle'
+import IconPlus from '@/components/icons/Plus'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
-import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 const pageSize = 20
 
@@ -60,20 +64,22 @@ export default {
   },
 
   components: {
-    BackTop,
     Banner,
-    ButtonSecondary,
-    Count,
-    Intro,
+    BackTop,
+    Bug,
+    Filters,
+    FiltersToggle,
+    IconPlus,
     Jobs,
-    Pager,
-    LinkPrimary
+    Pager
   },
 
   data () {
     return {
       filter: false,
-      closed: false
+      mobileFilter: false,
+      fields: false,
+      loading: true
     }
   },
 
@@ -103,9 +109,13 @@ export default {
   },
 
   async mounted () {
-    if (this.$cookies.isKey('banner:jobs')) {
-      this.closed = true
+    const key = 'Jobs'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
     }
+
+    this.fields = this.$store.state.cms.pages[key].fields
 
     if (!this.$store.state.workCategories.repository.length) {
       await this.$store.dispatch('workCategories/fetch')
@@ -126,6 +136,8 @@ export default {
     }
 
     window.analytics.page('Jobs')
+
+    this.loading = false
   },
 
   methods: {
@@ -152,16 +164,35 @@ export default {
         }
       })
     }
+  },
+
+  watch: {
+    mobileFilter (value) {
+      if (value === true) {
+        VueScrollTo.scrollTo(document.getElementById('sticky-filters'), 500)
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .boxed {
-    padding: grid(8) grid(8) 0 grid(8);
+  .toggle-filter {
+    @include Flex ($justify: center);
+    background: $WHITE;
+    border: none;
+    border-bottom: 1px solid $GREY;
+    font-weight: 500;
+    padding: grid(3) 0;
+    text-align: center;
+    width: 100%;
 
-    @include mq($until: xsmall) {
-      padding: grid(6) grid(4) 0 grid(4);
+    svg {
+      margin-left: grid(2);
+    }
+
+    .bug {
+      margin-left: grid(1);
     }
   }
 </style>

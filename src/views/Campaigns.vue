@@ -1,18 +1,11 @@
 <template>
-  <div>
-    <Intro heading="Campaigns" />
-    <div
-      class="boxed"
-      v-if="!closed"
-      >
+  <section v-if="!loading">
+    <portal to="banner">
       <Banner
-        @close="$cookies.set('banner:campaigns'); closed = true"
-        heading="Pick a Race, Get Involved"
-        content="Volunteer, knock doors, phone bank or apply for a job. Its go time. #letsworkblue"
-        :link="{name: 'questions'}"
-        :items="$store.state.campaigns.repository"
+        :heading="fields.Heading"
+        :content="fields.Content"
       />
-    </div>
+    </portal>
     <Campaigns :campaigns="$store.getters['campaigns/getFetched']('campaigns')" />
     <Pager
       @load="load"
@@ -20,13 +13,12 @@
       v-if="$store.getters['campaigns/getOffset']('campaigns')"
     />
     <BackTop v-if="!$store.getters['campaigns/getOffset']('campaigns')" />
-  </div>
+  </section>
 </template>
 
 <script>
 import BackTop from '@/components/molecules/BackTop'
 import Banner from '@/components/molecules/Banner'
-import Intro from '@/components/molecules/Intro'
 import Campaigns from '@/components/molecules/Campaigns'
 import Pager from '@/components/molecules/Pager'
 
@@ -43,18 +35,24 @@ export default {
     BackTop,
     Banner,
     Campaigns,
-    Intro,
     Pager
   },
 
   data () {
-    return { closed: false }
+    return {
+      fields: false,
+      loading: true
+    }
   },
 
   async mounted () {
-    if (this.$cookies.isKey('banner:campaigns')) {
-      this.closed = true
+    const key = 'Campaigns'
+
+    if (!(key in this.$store.state.cms.pages)) {
+      await this.$store.dispatch('cms/fetchPage', key)
     }
+
+    this.fields = this.$store.state.cms.pages[key].fields
 
     if (!this.$store.state.offices.repository.length) {
       await this.$store.dispatch('offices/fetch')
@@ -65,6 +63,8 @@ export default {
     }
 
     window.analytics.page('Campaigns')
+
+    this.loading = false
   },
 
   methods: {
@@ -86,8 +86,8 @@ export default {
   .boxed {
     padding: grid(8) grid(8) 0 grid(8);
 
-    @include mq($until: xsmall) {
-      padding: grid(6) grid(4) 0 grid(4);
+    @include mq($until: small) {
+      padding: grid(8) grid(4) 0 grid(4);
     }
   }
 </style>

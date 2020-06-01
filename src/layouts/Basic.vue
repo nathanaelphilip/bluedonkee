@@ -1,26 +1,22 @@
 <template>
-  <Grid class="basic">
-    <template v-slot:one>
-      <ButtonSecondary @click.native.prevent="back()">
-        Close
-      </ButtonSecondary>
-    </template>
-    <template v-slot:two>
-      <slot />
-    </template>
-    <template v-slot:three>
-      &nbsp;
-    </template>
-  </Grid>
+  <main class="site" :class="{'»mobilesticky' : $store.state.app.mobileNavOpen}">
+    <Header />
+    <div class="grid">
+      <div class="column">
+        <slot />
+        <Colophon />
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
-import ButtonSecondary from '@/components/atoms/ButtonSecondary'
-import Grid from '@/components/layouts/Grid'
+import Colophon from '@/components/molecules/Colophon'
+import Header from '@/components/molecules/HeaderGlobal'
 
 export default {
   name: 'layout-basic',
-  components: { Grid, ButtonSecondary },
+  components: { Colophon, Header },
 
   methods: {
     back () {
@@ -31,29 +27,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .basic {
-    grid-template-columns: 100px 1fr 100px;
+  .site {
+    padding-bottom: grid(15);
 
-    &::v-deep .column-2 {
-      margin: 0 auto;
-      max-width: 680px;
+    @include mq ($until: xsmall) {
+      padding-bottom: grid(8);
     }
+  }
 
-    @include mq ($until: small) {
-      grid-template-columns: 1fr;
-      padding: grid(4);
+  .»mobilesticky {
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 
-      &::v-deep .column-1 {
-        @include mq ($until: small) {
-          min-height: 0;
-        }
+  .grid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: minmax(auto, 650px);
+  }
 
-        .sticky-top {
-          @include mq ($until: small) {
-            padding-top: 0;
-          }
-        }
-      }
-    }
+  .column {
+    padding: 0 grid(5);
   }
 </style>

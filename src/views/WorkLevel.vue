@@ -1,6 +1,6 @@
 <template>
   <section v-if="!loading">
-    <Intro :back="{ name: 'jobs' }" :heading="`Level: ${level.fields.Name}`" />
+    <Intro :heading="level.fields.Name" />
     <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
     <Pager
       @load="load"
@@ -49,6 +49,8 @@ export default {
       slug: this.$route.params.slug,
       type: 'workLevels'
     })
+
+    this.$store.dispatch('app/setHeading', `Work Level: ${this.level.fields.Name}`)
 
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()

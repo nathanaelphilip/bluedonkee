@@ -1,14 +1,5 @@
 <template>
   <article class="job" v-if="!loading">
-    <Intro :back="{ name: 'jobs' }" :heading="job.fields.Title">
-      <Share :path="$route.path" />
-      <LinkPrimary
-        classes="small"
-        @clicked="track"
-        :href="job.fields['Application URL']">
-        Apply
-      </LinkPrimary>
-    </Intro>
     <div class="boxed">
       <Header
         :avatar="avatar"
@@ -17,12 +8,14 @@
         :locations="locations"
         locationroute="locationJob"
         :heading="job.fields.Title"
+        :isNew="isNew"
         :workCategories="workCategories"
         :workLevels="workLevels"
         :workTypes="workTypes"
         :remote="job.fields.Remote"
         :website="entity.fields.Website"
         :twitter="entity.fields.Twitter"
+        :apply="job.fields['Application URL']"
       />
 
       <div class="overview">
@@ -38,7 +31,6 @@
     <Jobs
       heading="Related Jobs"
       :jobs="$store.getters['jobs/getFetched'](`job/${this.job.id}`)"
-      :simple="true"
      />
 
     <BackTop />
@@ -46,6 +38,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 import {
   getByIds,
   getBySlug,
@@ -54,23 +48,52 @@ import {
 
 import BackTop from '@/components/molecules/BackTop'
 import Header from '@/components/molecules/Header'
-import Intro from '@/components/molecules/Intro'
 import Jobs from '@/components/molecules/Jobs'
-import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Markdown from '@/components/molecules/Markdown'
 import Report from '@/components/molecules/Report'
-import Share from '@/components/molecules/Share'
 
 export default {
   name: 'job',
 
   metaInfo () {
+    const job = this.job && this.job.fields ? this.job : false
+    const entity = this.entity && this.entity.fields ? this.entity : false
+
+    const title = job && entity ? `${job.fields.Title}, ${entity.fields.Name}` : 'Job'
+
+    const description = job ? this.job.fields.Description : ''
+    const datePosted = job ? this.job.fields['Post Date'] : ''
+    const employmentType = this.workTypes.length ? this.workTypes[0].fields.Name : ''
+
+    const formatEmploymentType = (value) => {
+      return employmentType.replace('-', '_').toUpperCase()
+    }
+
+    const hiringOrganization = {
+      '@type': 'Organization',
+      name: entity ? entity.fields.Name : '',
+      logo: entity ? entity.fields.Avatar[0].url : '',
+      sameAs: entity ? entity.fields.Website : ''
+    }
+
     return {
-      title: this.job && this.job.fields && this.entity && this.entity.fields ? `${this.job.fields.Title}, ${this.entity.fields.Name}` : 'Office'
+      title,
+      script: [{
+        type: 'application/ld+json',
+        json: {
+          '@context': 'http://schema.org',
+          '@type': 'JobPosting',
+          title,
+          description,
+          datePosted,
+          employmentType: formatEmploymentType(employmentType),
+          hiringOrganization
+        }
+      }]
     }
   },
 
-  components: { BackTop, LinkPrimary, Header, Intro, Jobs, Markdown, Report, Share },
+  components: { BackTop, Header, Jobs, Markdown, Report },
 
   data () {
     return {
@@ -88,6 +111,10 @@ export default {
   computed: {
     avatar () {
       return this.entity ? this.entity.fields.Avatar[0].url : false
+    },
+
+    isNew () {
+      return moment(this.job.fields['Post Date']) > moment().subtract(5, 'days')
     }
   },
 
@@ -112,6 +139,8 @@ export default {
       slug: this.$route.params.slug,
       type: 'jobs'
     })
+
+    this.$store.dispatch('app/setHeading', this.job.fields.Title)
 
     this.locations = await getByIds({
       ids: this.job.fields.Location,
@@ -152,38 +181,35 @@ export default {
     this.loading = false
 
     window.analytics.page('Job')
-  },
-
-  methods: {
-    track () {
-      window.analytics.track('Applied for Job', {
-        id: this.job.id,
-        title: this.job.fields.Title,
-        entity: this.entity.fields.Name
-      })
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .boxed {
-    background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
-    padding: 32px;
+    margin-bottom: grid(15);
+    padding-top: grid(15);
 
-    @include mq ($until: xsmall) {
-      padding: 24px 16px;
+    @include mq ($until: small) {
+      margin-bottom: grid(12);
+      padding-left: grid(6);
+      padding-right: grid(6);
+      padding-top: grid(8);
     }
   }
 
   .overview {
-    margin-bottom: 24px;
+    margin-bottom: grid(12);
   }
 
   .subheading {
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 900;
     margin-bottom: 10px;
+
+    @include mq ($until: xsmall) {
+      font-size: 19px;
+    }
   }
 
   .content {

@@ -4,21 +4,61 @@
       <div>
         <Avatar :src="avatar" />
       </div>
-      <div class="links">
-        <a :href="website" target="_blank"><IconLink width="19" height="19" />Website</a>
-        <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" />{{ twitter }}</a>
-      </div>
+      <mq-layout class="links" mq="medium+">
+        <a :href="website" target="_blank"><IconLink width="19" height="19" class="icon" /></a>
+        <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" class="icon" /></a>
+        <Share :path="$route.path" />
+        <LinkPrimary
+           v-if="apply"
+           classes="small"
+           @clicked="track('Applied for Job')"
+           :href="apply">
+           Apply
+        </LinkPrimary>
+        <LinkPrimary
+           v-if="donate"
+           classes="small"
+           @clicked="track('Donated')"
+           :href="donate">
+           Donate
+        </LinkPrimary>
+      </mq-layout>
+      <mq-layout class="links" :mq="['xxsmall', 'xsmall', 'small']">
+        <a :href="website" target="_blank"><IconLink width="19" height="19" class="icon" /></a>
+        <a :href="`https://twitter.com/${twitter}`" target="_blank"><IconTwitter width="19" height="16" class="icon" /></a>
+      </mq-layout>
+      <mq-layout class="links-mobile" :mq="['xxsmall', 'xsmall', 'small']">
+        <Share :path="$route.path" />
+        <LinkPrimary
+           v-if="apply"
+           classes="small"
+           @clicked="track('Applied for Job')"
+           :href="apply">
+           Apply
+        </LinkPrimary>
+        <LinkPrimary
+           v-if="donate"
+           classes="small"
+           @clicked="track('Donated')"
+           :href="donate">
+           Donate
+        </LinkPrimary>
+      </mq-layout>
     </div>
 
     <h2 class="heading">{{ heading }}</h2>
 
     <div class="info">
+      <mq-layout mq="small+">
+        <Bug v-if="isNew">New</Bug>
+      </mq-layout>
       <template v-if="entity">
         <router-link :to="{
           name: entityType,
           params: {slug: entity.fields.Slug}
           }">{{ entity.fields.Name }}
-        </router-link> –
+        </router-link>
+        <span class="info-divider">•</span>
       </template>
       <template v-if="locations && locations.length">
         <Locations
@@ -34,6 +74,9 @@
 
     <div class="tags">
       <Tags>
+        <mq-layout :mq="['xxsmall', 'xsmall']">
+          <Bug v-if="isNew">New</Bug>
+        </mq-layout>
         <Tag
           v-for="category in groupCategories"
           :key="`work-category-${category.id}`"
@@ -82,8 +125,11 @@
 
 <script>
 import Avatar from '@/components/atoms/Avatar'
+import Bug from '@/components/atoms/Bug'
+import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Locations from '@/components/molecules/Locations'
 import Markdown from '@/components/molecules/Markdown'
+import Share from '@/components/molecules/Share'
 import Tag from '@/components/atoms/Tag'
 import Tags from '@/components/molecules/Tags'
 
@@ -92,12 +138,15 @@ import IconTwitter from '@/components/icons/Twitter'
 
 export default {
   props: [
+    'apply',
     'avatar',
     'description',
+    'donate',
     'entity',
     'entityType',
     'groupCategories',
     'heading',
+    'isNew',
     'locations',
     'locationroute',
     'offices',
@@ -111,12 +160,25 @@ export default {
 
   components: {
     Avatar,
+    Bug,
+    LinkPrimary,
     Locations,
     Markdown,
+    Share,
     Tag,
     Tags,
     IconLink,
     IconTwitter
+  },
+
+  methods: {
+    track (text) {
+      window.analytics.track(text, {
+        id: this.job.id,
+        title: this.job.fields.Title,
+        entity: this.entity.fields.Name
+      })
+    }
   }
 }
 </script>
@@ -133,57 +195,89 @@ export default {
     }
   }
 
+  .links-mobile {
+    @include Flex;
+    background: $WHITE;
+    bottom: 0px;
+    left: 0;
+    padding: grid(3) grid(6);
+    position: fixed;
+    width: 100%;
+    z-index: 7;
+
+    ::v-deep a {
+      flex: 1;
+      margin-left: grid(4);
+      text-align: center;
+    }
+  }
+
   .links {
+    @include Flex;
     color: $BLUE;
-    display: flex;
     font-size: 15px;
     margin-top: 6px;
     justify-content: flex-end;
 
-    > a {
-      @include Flex($justify: flex-start);
-
+    > * {
       &:not(:last-child) {
-        margin-right: 24px;
+        margin-right: grid(3);
       }
+    }
+
+    > a {
+      @include ButtonSquareIcon;
     }
   }
 
   .header {
-    margin-bottom: 24px;
+    margin-bottom: grid(15);
+
+    @include mq ($until: xsmall) {
+      margin-bottom: grid(9);
+    }
   }
 
   .heading {
-    font-size: 26px;
+    font-size: 36px;
     font-weight: 900;
-    line-height: 1.35;
-    max-width: 405px;
+    line-height: 1.15;
+    max-width: 500px;
     margin-bottom: 8px;
 
     @include mq ($until: xsmall) {
-      font-size: 22px;
+      font-size: 24px;
     }
   }
 
   .info {
+    @include Flex ($justify: flex-start);
     color: $BLUE;
     font-size: 17px;
-    margin-bottom: 24px;
+    margin-bottom: grid(6);
+
+    @include mq ($until: small) {
+      font-size: 15px;
+      line-height: 1.23;
+      margin-bottom: grid(3);
+    }
+
+    .bug {
+      margin-right: grid(3)
+    }
+  }
+
+  .info-divider {
+    margin: 0 grid(1);
   }
 
   .tags {
-    margin-bottom: 36px;
-  }
-
-  .icon-link,
-  .icon-twitter {
-    fill: $GREY;
-    margin-right: 6px;
+    margin-bottom: grid(9);
   }
 
   .description {
-    font-size: 17px;
-    line-height: 1.4;
-    margin-bottom: 24px;
+    font-size: 19px;
+    line-height: 1.47;
+    margin-bottom: grid(6);
   }
 </style>

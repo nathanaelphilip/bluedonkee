@@ -1,9 +1,5 @@
 <template>
   <article class="job" v-if="!loading">
-    <Intro :back="{ name: 'campaigns' }" :heading="campaign.fields.Name">
-      <Share :path="$route.path" />
-      <LinkPrimary classes="small" :href="campaign.fields['Donation URL']">Donate</LinkPrimary>
-    </Intro>
     <div class="boxed">
       <Header
         :avatar="avatar"
@@ -14,6 +10,7 @@
         :offices="offices"
         :website="campaign.fields.Website"
         :twitter="campaign.fields.Twitter"
+        :donate="campaign.fields['Donation URL']"
       />
       <div class="overview" v-if="campaign.fields['Long Description']">
         <h3 class="subheading">Overview</h3>
@@ -22,11 +19,9 @@
         </div>
       </div>
     </div>
-    <Jobs heading="Available Jobs" :jobs="jobs" :simple="true">
+    <Jobs heading="Available Jobs" :jobs="$store.getters['jobs/getFetched'](id)" :simple="true">
       <template v-slot:empty>
-        <JobsEmpty>
-          Check back later or view related campaigns below.
-        </JobsEmpty>
+        <JobsEmpty />
       </template>
     </Jobs>
     <Campaigns heading="Related Campaigns" :campaigns="$store.getters['campaigns/getFetched'](id)" />
@@ -45,10 +40,7 @@ import Campaigns from '@/components/molecules/Campaigns'
 import Jobs from '@/components/molecules/Jobs'
 import JobsEmpty from '@/components/molecules/JobsEmpty'
 import Header from '@/components/molecules/Header'
-import Intro from '@/components/molecules/Intro'
-import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Markdown from '@/components/molecules/Markdown'
-import Share from '@/components/molecules/Share'
 
 export default {
   name: 'campaign',
@@ -63,12 +55,9 @@ export default {
     BackTop,
     Campaigns,
     Header,
-    Intro,
     Jobs,
     JobsEmpty,
-    LinkPrimary,
-    Markdown,
-    Share
+    Markdown
   },
 
   data () {
@@ -98,6 +87,8 @@ export default {
       type: 'campaigns'
     })
 
+    this.$store.dispatch('app/setHeading', this.campaign.fields.Name)
+
     this.locations = await getByIds({
       ids: this.campaign.fields.Location,
       type: 'locations'
@@ -108,10 +99,13 @@ export default {
       type: 'offices'
     })
 
-    this.jobs = this.campaign.fields.Jobs ? await getByIds({
-      ids: this.campaign.fields.Jobs,
-      type: 'jobs'
-    }) : []
+    await this.$store.dispatch('jobs/fetch', {
+      id: this.id,
+      params: {
+        filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), {Campaigns} = '${this.campaign.fields.Name}')`,
+        sort: [{ field: 'Post Date', direction: 'desc' }]
+      }
+    })
 
     if (!this.$store.getters['campaigns/getFetched'](this.id).length) {
       const search = []
@@ -138,11 +132,14 @@ export default {
 
 <style lang="scss" scoped>
   .boxed {
-    background-image: linear-gradient(#f6fafc 25%, rgba($GREY, .01));
-    padding: 32px;
+    margin-bottom: grid(15);
+    padding-top: grid(15);
 
-    @include mq ($until: xsmall) {
-      padding: 24px 16px;
+    @include mq ($until: small) {
+      margin-bottom: grid(12);
+      padding-left: grid(6);
+      padding-right: grid(6);
+      padding-top: grid(8);
     }
   }
 
@@ -157,12 +154,7 @@ export default {
   }
 
   .content {
-    font-size: 15px;
-    line-height: 1.6666;
-
-    &::v-deep p {
-      margin-bottom: 10px;
-    }
+    @include Content;
   }
 
   .jobs {
