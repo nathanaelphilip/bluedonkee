@@ -10,7 +10,7 @@
     </div>
     <Markdown class="content" :content="fields.Content" />
     <div class="actions">
-      <LinkPrimary href="#">Download Press Package</LinkPrimary>
+      <LinkPrimary href="https://www.dropbox.com/sh/vbiobw20gv98oto/AABGFjvfpdrCdmkuAq6e0fyFa?dl=0" target="_blank">Download Press Package</LinkPrimary>
       <LinkSecondary classes="large" :to="{'name': 'contact'}">Contact Us</LinkSecondary>
     </div>
   </article>
