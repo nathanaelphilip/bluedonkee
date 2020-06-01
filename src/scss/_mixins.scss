@@ -125,6 +125,8 @@
   &:placeholder { color: $GREY; }
   &[readonly] {color: $BLUEGREY}
 
+  &:focus { border-color: $BLUE }
+
   &:not(output):-moz-ui-invalid {box-shadow: none}
 
   &.error {
@@ -238,6 +240,8 @@
     & + h4 {
       margin-top: grid(6);
     }
+
+    a { color: $BLUE }
   }
 
   &::v-deep ul {
