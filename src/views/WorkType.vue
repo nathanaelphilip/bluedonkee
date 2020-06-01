@@ -1,6 +1,6 @@
 <template>
   <section v-if="!loading">
-    <Intro :back="{ name: 'jobs' }" :heading="`Type: ${type.fields.Name}`" />
+    <Intro :heading="type.fields.Name" />
     <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
     <Pager
       @load="load"
@@ -49,6 +49,8 @@ export default {
       slug: this.$route.params.slug,
       type: 'workTypes'
     })
+
+    this.$store.dispatch('app/setHeading', `Work Type: ${this.type.fields.Name}`)
 
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()

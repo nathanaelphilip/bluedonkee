@@ -1,9 +1,11 @@
 <template lang="html">
-  <section class="filters-toggle">
+  <section
+    class="filters-toggle"
+    :style="{'height': `${$store.state.app.innerHeight}px`}"
+    >
     <header class="header">
-      <div class="heading">Filter Jobs</div>
       <button @click.prevent="clear" class="clear">
-        Clear <div class="reset"><IconClose width="9" height="9" /></div>
+        Clear All
       </button>
     </header>
     <div class="boxed">
@@ -55,12 +57,11 @@
 <script>
 import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import CheckTag from '@/components/forms/CheckTag'
-import IconClose from '@/components/icons/Close'
 import Toggles from '@/components/molecules/Toggles'
 import TogglesBox from '@/components/atoms/TogglesBox'
 
 export default {
-  components: { ButtonPrimary, CheckTag, IconClose, Toggles, TogglesBox },
+  components: { ButtonPrimary, CheckTag, Toggles, TogglesBox },
 
   data () {
     return {
@@ -98,8 +99,8 @@ export default {
     async apply () {
       const entries = Object.entries(this.selected)
 
-      for (const [key, items] of entries) {
-        await this.$store.dispatch('filters/accept', { key, items })
+      for (const [key, value] of entries) {
+        await this.$store.dispatch('filters/accept', { key, value })
       }
 
       this.$emit('close')
@@ -127,18 +128,16 @@ export default {
     @include Flex($align: stretch, $direction: column, $justify: flex-start, $wrap: nowrap);
     background: $WHITE;
     position: absolute;
-    height: calc(100vh - max(180px, constant(safe-area-inset-bottom)));
-    height: calc(100vh - max(180px, env(safe-area-inset-bottom)));
+    height: calc(100vh - max(110px, constant(safe-area-inset-bottom)));
+    height: calc(100vh - max(110px, env(safe-area-inset-bottom)));
     left: 0;
-    top: calc(100% + 1px);
+    top: 100%;
     width: 100%;
     z-index: 12;
   }
 
   .header {
-    @include Flex;
-    border-bottom: 1px solid $GREY;
-    padding: grid(6) grid(4);
+    padding: grid(5) grid(4) 0 grid(4);
   }
 
   .boxed {
@@ -146,9 +145,7 @@ export default {
     flex: 1;
   }
 
-  .apply {
-    border-radius: 0;
-  }
+  .apply {}
 
   .reset {
     @include ButtonClose;
@@ -158,8 +155,17 @@ export default {
   }
 
   .clear {
-    @include ButtonStripped;
-    @include Flex($justify: flex-end);
+    @include Tag;
+    border: 1px solid $GREY;
+    padding: grid(3) 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .actions {
+    @include mq ($until: xsmall) {
+      padding: grid(4);
+    }
   }
 
   .tags {

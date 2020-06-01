@@ -1,6 +1,6 @@
 <template>
   <article v-if="!loading">
-    <Intro :back="{ name: 'groups' }" :heading="`Category: ${category.fields.Name}`" />
+    <Intro :heading="category.fields.Name" />
     <Groups :groups="$store.getters['groups/getFetched'](id)" />
     <Pager
       @load="load"
@@ -49,6 +49,8 @@ export default {
       slug: this.$route.params.slug,
       type: 'groupCategories'
     })
+
+    this.$store.dispatch('app/setHeading', this.category.fields.Name)
 
     if (!this.$store.getters['groups/getFetched'](this.id).length) {
       await this.load()

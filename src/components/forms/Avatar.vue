@@ -45,7 +45,7 @@ export default {
         files = event.dataTransfer.files
       }
 
-      if (event.target && event.target.files) {
+      if (event.target && event.target.files && event.target.files.length) {
         files = event.target.files
       }
 

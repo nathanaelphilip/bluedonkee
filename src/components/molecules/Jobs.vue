@@ -24,37 +24,39 @@ export default {
 
 <style lang="scss" scoped>
   .heading {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 900;
-    margin-bottom: 30px;
-    padding: 0 32px;
+    margin-bottom: grid(10);
 
-    @include mq ($until: xsmall) {
-      padding: 0px 16px;
+    @include mq ($until: small) {
+      margin-bottom: grid(6);
+      padding: 0 grid(6);
     }
   }
 
   .box {
-    padding: grid(6) grid(8);
-
-    @include mq($until: xsmall) {
-      padding: grid(6) grid(4);
+    @include mq ($until: small) {
+      border-bottom: 1px solid $GREY;
     }
 
-    .simple &:nth-child(2) { padding-top: 0; }
-
     &:not(:last-child) {
-      border-bottom: 1px solid $GREY;
+      margin-bottom: grid(8);
+
+      @include mq ($until: small) {
+        margin-bottom: grid(0);
+      }
     }
   }
 
   .empty {
-    margin-bottom: 48px;
-    margin-top: -15px;
-    padding: 0 32px;
+    margin-bottom: grid(12);
 
-    @include mq ($until: xsmall) {
-      padding: 0px 16px;
+    @include mq ($from: small) {
+      margin-top: grid(-4);
+    }
+
+    @include mq ($until: small) {
+      padding: 0 grid(6);
     }
   }
 </style>

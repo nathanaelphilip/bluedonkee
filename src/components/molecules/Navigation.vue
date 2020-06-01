@@ -1,109 +1,143 @@
 <template>
-  <nav class="nav">
-    <router-link class="anchor" :to="{ name: 'jobs' }">
-      <IconJobs class="icon" width="32" height="24" /><span class="text">Jobs</span>
-    </router-link>
-    <router-link class="anchor" :to="{ name: 'groups' }">
-      <IconGroups class="icon" width="32" height="32" /><span class="text">Groups</span>
-    </router-link>
-    <router-link class="anchor" :to="{ name: 'campaigns' }">
-      <IconCampaigns class="icon" width="32" height="33" /><span class="text">Campaigns</span>
-    </router-link>
-    <button class="anchor anchor-more" @click.prevent="$store.dispatch('app/sidebar', true)">
-      <IconMore class="icon" width="36" height="38" /><span class="text">Sidebar</span>
-    </button>
+  <nav class="nav" :class="[alignment]">
+    <ul class="parent">
+      <li :key="index" class="primary" v-for="(item, index) in menu">
+        <template v-if="item.type === 'shallow'">
+          <router-link class="anchor" :to="item.to">
+            {{ item.name }}
+          </router-link>
+        </template>
+        <template v-if="item.type === 'deep'">
+          <a href="#" class="anchor">{{ item.name }}</a>
+          <div class="child">
+            <div class="submenu-wrapper">
+              <ul class="submenu">
+                <li :key="`sub-${index}`" v-for="(subitem, index) in item.menu" class="secondary">
+                  <router-link class="anchor" :to="subitem.to">
+                    {{ subitem.name }}
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </template>
+        <template v-if="item.type === 'button'">
+          <LinkPrimary classes="small" :to="item.to">{{ item.name }}</LinkPrimary>
+        </template>
+      </li>
+    </ul>
   </nav>
 </template>
 
 <script>
-import IconCampaigns from '@/components/icons/Campaigns'
-import IconGroups from '@/components/icons/Groups'
-import IconJobs from '@/components/icons/Jobs'
-import IconMore from '@/components/icons/More'
+import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 export default {
   name: 'components-molecules-navigation',
-  components: { IconCampaigns, IconGroups, IconJobs, IconMore }
+  props: ['alignment', 'menu'],
+  components: { LinkPrimary }
 }
 </script>
 
 <style lang="scss" scoped>
   .nav {
-    display: flex;
+    color: $BLUEGREY;
+    font-weight: 500;
+    font-size: 15px;
+  }
 
-    @include mq($from: large) {
-      font-size: 20px;
-      font-weight: 800;
-      max-width: 200px;
-      margin-left: -20px;
+  .parent {
+    @include Flex ($justify: flex-end);
+
+    .»center & {
+      justify-content: center;
     }
+  }
 
-    @include mq($until: large) {
-      align-items: center;
-    }
+  .primary {
+    position: relative;
 
-     @include mq($from: xsmall) {
-       flex-direction: column;
-     }
+    &:not(:last-child) {
+      margin-right: grid(3);
 
-    @include mq($until: xsmall) {
-      background: $WHITE;
-      left: 0;
-      bottom: 0;
-      padding: 12px 0;
-      position: fixed;
-      justify-content: space-around;
-      width: 100%;
-      z-index: 10;
+      @include mq ($until: medium) {
+        margin-right: grid(2);
+      }
     }
   }
 
   .anchor {
-    background: none;
-    border: none;
-    align-items: center;
-    display: flex;
-    border-radius: 30px;
-    color: inherit;
-    height: 60px;
-    justify-content: flex-start;
-    padding: 13px 20px;
-    text-decoration: none;
+    @include ButtonSimple;
+  }
 
-    @include mq($until: small) {
-      justify-content: center;
-      padding: 0;
-      width: 60px;
+  .child {
+    display: none;
+    right: 0;
+    padding-top: grid(12);
+    position: absolute;
+    top: 100%;
+
+    .primary:hover & {
+      display: block;
+    }
+  }
+
+  .submenu-wrapper {
+    @include Shadow;
+    background: $WHITE;
+    border-radius: grid(1);
+    padding: grid(3) 0;
+    position: relative;
+    width: 200px;
+
+    &:before {
+      content: ' ';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent $WHITE transparent;
+      position: absolute;
+      right: grid(3);
+      bottom: 100%;
+    }
+  }
+
+  .submenu {
+    max-height: 275px;
+    overflow: auto;
+    padding: 0 grid(3);
+    scrollbar-width: thin;
+    scrollbar-color: $GREY5 $GREY3;
+
+    &::-webkit-scrollbar {
+      width: 4px;
     }
 
+    &::-webkit-scrollbar-track {
+      background: $GREY3;
+      border-radius: grid(4);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $GREY5;
+      border-radius: grid(4);
+    }
+  }
+
+  .secondary {
     &:not(:last-child) {
-      @include mq($from: xsmall) {
-        margin-bottom: 12px;
-      }
+      margin-bottom: grid(1);
     }
 
-    &:hover,
-    &.router-link-active {
-      background: $BLUELIGHT;
-      cursor: pointer;
+    a {
+      display: block;
+      padding: grid(2);
 
-     ::v-deep .icon .st1 {fill: $BLUE;}
-     ::v-deep .icon .st0 {fill: #90cdf4;}
-    }
-
-    &-more {
-      @include mq ($from: large) {display: none}
-    }
-
-    .icon {
-      @include mq($from: large) {
-        margin-right: 16px;
-      }
-    }
-
-    .text {
-      @include mq($until: large) {
-       display: none;
+      &:hover {
+        background: $BLUE2;
+        border-radius: grid(1);
+        color: $WHITE;
       }
     }
   }

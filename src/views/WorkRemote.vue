@@ -1,6 +1,6 @@
 <template>
   <section v-if="!loading">
-    <Intro :back="{ name: 'jobs' }" :heading="`Remote`" />
+    <Intro heading="Remote Jobs" />
     <Jobs :jobs="$store.getters['jobs/getFetched'](id)" />
     <Pager
       @load="load"
@@ -36,6 +36,8 @@ export default {
 
   async mounted () {
     this.id = 'jobs/remote'
+
+    this.$store.dispatch('app/setHeading', 'Remote Jobs')
 
     if (!this.$store.getters['jobs/getFetched'](this.id).length) {
       await this.load()

@@ -19,11 +19,23 @@
   &:hover {cursor: pointer}
 }
 
+@mixin ButtonSimple {
+  @include Button;
+  padding: grid(2) grid(3);
+
+  &:hover,
+  &.router-link-active {
+    background: $GREY3;
+    color: $BLACK;
+  }
+}
+
 @mixin ButtonPrimary {
   @include Button;
   background: $BLUE2;
   border: 1px solid $BLUE2;
   color: $WHITE;
+  font-size: 15px;
   padding: 12px 14px;
 
   &:hover { background: $BLUE; border-color:  $BLUE; }
@@ -31,8 +43,9 @@
 
 @mixin ButtonSecondary {
   @include Button;
-  background: none;
+  background: $WHITE;
   border: 1px solid $GREY;
+  font-size: 15px;
   padding: 10px 18px;
 
   &.bugged {
@@ -42,6 +55,20 @@
   }
 
   &:hover {background: $GREY;}
+}
+
+@mixin ButtonSquareIcon {
+  @include ButtonSecondary;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: grid(9);
+  padding: 0;
+  width: grid(9);
+
+  .icon {
+    fill: $BLACK;
+  }
 }
 
 @mixin Tag {
@@ -57,11 +84,10 @@
 }
 
 @mixin ButtonClose {
+  @include ButtonStripped;
   $d: 35px;
-  appearance: none;
   align-items: center;
   background: $BLUELIGHT;
-  border: none;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -93,11 +119,13 @@
   font-size: 15px;
   line-height: 1.1;
   min-width: 0;
-  padding: 12px;
+  padding: grid(3) - 1px grid(3);
   width: 100%;
 
   &:placeholder { color: $GREY; }
   &[readonly] {color: $BLUEGREY}
+
+  &:focus { border-color: $BLUE }
 
   &:not(output):-moz-ui-invalid {box-shadow: none}
 
@@ -108,6 +136,7 @@
 
 @mixin Select {
   @include Input;
+  padding: grid(3);
 
   option {color: $BLACK}
 
@@ -129,7 +158,11 @@
   background: $BLUELIGHT;
   border-radius: 12px;
   display: block;
-  padding: 32px;
+  padding: grid(8);
+
+  @include mq ($until: xsmall) {
+    padding: grid(6);
+  }
 
   &:not(:last-child) {
     margin-bottom: 24px;
@@ -189,15 +222,26 @@
   &::v-deep p,
   &::v-deep ul,
   &::v-deep ol {
-    line-height: 1.5;
+    font-size: 17px;
+    line-height: 1.45;
+
+    @include mq ($until: xsmall) {
+      font-size: 15px;
+    }
 
     &:not(:last-child) {
-      margin-bottom: 12px;
+      margin-bottom: grid(6);
+    }
+
+    & + h3 {
+      margin-top: grid(12);
     }
 
     & + h4 {
-      margin-top: 24px;
+      margin-top: grid(6);
     }
+
+    a { color: $BLUE }
   }
 
   &::v-deep ul {
@@ -210,16 +254,37 @@
 
   &::v-deep ol,
   &::v-deep ul {
-    margin-left: 16px;
+    margin-left: grid(4);
 
     li:not(:last-child) {
-      margin-bottom: 12px;
+      margin-bottom: grid(2);
+    }
+  }
+
+  &::v-deep h3 {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: grid(6);
+
+    @include mq ($until: xsmall) {
+      font-size: 19px;
+      margin-bottom: grid(3);
     }
   }
 
   &::v-deep h4 {
     font-size: 17px;
     font-weight: 800;
-    margin-bottom: 8px;
+    margin-bottom: grid(2);
   }
+
+  a {
+    color: $BLUE2;
+  }
+}
+
+@mixin Container {
+  margin:  0 auto;
+  max-width: grid(256);
+  width: 95%;
 }

@@ -24,16 +24,20 @@ export default {
 
 <style lang="scss" scoped>
   .modal {
+    @include Flex ($justify: center);
     background: rgba($BLACK, .25);
-    align-items: center;
-    display: flex;
     height: 100%;
     left: 0;
-    justify-content: center;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 9;
+
+    &.»mobile-bottom {
+      @include mq ($until: small) {
+        align-items: flex-end;
+      }
+    }
   }
 
   .boxed {
@@ -42,6 +46,13 @@ export default {
     border-radius: grid(2);
     min-width: 320px;
     padding: grid(6);
+
+    .»mobile-bottom & {
+      @include mq ($until: small) {
+        border-radius: 0;
+        width: 100%;
+      }
+    }
   }
 
   .header {

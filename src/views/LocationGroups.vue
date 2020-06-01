@@ -1,6 +1,6 @@
 <template>
   <section v-if="!loading">
-    <Intro :back="{ name: 'groups' }" :heading="`Location: ${location.fields.City}`" />
+    <Intro :heading="location.fields.City" />
     <Groups :groups="$store.getters['groups/getFetched'](id)" />
     <Pager
       @load="load"
@@ -17,8 +17,8 @@ import {
 } from '@/store/helpers'
 
 import BackTop from '@/components/molecules/BackTop'
-import Intro from '@/components/molecules/Intro'
 import Groups from '@/components/molecules/Groups'
+import Intro from '@/components/molecules/Intro'
 import Pager from '@/components/molecules/Pager'
 
 const pageSize = 20
@@ -32,7 +32,7 @@ export default {
     }
   },
 
-  components: { BackTop, Intro, Groups, Pager },
+  components: { BackTop, Groups, Intro, Pager },
 
   data () {
     return {
@@ -49,6 +49,8 @@ export default {
       slug: this.$route.params.slug,
       type: 'locations'
     })
+
+    this.$store.dispatch('app/setHeading', `Location: ${this.location.fields.City}`)
 
     if (!this.$store.getters['groups/getFetched'](this.id).length) {
       await this.load()

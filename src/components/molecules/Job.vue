@@ -1,9 +1,11 @@
 <template>
-  <article v-if="!loading" class="job" :class="{simple}">
+  <article @click.prevent="go" v-if="!loading" class="job" :class="{simple}">
     <div class="box-avatar">
-      <Avatar :src="avatar" />
+      <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
+        <Avatar :src="avatar" />
+      </router-link>
     </div>
-    <div>
+    <div class="box-content">
       <header class="header">
         <div class="box">
           <h2 class="heading">
@@ -12,23 +14,27 @@
             </router-link>
           </h2>
           <div class="meta" v-if="entity">
-            <router-link :to="{ name: entityType, params: { slug: entity.fields.Slug } }">
+            <router-link @click.native="$event.stopImmediatePropagation()" :to="{ name: entityType, params: { slug: entity.fields.Slug } }">
               {{ entity.fields.Name }}
             </router-link>
             <template v-if="locations.length">
-              -
-              <router-link :to="{ name: 'locationJob', params: { slug: locations[0].fields.Slug } }">
+              •
+              <router-link @click.native="$event.stopImmediatePropagation()" :to="{ name: 'locationJob', params: { slug: locations[0].fields.Slug } }">
                 {{ locations[0].fields.City }}
               </router-link>
             </template>
           </div>
         </div>
         <time class="time">
-          {{ date }}
+          <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
+            {{ date }}
+          </router-link>
         </time>
       </header>
       <div class="content">
-        <Markdown :content="description" />
+        <router-link :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }">
+          <Markdown :content="description" />
+        </router-link>
       </div>
       <Tags>
         <Tag
@@ -60,6 +66,9 @@
         />
       </Tags>
     </div>
+    <router-link
+      :to="{ name: 'job', params: { entityType: entityType, entity: entity.fields.Slug , slug: job.fields.Slug } }" class="background-link">
+    </router-link>
   </article>
 </template>
 
@@ -125,6 +134,12 @@ export default {
     }
   },
 
+  methods: {
+    go () {
+      this.$router.push({ name: 'job', params: { entityType: this.entityType, entity: this.entity.fields.Slug, slug: this.job.fields.Slug } })
+    }
+  },
+
   async mounted () {
     if (this.job.fields.Group) {
       this.groups = await getByIds({
@@ -177,14 +192,24 @@ export default {
   .job {
     align-items: start;
     display: grid;
-    grid-template-columns: 60px 1fr;
+    border: 1px solid transparent;
+    border-radius: grid(2);
+    grid-template-columns: grid(15) 1fr;
     grid-column-gap: 16px;
+    padding: grid(5) grid(6) grid(6) grid(6);
+    position: relative;
 
     @include mq($until: xsmall) {
-      grid-template-columns: 48px 1fr;
+      grid-template-columns: grid(12) 1fr;
     }
 
     &.simple { grid-template-columns: 1fr; }
+
+    &:hover {
+      background: $BLUELIGHT;
+      border-color: $GREY3;
+      cursor: pointer;
+    }
   }
 
   .header {
@@ -194,6 +219,10 @@ export default {
     margin-bottom: grid(4);
     margin-top: 11px;
 
+    @include mq ($until: small) {
+      grid-template-columns: 1fr;
+    }
+
     @include mq ($until: xsmall) {
       margin-top: 0;
     }
@@ -202,21 +231,34 @@ export default {
   }
 
   .heading {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 800;
     line-height: 1.25;
     margin-bottom: 5px;
+
+    @include mq ($until: xsmall) {
+      font-size: 15px;
+      line-height: 1.4;
+    }
   }
 
   .meta {
     color: $BLUE;
     font-size: 15px;
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
   .time {
     color: $BLUEGREY;
     font-size: 15px;
     text-align: right;
+
+    @include mq ($until: small) {
+      display: none;
+    }
 
     .simple & { display: none }
   }

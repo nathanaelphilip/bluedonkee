@@ -21,24 +21,18 @@ export default {
 
 <style lang="scss" scoped>
   .heading {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 900;
-    margin-bottom: 5px;
-    padding: 0 32px;
+    margin-bottom: grid(8);
 
-    @include mq ($until: xsmall) {
-      padding: 0px 16px;
+    @include mq ($until: small) {
+      margin-bottom: grid(6);
+      padding: 0 grid(6);
     }
   }
 
   .box {
-    padding: 24px 36px;
-
-    @include mq ($until: xsmall) {
-      padding: 24px 16px;
-    }
-
-    &:not(:last-child) {
+    @include mq ($until: small) {
       border-bottom: 1px solid $GREY;
     }
   }

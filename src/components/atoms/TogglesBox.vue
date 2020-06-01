@@ -1,8 +1,7 @@
 <template lang="html">
   <div class="box" :class="{'visible': visible == _uid}">
     <button class="heading" @click.prevent="toggle">
-      {{ heading }}
-      <IconChevronDown width="10" height="6" class="icon-chevron-down" />
+      {{ heading }}<IconPlus :width="10" :height="10" />
     </button>
     <div class="boxed" v-if="visible === _uid">
       <slot></slot>
@@ -11,11 +10,11 @@
 </template>
 
 <script>
-import IconChevronDown from '@/components/icons/ChevronDown'
+import IconPlus from '@/components/icons/Plus'
 
 export default {
-  props: ['heading', 'open', 'visible'],
-  components: { IconChevronDown },
+  props: ['heading', 'visible'],
+  components: { IconPlus },
 
   methods: {
     toggle () {
@@ -36,7 +35,9 @@ export default {
     @include ButtonStripped;
     @include Flex;
     border-bottom: 1px solid $GREY;
-    padding: grid(6) grid(4);
+    font-size: 19px;
+    font-weight: 800;
+    padding: grid(5) grid(4);
     width: 100%;
 
     &:hover {cursor: pointer}

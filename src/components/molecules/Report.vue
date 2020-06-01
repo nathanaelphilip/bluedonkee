@@ -1,7 +1,7 @@
 <template>
   <aside class="report">
     <h6 class="heading">Something off with this post?</h6>
-    <button class="button" @click.prevent="open.modal = true">Flag Posting</button>
+    <ButtonSecondary @click.native.prevent="open.modal = true">Flag Posting</ButtonSecondary>
     <portal to="modal">
       <Modal @close="open.modal = false" :open="open.modal" heading="Flag Posting">
         <OptionsList
@@ -38,6 +38,7 @@ import { postFlagged } from '@/api'
 import Flash from '@/components/molecules/Flash'
 import Modal from '@/components/molecules/Modal'
 import OptionsList from '@/components/forms/OptionsList'
+import ButtonSecondary from '@/components/atoms/ButtonSecondary'
 import TextArea from '@/components/forms/TextArea'
 
 const options = [{
@@ -61,7 +62,7 @@ const message = {
 export default {
   props: ['id'],
 
-  components: { Flash, Modal, OptionsList, TextArea },
+  components: { ButtonSecondary, Flash, Modal, OptionsList, TextArea },
 
   data () {
     return {
@@ -121,23 +122,23 @@ export default {
   .report {
     align-items: center;
     display: grid;
-    background: $GREY3;
-    border-radius: 4px;
-    font-size: 15px;
-    padding: 15px 16px;
+    background: $BLUELIGHT;
+    border-radius: grid(1);
+    border: 1px solid $GREY;
+    font-size: 16px;
+    font-weight: 500;
+    padding: grid(3) grid(4);
     grid-template-columns: 1fr auto;
+
+    @include mq ($until: small) {
+      align-items: stretch;
+      grid-template-columns: 1fr;
+      grid-row-gap: grid(3);
+      padding: grid(4) grid(4);
+      text-align: center;
+    }
   }
 
   .heading {
-    color: $GREY2;
-  }
-
-  .button {
-    appearance: none;
-    background: none;
-    border: none;
-    color: $BLUE;
-
-    &:hover {cursor: pointer}
   }
 </style>

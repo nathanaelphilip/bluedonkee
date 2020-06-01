@@ -1,12 +1,7 @@
 <template>
   <aside class="jobs-empty">
-    <div class="box">
-      <h4 class="heading">Currently no jobs posted.</h4>
-      <div class="content"><slot></slot></div>
-    </div>
-    <div class="action">
-      <LinkPrimary :to="{name: 'postJob'}">Post Job</LinkPrimary>
-    </div>
+    <h4 class="heading">Currently no jobs posted.</h4>
+    <LinkPrimary :to="{name: 'postJob'}">Post Job</LinkPrimary>
   </aside>
 </template>
 
@@ -21,40 +16,27 @@ export default {
 <style lang="scss" scoped>
   .jobs-empty {
     align-items: center;
+    display: grid;
     background: $BLUELIGHT;
-    border-radius: 4px;
+    border-radius: grid(1);
     border: 1px solid $GREY;
-    padding: 18px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: grid(3) grid(4);
+    grid-template-columns: 1fr auto;
 
-    @include mq ($from: small) {
-      display: grid;
-      grid-template-columns: auto auto;
-      grid-column-gap: 36px;
-      justify-content: space-between;
-    }
-  }
-
-  .heading {
-    font-size: 17px;
-    font-weight: 800;
-    margin-bottom: 5px;
-  }
-
-  .box {
     @include mq ($until: small) {
-      margin-bottom: 12px;
+      align-items: stretch;
+      grid-template-columns: 1fr;
+      grid-row-gap: grid(3);
+      padding: grid(4) grid(4);
       text-align: center;
     }
   }
 
-  .content {
+  .heading { }
+
+  .button {
     font-size: 15px;
-  }
-
-  .action::v-deep a {
-    @include mq ($until: small) {
-      text-align: center;
-      width: 100%;
-    }
   }
 </style>

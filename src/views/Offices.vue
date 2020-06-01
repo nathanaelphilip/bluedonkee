@@ -1,6 +1,6 @@
 <template>
-  <div v-if="!loading">
-    <Intro :heading="`Office: ${office.fields.Name}`" :back="{ name: 'campaigns' }" />
+  <section v-if="!loading">
+    <Intro heading="Offices" />
     <Campaigns :campaigns="$store.getters['campaigns/getFetched'](id)" />
     <Pager
       @load="load"
@@ -8,7 +8,7 @@
       v-if="$store.getters['campaigns/getOffset'](id)"
     />
     <BackTop v-if="!$store.getters['campaigns/getOffset'](id)" />
-  </div>
+  </section>
 </template>
 
 <script>
@@ -49,6 +49,8 @@ export default {
       slug: this.$route.params.slug,
       type: 'offices'
     })
+
+    this.$store.dispatch('app/setHeading', `Offices: ${this.office.fields.Name}`)
 
     if (!this.$store.getters['campaigns/getFetched'](this.id).length) {
       await this.load()
