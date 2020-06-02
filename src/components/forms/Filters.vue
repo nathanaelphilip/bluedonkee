@@ -56,7 +56,7 @@
         </div>
       </Modal>
       <Modal @close="modal = false" :open="modal === 'category'" heading="Category">
-        <div class="modalBox">
+        <div class="modalBox »large">
           <CheckTags
             :accepted="$store.getters['filters/accepted']('categories')"
             :options="$store.getters['workCategories/sortAlphabetically']"
@@ -172,5 +172,9 @@ export default {
 
   .modalBox {
     width: 400px;
+
+    &.»large {
+      width: 600px;
+    }
   }
 </style>
