@@ -8,7 +8,7 @@
     </portal>
     <portal to="filters">
       <mq-layout mq="medium+">
-        <Navigation alignment="»center" :menu="menu" />
+        <Navigation alignment="»center" :menu="menu" :extended="true" />
       </mq-layout>
       <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
         <NavigationMobileAlt heading="Select area of interest" :menu="menu" />

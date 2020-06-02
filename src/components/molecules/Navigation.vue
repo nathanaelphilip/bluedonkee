@@ -10,7 +10,7 @@
         <template v-if="item.type === 'deep'">
           <a href="#" class="anchor">{{ item.name }}</a>
           <div class="child">
-            <div class="submenu-wrapper">
+            <div class="submenu-wrapper" :class="{'»extended': extended}">
               <ul class="submenu">
                 <li :key="`sub-${index}`" v-for="(subitem, index) in item.menu" class="secondary">
                   <router-link class="anchor" :to="subitem.to">
@@ -34,7 +34,7 @@ import LinkPrimary from '@/components/atoms/LinkPrimary'
 
 export default {
   name: 'components-molecules-navigation',
-  props: ['alignment', 'menu'],
+  props: ['alignment', 'menu', 'extended'],
   components: { LinkPrimary }
 }
 </script>
@@ -89,6 +89,10 @@ export default {
     padding: grid(3) 0;
     position: relative;
     width: 200px;
+
+    &.»extended {
+      width: 300px;
+    }
 
     &:before {
       content: ' ';
