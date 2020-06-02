@@ -72,54 +72,52 @@
       <Markdown :content="description" />
     </div>
 
-    <div class="tags">
-      <Tags>
-        <mq-layout :mq="['xxsmall', 'xsmall']">
-          <Bug v-if="isNew">New</Bug>
-        </mq-layout>
-        <Tag
-          v-for="category in groupCategories"
-          :key="`work-category-${category.id}`"
-          :slug="category.fields.Slug"
-          :name="category.fields.Name"
-          route="groupCategory"
-         />
-        <Tag
-          v-for="category in workCategories"
-          :key="`work-category-${category.id}`"
-          :slug="category.fields.Slug"
-          :name="category.fields.Name"
-          route="workCategory"
-         />
-       <Tag
-         v-for="level in workLevels"
-         :key="`work-level-${level.id}`"
-         :slug="level.fields.Slug"
-         :name="level.fields.Name"
-         route="workLevel"
-        />
+    <Tags>
+      <mq-layout :mq="['xxsmall', 'xsmall']">
+        <Bug v-if="isNew">New</Bug>
+      </mq-layout>
       <Tag
-        v-for="type in workTypes"
-        :key="`type-${type.id}`"
-        :slug="type.fields.Slug"
-        :name="type.fields.Name"
-        route="workType"
+        v-for="category in groupCategories"
+        :key="`work-category-${category.id}`"
+        :slug="category.fields.Slug"
+        :name="category.fields.Name"
+        route="groupCategory"
        />
-       <Tag
-         v-for="office in offices"
-         :key="`type-${office.id}`"
-         :slug="office.fields.Slug"
-         :name="office.fields.Name"
-         route="office"
-        />
-        <Tag
-          key="remote"
-          name="Remote"
-          v-if="remote"
-          route="workRemote"
-        />
-     </Tags>
-    </div>
+      <Tag
+        v-for="category in workCategories"
+        :key="`work-category-${category.id}`"
+        :slug="category.fields.Slug"
+        :name="category.fields.Name"
+        route="workCategory"
+       />
+     <Tag
+       v-for="level in workLevels"
+       :key="`work-level-${level.id}`"
+       :slug="level.fields.Slug"
+       :name="level.fields.Name"
+       route="workLevel"
+      />
+    <Tag
+      v-for="type in workTypes"
+      :key="`type-${type.id}`"
+      :slug="type.fields.Slug"
+      :name="type.fields.Name"
+      route="workType"
+     />
+     <Tag
+       v-for="office in offices"
+       :key="`type-${office.id}`"
+       :slug="office.fields.Slug"
+       :name="office.fields.Name"
+       route="office"
+      />
+      <Tag
+        key="remote"
+        name="Remote"
+        v-if="remote"
+        route="workRemote"
+      />
+   </Tags>
   </header>
 </template>
 

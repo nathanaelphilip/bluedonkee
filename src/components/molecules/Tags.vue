@@ -12,18 +12,13 @@ export default {
 <style lang="scss" scoped>
   .tags {
     @include Flex($justify: flex-start);
-
-    @include mq ($until: xsmall) {
-      margin-top: grid(-2);
-    }
+    margin-top: grid(-2);
 
     > * {
+      margin-top: grid(2);
+
       &:not(:last-child) {
         margin-right: grid(2);
-      }
-
-      @include mq ($until: xsmall) {
-        margin-top: grid(2);
       }
     }
   }
