@@ -171,6 +171,6 @@ export default {
   }
 
   .modalBox {
-    width: 400px;
+    width: 600px;
   }
 </style>
