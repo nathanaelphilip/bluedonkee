@@ -98,7 +98,7 @@ const getters = {
     }
 
     if (state.accepted.remote) {
-      filters.push('AND({Remote} = 1)')
+      filters.push('OR({Remote} = 1)')
     }
 
     return `AND(${filters.join(',')})`
