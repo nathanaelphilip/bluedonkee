@@ -1,4 +1,5 @@
 import hash from 'object-hash'
+import { uniq } from 'lodash'
 
 import {
   FILTERS_ACCEPT,
@@ -60,7 +61,7 @@ const getters = {
 
   filter: (state, getters, rootState) => {
     const categories = []
-    const cities = []
+    const states = []
     const types = []
     const filters = ['OR({Status} = \'Active\', {Status} = \'Promoted\')']
 
@@ -83,10 +84,12 @@ const getters = {
           return state.id === filtered[j].fields.State[0]
         })
 
-        cities.push(`FIND('${state.fields.Name}', {Location})`)
+        states.push(`FIND('${state.fields.Name}', {Location})`)
       }
 
-      filters.push(`OR(${cities.join(',')})`)
+      const uniqued = uniq(states)
+
+      filters.push(`OR(${uniqued.join(',')})`)
     }
 
     if (state.accepted.types.length) {
@@ -98,10 +101,10 @@ const getters = {
     }
 
     if (state.accepted.remote) {
-      filters.push('OR({Remote} = 1)')
+      return `OR(AND(${filters.join(',')}), {Remote} = 1)`
+    } else {
+      return `AND(${filters.join(',')})`
     }
-
-    return `AND(${filters.join(',')})`
   },
 
   key: state => {
