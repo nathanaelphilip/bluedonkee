@@ -58,7 +58,7 @@ export default {
       await this.$store.dispatch('offices/fetch')
     }
 
-    if (!this.$store.getters['campaigns/getFetched']('campaigns').length) {
+    if (!this.$store.getters['campaigns/getFetched'](key).length) {
       await this.load()
     }
 
@@ -72,6 +72,7 @@ export default {
       await this.$store.dispatch('campaigns/fetch', {
         id: 'campaigns',
         params: {
+          filterByFormula: '({Status} = \'Active\')',
           pageSize,
           sort: [{ field: 'Name', direction: 'asc' }],
           offset: this.$store.getters['campaigns/getOffset']('campaigns')
