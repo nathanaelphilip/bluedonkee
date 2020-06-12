@@ -117,7 +117,7 @@ export default {
       await this.$store.dispatch('campaigns/fetch', {
         id: this.id,
         params: {
-          filterByFormula: `AND(OR(${search.join(',')}), RECORD_ID() != "${this.campaign.id}")`,
+          filterByFormula: `AND({Status} = 'Active', OR(${search.join(',')}), RECORD_ID() != "${this.campaign.id}")`,
           maxRecords: 3
         }
       })
