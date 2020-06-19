@@ -67,7 +67,7 @@ const getters = {
 
     if (state.accepted.categories.length) {
       for (let i = 0; i < state.accepted.categories.length; i++) {
-        categories.push(`{Work Categories} = '${state.accepted.categories[i]}'`)
+        categories.push(`FIND('${state.accepted.categories[i]}', {Work Categories})`)
       }
 
       filters.push(`OR(${categories.join(',')})`)
