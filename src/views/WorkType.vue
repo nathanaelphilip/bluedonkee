@@ -66,7 +66,7 @@ export default {
       await this.$store.dispatch('jobs/fetch', {
         id: this.id,
         params: {
-          filterByFormula: `SEARCH("${this.type.fields.Name}", {Work Types})`,
+          filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), SEARCH("${this.type.fields.Name}", {Work Types}))`,
           pageSize,
           sort: [{ field: 'Post Date', direction: 'desc' }],
           offset: this.$store.getters['jobs/getOffset'](this.id)
