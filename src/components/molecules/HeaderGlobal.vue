@@ -3,12 +3,12 @@
     <div class="container">
       <div class="back" v-if="$store.state.app.heading && back">
         <ButtonBack :to="back" v-if="back" />
-        <h2 class="heading">{{ $store.state.app.heading }}</h2>
       </div>
       <div class="logo" v-if="!$store.state.app.heading || !back">
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
         <Bug>Beta</Bug>
       </div>
+      <FormSearch />
       <mq-layout mq="medium+">
         <Navigation :menu="menu" />
       </mq-layout>
@@ -28,6 +28,7 @@
 <script>
 import Bug from '@/components/atoms/Bug'
 import ButtonBack from '@/components/atoms/ButtonBack'
+import FormSearch from '@/components/forms/Search'
 import Hamburger from '@/components/atoms/Hamburger'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Logo from '@/components/atoms/Logo'
@@ -38,6 +39,7 @@ export default {
   components: {
     Bug,
     ButtonBack,
+    FormSearch,
     Hamburger,
     LinkPrimary,
     Logo,
