@@ -288,3 +288,13 @@
   max-width: grid(256);
   width: 95%;
 }
+
+@mixin Hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@mixin Show {
+  opacity: 1;
+  visibility: visible;
+}
