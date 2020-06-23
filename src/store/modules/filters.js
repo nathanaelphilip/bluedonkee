@@ -74,6 +74,8 @@ const getters = {
     }
 
     if (state.accepted.locations.length) {
+      let hasDC = false
+
       const filtered = rootState.locations.repository.filter(location => {
         const stateId = location.fields.State || false
         return stateId ? state.accepted.locations.includes(stateId[0]) : false
@@ -84,12 +86,20 @@ const getters = {
           return state.id === filtered[j].fields.State[0]
         })
 
+        if (state.fields.Name === 'District of Columbia') {
+          hasDC = true
+        }
+
         states.push(`FIND('${state.fields.Name}', {Location})`)
       }
 
       const uniqued = uniq(states)
 
-      filters.push(`AND(NOT(FIND('District of Columbia', {Location})), OR(${uniqued.join(',')}))`)
+      if (!hasDC) {
+        filters.push(`AND(NOT(FIND('District of Columbia', {Location})), OR(${uniqued.join(',')}))`)
+      } else {
+        filters.push(`OR(${uniqued.join(',')})`)
+      }
     }
 
     if (state.accepted.types.length) {
