@@ -89,7 +89,7 @@ const getters = {
 
       const uniqued = uniq(states)
 
-      filters.push(`OR(${uniqued.join(',')})`)
+      filters.push(`AND(NOT(FIND('District of Columbia', {Location})), OR(${uniqued.join(',')}))`)
     }
 
     if (state.accepted.types.length) {
