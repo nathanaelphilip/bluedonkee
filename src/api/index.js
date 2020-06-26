@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { throttleAdapterEnhancer } from 'axios-extensions'
 import jsonp from 'jsonp'
 import qs from 'qs'
 
@@ -23,7 +24,10 @@ const newsletterForm = process.env.VUE_APP_MAILCHIMP_URL
 export const api = axios.create({
   baseURL: 'https://api.airtable.com/v0/appkK3vHJcH4114kk',
   timeout: 3000,
-  headers: { Authorization: `Bearer ${process.env.VUE_APP_AIRTABLE_API_KEY}` }
+  headers: { Authorization: `Bearer ${process.env.VUE_APP_AIRTABLE_API_KEY}` },
+  adapter: throttleAdapterEnhancer(axios.defaults.adapter, {
+    threshold: 60 * 1000 // 2 seconds
+  })
 })
 
 export const postContactForm = (data) => {
