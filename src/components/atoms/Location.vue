@@ -10,10 +10,14 @@
         }
       }"
     >
-      {{ location.fields.City }}<template v-if="state">, {{ state }}</template>
+      <template v-if="location.fields.City">{{ location.fields.City }}</template>
+      <template v-if="location.fields.City && state">, </template>
+      <template v-if="state">{{ state }}</template>
     </router-link>
     <div v-if="simple">
-      {{ location.fields.City }}<template v-if="state">, {{ state }}</template>
+      <template v-if="location.fields.City">{{ location.fields.City }}</template>
+      <template v-if="location.fields.City && state">, </template>
+      <template v-if="state">{{ state }}</template>
     </div>
   </Fragment>
 </template>
