@@ -1,13 +1,27 @@
 <template>
   <form @submit.prevent class="form" :class="{'»open' : open}">
     <div class="box">
-      <IconSearch width="16" height="16" />
-      <input @focus="open = true" @blur="open = false" v-model="input" type="text" class="input">
+      <IconSearch class="icon-search" width="16" height="16" />
+      <input
+        @focus="open = true"
+        @blur="open = false"
+        @keyup="search"
+        v-model="input"
+        type="text"
+        class="input"
+        placeholder="Job Title or Keyword"
+        />
       <button class="close">
         <IconClose height="9" width="9" />
       </button>
     </div>
-    <div class="results"></div>
+    <div class="results">
+      <div v-if="$store.getters['jobs/getFetched']('search').length">
+        <div :key="item.id" v-for="item in $store.getters['jobs/getFetched']('search')">
+          {{ item.fields.Title }}
+        </div>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -22,6 +36,20 @@ export default {
     return {
       open: false,
       input: ''
+    }
+  },
+
+  methods: {
+    async search () {
+      await this.$store.dispatch('jobs/clear', 'search')
+      await this.$store.dispatch('jobs/fetch', {
+        id: 'search',
+        params: {
+          filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), SEARCH("${this.input}", {Title}))`,
+          pageSize: 3,
+          sort: [{ field: 'Post Date', direction: 'desc' }]
+        }
+      })
     }
   }
 }
@@ -46,16 +74,21 @@ export default {
 
   .input {
     border: none;
+    color: $BLACK;
     font-size: 15px;
     padding: grid(2);
 
     &:focus { outline: none; }
+    &::placeholder {
+      color: $GREY5;
+      opacity: 1;
+    }
   }
 
   .close {
     @include Hide;
     @include Flex ($justify: center);
-    background: $GREY;
+    background: $BLUELIGHT;
     border: none;
     border-radius: 100%;
     height: grid(6);
@@ -81,6 +114,15 @@ export default {
 
     .»open & {
       display: block;
+    }
+  }
+
+  .icon-search {
+    fill: $GREY5;
+
+    .form.»open &,
+    .form:hover & {
+      fill: $BLACK;
     }
   }
 </style>
