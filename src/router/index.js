@@ -114,14 +114,19 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "questions" */ '../views/About.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
     meta: { layout: 'basic' }
   },
   {
     path: '/contact',
     name: 'contact',
-    component: () => import(/* webpackChunkName: "questions" */ '../views/Contact.vue'),
+    component: () => import(/* webpackChunkName: "contact" */ '../views/Contact.vue'),
     meta: { layout: 'basic' }
+  },
+  {
+    path: '/search/:type',
+    name: 'search',
+    component: () => import(/* webpackChunkName: "search" */ '../views/Search')
   }
 ]
 

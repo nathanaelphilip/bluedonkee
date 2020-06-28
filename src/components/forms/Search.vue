@@ -4,23 +4,21 @@
       <IconSearch class="icon-search" width="16" height="16" />
       <input
         @focus="open = true"
-        @blur="open = false"
         @keyup="search"
         v-model="input"
         type="text"
         class="input"
         placeholder="Job Title or Keyword"
         />
-      <button class="close">
+      <button @click.prevent="open = false" class="close">
         <IconClose height="9" width="9" />
       </button>
     </div>
-    <div class="results">
-      <div v-if="$store.getters['jobs/getFetched']('search').length">
-        <div :key="item.id" v-for="item in $store.getters['jobs/getFetched']('search')">
-          {{ item.fields.Title }}
-        </div>
-      </div>
+    <div
+    class="results"
+    v-if="$store.getters['jobs/getFetched']('search').length"
+    >
+      <SearchResults v-if="$store.getters['jobs/getFetched']('search').length" heading="Jobs" type="jobs" :results="$store.getters['jobs/getFetched']('search').slice(0, 3)" />
     </div>
   </form>
 </template>
@@ -28,14 +26,28 @@
 <script>
 import IconClose from '@/components/icons/Close'
 import IconSearch from '@/components/icons/Search'
+import SearchResults from '@/components/molecules/SearchResults'
+
+const pageSize = 20
 
 export default {
-  components: { IconClose, IconSearch },
+  components: { IconClose, IconSearch, SearchResults },
 
   data () {
     return {
-      open: false,
-      input: ''
+      open: false
+    }
+  },
+
+  computed: {
+    input: {
+      get () {
+        return this.$store.state.search.query
+      },
+
+      set (value) {
+        this.$store.dispatch('search/updateQuery', value)
+      }
     }
   },
 
@@ -45,8 +57,8 @@ export default {
       await this.$store.dispatch('jobs/fetch', {
         id: 'search',
         params: {
-          filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), SEARCH("${this.input}", {Title}))`,
-          pageSize: 3,
+          filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), SEARCH("${this.$store.getters['search/query']}", {Title}))`,
+          pageSize,
           sort: [{ field: 'Post Date', direction: 'desc' }]
         }
       })
@@ -57,6 +69,8 @@ export default {
 
 <style lang="scss" scoped>
   .form {
+    margin-right: auto;
+    margin-left: grid(10);
     position: relative;
   }
 
@@ -94,6 +108,8 @@ export default {
     height: grid(6);
     width: grid(6);
 
+    &:hover { cursor: pointer; }
+
     .»open & {
       @include Show;
     }
@@ -107,6 +123,7 @@ export default {
     border-bottom-right-radius: 4px;
     display: none;
     overflow: auto;
+    padding: grid(4);
     position: absolute;
     height: 300px;
     top: 100%;
