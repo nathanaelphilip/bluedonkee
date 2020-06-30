@@ -8,14 +8,22 @@
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
         <Bug>Beta</Bug>
       </div>
-      <FormSearch />
+      <mq-layout class="search-form" mq="medium+">
+        <FormSearch />
+      </mq-layout>
       <mq-layout mq="medium+">
         <Navigation :menu="menu" />
       </mq-layout>
       <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
         <div class="alt-menu">
           <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
-          <Hamburger @click.native.prevent="$store.dispatch('app/mobileNavToggle', !$store.state.app.mobileNavOpen)" />
+          <ButtonIcon
+            class="button-search"
+            @click.native.prevent="$store.dispatch('app/mobileSearchToggle', true)"
+            >
+            <IconSearch :height="16" :width="16" />
+          </ButtonIcon>
+          <Hamburger @click.native.prevent="close" />
         </div>
       </mq-layout>
     </div>
@@ -28,8 +36,10 @@
 <script>
 import Bug from '@/components/atoms/Bug'
 import ButtonBack from '@/components/atoms/ButtonBack'
+import ButtonIcon from '@/components/atoms/ButtonIcon'
 import FormSearch from '@/components/forms/Search'
 import Hamburger from '@/components/atoms/Hamburger'
+import IconSearch from '@/components/icons/Search'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
@@ -39,8 +49,10 @@ export default {
   components: {
     Bug,
     ButtonBack,
+    ButtonIcon,
     FormSearch,
     Hamburger,
+    IconSearch,
     LinkPrimary,
     Logo,
     Navigation,
@@ -89,6 +101,16 @@ export default {
         to: { name: 'postJob' }
       }]
     }
+  },
+
+  methods: {
+    close () {
+      if (this.$store.state.app.mobileSearchOpen) {
+        this.$store.dispatch('app/mobileSearchToggle', false)
+      } else {
+        this.$store.dispatch('app/mobileNavToggle', !this.$store.state.app.mobileNavOpen)
+      }
+    }
   }
 }
 </script>
@@ -97,10 +119,15 @@ export default {
   .header {
     background: $WHITE;
     border-bottom: 1px solid $GREY;
-    padding: grid(4);
+    padding: grid(4) 0;
     position: sticky;
     top: 0;
     z-index: 8;
+  }
+
+  .search-form {
+    margin-right: auto;
+    margin-left: 40px;
   }
 
   .back {
@@ -149,7 +176,7 @@ export default {
   .alt-menu {
     @include Flex ($justify: flex-end);
 
-    > *:last-child {
+    > *:not(first-child) {
       margin-left: grid(2);
     }
   }

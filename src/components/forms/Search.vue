@@ -69,8 +69,6 @@ export default {
 
 <style lang="scss" scoped>
   .form {
-    margin-right: auto;
-    margin-left: grid(10);
     position: relative;
   }
 
@@ -78,7 +76,7 @@ export default {
     @include Flex;
     border: 1px solid $GREY;
     border-radius: 4px;
-    padding: grid(1) grid(3);
+    padding: 0 grid(3);
 
     .»open & {
       border-bottom-left-radius: 0;
@@ -90,6 +88,7 @@ export default {
     border: none;
     color: $BLACK;
     font-size: 15px;
+    flex: 1;
     padding: grid(2);
 
     &:focus { outline: none; }

@@ -3,6 +3,7 @@ import {
   GLOBAL_HEADING,
   GLOBAL_INNER_HEIGHT,
   GLOBAL_MOBILE_NAVIGATION_TOGGLE,
+  GLOBAL_MOBILE_SEARCH_TOGGLE,
   GLOBAL_SIDEBAR_TOGGLE
 } from '@/store/mutation-types'
 
@@ -11,7 +12,8 @@ const state = {
   innerHeight: false,
   sidebar: false,
   modalOpen: false,
-  mobileNavOpen: false
+  mobileNavOpen: false,
+  mobileSearchOpen: false
 }
 
 const mutations = {
@@ -21,6 +23,10 @@ const mutations = {
 
   [GLOBAL_MOBILE_NAVIGATION_TOGGLE] (state, status) {
     state.mobileNavOpen = status
+  },
+
+  [GLOBAL_MOBILE_SEARCH_TOGGLE] (state, status) {
+    state.mobileSearchOpen = status
   },
 
   [GLOBAL_SIDEBAR_TOGGLE] (state, status) {
@@ -43,6 +49,10 @@ const actions = {
 
   mobileNavToggle ({ commit }, status) {
     commit(GLOBAL_MOBILE_NAVIGATION_TOGGLE, status)
+  },
+
+  mobileSearchToggle ({ commit }, status) {
+    commit(GLOBAL_MOBILE_SEARCH_TOGGLE, status)
   },
 
   sidebar ({ commit }, status) {
