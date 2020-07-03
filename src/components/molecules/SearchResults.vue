@@ -3,7 +3,7 @@
     <header class="header">
       <h3 class="heading">{{ heading }}</h3>
       <router-link
-        @click.native="$event.stopImmediatePropagation()"
+        @click.native="$event.stopImmediatePropagation(); $emit('close')"
         class="link"
         :to="{ name: 'search', params: {
           type

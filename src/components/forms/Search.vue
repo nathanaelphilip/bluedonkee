@@ -16,9 +16,15 @@
     </div>
     <div
     class="results"
-    v-if="$store.getters['jobs/getFetched']('search').length"
+    v-if="$store.getters['jobs/getFetched']('search').length && open"
     >
-      <SearchResults v-if="$store.getters['jobs/getFetched']('search').length" heading="Jobs" type="jobs" :results="$store.getters['jobs/getFetched']('search').slice(0, 3)" />
+      <SearchResults
+        v-if="$store.getters['jobs/getFetched']('search').length"
+        heading="Jobs"
+        type="jobs"
+        :results="$store.getters['jobs/getFetched']('search').slice(0, 3)"
+        @close="$store.dispatch('app/mobileSearchToggle', false)"
+        />
     </div>
   </form>
 </template>
@@ -116,20 +122,22 @@ export default {
 
   .results {
     background: $WHITE;
-    border: 1px solid $GREY;
-    border-top: none;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    display: none;
-    overflow: auto;
-    padding: grid(4);
-    position: absolute;
-    height: 300px;
-    top: 100%;
-    width: 100%;
 
-    .»open & {
-      display: block;
+    @include mq ($from: small) {
+      border: 1px solid $GREY;
+      border-top: none;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      padding: grid(4);
+      position: absolute;
+      height: 300px;
+      overflow: auto;
+      top: 100%;
+      width: 100%;
+    }
+
+    @include mq ($until: small) {
+      padding: grid(4) 0;
     }
   }
 

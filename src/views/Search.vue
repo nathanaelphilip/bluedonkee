@@ -48,18 +48,40 @@ export default {
 
 <style lang="scss" scoped>
   .header {
-    margin-bottom: grid(18);
-    margin-top: grid(16);
+    @include mq ($from: small) {
+      margin-bottom: grid(18);
+      margin-top: grid(16);
+    }
+
+    @include mq ($until: small) {
+      @include Flex ($justify: flex-start);
+      background: $WHITE;
+      border-bottom: 1px solid $GREY;
+      font-size: 15px;
+      padding: grid(4) grid(5);
+      position: sticky;
+      top: 69px;
+      z-index: 2;
+    }
   }
 
   .subheading {
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: grid(3);
+    @include mq ($from: small) {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: grid(3);
+    }
+
+    @include mq ($until: small) {
+      margin-right: grid(1);
+    }
   }
 
   .heading {
-    font-size: 36px;
     font-weight: 900;
+
+    @include mq ($from: small) {
+      font-size: 36px;
+    }
   }
 </style>
