@@ -63,7 +63,7 @@ export default {
       await this.$store.dispatch('jobs/fetch', {
         id: 'search',
         params: {
-          filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), SEARCH("${this.$store.getters['search/query']}", {Title}))`,
+          filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), SEARCH(LOWER("${this.$store.getters['search/query']}"), LOWER({Title}&'')))`,
           pageSize,
           sort: [{ field: 'Post Date', direction: 'desc' }]
         }
