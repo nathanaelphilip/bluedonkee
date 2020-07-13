@@ -8,9 +8,6 @@
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
         <Bug>Beta</Bug>
       </div>
-      <mq-layout class="search-form" mq="medium+">
-        <FormSearch />
-      </mq-layout>
       <mq-layout mq="medium+">
         <Navigation :menu="menu" />
       </mq-layout>
@@ -37,7 +34,6 @@
 import Bug from '@/components/atoms/Bug'
 import ButtonBack from '@/components/atoms/ButtonBack'
 import ButtonIcon from '@/components/atoms/ButtonIcon'
-import FormSearch from '@/components/forms/Search'
 import Hamburger from '@/components/atoms/Hamburger'
 import IconSearch from '@/components/icons/Search'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
@@ -50,7 +46,6 @@ export default {
     Bug,
     ButtonBack,
     ButtonIcon,
-    FormSearch,
     Hamburger,
     IconSearch,
     LinkPrimary,
@@ -96,6 +91,8 @@ export default {
           to: { name: 'contact' }
         }]
       }, {
+        type: 'search'
+      }, {
         type: 'button',
         name: 'Post Job',
         to: { name: 'postJob' }
@@ -126,7 +123,6 @@ export default {
   }
 
   .search-form {
-    margin-right: auto;
     margin-left: 40px;
   }
 

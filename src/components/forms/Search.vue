@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent class="form" :class="{'»open' : open}">
+  <form @submit.prevent class="form" :class="{'»open' : open}" v-click-outside="close">
     <div class="box">
       <IconSearch class="icon-search" width="16" height="16" />
       <input
@@ -58,6 +58,10 @@ export default {
   },
 
   methods: {
+    close (event) {
+      this.open = false
+    },
+
     async search () {
       await this.$store.dispatch('jobs/clear', 'search')
       await this.$store.dispatch('jobs/fetch', {
@@ -124,16 +128,17 @@ export default {
     background: $WHITE;
 
     @include mq ($from: small) {
-      border: 1px solid $GREY;
-      border-top: none;
-      border-bottom-left-radius: 4px;
-      border-bottom-right-radius: 4px;
+      border-radius: grid(1);
+      box-shadow: 0 3px 7px rgba($BLACK, .15);
       padding: grid(4);
       position: absolute;
-      height: 300px;
+      height: 420px;
       overflow: auto;
       top: 100%;
-      width: 100%;
+      right: 0;
+      top: calc(100% + 16px);
+      width: 400px;
+      z-index: 2;
     }
 
     @include mq ($until: small) {
