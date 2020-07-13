@@ -98,8 +98,8 @@ export default {
     border: none;
     color: $BLACK;
     font-size: 15px;
-    flex: 1;
     padding: grid(2);
+    width: grid(46);
 
     &:focus { outline: none; }
     &::placeholder {
