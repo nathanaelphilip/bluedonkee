@@ -5,7 +5,7 @@
       <div class="content">
         <strong>We want your feedback.</strong> Please take our brief WorkBlue user survey.
       </div>
-      <LinkPrimary href="https://docs.google.com/forms/d/e/1FAIpQLSeD_tyqltmJqNNZPhCAtYErMPPwknPGDQDbizwR-12FXEA0YQ/viewform">Get Started</LinkPrimary>
+      <LinkPrimary href="https://bit.ly/2OrDxvp">Get Started</LinkPrimary>
     </div>
   </Flash>
 </template>
