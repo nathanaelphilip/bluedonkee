@@ -7,6 +7,7 @@
     <component :is="layout" v-if="loaded">
       <router-view :key="$route.fullPath" />
     </component>
+    <Toast @close="open = false; $cookies.set('toast-form', true);" :open="open" />
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import _ from 'lodash'
 
 import Basic from '@/layouts/Basic'
 import Full from '@/layouts/Full'
+import Toast from '@/components/molecules/Toast'
 
 export default {
   name: 'app',
@@ -27,11 +29,13 @@ export default {
 
   components: {
     basic: Basic,
-    full: Full
+    full: Full,
+    Toast
   },
 
   data () {
     return {
+      open: false,
       loaded: false
     }
   },
@@ -40,6 +44,10 @@ export default {
     layout () {
       return this.$route.meta.layout ? this.$route.meta.layout : 'full'
     }
+  },
+
+  created () {
+    this.open = !this.$cookies.isKey('toast-form')
   },
 
   async mounted () {
