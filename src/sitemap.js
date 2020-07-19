@@ -47,7 +47,7 @@ const generate = async function () {
   for (var i = 0; i < jobs.length; i++) {
     const entityType = jobs[i].fields.Group ? 'Group' : 'Campaigns'
     const entities = jobs[i].fields.Group ? groups : campaigns
-
+    
     const entity = entities.find(entity => {
       return entity.id === jobs[i].fields[entityType][0]
     })

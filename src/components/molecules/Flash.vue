@@ -13,7 +13,10 @@
 import IconClose from '@/components/icons/Close'
 
 export default {
-  props: ['open'],
+  props: {
+    open: { type: Boolean, default: false }
+  },
+
   components: { IconClose },
 
   watch: {
@@ -38,17 +41,27 @@ export default {
 
     &.open {
       transform: translateY(0);
-      transform-delay: transform 0s;
+      transition-delay: 0s;
+    }
+
+    &.»bottom {
+      bottom: grid(5);
+      top: auto;
+      transform: translateY(130%);
+
+      &.open {
+        transform: translateY(0);
+      }
     }
   }
 
   .grid {
+    @include Container;
     display: grid;
     grid-template-columns: 1fr 2.25fr 1fr;
     grid-column-gap: 33px;
-    margin: 0 auto;
-    max-width: 1400px;
-    width: 95%;
+
+    .»full & { grid-template-columns: 1fr; }
   }
 
   .flash {
@@ -62,6 +75,12 @@ export default {
     grid-column: 2 / 3;
     padding: 22px 25px;
     max-width: 800px;
+
+    .»full & {
+      max-width: 100%;
+      grid-column: 1 / 3;
+      width: 100%;
+    }
   }
 
   .message {

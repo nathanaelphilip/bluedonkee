@@ -24,9 +24,10 @@
       </Modal>
     </portal>
     <portal to="flash">
-       <Flash
+      <Flash
         @close="open.flash = false"
-        :open="open.flash">{{ message }}
+        :open="open.flash">
+        {{ message }}
       </Flash>
     </portal>
   </aside>
@@ -137,8 +138,5 @@ export default {
       padding: grid(4) grid(4);
       text-align: center;
     }
-  }
-
-  .heading {
   }
 </style>

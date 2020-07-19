@@ -23,5 +23,7 @@ export default {
     @include ButtonPrimary;
 
     &.small {padding: 9px 12px 9px 12px}
+
+    strong { font-weight: 900; }
   }
 </style>
