@@ -5,7 +5,7 @@
     </div>
     <div class="box">
       <h4 class="heading">{{ title }}</h4>
-      <div class="entity">{{ entity.fields.Name }}</div>
+      <div class="entity" v-if="entity">{{ entity.fields.Name }}</div>
     </div>
   </router-link>
 </template>
@@ -31,7 +31,15 @@ export default {
 
   computed: {
     avatar () {
-      return this.entity && this.entity.fields.Avatar ? this.entity.fields.Avatar[0].url : ''
+      if (this.entity && this.entity.fields.Avatar) {
+        return this.entity.fields.Avatar[0].url
+      }
+
+      if (this.result.fields.Avatar && this.result.fields.Avatar[0]) {
+        return this.result.fields.Avatar[0].url
+      }
+
+      return ''
     },
 
     title () {

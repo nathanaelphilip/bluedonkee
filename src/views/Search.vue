@@ -5,6 +5,7 @@
       <h2 class="heading">{{ $store.getters['search/query'] }}</h2>
     </header>
     <Jobs v-if="$route.params.type === 'jobs'" :jobs="$store.getters['jobs/getFetched']('search')" />
+    <Campaigns v-if="$route.params.type === 'campaigns'" :campaigns="$store.getters['campaigns/getFetched']('search')" />
     <Pager
       @load="load"
       :loading="$store.state.jobs.loading === 'search'"
@@ -16,13 +17,14 @@
 
 <script>
 import BackTop from '@/components/molecules/BackTop'
+import Campaigns from '@/components/molecules/Campaigns'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
 
 const pageSize = 20
 
 export default {
-  components: { BackTop, Jobs, Pager },
+  components: { BackTop, Campaigns, Jobs, Pager },
 
   async mounted () {
     if (!this.$store.getters['jobs/getFetched']('search').length && this.$store.getters['search/query']) {

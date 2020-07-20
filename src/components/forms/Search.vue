@@ -25,6 +25,20 @@
         :results="$store.getters['jobs/getFetched']('search').slice(0, 3)"
         @close="$store.dispatch('app/mobileSearchToggle', false)"
         />
+      <SearchResults
+        v-if="$store.getters['campaigns/getFetched']('search').length"
+        heading="Campaigns"
+        type="campaigns"
+        :results="$store.getters['campaigns/getFetched']('search').slice(0, 3)"
+        @close="$store.dispatch('app/mobileSearchToggle', false)"
+        />
+      <SearchResults
+        v-if="$store.getters['groups/getFetched']('search').length"
+        heading="Groups"
+        type="groups"
+        :results="$store.getters['groups/getFetched']('search').slice(0, 3)"
+        @close="$store.dispatch('app/mobileSearchToggle', false)"
+        />
     </div>
   </form>
 </template>
@@ -70,6 +84,22 @@ export default {
           filterByFormula: `AND(OR({Status} = 'Active', {Status} = 'Promoted'), SEARCH(LOWER("${this.$store.getters['search/query']}"), LOWER({Title}&'')))`,
           pageSize,
           sort: [{ field: 'Post Date', direction: 'desc' }]
+        }
+      })
+      await this.$store.dispatch('campaigns/fetch', {
+        id: 'search',
+        params: {
+          filterByFormula: `AND(OR({Status} = 'Active'), SEARCH(LOWER("${this.$store.getters['search/query']}"), LOWER({Name}&'')))`,
+          pageSize,
+          sort: [{ field: 'Name', direction: 'desc' }]
+        }
+      })
+      await this.$store.dispatch('groups/fetch', {
+        id: 'search',
+        params: {
+          filterByFormula: `SEARCH(LOWER("${this.$store.getters['search/query']}"), LOWER({Name}&''))`,
+          pageSize,
+          sort: [{ field: 'Name', direction: 'desc' }]
         }
       })
     }
