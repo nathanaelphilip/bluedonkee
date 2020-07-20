@@ -7,7 +7,9 @@
     <component :is="layout" v-if="loaded">
       <router-view :key="$route.fullPath" />
     </component>
-    <Toast @close="open = false; $cookies.set('toast-form', true);" :open="open" />
+    <mq-layout mq="medium+">
+      <Toast @close="open = false; $cookies.set('toast-form', true);" :open="open" />
+    </mq-layout>
   </div>
 </template>
 
