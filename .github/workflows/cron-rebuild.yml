@@ -11,4 +11,4 @@ jobs:
     - name: curl
       uses: wei/curl@master
       with:
-        args: https://api.zeit.co/v1/integrations/deploy/QmdUckg81pGZMobwiWC9EwA2WfbvfHfbfU8nMtfShkPES7/2ah34aWIPZ
+        args:
