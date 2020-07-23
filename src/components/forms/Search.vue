@@ -16,7 +16,7 @@
     </div>
     <div
     class="results"
-    v-if="($store.getters['jobs/getFetched']('search').length || $store.getters['campaigns/getFetched']('search').length || $store.getters['groups/getFetched']('search').length) && open"
+    v-if="open"
     >
       <SearchResults
         v-if="$store.getters['jobs/getFetched']('search').length"
