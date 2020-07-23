@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="search-results">
     <header class="header">
       <h3 class="heading">{{ heading }}</h3>
       <router-link

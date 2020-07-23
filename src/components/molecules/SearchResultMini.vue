@@ -6,6 +6,12 @@
     <div class="box">
       <h4 class="heading">{{ title }}</h4>
       <div class="entity" v-if="entity">{{ entity.fields.Name }}</div>
+      <div class="location" v-if="!entity">
+        <Locations
+          :locations="locations"
+          :simple="true"
+        />
+      </div>
     </div>
   </router-link>
 </template>
@@ -16,16 +22,18 @@ import {
 } from '@/store/helpers'
 
 import Avatar from '@/components/atoms/Avatar'
+import Locations from '@/components/molecules/Locations'
 
 export default {
   props: ['result', 'type'],
-  components: { Avatar },
+  components: { Avatar, Locations },
 
   data () {
     return {
       loading: true,
       groups: [],
-      campaigns: []
+      campaigns: [],
+      locations: []
     }
   },
 
@@ -93,6 +101,11 @@ export default {
       })
     }
 
+    this.locations = this.result.fields.Location ? await getByIds({
+      ids: this.result.fields.Location,
+      type: 'locations'
+    }) : []
+
     this.loading = false
   }
 }
@@ -117,10 +130,12 @@ export default {
   }
 
   .heading {
+    color: $BLACK;
     font-size: 15px;
     margin-bottom: grid(1);
   }
 
+  .location,
   .entity {
     color: $BLUEGREY;
     font-size: 13px;

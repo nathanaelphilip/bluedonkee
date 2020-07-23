@@ -16,7 +16,7 @@
     </div>
     <div
     class="results"
-    v-if="$store.getters['jobs/getFetched']('search').length && open"
+    v-if="($store.getters['jobs/getFetched']('search').length || $store.getters['campaigns/getFetched']('search').length || $store.getters['groups/getFetched']('search').length) && open"
     >
       <SearchResults
         v-if="$store.getters['jobs/getFetched']('search').length"
@@ -48,6 +48,8 @@ import IconClose from '@/components/icons/Close'
 import IconSearch from '@/components/icons/Search'
 import SearchResults from '@/components/molecules/SearchResults'
 
+import { debounce } from 'lodash'
+
 const pageSize = 20
 
 export default {
@@ -76,7 +78,8 @@ export default {
       this.open = false
     },
 
-    async search () {
+    search: debounce(async function () {
+      console.log('wut')
       await this.$store.dispatch('jobs/clear', 'search')
       await this.$store.dispatch('jobs/fetch', {
         id: 'search',
@@ -86,23 +89,25 @@ export default {
           sort: [{ field: 'Post Date', direction: 'desc' }]
         }
       })
+      await this.$store.dispatch('campaigns/clear', 'search')
       await this.$store.dispatch('campaigns/fetch', {
         id: 'search',
         params: {
           filterByFormula: `AND(OR({Status} = 'Active'), SEARCH(LOWER("${this.$store.getters['search/query']}"), LOWER({Name}&'')))`,
           pageSize,
-          sort: [{ field: 'Name', direction: 'desc' }]
+          sort: [{ field: 'Name', direction: 'asc' }]
         }
       })
+      await this.$store.dispatch('groups/clear', 'search')
       await this.$store.dispatch('groups/fetch', {
         id: 'search',
         params: {
           filterByFormula: `SEARCH(LOWER("${this.$store.getters['search/query']}"), LOWER({Name}&''))`,
           pageSize,
-          sort: [{ field: 'Name', direction: 'desc' }]
+          sort: [{ field: 'Name', direction: 'asc' }]
         }
       })
-    }
+    }, 500)
   }
 }
 </script>
@@ -182,6 +187,12 @@ export default {
     .form.»open &,
     .form:hover & {
       fill: $BLACK;
+    }
+  }
+
+  .search-results {
+    &:not(:last-child) {
+      margin-bottom: grid(6);
     }
   }
 </style>

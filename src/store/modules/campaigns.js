@@ -6,7 +6,8 @@ import {
   CAMPAIGNS_FETCH,
   CAMPAIGNS_FETCHED,
   CAMPAIGNS_LOADING,
-  CAMPAIGNS_OFFSET
+  CAMPAIGNS_OFFSET,
+  CAMPAIGNS_CLEAR
 } from '@/store/mutation-types'
 
 const state = {
@@ -33,6 +34,10 @@ const mutations = {
   [CAMPAIGNS_FETCHED] (state, { ids, id }) {
     const merged = unionBy(state.fetched[id], ids)
     Vue.set(state.fetched, id, merged)
+  },
+
+  [CAMPAIGNS_CLEAR] (state, id) {
+    delete state.fetched[id]
   }
 }
 
@@ -57,6 +62,10 @@ const actions = {
     const { data } = await getCampaign(id)
     commit(CAMPAIGNS_FETCH, [data])
     return data
+  },
+
+  async clear ({ commit }, id) {
+    commit(CAMPAIGNS_CLEAR, id)
   }
 }
 
