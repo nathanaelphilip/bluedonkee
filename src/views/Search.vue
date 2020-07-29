@@ -3,6 +3,11 @@
     <header class="header">
       <div class="subheading">Results for</div>
       <h2 class="heading">{{ $store.getters['search/query'] }}</h2>
+      <nav class="navigation">
+        <router-link class="anchor" to="/search/jobs">Jobs</router-link>
+        <router-link class="anchor" to="/search/groups">Groups</router-link>
+        <router-link class="anchor" to="/search/campaigns">Campaigns</router-link>
+      </nav>
     </header>
     <Jobs v-if="$route.params.type === 'jobs'" :jobs="$store.getters['jobs/getFetched']('search')" />
     <Campaigns v-if="$route.params.type === 'campaigns'" :campaigns="$store.getters['campaigns/getFetched']('search')" />
@@ -10,7 +15,17 @@
     <Pager
       @load="load"
       :loading="$store.state.jobs.loading === 'search'"
-      v-if="$store.getters['jobs/getOffset']('search')"
+      v-if="$route.params.type === 'jobs' && $store.getters['jobs/getOffset']('search')"
+     />
+    <Pager
+      @load="load"
+      :loading="$store.state.campaigns.loading === 'search'"
+      v-if="$route.params.type === 'campaigns' && $store.getters['campaigns/getOffset']('search')"
+     />
+     <Pager
+      @load="load"
+      :loading="$store.state.groups.loading === 'search'"
+      v-if="$route.params.type === 'groups' && $store.getters['groups/getOffset']('search')"
      />
     <BackTop v-if="!$store.getters['jobs/getOffset']($store.getters['search'])" />
   </section>
@@ -53,7 +68,7 @@ export default {
 <style lang="scss" scoped>
   .header {
     @include mq ($from: small) {
-      margin-bottom: grid(18);
+      margin-bottom: grid(16);
       margin-top: grid(16);
     }
 
@@ -83,9 +98,18 @@ export default {
 
   .heading {
     font-weight: 900;
+    margin-bottom: grid(6);
 
     @include mq ($from: small) {
       font-size: 36px;
+    }
+  }
+
+  .anchor {
+    @include ButtonSimple;
+
+    &:not(:last-child) {
+      margin-right: grid(2);
     }
   }
 </style>
