@@ -16,7 +16,7 @@
     </div>
     <div
     class="results"
-    v-if="open"
+    v-if="results && open"
     >
       <SearchResults
         v-if="$store.getters['jobs/getFetched']('search').length"
@@ -70,6 +70,10 @@ export default {
       set (value) {
         this.$store.dispatch('search/updateQuery', value)
       }
+    },
+
+    results () {
+      return this.$store.getters['jobs/getFetched']('search').length || this.$store.getters['campaigns/getFetched']('search').length || this.$store.getters['groups/getFetched']('search').length
     }
   },
 
@@ -79,8 +83,12 @@ export default {
     },
 
     search: debounce(async function () {
-      console.log('wut')
       await this.$store.dispatch('jobs/clear', 'search')
+      await this.$store.dispatch('campaigns/clear', 'search')
+      await this.$store.dispatch('groups/clear', 'search')
+
+      if (!this.$store.getters['search/query']) return
+
       await this.$store.dispatch('jobs/fetch', {
         id: 'search',
         params: {
@@ -89,7 +97,7 @@ export default {
           sort: [{ field: 'Post Date', direction: 'desc' }]
         }
       })
-      await this.$store.dispatch('campaigns/clear', 'search')
+
       await this.$store.dispatch('campaigns/fetch', {
         id: 'search',
         params: {
@@ -98,7 +106,7 @@ export default {
           sort: [{ field: 'Name', direction: 'asc' }]
         }
       })
-      await this.$store.dispatch('groups/clear', 'search')
+
       await this.$store.dispatch('groups/fetch', {
         id: 'search',
         params: {

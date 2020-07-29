@@ -42,7 +42,7 @@ const mutations = {
   },
 
   [GROUPS_CLEAR] (state, id) {
-    delete state.fetched[id]
+    Vue.delete(state.fetched, id)
   }
 }
 
