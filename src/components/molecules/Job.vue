@@ -217,10 +217,11 @@ export default {
     grid-template-columns: 1fr 54px;
     grid-column-gap: 16px;
     margin-bottom: grid(4);
-    margin-top: 11px;
+    margin-top: grid(3) - 1;
 
     @include mq ($until: small) {
       grid-template-columns: 1fr;
+      margin-bottom: grid(2);
     }
 
     @include mq ($until: xsmall) {
@@ -234,17 +235,22 @@ export default {
     font-size: 18px;
     font-weight: 800;
     line-height: 1.25;
-    margin-bottom: 5px;
+    margin-bottom: grid(1);
 
     @include mq ($until: xsmall) {
       font-size: 15px;
-      line-height: 1.4;
+      line-height: 1.3333;
     }
   }
 
   .meta {
     color: $BLUE;
     font-size: 15px;
+
+    @include mq ($until: xsmall) {
+      font-size: 14px;
+      line-height: 1.42;
+    }
 
     a:hover {
       text-decoration: underline;
