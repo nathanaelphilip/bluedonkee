@@ -252,6 +252,7 @@ export default {
     @include Flex ($justify: flex-start);
     color: $BLUE;
     font-size: 17px;
+    line-height: 1.5;
     margin-bottom: grid(6);
 
     @include mq ($until: small) {
@@ -261,7 +262,8 @@ export default {
     }
 
     .bug {
-      margin-right: grid(3)
+      margin-right: grid(3);
+      line-height: 1;
     }
   }
 

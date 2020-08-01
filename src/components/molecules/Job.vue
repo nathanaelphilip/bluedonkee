@@ -118,7 +118,7 @@ export default {
         return this.campaigns[0]
       }
 
-      return false
+      return { fields: { Slug: '' } }
     },
 
     avatar () {
