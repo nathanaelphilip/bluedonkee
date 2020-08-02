@@ -6,7 +6,7 @@
     x="0px"
     y="0px"
     viewBox="0 0 10 2"
-    style="enable-background:new 0 0 10 2;"
+    enable-background="new 0 0 10 2"
     xml:space="preserve"
     :height="height"
     :width="width"
