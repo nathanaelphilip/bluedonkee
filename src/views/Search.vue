@@ -3,12 +3,12 @@
     <header class="header">
       <div class="subheading">Results for</div>
       <h2 class="heading">{{ $store.getters['search/query'] }}</h2>
-      <nav class="navigation">
-        <router-link class="anchor" to="/search/jobs">Jobs</router-link>
-        <router-link class="anchor" to="/search/groups">Groups</router-link>
-        <router-link class="anchor" to="/search/campaigns">Campaigns</router-link>
-      </nav>
     </header>
+    <nav class="navigation">
+      <router-link class="anchor" to="/search/jobs">Jobs</router-link>
+      <router-link class="anchor" to="/search/groups">Groups</router-link>
+      <router-link class="anchor" to="/search/campaigns">Campaigns</router-link>
+    </nav>
     <Jobs v-if="$route.params.type === 'jobs'" :jobs="$store.getters['jobs/getFetched']('search')" />
     <Campaigns v-if="$route.params.type === 'campaigns'" :campaigns="$store.getters['campaigns/getFetched']('search')" />
     <Groups v-if="$route.params.type === 'groups'" :groups="$store.getters['groups/getFetched']('search')" />
@@ -68,7 +68,7 @@ export default {
 <style lang="scss" scoped>
   .header {
     @include mq ($from: small) {
-      margin-bottom: grid(16);
+      margin-bottom: grid(8);
       margin-top: grid(16);
     }
 
@@ -98,10 +98,20 @@ export default {
 
   .heading {
     font-weight: 900;
-    margin-bottom: grid(6);
 
     @include mq ($from: small) {
       font-size: 36px;
+      margin-bottom: grid(6);
+    }
+  }
+
+  .navigation {
+    @include mq ($from: small) {
+      margin-bottom: grid(12);
+    }
+
+    @include mq ($until: small) {
+      padding: grid(4) grid(5) 0 grid(5);
     }
   }
 
