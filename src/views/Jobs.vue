@@ -13,7 +13,8 @@
       <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
         <button @click.prevent="mobileFilter = !mobileFilter" class="toggle-filter">
           Filter
-          <IconPlus v-if="!$store.getters['filters/count']" :width="10" :height="10" />
+          <IconPlus v-if="!$store.getters['filters/count'] && !mobileFilter" :width="10" :height="10" />
+          <IconMinus v-if="!$store.getters['filters/count'] && mobileFilter" :width="10" :height="2" />
           <template v-if="$store.getters['filters/count']">
             <Bug>{{ $store.getters['filters/count'] }}</Bug>
           </template>
@@ -50,6 +51,7 @@ import BackTop from '@/components/molecules/BackTop'
 import Bug from '@/components/atoms/Bug'
 import Filters from '@/components/forms/Filters'
 import FiltersToggle from '@/components/forms/FiltersToggle'
+import IconMinus from '@/components/icons/Minus'
 import IconPlus from '@/components/icons/Plus'
 import Jobs from '@/components/molecules/Jobs'
 import Pager from '@/components/molecules/Pager'
@@ -69,6 +71,7 @@ export default {
     Bug,
     Filters,
     FiltersToggle,
+    IconMinus,
     IconPlus,
     Jobs,
     Pager

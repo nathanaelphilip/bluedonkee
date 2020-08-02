@@ -73,9 +73,6 @@
     </div>
 
     <Tags>
-      <mq-layout :mq="['xxsmall', 'xsmall']">
-        <Bug v-if="isNew">New</Bug>
-      </mq-layout>
       <Tag
         v-for="category in groupCategories"
         :key="`work-category-${category.id}`"
@@ -241,10 +238,11 @@ export default {
     font-weight: 900;
     line-height: 1.15;
     max-width: 500px;
-    margin-bottom: 8px;
+    margin-bottom: grid(2);
 
     @include mq ($until: xsmall) {
       font-size: 24px;
+      line-height: 1.25;
     }
   }
 
@@ -252,6 +250,7 @@ export default {
     @include Flex ($justify: flex-start);
     color: $BLUE;
     font-size: 17px;
+    line-height: 1.5;
     margin-bottom: grid(6);
 
     @include mq ($until: small) {
@@ -261,7 +260,8 @@ export default {
     }
 
     .bug {
-      margin-right: grid(3)
+      margin-right: grid(3);
+      line-height: 1;
     }
   }
 
