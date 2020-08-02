@@ -16,8 +16,9 @@
     </div>
     <div
     class="results"
-    v-if="results && open"
+    v-if="$store.getters['search/query'] && open"
     >
+      <Spinner v-if="loading" />
       <SearchResults
         v-if="$store.getters['jobs/getFetched']('search').length"
         heading="Jobs"
@@ -39,6 +40,12 @@
         :results="$store.getters['groups/getFetched']('search').slice(0, 3)"
         @close="$store.dispatch('app/mobileSearchToggle', false)"
         />
+        <template v-if="!results && !loading">
+          <div class="no-results">
+            <h3>No Results Found</h3>
+            <p>Please try something else.</p>
+          </div>
+        </template>
     </div>
   </form>
 </template>
@@ -47,16 +54,18 @@
 import IconClose from '@/components/icons/Close'
 import IconSearch from '@/components/icons/Search'
 import SearchResults from '@/components/molecules/SearchResults'
+import Spinner from '@/components/atoms/Spinner'
 
 import { debounce } from 'lodash'
 
 const pageSize = 20
 
 export default {
-  components: { IconClose, IconSearch, SearchResults },
+  components: { IconClose, IconSearch, SearchResults, Spinner },
 
   data () {
     return {
+      loading: false,
       open: false
     }
   },
@@ -83,6 +92,8 @@ export default {
     },
 
     search: debounce(async function () {
+      this.loading = true
+
       await this.$store.dispatch('jobs/clear', 'search')
       await this.$store.dispatch('campaigns/clear', 'search')
       await this.$store.dispatch('groups/clear', 'search')
@@ -98,6 +109,8 @@ export default {
         }
       })
 
+      if (this.$store.getters['jobs/getFetched']('search').length) { this.loading = false }
+
       await this.$store.dispatch('campaigns/fetch', {
         id: 'search',
         params: {
@@ -107,6 +120,8 @@ export default {
         }
       })
 
+      if (this.$store.getters['campaigns/getFetched']('search').length) { this.loading = false }
+
       await this.$store.dispatch('groups/fetch', {
         id: 'search',
         params: {
@@ -115,6 +130,8 @@ export default {
           sort: [{ field: 'Name', direction: 'asc' }]
         }
       })
+
+      this.loading = false
     }, 500)
   }
 }
@@ -201,6 +218,21 @@ export default {
   .search-results {
     &:not(:last-child) {
       margin-bottom: grid(6);
+    }
+  }
+
+  .no-results {
+    h3 {
+      color: $BLACK;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: grid(1);
+    }
+
+    p {
+      color: $BLUEGREY;
+      font-size: 15px;
+      font-weight: 500;
     }
   }
 </style>
