@@ -175,7 +175,7 @@ export default {
       box-shadow: 0 3px 7px rgba($BLACK, .15);
       padding: grid(4);
       position: absolute;
-      height: 420px;
+      max-height: 420px;
       overflow: auto;
       top: 100%;
       right: 0;
