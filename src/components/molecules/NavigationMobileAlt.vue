@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <button @click.prevent="visible = !visible" class="toggle">
-      Area of Interest<IconPlus v-if="!$store.getters['filters/count']" :width="10" :height="10" />
+      Area of Interest
+      <IconPlus v-if="!$store.getters['filters/count'] && !visible" :width="10" :height="10" />
+      <IconMinus v-if="!$store.getters['filters/count'] && visible" :width="10" :height="2" />
     </button>
     <nav
       class="nav"
@@ -25,12 +27,13 @@
 import VueScrollTo from 'vue-scrollto'
 
 import IconChevronRight from '@/components/icons/ChevronRight'
+import IconMinus from '@/components/icons/Minus'
 import IconPlus from '@/components/icons/Plus'
 
 export default {
   name: 'components-molecules-navigation',
   props: ['heading', 'menu'],
-  components: { IconChevronRight, IconPlus },
+  components: { IconChevronRight, IconMinus, IconPlus },
 
   data () {
     return {
