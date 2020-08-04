@@ -27,16 +27,19 @@ export default {
 
     @include mq ($until: small) {
       font-size: 24px;
-      line-height: 30px;
+      line-height: 1.25;
     }
 
     &:not(:last-child) {
-      margin-bottom: grid(6);
+      margin-bottom: grid(3);
+
+      @include mq ($until: small) {
+        margin-bottom: grid(2);
+      }
     }
   }
 
   .content {
-    font-size: 16px;
     line-height: 24px;
     margin: 0 auto;
     max-width: 530px;

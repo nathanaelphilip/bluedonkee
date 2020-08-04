@@ -140,18 +140,22 @@ export default {
 <style lang="scss" scoped>
   .form-contact {
     background: $BLUELIGHT;
-    border-radius: 12px;
-    padding: 32px;
+    border-radius: grid(3);
+    padding: grid(8);
+
+    @include mq ($until: small) {
+      padding: grid(4);
+    }
   }
 
   .header {
-    margin-bottom: 35px;
+    margin-bottom: grid(8);
   }
 
   .heading {
     font-size: 24px;
     font-weight: 800;
-    margin-bottom: 15px;
+    margin-bottom: grid(4);
   }
 
   .subheading {

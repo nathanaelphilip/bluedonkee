@@ -37,7 +37,7 @@ export default {
 
     @include mq ($until: small) {
       font-size: 24px;
-      line-height: 30px;
+      line-height: 1.25;
     }
   }
 

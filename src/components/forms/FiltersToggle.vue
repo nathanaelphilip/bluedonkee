@@ -7,6 +7,7 @@
       <button @click.prevent="clear" class="clear">
         Clear All
       </button>
+      <h2 class="heading">Filter Results</h2>
     </header>
     <div class="boxed">
       <Toggles>
@@ -49,7 +50,7 @@
       </Toggles>
     </div>
     <div class="actions">
-      <ButtonPrimary @click.native.prevent="apply" class="apply full large">Apply Filters</ButtonPrimary>
+      <ButtonPrimary @click.native.prevent="apply" class="apply full">Apply Filters</ButtonPrimary>
     </div>
   </section>
 </template>
@@ -140,6 +141,12 @@ export default {
     padding: grid(5) grid(4) 0 grid(4);
   }
 
+  .heading {
+    font-size: 19px;
+    font-weight: 900;
+    margin: grid(6) 0 grid(3) 0;
+  }
+
   .boxed {
     overflow: auto;
     flex: 1;
@@ -163,6 +170,7 @@ export default {
   }
 
   .actions {
+    border-top: 1px solid $GREY;
     @include mq ($until: xsmall) {
       padding: grid(4);
     }
