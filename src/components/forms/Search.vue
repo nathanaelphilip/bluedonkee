@@ -148,6 +148,10 @@ export default {
     border-radius: 4px;
     padding: 0 grid(3);
 
+    @include mq ($until: small) {
+      padding: grid(2);
+    }
+
     .»open & {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
@@ -158,8 +162,18 @@ export default {
     border: none;
     color: $BLACK;
     font-size: 15px;
-    padding: grid(2);
-    width: grid(46);
+
+    @include mq ($from: small) {
+      padding: grid(2);
+      width: grid(46);
+    }
+
+    @include mq ($until: small) {
+      border-left: 1px solid $GREY;
+      flex: 1;
+      margin-left: grid(3);
+      padding: 0 grid(2);
+    }
 
     &:focus { outline: none; }
     &::placeholder {
