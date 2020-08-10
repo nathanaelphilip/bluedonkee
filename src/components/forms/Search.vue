@@ -171,7 +171,8 @@ export default {
     @include mq ($until: small) {
       border-left: 1px solid $GREY;
       flex: 1;
-      margin-left: grid(3);
+      font-size: 16px;
+      margin-left: grid(2.5);
       padding: 0 grid(2);
     }
 
@@ -188,8 +189,11 @@ export default {
     background: $BLUELIGHT;
     border: none;
     border-radius: 100%;
+    padding: 0;
     height: grid(6);
     width: grid(6);
+
+    @include mq ($until: small) { display: none; }
 
     &:hover { cursor: pointer; }
 
