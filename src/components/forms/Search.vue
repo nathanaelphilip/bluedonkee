@@ -170,6 +170,7 @@ export default {
 
     @include mq ($until: small) {
       border-left: 1px solid $GREY;
+      border-radius: 0;
       flex: 1;
       font-size: 16px;
       margin-left: grid(2.5);
