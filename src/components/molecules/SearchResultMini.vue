@@ -125,13 +125,14 @@ export default {
     grid-column-gap: grid(3);
 
     &:hover {
-      background: $GREY;
+      background: $GREY3;
     }
   }
 
   .heading {
     color: $BLACK;
     font-size: 15px;
+    line-height: 1.2;
     margin-bottom: grid(1);
   }
 

@@ -5,9 +5,27 @@
       <h2 class="heading">{{ $store.getters['search/query'] }}</h2>
     </header>
     <nav class="navigation">
-      <router-link class="anchor" to="/search/jobs">Jobs</router-link>
-      <router-link class="anchor" to="/search/groups">Groups</router-link>
-      <router-link class="anchor" to="/search/campaigns">Campaigns</router-link>
+      <router-link
+        class="anchor"
+        to="/search/jobs"
+        v-if="$store.getters['jobs/getFetched']('search').length"
+      >
+        Jobs
+      </router-link>
+      <router-link
+        class="anchor"
+        to="/search/groups"
+        v-if="$store.getters['groups/getFetched']('search').length"
+      >
+        Groups
+      </router-link>
+      <router-link
+        class="anchor"
+        to="/search/campaigns"
+        v-if="$store.getters['campaigns/getFetched']('search').length"
+      >
+        Campaigns
+      </router-link>
     </nav>
     <Jobs v-if="$route.params.type === 'jobs'" :jobs="$store.getters['jobs/getFetched']('search')" />
     <Campaigns v-if="$route.params.type === 'campaigns'" :campaigns="$store.getters['campaigns/getFetched']('search')" />
