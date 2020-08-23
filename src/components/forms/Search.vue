@@ -93,6 +93,7 @@ export default {
     },
 
     search: debounce(async function () {
+      this.open = true
       this.loading = true
 
       await this.$store.dispatch('jobs/clear', 'search')

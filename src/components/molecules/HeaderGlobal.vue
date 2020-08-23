@@ -104,6 +104,7 @@ export default {
     close () {
       if (this.$store.state.app.mobileSearchOpen) {
         this.$store.dispatch('app/mobileSearchToggle', false)
+        this.$store.dispatch('search/updateQuery', '')
       } else {
         this.$store.dispatch('app/mobileNavToggle', !this.$store.state.app.mobileNavOpen)
       }
