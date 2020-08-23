@@ -5,7 +5,7 @@
     v-if="$store.state.app.mobileSearchOpen"
     >
     <div class="box">
-      <FormSearch />
+      <FormSearch ref="form" />
     </div>
   </mq-layout>
 </template>
@@ -14,7 +14,22 @@
 import FormSearch from '@/components/forms/Search'
 
 export default {
-  components: { FormSearch }
+  components: { FormSearch },
+
+  mounted () {
+    this.unwatch = this.$store.watch(
+      state => state.app.mobileSearchOpen,
+      open => {
+        if (open === true) {
+          this.$refs.form.$refs.input.focus()
+        }
+      }
+    )
+  },
+
+  beforeDestroy () {
+    this.unwatch()
+  }
 }
 </script>
 

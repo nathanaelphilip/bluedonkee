@@ -68,7 +68,9 @@ const actions = {
   }
 }
 
-const getters = {}
+const getters = {
+  mobileSearchOpen: (state) => state.mobileSearchOpen
+}
 
 export default {
   namespaced: true,

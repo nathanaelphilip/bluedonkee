@@ -3,13 +3,14 @@
     <div class="box">
       <IconSearch class="icon-search" width="16" height="16" />
       <input
+        ref="input"
         @focus="open = true"
         @keyup="search"
         v-model="input"
         type="text"
         class="input"
         placeholder="Job Title or Keyword"
-        />
+      />
       <button @click.prevent="open = false" class="close">
         <IconClose height="9" width="9" />
       </button>
