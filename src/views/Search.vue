@@ -2,7 +2,7 @@
   <section>
     <header class="header">
       <div class="subheading">Results for</div>
-      <h2 class="heading">{{ $store.getters['search/query'] }}</h2>
+      <h2 class="heading">{{ cachedQuery }}</h2>
     </header>
     <nav class="navigation">
       <router-link
@@ -61,10 +61,18 @@ const pageSize = 20
 export default {
   components: { BackTop, Campaigns, Groups, Jobs, Pager },
 
+  data () {
+    return {
+      cachedQuery: ''
+    }
+  },
+
   async mounted () {
     if (!this.$store.getters['jobs/getFetched']('search').length && this.$store.getters['search/query']) {
       await this.load()
     }
+
+    this.cachedQuery = this.$store.state.search.query
   },
 
   methods: {

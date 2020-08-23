@@ -11,7 +11,7 @@
         class="input"
         placeholder="Job Title or Keyword"
       />
-      <button @click.prevent="open = false" class="close">
+      <button @click.prevent="open = false; $store.dispatch('search/updateQuery', '')" class="close">
         <IconClose height="9" width="9" />
       </button>
     </div>
