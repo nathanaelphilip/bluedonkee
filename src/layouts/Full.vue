@@ -1,6 +1,7 @@
 <template>
   <main class="site" :class="{'»mobilesticky' : $store.state.app.mobileNavOpen}">
     <Header />
+    <SearchMobile />
     <portal-target name="banner">
     </portal-target>
     <div id="sticky-filters" class="filters">
@@ -31,10 +32,12 @@ import Newsletter from '@/components/forms/Newsletter'
 import JobsPromoted from '@/components/molecules/JobsPromoted'
 import Twitter from '@/components/molecules/Twitter'
 
+import SearchMobile from '@/components/molecules/SearchMobile'
+
 export default {
   name: 'layout-full',
 
-  components: { Grid, Header, Newsletter, JobsPromoted, Twitter },
+  components: { Grid, Header, Newsletter, JobsPromoted, SearchMobile, Twitter },
 
   mounted () {
     sticky('sticky-filters', 69)

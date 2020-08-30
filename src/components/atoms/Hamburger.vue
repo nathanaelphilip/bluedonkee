@@ -2,7 +2,7 @@
   <button
     @click.prevent
     class="hamburger"
-    :class="{'»active': $store.state.app.mobileNavOpen}"
+    :class="{'»active': $store.state.app.mobileNavOpen || $store.state.app.mobileSearchOpen}"
     >
     <div class="line"></div>
     <div class="line"></div>

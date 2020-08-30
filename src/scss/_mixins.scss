@@ -21,7 +21,7 @@
 
 @mixin ButtonSimple {
   @include Button;
-  padding: grid(2) grid(3);
+  padding: grid(2.5) grid(3);
 
   &:hover,
   &.router-link-active {
@@ -287,4 +287,14 @@
   margin:  0 auto;
   max-width: grid(256);
   width: 95%;
+}
+
+@mixin Hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@mixin Show {
+  opacity: 1;
+  visibility: visible;
 }

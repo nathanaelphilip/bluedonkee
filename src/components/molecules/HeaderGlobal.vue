@@ -3,7 +3,6 @@
     <div class="container">
       <div class="back" v-if="$store.state.app.heading && back">
         <ButtonBack :to="back" v-if="back" />
-        <h2 class="heading">{{ $store.state.app.heading }}</h2>
       </div>
       <div class="logo" v-if="!$store.state.app.heading || !back">
         <router-link :to="{name: 'jobs'}"><Logo /></router-link>
@@ -15,7 +14,13 @@
       <mq-layout :mq="['xxsmall', 'xsmall', 'small']">
         <div class="alt-menu">
           <LinkPrimary classes="small" :to="{name: 'postJob'}">Post Job</LinkPrimary>
-          <Hamburger @click.native.prevent="$store.dispatch('app/mobileNavToggle', !$store.state.app.mobileNavOpen)" />
+          <ButtonIcon
+            class="button-search"
+            @click.native.prevent="$store.dispatch('app/mobileSearchToggle', true)"
+            >
+            <IconSearch :height="16" :width="16" />
+          </ButtonIcon>
+          <Hamburger @click.native.prevent="close" />
         </div>
       </mq-layout>
     </div>
@@ -28,7 +33,9 @@
 <script>
 import Bug from '@/components/atoms/Bug'
 import ButtonBack from '@/components/atoms/ButtonBack'
+import ButtonIcon from '@/components/atoms/ButtonIcon'
 import Hamburger from '@/components/atoms/Hamburger'
+import IconSearch from '@/components/icons/Search'
 import LinkPrimary from '@/components/atoms/LinkPrimary'
 import Logo from '@/components/atoms/Logo'
 import Navigation from '@/components/molecules/Navigation'
@@ -38,7 +45,9 @@ export default {
   components: {
     Bug,
     ButtonBack,
+    ButtonIcon,
     Hamburger,
+    IconSearch,
     LinkPrimary,
     Logo,
     Navigation,
@@ -82,10 +91,23 @@ export default {
           to: { name: 'contact' }
         }]
       }, {
+        type: 'search'
+      }, {
         type: 'button',
         name: 'Post Job',
         to: { name: 'postJob' }
       }]
+    }
+  },
+
+  methods: {
+    close () {
+      if (this.$store.state.app.mobileSearchOpen) {
+        this.$store.dispatch('app/mobileSearchToggle', false)
+        this.$store.dispatch('search/updateQuery', '')
+      } else {
+        this.$store.dispatch('app/mobileNavToggle', !this.$store.state.app.mobileNavOpen)
+      }
     }
   }
 }
@@ -95,10 +117,14 @@ export default {
   .header {
     background: $WHITE;
     border-bottom: 1px solid $GREY;
-    padding: grid(4);
+    padding: grid(4) 0;
     position: sticky;
     top: 0;
     z-index: 8;
+  }
+
+  .search-form {
+    margin-left: 40px;
   }
 
   .back {
@@ -147,7 +173,7 @@ export default {
   .alt-menu {
     @include Flex ($justify: flex-end);
 
-    > *:last-child {
+    > *:not(first-child) {
       margin-left: grid(2);
     }
   }

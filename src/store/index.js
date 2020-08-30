@@ -11,6 +11,7 @@ import groupCategories from './modules/groupCategories'
 import jobs from './modules/jobs'
 import locations from './modules/locations'
 import offices from './modules/offices'
+import search from './modules/search'
 import states from './modules/states'
 import workCategories from './modules/workCategories'
 import workLevels from './modules/workLevels'
@@ -30,6 +31,7 @@ export default new Vuex.Store({
     jobs,
     locations,
     offices,
+    search,
     states,
     workCategories,
     workLevels,

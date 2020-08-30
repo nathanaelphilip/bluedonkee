@@ -6,7 +6,8 @@ import {
   JOBS_FETCH,
   JOBS_FETCHED,
   JOBS_LOADING,
-  JOBS_OFFSET
+  JOBS_OFFSET,
+  JOBS_CLEAR
 } from '@/store/mutation-types'
 
 const state = {
@@ -35,6 +36,10 @@ const mutations = {
   [JOBS_FETCHED] (state, { id, ids }) {
     const merged = unionBy(state.fetched[id], ids)
     Vue.set(state.fetched, id, merged)
+  },
+
+  [JOBS_CLEAR] (state, id) {
+    Vue.delete(state.fetched, id)
   }
 }
 
@@ -64,6 +69,10 @@ const actions = {
     const { data } = await getJobs(settings)
     commit(JOBS_FETCH, data.records)
     return data.records[0]
+  },
+
+  async clear ({ commit }, id) {
+    commit(JOBS_CLEAR, id)
   }
 }
 
