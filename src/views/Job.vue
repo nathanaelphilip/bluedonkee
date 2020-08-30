@@ -164,11 +164,9 @@ export default {
 
     if (!this.$store.getters['jobs/getFetched'](`job/${this.job.id}`).length) {
       const search = []
-
       for (var i = 0; i < this.workCategories.length; i++) {
         search.push(`SEARCH("${this.workCategories[i].fields.Name}", {Work Categories})`)
       }
-
       await this.$store.dispatch('jobs/fetch', {
         id: `job/${this.job.id}`,
         params: {

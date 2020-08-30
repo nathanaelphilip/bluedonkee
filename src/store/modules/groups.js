@@ -7,7 +7,8 @@ import {
   GROUPS_FETCHED,
   GROUPS_LOADING,
   GROUPS_OFFSET,
-  GROUPS_REMOVE
+  GROUPS_REMOVE,
+  GROUPS_CLEAR
 } from '@/store/mutation-types'
 
 const state = {
@@ -38,6 +39,10 @@ const mutations = {
 
   [GROUPS_REMOVE] (state) {
     state.repository = []
+  },
+
+  [GROUPS_CLEAR] (state, id) {
+    Vue.delete(state.fetched, id)
   }
 }
 
@@ -66,6 +71,10 @@ const actions = {
 
   async remove ({ commit }) {
     commit(GROUPS_REMOVE)
+  },
+
+  async clear ({ commit }, id) {
+    commit(GROUPS_CLEAR, id)
   }
 }
 

@@ -21,6 +21,9 @@
             </div>
           </div>
         </template>
+        <template v-if="item.type === 'search'">
+          <FormSearch />
+        </template>
         <template v-if="item.type === 'button'">
           <LinkPrimary classes="small" :to="item.to">{{ item.name }}</LinkPrimary>
         </template>
@@ -31,11 +34,12 @@
 
 <script>
 import LinkPrimary from '@/components/atoms/LinkPrimary'
+import FormSearch from '@/components/forms/Search'
 
 export default {
   name: 'components-molecules-navigation',
   props: ['alignment', 'menu', 'extended'],
-  components: { LinkPrimary }
+  components: { FormSearch, LinkPrimary }
 }
 </script>
 
