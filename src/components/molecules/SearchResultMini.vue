@@ -82,6 +82,24 @@ export default {
         }
       }
 
+      if (this.type === 'campaigns') {
+        return {
+          name: 'campaign',
+          params: {
+            slug: this.result.fields.Slug
+          }
+        }
+      }
+
+      if (this.type === 'groups') {
+        return {
+          name: 'group',
+          params: {
+            slug: this.result.fields.Slug
+          }
+        }
+      }
+
       return {}
     }
   },
@@ -140,5 +158,9 @@ export default {
   .entity {
     color: $BLUEGREY;
     font-size: 13px;
+  }
+
+  .location {
+    @include Flex ($justify: flex-start)
   }
 </style>
