@@ -159,4 +159,8 @@ export default {
     color: $BLUEGREY;
     font-size: 13px;
   }
+
+  .location {
+    @include Flex ($justify: flex-start)
+  }
 </style>
