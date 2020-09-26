@@ -12,6 +12,9 @@
     <div class="boxed">
       <Toggles>
         <TogglesBox :visible="visible" @toggle="_uid => visible = _uid" heading="Location">
+          <div class="remote">
+              Include remote positions <Toggle :checked="remote" @toggled="remote = !remote" />
+            </div>
           <div class="tags grid">
             <CheckTag
               v-for="(tag, index) in $store.getters['states/sortAlphabetically']"
@@ -60,9 +63,10 @@ import ButtonPrimary from '@/components/atoms/ButtonPrimary'
 import CheckTag from '@/components/forms/CheckTag'
 import Toggles from '@/components/molecules/Toggles'
 import TogglesBox from '@/components/atoms/TogglesBox'
+import Toggle from '@/components/forms/Toggle'
 
 export default {
-  components: { ButtonPrimary, CheckTag, Toggles, TogglesBox },
+  components: { ButtonPrimary, CheckTag, Toggle, Toggles, TogglesBox },
 
   data () {
     return {
@@ -72,6 +76,7 @@ export default {
         types: []
       },
 
+      remote: false,
       visible: false
     }
   },
@@ -99,6 +104,8 @@ export default {
 
     async apply () {
       const entries = Object.entries(this.selected)
+
+      await this.$store.dispatch('filters/accept', { key: 'remote', value: this.remote })
 
       for (const [key, value] of entries) {
         await this.$store.dispatch('filters/accept', { key, value })
@@ -152,7 +159,15 @@ export default {
     flex: 1;
   }
 
-  .apply {}
+  .remote {
+    @include Flex;
+    background: $BLUELIGHT;
+    border-radius: grid(1);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: grid(6);
+    padding: grid(3) grid(5);
+  }
 
   .reset {
     @include ButtonClose;
