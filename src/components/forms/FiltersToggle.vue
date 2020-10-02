@@ -86,6 +86,7 @@ export default {
     this.selected.categories = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('categories')))
     this.selected.locations = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('locations')))
     this.selected.types = JSON.parse(JSON.stringify(this.$store.getters['filters/accepted']('types')))
+    this.remote = this.$store.getters['filters/accepted']('remote')
   },
 
   destroyed () {
