@@ -34,7 +34,7 @@
           {{ $store.getters['filters/accepted']('types').length }}
         </Count>
       </button>
-      <button @click.prevent="$store.dispatch('filters/clear')" class="clear">
+      <button @click.prevent="$store.dispatch('filters/clear'); remote = false;" class="clear">
         Clear Filters
       </button>
     </div>

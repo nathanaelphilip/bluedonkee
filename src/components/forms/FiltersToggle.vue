@@ -96,7 +96,7 @@ export default {
   methods: {
     clear () {
       this.$store.dispatch('filters/clear')
-      this.remove = false
+      this.remote = false
       this.selected = {
         categories: [],
         locations: [],
