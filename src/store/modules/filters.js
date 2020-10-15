@@ -24,7 +24,8 @@ const mutations = {
     state.accepted = {
       categories: [],
       locations: [],
-      types: []
+      types: [],
+      remote: false
     }
   }
 }
