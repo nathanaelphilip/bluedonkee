@@ -97,7 +97,7 @@ export default {
       this.loading = true
 
       await this.$store.dispatch('jobs/clear', 'search')
-      await this.$store.dispatch('campaigns/clear', 'search')
+      // await this.$store.dispatch('campaigns/clear', 'search')
       await this.$store.dispatch('groups/clear', 'search')
 
       if (!this.$store.getters['search/query']) return
@@ -113,16 +113,16 @@ export default {
 
       if (this.$store.getters['jobs/getFetched']('search').length) { this.loading = false }
 
-      await this.$store.dispatch('campaigns/fetch', {
-        id: 'search',
-        params: {
-          filterByFormula: `AND(OR({Status} = 'Active'), SEARCH(LOWER("${this.$store.getters['search/query']}"), LOWER({Name}&'')))`,
-          pageSize,
-          sort: [{ field: 'Name', direction: 'asc' }]
-        }
-      })
+      // await this.$store.dispatch('campaigns/fetch', {
+      //   id: 'search',
+      //   params: {
+      //     filterByFormula: `AND(OR({Status} = 'Active'), SEARCH(LOWER("${this.$store.getters['search/query']}"), LOWER({Name}&'')))`,
+      //     pageSize,
+      //     sort: [{ field: 'Name', direction: 'asc' }]
+      //   }
+      // })
 
-      if (this.$store.getters['campaigns/getFetched']('search').length) { this.loading = false }
+      // if (this.$store.getters['campaigns/getFetched']('search').length) { this.loading = false }
 
       await this.$store.dispatch('groups/fetch', {
         id: 'search',

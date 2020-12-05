@@ -74,10 +74,6 @@ export default {
         name: 'Groups',
         to: { name: 'groups' }
       }, {
-        type: 'shallow',
-        name: 'Campaigns',
-        to: { name: 'campaigns' }
-      }, {
         type: 'deep',
         name: 'More',
         menu: [{
